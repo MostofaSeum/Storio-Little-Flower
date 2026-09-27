@@ -173,24 +173,15 @@ html {
 .delay-300 { transition-delay: 300ms; }
 .delay-400 { transition-delay: 400ms; }
 
-/* Interactive playful hover effect */
-.card-hover-playful {
-  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-  will-change: transform;
+/* Interactive Card Hover effect with smooth elevation and shadow */
+.card-interactive {
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+  will-change: transform, box-shadow;
 }
 
-.card-hover-playful:hover {
-  transform: translateY(-6px);
-}
-
-/* Silky smooth zoom utility with gentle duration and easing */
-.smooth-zoom {
-  transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
-  will-change: transform;
-}
-
-.smooth-zoom:hover {
-  transform: scale(1.04);
+.card-interactive:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
 }
 
 /* Circle badges gentle bounce and smooth transition on group-hover and hover */
@@ -204,6 +195,7 @@ html {
   transform: translateY(-6px) scale(1.08) !important;
   box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.15) !important;
 }
+
 
 
 

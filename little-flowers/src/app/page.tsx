@@ -293,7 +293,7 @@ export default async function Home() {
               {notices.slice(0, 6).map((notice, idx) => (
                 <div
                   key={notice.id}
-                  className={`p-6 rounded-3xl bg-white border border-purple-100 hover:border-pink-200 shadow-xs hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between group transform hover:-translate-y-1.5 reveal-on-scroll delay-${(idx % 3) * 100 + 100}`}
+                  className={`p-6 rounded-3xl bg-white border border-purple-100 hover:border-pink-300 relative overflow-hidden flex flex-col justify-between group card-interactive cursor-pointer reveal-on-scroll delay-${(idx % 3) * 100 + 100}`}
                 >
                   {notice.is_urgent && (
                     <span className="absolute top-4 right-4 text-[10px] font-bold uppercase tracking-wider bg-rose-500 text-white px-2.5 py-0.5 rounded-full shadow-xs animate-pulse">
@@ -429,7 +429,7 @@ export default async function Home() {
                 return (
                   <div
                     key={activity.id}
-                    className={`bg-white rounded-3xl p-6 border-2 ${borderColors[idx % 4]} shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group transform hover:-translate-y-2 reveal-on-scroll delay-${(idx % 4) * 100 + 100}`}
+                    className={`bg-white rounded-3xl p-6 border-2 ${borderColors[idx % 4]} flex flex-col justify-between group card-interactive cursor-pointer reveal-on-scroll delay-${(idx % 4) * 100 + 100}`}
                   >
                     <div>
                       {activity.featured_image_url && (
@@ -495,7 +495,7 @@ export default async function Home() {
               return (
                 <div
                   key={member.id}
-                  className={`flex flex-col items-center text-center p-6 bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 group transform hover:-translate-y-2 reveal-on-scroll delay-${(idx % 4) * 100 + 100}`}
+                  className={`flex flex-col items-center text-center p-6 bg-white rounded-3xl border border-gray-100 group card-interactive cursor-pointer reveal-on-scroll delay-${(idx % 4) * 100 + 100}`}
                 >
                   <div className={`w-32 h-32 rounded-full overflow-hidden p-1.5 ring-4 ${ringColors[idx % 4]} mb-4 shadow-sm group-hover:ring-offset-2 transition-all duration-500`}>
                     <img
@@ -612,7 +612,7 @@ export default async function Home() {
               {testimonials.map((t, idx) => (
                 <div
                   key={t.id}
-                  className={`p-7 rounded-3xl bg-white border border-sky-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between transform hover:-translate-y-2 reveal-on-scroll delay-${(idx % 3) * 100 + 100}`}
+                  className={`p-7 rounded-3xl bg-white border border-sky-100 flex flex-col justify-between group card-interactive cursor-pointer reveal-on-scroll delay-${(idx % 3) * 100 + 100}`}
                 >
                   <div>
                     {/* Stars */}
