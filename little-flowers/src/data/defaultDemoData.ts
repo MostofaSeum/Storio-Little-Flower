@@ -60,7 +60,7 @@ export const DEFAULT_DEMO_DATA: {
       id: 1,
       title: "Practical teaching &",
       subtitle: "Social Development",
-      image_url: "https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=1200&auto=format&fit=crop",
+      image_url: "/homepage/H1.webp",
       button_text: "Learn More",
       button_url: "/about",
       order: 1,

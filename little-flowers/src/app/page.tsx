@@ -137,28 +137,29 @@ export default async function Home() {
         <div className="absolute bottom-20 left-10 w-24 h-24 bg-yellow-100 rounded-full blur-2xl -z-10 opacity-70"></div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left Column: Organic Circular Kids Image */}
+          {/* Left Column: Tall (Lomba) Illustration Showcase */}
           <div className="lg:col-span-6 flex justify-center relative">
-            <div className="relative w-72 h-72 sm:w-96 sm:h-96 md:w-[440px] md:h-[440px]">
-              {/* Outer soft shadow background blob */}
-              <div className="absolute inset-0 bg-gradient-to-br from-amber-100 via-pink-50 to-sky-100 rounded-[50%] filter blur-lg opacity-80 transform -rotate-6"></div>
+            <div className="relative w-full max-w-[380px] sm:max-w-[430px] md:max-w-[460px] flex items-center justify-center">
+              {/* Outer soft colorful ambient backdrop for tall layout */}
+              <div className="absolute inset-x-4 inset-y-6 bg-gradient-to-tr from-amber-100 via-pink-100 to-sky-100 rounded-[42px] filter blur-xl opacity-70 transform -rotate-2 -z-10"></div>
+              
+              {/* Decorative blob plate behind character illustration */}
+              <div className="absolute inset-0 bg-[#fffdf0] border-4 border-dashed border-amber-200 rounded-[50px] transform rotate-1 -z-10 shadow-sm"></div>
 
-              {/* The circular student image from preview or SDK */}
-              <div className="relative w-full h-full rounded-full overflow-hidden border-8 border-white shadow-xl">
+              {/* Tall Illustration Image */}
+              <div className="relative w-full p-4 sm:p-6 flex items-center justify-center">
                 <img
-                  src={
-                    activeSlide?.image_url ||
-                    'https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=1200&auto=format&fit=crop'
-                  }
+                  src={activeSlide?.image_url || '/homepage/H1.webp'}
                   alt={activeSlide?.title || 'School Kids'}
-                  className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-700"
+                  className="w-full h-auto max-h-[500px] object-contain drop-shadow-xl transform hover:scale-102 transition-transform duration-500"
                 />
               </div>
 
-              {/* Little playful colored floating pins/dots around image */}
-              <div className="absolute -top-2 left-10 w-5 h-5 bg-pink-500 rounded-full border-2 border-white shadow-md"></div>
-              <div className="absolute bottom-12 -left-4 w-7 h-7 bg-amber-400 rounded-full border-2 border-white shadow-md"></div>
-              <div className="absolute bottom-6 right-8 w-6 h-6 bg-sky-400 rounded-full border-2 border-white shadow-md"></div>
+              {/* Little playful colored floating pins/dots around tall image */}
+              <div className="absolute -top-3 left-6 w-6 h-6 bg-pink-500 rounded-full border-2 border-white shadow-md animate-pulse"></div>
+              <div className="absolute bottom-10 -left-4 w-7 h-7 bg-amber-400 rounded-full border-2 border-white shadow-md"></div>
+              <div className="absolute bottom-6 right-6 w-6 h-6 bg-sky-400 rounded-full border-2 border-white shadow-md"></div>
+              <div className="absolute top-1/3 -right-3 w-5 h-5 bg-lime-400 rounded-full border-2 border-white shadow-md"></div>
             </div>
           </div>
 
