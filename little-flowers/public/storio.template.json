@@ -1,0 +1,152 @@
+{
+  "id": "template-01-little-flowers",
+  "name": "Little Flowers",
+  "version": "1.0.0",
+  "customization": {
+    "colors": [
+      {
+        "id": "primaryColor",
+        "label": "Primary Purple Heading",
+        "type": "color",
+        "default": "#6c4298"
+      },
+      {
+        "id": "secondaryColor",
+        "label": "Secondary Sunny Yellow",
+        "type": "color",
+        "default": "#f39c12"
+      },
+      {
+        "id": "accentPink",
+        "label": "Accent Pink / Active Dot",
+        "type": "color",
+        "default": "#ff4081"
+      },
+      {
+        "id": "accentBlue",
+        "label": "Soft Wave Blue",
+        "type": "color",
+        "default": "#e3f2fd"
+      },
+      {
+        "id": "topbarBgColor",
+        "label": "Top Bar Background",
+        "type": "color",
+        "default": "#111111"
+      },
+      {
+        "id": "buttonColor",
+        "label": "Button Color",
+        "type": "color",
+        "default": "#111111"
+      },
+      {
+        "id": "buttonTextColor",
+        "label": "Button Text Color",
+        "type": "color",
+        "default": "#ffffff"
+      },
+      {
+        "id": "textColor",
+        "label": "Body Text Color",
+        "type": "color",
+        "default": "#555555"
+      }
+    ],
+    "typography": [
+      {
+        "id": "fontFamily",
+        "label": "Main Font",
+        "type": "text",
+        "default": "Fredoka, Nunito, sans-serif"
+      }
+    ],
+    "layout": [
+      {
+        "id": "borderRadius",
+        "label": "Button Border Radius",
+        "type": "text",
+        "default": "9999px"
+      }
+    ],
+    "content": [
+      {
+        "id": "showTopBar",
+        "label": "Show Dark Top Contact Bar",
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "id": "showWaveDivider",
+        "label": "Show Soft Wave Divider",
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "id": "heroTitle1",
+        "label": "Hero Title (Line 1 - Purple)",
+        "type": "text",
+        "default": "Practical teaching &"
+      },
+      {
+        "id": "heroTitle2",
+        "label": "Hero Title (Line 2 - Yellow)",
+        "type": "text",
+        "default": "Social Development"
+      },
+      {
+        "id": "heroDescription",
+        "label": "Hero Description",
+        "type": "text",
+        "default": "We aim at success by creating skills necessary for kids to enrich & empower in studies & sports."
+      }
+    ]
+  },
+  "features": [
+    "notice",
+    "blogs",
+    "gallery",
+    "faq",
+    "heroSlide",
+    "activity",
+    "mediaFile",
+    "careers",
+    "testimonial",
+    "contact",
+    "staff",
+    "team",
+    "leadership_message",
+    "important_links",
+    "socialLink",
+    "institution_profile",
+    "accounts",
+    "auth",
+    "generalSettings",
+    "template_customization",
+    "formbuilder",
+    "custom_pages",
+    "promotions",
+    "admission",
+    "exam_results",
+    "calendar_events",
+    "events"
+  ],
+  "navigation": [
+    {
+      "id": "navbarLinks",
+      "label": "Navigation Links",
+      "type": "links",
+      "default": [
+        { "id": "1", "name": "Home", "href": "/" },
+        { "id": "2", "name": "About", "href": "/about" },
+        { "id": "3", "name": "Facilities", "href": "/facilities" },
+        { "id": "4", "name": "Notices", "href": "/notice" },
+        { "id": "5", "name": "Blog", "href": "/blog" },
+        { "id": "6", "name": "Admission", "href": "/admission" },
+        { "id": "7", "name": "Faculty", "href": "/staff" },
+        { "id": "8", "name": "Gallery", "href": "/gallery" },
+        { "id": "9", "name": "Contact", "href": "/contact" }
+      ]
+    }
+  ]
+}

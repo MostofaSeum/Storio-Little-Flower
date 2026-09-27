@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+:root {
+  --font-quicksand: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-fredoka: 'Fredoka', 'Quicksand', sans-serif;
+  --primary: #6c4298;
+  --secondary: #f39c12;
+  --accent-pink: #ff4081;
+  --accent-blue: #4fc3f7;
+  --accent-green: #8bc34a;
+  --accent-soft-blue: #e3f2fd;
+}
+
+body {
+  font-family: var(--font-quicksand);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-fredoka);
+}
+
+/* Wavy and organic animation helpers */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(2deg);
+  }
+}
+
+.animate-float {
+  animation: floatSlow 6s ease-in-out infinite;
+}
