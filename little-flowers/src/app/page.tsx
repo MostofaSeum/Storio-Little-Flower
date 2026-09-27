@@ -70,18 +70,14 @@ export default async function Home() {
               href={`mailto:${settings?.contact_email || 'info@example.com'}`}
               className="flex items-center space-x-2 hover:text-white transition-colors"
             >
-              <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
+              <img src="/icons/mail.png" alt="Email" className="w-4 h-4 object-contain brightness-0 invert opacity-80" />
               <span>{settings?.contact_email || 'info@example.com'}</span>
             </a>
             <a
               href={`tel:${settings?.phone_number || '+1 8 888 567.890.03'}`}
               className="flex items-center space-x-2 hover:text-white transition-colors"
             >
-              <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-              </svg>
+              <img src="/icons/telephone.png" alt="Phone" className="w-4 h-4 object-contain brightness-0 invert opacity-80" />
               <span>{settings?.phone_number || '8 888 567.890.03'}</span>
             </a>
           </div>
@@ -109,10 +105,8 @@ export default async function Home() {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo with playful school castle mark */}
           <a href="/" className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-300 via-pink-400 to-sky-400 p-1 flex items-center justify-center shadow-sm">
-              <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 3L2 12h3v8h14v-8h3L12 3zm0 3.5l4 3.6V18h-2v-4h-4v4H8v-7.9l4-3.6z" />
-              </svg>
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-300 via-pink-400 to-sky-400 p-1.5 flex items-center justify-center shadow-sm">
+              <img src="/icons/school.png" alt="School Logo" className="w-6 h-6 object-contain brightness-0 invert" />
             </div>
             <div>
               <span className="text-2xl font-bold tracking-tight text-gray-900 font-fredoka">
@@ -235,42 +229,34 @@ export default async function Home() {
         {/* Pastel Sky Blue Strip with 4 Colorful Feature Badges */}
         <div className="bg-[#e1f5fe] pb-16 pt-2 px-4 sm:px-8">
           <div className="max-w-5xl mx-auto flex flex-wrap items-center justify-around gap-6 sm:gap-8">
-            {/* 1. Yellow Circle: Early Learning */}
+            {/* 1. Yellow Circle: Early Learning (Book) */}
             <div className="flex flex-col items-center group cursor-pointer">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#f39c12] text-white flex items-center justify-center shadow-md transform group-hover:scale-110 transition-transform">
-                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#f39c12] text-white flex items-center justify-center shadow-md transform group-hover:scale-110 transition-transform p-5">
+                <img src="/icons/book.png" alt="Creative Learning" className="w-full h-full object-contain brightness-0 invert" />
               </div>
               <span className="mt-3 font-bold text-gray-700 text-sm">Creative Learning</span>
             </div>
 
-            {/* 2. Pink Circle: Little Teachers */}
+            {/* 2. Pink Circle: Little Teachers / Mentors (User) */}
             <div className="flex flex-col items-center group cursor-pointer">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#e91e63] text-white flex items-center justify-center shadow-md transform group-hover:scale-110 transition-transform">
-                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#e91e63] text-white flex items-center justify-center shadow-md transform group-hover:scale-110 transition-transform p-5">
+                <img src="/icons/user.png" alt="Caring Mentors" className="w-full h-full object-contain brightness-0 invert" />
               </div>
               <span className="mt-3 font-bold text-gray-700 text-sm">Caring Mentors</span>
             </div>
 
-            {/* 3. Blue Circle: Child Care */}
+            {/* 3. Blue Circle: Child Care / Happiness (Happiness) */}
             <div className="flex flex-col items-center group cursor-pointer">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#29b6f6] text-white flex items-center justify-center shadow-md transform group-hover:scale-110 transition-transform">
-                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#29b6f6] text-white flex items-center justify-center shadow-md transform group-hover:scale-110 transition-transform p-5">
+                <img src="/icons/happiness.png" alt="Healthy Growth" className="w-full h-full object-contain brightness-0 invert" />
               </div>
               <span className="mt-3 font-bold text-gray-700 text-sm">Healthy Growth</span>
             </div>
 
-            {/* 4. Green Circle: Safe Campus */}
+            {/* 4. Green Circle: Safe Campus (Security) */}
             <div className="flex flex-col items-center group cursor-pointer">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#8bc34a] text-white flex items-center justify-center shadow-md transform group-hover:scale-110 transition-transform">
-                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#8bc34a] text-white flex items-center justify-center shadow-md transform group-hover:scale-110 transition-transform p-5">
+                <img src="/icons/security.png" alt="Safe & Nurturing" className="w-full h-full object-contain brightness-0 invert" />
               </div>
               <span className="mt-3 font-bold text-gray-700 text-sm">Safe & Nurturing</span>
             </div>
