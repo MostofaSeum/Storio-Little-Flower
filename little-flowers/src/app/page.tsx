@@ -205,7 +205,7 @@ export default async function Home() {
               href="/notice"
               className="text-xs sm:text-sm font-bold text-accent-pink hover:underline"
             >
-              View All Notices →
+              View All Notices
             </a>
           </div>
 
@@ -237,7 +237,7 @@ export default async function Home() {
                   href={`/notice/${notice.id}`}
                   className="mt-4 text-xs font-bold text-primary-color hover:text-accent-pink inline-flex items-center"
                 >
-                  Read Circular →
+                  Read Circular
                 </a>
               </div>
             ))}
