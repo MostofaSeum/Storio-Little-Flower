@@ -437,7 +437,7 @@ export default async function Home() {
                           <img
                             src={activity.featured_image_url}
                             alt={activity.title}
-                            className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-700 ease-out"
+                            className="w-full h-full object-cover group-hover:scale-106 transition-transform duration-500 ease-out"
                           />
                         </div>
                       )}
@@ -501,7 +501,7 @@ export default async function Home() {
                     <img
                       src={member.photo_url || '/icons/user.png'}
                       alt={member.name}
-                      className="w-full h-full object-cover rounded-full group-hover:scale-[1.04] transition-transform duration-700 ease-out"
+                      className="w-full h-full object-cover rounded-full group-hover:scale-106 transition-transform duration-500 ease-out"
                     />
                   </div>
                   <h3 className="font-extrabold text-lg text-gray-900 group-hover:text-primary-color transition-colors">
@@ -579,7 +579,7 @@ export default async function Home() {
                 <img
                   src={item.image_url}
                   alt={item.title || 'Campus Moment'}
-                  className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-800 ease-out"
+                  className="w-full h-full object-cover group-hover:scale-106 transition-transform duration-500 ease-out"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                   <span className="text-white text-xs sm:text-sm font-bold">
