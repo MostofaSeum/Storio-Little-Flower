@@ -39,7 +39,7 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
   const activeSlide = slides[currentIndex] || slides[0];
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center min-h-[540px]">
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
       {/* Left Column: Illustration Showcase with fade transition */}
       <div className="lg:col-span-6 flex justify-center relative">
         <div className="relative w-full max-w-[360px] sm:max-w-[440px] md:max-w-[500px] lg:max-w-[530px] flex items-center justify-center">
