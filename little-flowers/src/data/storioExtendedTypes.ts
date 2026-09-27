@@ -40,3 +40,14 @@ export interface StorioPromotion {
   cta_label?: string;
   cta_url?: string;
 }
+
+export interface StorioTestimonial {
+  id: number;
+  name: string;
+  role?: string;
+  designation?: string;
+  quote?: string;
+  content?: string;
+  rating?: number;
+  avatar_url?: string;
+}
