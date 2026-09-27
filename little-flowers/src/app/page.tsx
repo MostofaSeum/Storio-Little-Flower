@@ -271,7 +271,7 @@ export default async function Home() {
 
       {/* 5. NOTICE BOARD & ANNOUNCEMENTS (Moved directly after circle badges, loading 6 circulars) */}
       {notices.length > 0 && (
-        <section id="notices" className="bg-[#faf9ff] py-16 px-4 sm:px-8 border-b border-purple-50">
+        <section id="notices" className="bg-pastel-purple py-16 px-4 sm:px-8 border-b border-purple-50">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-wrap items-end justify-between border-b-2 border-purple-100 pb-4 mb-8 gap-4 reveal-on-scroll">
               <div>
@@ -283,7 +283,7 @@ export default async function Home() {
               </div>
               <a
                 href="/notice"
-                className="text-xs sm:text-sm font-bold text-accent-pink hover:text-[#e91e63] transition-colors"
+                className="text-xs sm:text-sm font-bold text-accent-pink hover:text-accent-pink-hover transition-colors"
               >
                 View All Notices →
               </a>
@@ -360,7 +360,7 @@ export default async function Home() {
 
               {/* Stats Highlights */}
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-2">
-                <div className="p-4 rounded-2xl bg-[#fffbf0] border border-amber-200 card-hover-playful">
+                <div className="p-4 rounded-2xl bg-soft-amber border border-amber-200 card-hover-playful">
                   <div className="text-3xl font-extrabold text-secondary-color">
                     {profile.total_students || 450}+
                   </div>
@@ -368,7 +368,7 @@ export default async function Home() {
                     {profile.total_students_label || 'Happy Children'}
                   </div>
                 </div>
-                <div className="p-4 rounded-2xl bg-[#fdf2f8] border border-pink-200 card-hover-playful">
+                <div className="p-4 rounded-2xl bg-soft-pink border border-pink-200 card-hover-playful">
                   <div className="text-3xl font-extrabold text-accent-pink">
                     {profile.total_teachers || 35}+
                   </div>
@@ -397,7 +397,7 @@ export default async function Home() {
 
       {/* 6. LEARNING PROGRAMS & ACTIVITIES (storio.getActivities) */}
       {activities.length > 0 && (
-        <section id="programs" className="py-20 px-4 sm:px-8 bg-[#faf9ff] border-y border-purple-50">
+        <section id="programs" className="py-20 px-4 sm:px-8 bg-pastel-purple border-y border-purple-50">
           <div className="max-w-7xl mx-auto">
             <div className="text-center max-w-2xl mx-auto mb-14 reveal-on-scroll">
               <span className="text-xs font-extrabold tracking-wider uppercase text-accent-pink bg-pink-100 px-3 py-1 rounded-full">
@@ -530,7 +530,7 @@ export default async function Home() {
                   {activePromo.badge_text}
                 </span>
               )}
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#6c4298] leading-tight">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-primary-color leading-tight">
                 {activePromo.title}
               </h2>
               <p className="text-gray-700 text-sm sm:text-base font-medium">

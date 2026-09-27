@@ -18,6 +18,9 @@
   --blob-yellow: #fde68a;
   --text-dark: #2d2b56;
   --text-muted: #4b5563;
+  --bg-pastel-purple: #faf9ff;
+  --bg-soft-amber: #fffbf0;
+  --bg-soft-pink: #fdf2f8;
 }
 
 body {
@@ -40,6 +43,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .text-accent-pink {
   color: var(--accent-pink);
+}
+
+.hover\:text-accent-pink-hover:hover {
+  color: var(--accent-pink-hover);
 }
 
 .text-accent-blue {
@@ -72,6 +79,18 @@ h1, h2, h3, h4, h5, h6 {
 
 .bg-accent-soft-blue {
   background-color: var(--accent-soft-blue);
+}
+
+.bg-pastel-purple {
+  background-color: var(--bg-pastel-purple);
+}
+
+.bg-soft-amber {
+  background-color: var(--bg-soft-amber);
+}
+
+.bg-soft-pink {
+  background-color: var(--bg-soft-pink);
 }
 
 .bg-topbar {
