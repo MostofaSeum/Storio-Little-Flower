@@ -324,7 +324,64 @@ export default async function Home() {
         </div>
       </div>
 
-      {/* 5. ABOUT US & INSTITUTION PROFILE (storio.getInstitutionProfile) */}
+      {/* 5. NOTICE BOARD & ANNOUNCEMENTS (Moved directly after circle badges, loading 6 circulars) */}
+      {notices.length > 0 && (
+        <section id="notices" className="bg-[#faf9ff] py-16 px-4 sm:px-8 border-b border-purple-50">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex flex-wrap items-end justify-between border-b-2 border-purple-100 pb-4 mb-8 gap-4">
+              <div>
+                <span className="text-xs font-extrabold tracking-wider uppercase text-accent-pink bg-pink-100 px-3 py-1 rounded-full">
+                  Important Circulars
+                </span>
+                <h3 className="text-3xl font-extrabold text-primary-color mt-2">Campus Announcements</h3>
+                <p className="text-sm text-gray-500 font-medium">Stay updated with latest school circulars, events, and schedules</p>
+              </div>
+              <a
+                href="/notice"
+                className="text-xs sm:text-sm font-bold text-accent-pink hover:text-[#e91e63] transition-colors"
+              >
+                View All Notices →
+              </a>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {notices.slice(0, 6).map((notice) => (
+                <div
+                  key={notice.id}
+                  className="p-6 rounded-3xl bg-white border border-purple-100 hover:border-pink-200 shadow-xs hover:shadow-lg transition-all duration-300 relative overflow-hidden flex flex-col justify-between group transform hover:-translate-y-1"
+                >
+                  {notice.is_urgent && (
+                    <span className="absolute top-4 right-4 text-[10px] font-bold uppercase tracking-wider bg-rose-500 text-white px-2.5 py-0.5 rounded-full shadow-xs">
+                      Urgent
+                    </span>
+                  )}
+                  <div>
+                    <span className="text-xs font-bold text-secondary-color bg-amber-50 px-2.5 py-0.5 rounded-full">
+                      {notice.published_date || 'Recent Notice'}
+                    </span>
+                    <h4 className="font-extrabold text-gray-800 text-base mt-3 line-clamp-2 group-hover:text-primary-color transition-colors">
+                      {notice.title}
+                    </h4>
+                    {notice.content && (
+                      <p className="text-gray-500 text-xs mt-2 line-clamp-3 leading-relaxed">
+                        {notice.content}
+                      </p>
+                    )}
+                  </div>
+                  <a
+                    href={`/notice/${notice.id}`}
+                    className="mt-5 text-xs font-bold text-primary-color group-hover:text-accent-pink inline-flex items-center"
+                  >
+                    Read Circular →
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* 6. ABOUT US & INSTITUTION PROFILE (storio.getInstitutionProfile) */}
       {profile && (
         <section id="about" className="py-20 px-4 sm:px-8 max-w-7xl mx-auto w-full relative">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -632,59 +689,7 @@ export default async function Home() {
         </section>
       )}
 
-      {/* 11. NOTICE BOARD SECTION (storio.getNotices) */}
-      {notices.length > 0 && (
-        <section id="notices" className="bg-white py-16 px-4 sm:px-8 max-w-7xl mx-auto w-full">
-          <div className="flex items-center justify-between border-b-2 border-gray-100 pb-4 mb-8">
-            <div>
-              <h3 className="text-2xl font-bold text-primary-color">Campus Announcements</h3>
-              <p className="text-sm text-gray-500">Stay updated with latest school circulars and events</p>
-            </div>
-            <a
-              href="/notice"
-              className="text-xs sm:text-sm font-bold text-accent-pink hover:underline"
-            >
-              View All Notices
-            </a>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {notices.slice(0, 3).map((notice) => (
-              <div
-                key={notice.id}
-                className="p-5 rounded-3xl bg-[#fafafa] border border-gray-100 hover:shadow-md transition-shadow relative overflow-hidden flex flex-col justify-between"
-              >
-                {notice.is_urgent && (
-                  <span className="absolute top-3 right-3 text-[10px] font-bold uppercase tracking-wider bg-rose-500 text-white px-2.5 py-0.5 rounded-full">
-                    Urgent
-                  </span>
-                )}
-                <div>
-                  <span className="text-xs font-semibold text-secondary-color">
-                    {notice.published_date || 'Recent Notice'}
-                  </span>
-                  <h4 className="font-bold text-gray-800 text-base mt-2 line-clamp-2">
-                    {notice.title}
-                  </h4>
-                  {notice.content && (
-                    <p className="text-gray-500 text-xs mt-2 line-clamp-3">
-                      {notice.content}
-                    </p>
-                  )}
-                </div>
-                <a
-                  href={`/notice/${notice.id}`}
-                  className="mt-4 text-xs font-bold text-primary-color hover:text-accent-pink inline-flex items-center"
-                >
-                  Read Circular
-                </a>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* 12. PLAYFUL COLORFUL FOOTER */}
+      {/* 11. PLAYFUL COLORFUL FOOTER */}
       <footer id="contact" className="bg-topbar text-gray-300 pt-16 pb-8 px-4 sm:px-8 mt-auto border-t-4 border-accent-pink">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-gray-800">
           {/* Col 1: Branding & Mission */}

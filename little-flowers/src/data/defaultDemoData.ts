@@ -72,6 +72,30 @@ export const DEFAULT_DEMO_DATA: {
       published_date: "2026-09-25",
       is_urgent: false,
     },
+    {
+      id: 4,
+      title: "Autumn Term Health Checkup & Pediatric Screening",
+      slug: "health-checkup-autumn",
+      content: "Visiting pediatric specialists will conduct annual dental, vision, and growth screenings for all learners.",
+      published_date: "2026-09-28",
+      is_urgent: true,
+    },
+    {
+      id: 5,
+      title: "Little Farmers Gardening Day & Seed Planting",
+      slug: "gardening-day-2026",
+      content: "Children will explore nature, plant flower saplings, and learn about caring for our green earth.",
+      published_date: "2026-10-02",
+      is_urgent: false,
+    },
+    {
+      id: 6,
+      title: "Parent-Teacher Developmental Progress Meeting",
+      slug: "ptm-development-progress",
+      content: "One-on-one personalized meetings with class mentors to review cognitive and social milestones.",
+      published_date: "2026-10-08",
+      is_urgent: false,
+    },
   ],
   heroSlides: [
     {
