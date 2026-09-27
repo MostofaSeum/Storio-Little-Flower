@@ -331,22 +331,22 @@ export default async function Home() {
         <section id="about" className="py-20 px-4 sm:px-8 max-w-7xl mx-auto w-full relative">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left: Playful Image Showcase */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative mx-auto max-w-[420px] rounded-3xl overflow-hidden border-8 border-white shadow-xl transform -rotate-1 hover:rotate-0 transition-transform duration-500">
+            <div className="lg:col-span-5 relative reveal-on-scroll">
+              <div className="relative mx-auto max-w-[420px] rounded-3xl overflow-hidden border-8 border-white shadow-xl transform -rotate-1 hover:rotate-0 hover:scale-102 transition-all duration-500">
                 <img
                   src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?q=80&w=800&auto=format&fit=crop"
                   alt="Kindergarten Learners"
                   className="w-full h-[400px] object-cover"
                 />
               </div>
-              <div className="absolute -bottom-6 -right-4 bg-blob-yellow p-4 rounded-2xl shadow-md border-2 border-white transform rotate-3">
+              <div className="absolute -bottom-6 -right-4 bg-blob-yellow p-4 rounded-2xl shadow-md border-2 border-white transform rotate-3 animate-float">
                 <span className="text-2xl font-extrabold text-primary-color">10+ Years</span>
                 <p className="text-xs font-bold text-gray-700">Of Joyful Learning</p>
               </div>
             </div>
 
             {/* Right: Mission, Details, and Key Metrics */}
-            <div className="lg:col-span-7 space-y-6">
+            <div className="lg:col-span-7 space-y-6 reveal-on-scroll delay-150">
               <div className="inline-block bg-accent-soft-blue text-primary-color font-bold text-xs uppercase px-3.5 py-1 rounded-full">
                 About Our Academy
               </div>
@@ -360,7 +360,7 @@ export default async function Home() {
 
               {/* Stats Highlights */}
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-2">
-                <div className="p-4 rounded-2xl bg-[#fffbf0] border border-amber-200">
+                <div className="p-4 rounded-2xl bg-[#fffbf0] border border-amber-200 card-hover-playful">
                   <div className="text-3xl font-extrabold text-secondary-color">
                     {profile.total_students || 450}+
                   </div>
@@ -368,7 +368,7 @@ export default async function Home() {
                     {profile.total_students_label || 'Happy Children'}
                   </div>
                 </div>
-                <div className="p-4 rounded-2xl bg-[#fdf2f8] border border-pink-200">
+                <div className="p-4 rounded-2xl bg-[#fdf2f8] border border-pink-200 card-hover-playful">
                   <div className="text-3xl font-extrabold text-accent-pink">
                     {profile.total_teachers || 35}+
                   </div>
@@ -376,7 +376,7 @@ export default async function Home() {
                     {profile.total_teachers_label || 'Caring Mentors'}
                   </div>
                 </div>
-                <div className="p-4 rounded-2xl bg-accent-soft-blue border border-sky-200 col-span-2 sm:col-span-1">
+                <div className="p-4 rounded-2xl bg-accent-soft-blue border border-sky-200 col-span-2 sm:col-span-1 card-hover-playful">
                   <div className="text-3xl font-extrabold text-primary-color">100%</div>
                   <div className="text-xs font-bold text-gray-600 mt-1">Safe Campus & Care</div>
                 </div>
@@ -385,7 +385,7 @@ export default async function Home() {
               <div className="pt-2 flex items-center space-x-4">
                 <a
                   href="/admission"
-                  className="px-6 py-3 bg-secondary-color hover:opacity-90 text-white font-bold text-sm rounded-full shadow-md transition-all"
+                  className="px-6 py-3 bg-secondary-color hover:opacity-90 text-white font-bold text-sm rounded-full shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5"
                 >
                   Schedule a Campus Visit
                 </a>
@@ -399,7 +399,7 @@ export default async function Home() {
       {activities.length > 0 && (
         <section id="programs" className="py-20 px-4 sm:px-8 bg-[#faf9ff] border-y border-purple-50">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center max-w-2xl mx-auto mb-14">
+            <div className="text-center max-w-2xl mx-auto mb-14 reveal-on-scroll">
               <span className="text-xs font-extrabold tracking-wider uppercase text-accent-pink bg-pink-100 px-3 py-1 rounded-full">
                 Early Exploration
               </span>
@@ -429,7 +429,7 @@ export default async function Home() {
                 return (
                   <div
                     key={activity.id}
-                    className={`bg-white rounded-3xl p-6 border-2 ${borderColors[idx % 4]} shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group transform hover:-translate-y-1`}
+                    className={`bg-white rounded-3xl p-6 border-2 ${borderColors[idx % 4]} shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group transform hover:-translate-y-2 reveal-on-scroll delay-${(idx % 4) * 100 + 100}`}
                   >
                     <div>
                       {activity.featured_image_url && (
@@ -437,7 +437,7 @@ export default async function Home() {
                           <img
                             src={activity.featured_image_url}
                             alt={activity.title}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
                           />
                         </div>
                       )}
@@ -456,7 +456,7 @@ export default async function Home() {
 
                     <a
                       href={`/activity/${activity.slug || activity.id}`}
-                      className="mt-6 text-xs font-bold text-primary-color group-hover:text-accent-pink inline-flex items-center"
+                      className="mt-6 text-xs font-bold text-primary-color group-hover:text-accent-pink inline-flex items-center transform group-hover:translate-x-1 transition-transform"
                     >
                       Program Details →
                     </a>
@@ -468,10 +468,10 @@ export default async function Home() {
         </section>
       )}
 
-      {/* 7. TEACHERS & MENTORS (storio.getStaff) */}
+      {/* 8. TEACHERS & MENTORS (storio.getStaff) */}
       {staffList.length > 0 && (
         <section id="teachers" className="py-20 px-4 sm:px-8 max-w-7xl mx-auto w-full">
-          <div className="text-center max-w-2xl mx-auto mb-14">
+          <div className="text-center max-w-2xl mx-auto mb-14 reveal-on-scroll">
             <span className="text-xs font-extrabold tracking-wider uppercase text-secondary-color bg-amber-100 px-3 py-1 rounded-full">
               Warm & Caring
             </span>
@@ -495,13 +495,13 @@ export default async function Home() {
               return (
                 <div
                   key={member.id}
-                  className="flex flex-col items-center text-center p-6 bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-lg transition-shadow group"
+                  className={`flex flex-col items-center text-center p-6 bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 group transform hover:-translate-y-2 reveal-on-scroll delay-${(idx % 4) * 100 + 100}`}
                 >
-                  <div className={`w-32 h-32 rounded-full overflow-hidden p-1.5 ring-4 ${ringColors[idx % 4]} mb-4 shadow-sm`}>
+                  <div className={`w-32 h-32 rounded-full overflow-hidden p-1.5 ring-4 ${ringColors[idx % 4]} mb-4 shadow-sm group-hover:ring-offset-2 transition-all`}>
                     <img
                       src={member.photo_url || '/icons/user.png'}
                       alt={member.name}
-                      className="w-full h-full object-cover rounded-full group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover rounded-full group-hover:scale-108 transition-transform duration-500"
                     />
                   </div>
                   <h3 className="font-extrabold text-lg text-gray-900 group-hover:text-primary-color transition-colors">
@@ -520,13 +520,13 @@ export default async function Home() {
         </section>
       )}
 
-      {/* 8. ADMISSIONS CALL-TO-ACTION PROMOTION (storio.getPromotions) */}
+      {/* 9. ADMISSIONS CALL-TO-ACTION PROMOTION (storio.getPromotions) */}
       {activePromo && (
         <section className="px-4 sm:px-8 py-10 max-w-7xl mx-auto w-full">
-          <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-amber-300 via-amber-200 to-pink-200 p-8 sm:p-14 shadow-lg flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-amber-300 via-amber-200 to-pink-200 p-8 sm:p-14 shadow-lg flex flex-col md:flex-row items-center justify-between gap-8 reveal-on-scroll">
             <div className="max-w-2xl space-y-3 text-center md:text-left">
               {activePromo.badge_text && (
-                <span className="inline-block bg-white text-secondary-color font-bold text-xs px-3.5 py-1 rounded-full uppercase tracking-wider shadow-xs">
+                <span className="inline-block bg-white text-secondary-color font-bold text-xs px-3.5 py-1 rounded-full uppercase tracking-wider shadow-xs animate-pulse">
                   {activePromo.badge_text}
                 </span>
               )}
@@ -541,7 +541,7 @@ export default async function Home() {
             <div className="shrink-0">
               <a
                 href={activePromo.cta_url || '/admission'}
-                className="px-8 py-4 bg-button-dark hover:opacity-90 text-white font-bold text-sm sm:text-base rounded-full shadow-xl transition-all transform hover:-translate-y-0.5 inline-block"
+                className="px-8 py-4 bg-button-dark hover:opacity-90 text-white font-bold text-sm sm:text-base rounded-full shadow-xl transition-all transform hover:-translate-y-1 hover:scale-105 inline-block"
               >
                 {activePromo.cta_label || 'Apply for Admission'}
               </a>
@@ -550,10 +550,10 @@ export default async function Home() {
         </section>
       )}
 
-      {/* 9. PHOTO GALLERY MOMENTS (storio.getGallery) */}
+      {/* 10. PHOTO GALLERY MOMENTS (storio.getGallery) */}
       {galleryItems.length > 0 && (
         <section id="gallery" className="py-20 px-4 sm:px-8 max-w-7xl mx-auto w-full">
-          <div className="flex flex-wrap items-end justify-between gap-4 mb-12">
+          <div className="flex flex-wrap items-end justify-between gap-4 mb-12 reveal-on-scroll">
             <div>
               <span className="text-xs font-extrabold tracking-wider uppercase text-accent-blue bg-sky-100 px-3 py-1 rounded-full">
                 Happy Memories
@@ -571,15 +571,15 @@ export default async function Home() {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-            {galleryItems.slice(0, 6).map((item) => (
+            {galleryItems.slice(0, 6).map((item, idx) => (
               <div
                 key={item.id}
-                className="relative rounded-3xl overflow-hidden group shadow-sm hover:shadow-xl transition-all duration-300 aspect-4/3"
+                className={`relative rounded-3xl overflow-hidden group shadow-sm hover:shadow-2xl transition-all duration-300 aspect-4/3 reveal-on-scroll delay-${(idx % 3) * 100 + 100}`}
               >
                 <img
                   src={item.image_url}
                   alt={item.title || 'Campus Moment'}
-                  className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                   <span className="text-white text-xs sm:text-sm font-bold">
@@ -592,11 +592,11 @@ export default async function Home() {
         </section>
       )}
 
-      {/* 10. PARENT TESTIMONIALS */}
+      {/* 11. PARENT TESTIMONIALS */}
       {testimonials && testimonials.length > 0 && (
         <section className="py-20 px-4 sm:px-8 bg-accent-soft-blue/60 border-t border-sky-100">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center max-w-2xl mx-auto mb-14">
+            <div className="text-center max-w-2xl mx-auto mb-14 reveal-on-scroll">
               <span className="text-xs font-extrabold tracking-wider uppercase text-accent-pink bg-pink-100 px-3 py-1 rounded-full">
                 Parent Voices
               </span>
@@ -609,10 +609,10 @@ export default async function Home() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {testimonials.map((t) => (
+              {testimonials.map((t, idx) => (
                 <div
                   key={t.id}
-                  className="p-7 rounded-3xl bg-white border border-sky-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between"
+                  className={`p-7 rounded-3xl bg-white border border-sky-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between transform hover:-translate-y-2 reveal-on-scroll delay-${(idx % 3) * 100 + 100}`}
                 >
                   <div>
                     {/* Stars */}
