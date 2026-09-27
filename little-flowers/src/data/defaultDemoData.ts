@@ -1,4 +1,16 @@
-import { StorioNotice, StorioHeroSlide, StorioSettingsResponse, StorioLayoutResponse } from '@storio/template-sdk';
+import {
+  StorioNotice,
+  StorioHeroSlide,
+  StorioSettingsResponse,
+  StorioLayoutResponse,
+  StorioStaffMember,
+  StorioGalleryItem,
+} from '@storio/template-sdk';
+import {
+  StorioInstitutionProfile,
+  StorioActivityItem,
+  StorioPromotion,
+} from '@/data/storioExtendedTypes';
 
 /**
  * DEFAULT_DEMO_DATA
@@ -15,6 +27,12 @@ export const DEFAULT_DEMO_DATA: {
   notices: StorioNotice[];
   heroSlides: StorioHeroSlide[];
   layout?: StorioLayoutResponse;
+  institutionProfile: StorioInstitutionProfile;
+  activities: StorioActivityItem[];
+  staff: StorioStaffMember[];
+  gallery: StorioGalleryItem[];
+  promotions: StorioPromotion[];
+  testimonials: Array<{ id: number; name: string; role: string; quote: string; rating: number; avatar_url?: string }>;
 } = {
   settings: {
     site_title: "Little Flowers",
@@ -64,6 +82,160 @@ export const DEFAULT_DEMO_DATA: {
       button_text: "Learn More",
       button_url: "/about",
       order: 1,
+    },
+  ],
+  institutionProfile: {
+    id: 1,
+    eiin: 135892,
+    school_code: "LFK-2026",
+    school_type: "Kindergarten & Primary School",
+    school_shift: "Morning (8:00 AM - 1:00 PM)",
+    mission: "To create a happy, creative, and safe environment where children grow with curiosity and confidence.",
+    vision: "Nurturing curious little learners to become empathetic, joyful, and lifelong thinkers.",
+    total_students: 450,
+    total_teachers: 35,
+    total_students_label: "Happy Children",
+    total_teachers_label: "Caring Mentors",
+    school_details: "Little Flowers Kindergarten provides experiential early childhood education centered on play, sensory exploration, creativity, and foundational social skills.",
+  },
+  activities: [
+    {
+      id: 1,
+      title: "Playgroup & Toddlers",
+      slug: "playgroup",
+      summary: "Sensory play, music, and motor skill building in a joyful atmosphere.",
+      excerpt: "Age 2 - 3 Years",
+      featured_image_url: "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?q=80&w=600&auto=format&fit=crop",
+    },
+    {
+      id: 2,
+      title: "Nursery Exploration",
+      slug: "nursery",
+      summary: "Early phonics, numbers, interactive storytelling, and creative art workshops.",
+      excerpt: "Age 3 - 4 Years",
+      featured_image_url: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?q=80&w=600&auto=format&fit=crop",
+    },
+    {
+      id: 3,
+      title: "Junior & Senior KG",
+      slug: "kindergarten",
+      summary: "Foundational reading, basic math concepts, scientific curiosity, and teamwork.",
+      excerpt: "Age 4 - 6 Years",
+      featured_image_url: "https://images.unsplash.com/photo-1588072432836-e10032774350?q=80&w=600&auto=format&fit=crop",
+    },
+    {
+      id: 4,
+      title: "Creative Arts & Music Club",
+      slug: "creative-club",
+      summary: "Painting, ceramic pottery, rhythm instruments, and theatrical puppet play.",
+      excerpt: "All Junior Grades",
+      featured_image_url: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=600&auto=format&fit=crop",
+    },
+  ],
+  staff: [
+    {
+      id: 1,
+      name: "Mrs. Sarah Jenkins",
+      designation: "Headmistress & Early Child Specialist",
+      department: "Administration",
+      photo_url: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=500&auto=format&fit=crop",
+      bio: "14+ years of passion in child cognitive development and joyful learning.",
+    },
+    {
+      id: 2,
+      name: "Ms. Emily Watson",
+      designation: "Playgroup & Sensory Lead",
+      department: "Early Childhood",
+      photo_url: "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?q=80&w=500&auto=format&fit=crop",
+      bio: "Certified Montessori guide loving puppet theatre and expressive speech.",
+    },
+    {
+      id: 3,
+      name: "Mr. David Miller",
+      designation: "Physical Education & Games Coach",
+      department: "Sports & Wellness",
+      photo_url: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=500&auto=format&fit=crop",
+      bio: "Focusing on motor coordination, balance, and cooperative games for kids.",
+    },
+    {
+      id: 4,
+      name: "Ms. Sophia Chen",
+      designation: "Art, Craft & Clay Mentor",
+      department: "Creative Arts",
+      photo_url: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=500&auto=format&fit=crop",
+      bio: "Nurturing imaginative thinking through vibrant watercolor and sculpture.",
+    },
+  ],
+  gallery: [
+    {
+      id: 1,
+      title: "Outdoor Splash & Play Day",
+      image_url: "https://images.unsplash.com/photo-1485546246426-74dc88dec4d9?q=80&w=600&auto=format&fit=crop",
+      caption: "Joyful outdoor water fun on sunny Friday.",
+    },
+    {
+      id: 2,
+      title: "Storytelling Circle",
+      image_url: "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=600&auto=format&fit=crop",
+      caption: "Morning circle time discovering fairy tales.",
+    },
+    {
+      id: 3,
+      title: "Little Scientists Lab",
+      image_url: "https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=600&auto=format&fit=crop",
+      caption: "Exploring plants and magnifying glasses.",
+    },
+    {
+      id: 4,
+      title: "Annual Colors Exhibition",
+      image_url: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=600&auto=format&fit=crop",
+      caption: "Colorful finger-painting masterpieces.",
+    },
+    {
+      id: 5,
+      title: "Mini Sports Day Champions",
+      image_url: "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?q=80&w=600&auto=format&fit=crop",
+      caption: "Fun obstacle race and medal ceremony.",
+    },
+    {
+      id: 6,
+      title: "Music & Rhythm Session",
+      image_url: "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?q=80&w=600&auto=format&fit=crop",
+      caption: "Singing nursery rhymes with xylophones.",
+    },
+  ],
+  promotions: [
+    {
+      id: 1,
+      title: "Early Bird Admissions 2026-2027 Open!",
+      subtitle: "Limited seats for Playgroup, Nursery & Kindergarten",
+      description: "Give your child the gift of joyful, exploratory education with caring teachers and modern facilities.",
+      badge_text: "Admissions Open",
+      cta_label: "Apply for Admission",
+      cta_url: "/admission",
+    },
+  ],
+  testimonials: [
+    {
+      id: 1,
+      name: "Jessica Vance",
+      role: "Mother of Leo (Playgroup)",
+      quote: "Little Flowers has been a second home for Leo! He used to be shy, but within two months he started singing songs and making friends with so much joy.",
+      rating: 5,
+    },
+    {
+      id: 2,
+      name: "Marcus Holloway",
+      role: "Father of Mia (Nursery)",
+      quote: "The teachers are remarkably attentive and patient. The daily sensory activities and outdoor plays make learning exciting for young kids.",
+      rating: 5,
+    },
+    {
+      id: 3,
+      name: "Amina Rahman",
+      role: "Mother of Aaryan (Senior KG)",
+      quote: "Outstanding early childhood environment! The safety standards, loving atmosphere, and creative curriculum exceeded our highest expectations.",
+      rating: 5,
     },
   ],
 };
