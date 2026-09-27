@@ -102,7 +102,7 @@ export const DEFAULT_DEMO_DATA: {
       id: 1,
       title: "Practical teaching &",
       subtitle: "Social Development",
-      image_url: "/homepage/jpg",
+      image_url: "/homepage/H1.jpg",
       button_text: "Learn More",
       button_url: "/about",
       order: 1,
