@@ -47,7 +47,7 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
           <div className="relative w-full flex items-center justify-center transition-all duration-700 ease-out">
             <img
               key={activeSlide?.image_url || currentIndex}
-              src={activeSlide?.image_url || '/homepage/H1.webp'}
+              src={activeSlide?.image_url || '/homepage/H1.jpg'}
               alt={activeSlide?.title || 'School Kids'}
               className="w-full h-auto max-h-[580px] sm:max-h-[620px] object-contain transform hover:scale-102 transition-transform duration-500 animate-fadeIn"
             />

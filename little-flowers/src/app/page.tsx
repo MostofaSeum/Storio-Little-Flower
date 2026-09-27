@@ -14,6 +14,8 @@ import {
 } from '@/data/storioExtendedTypes';
 import { headers } from 'next/headers';
 import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
+import HeroCarousel from '@/Components/HeroCarousel';
+import ScrollObserver from '@/Components/ScrollObserver';
 
 export default async function Home() {
   // 1. Resolve host from incoming request
@@ -124,6 +126,8 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen bg-white text-gray-800 flex flex-col overflow-x-hidden selection:bg-pink-100 selection:text-pink-700">
+      <ScrollObserver />
+
       {/* 1. TOP BLACK CONTACT BAR */}
       <div className="bg-topbar text-gray-300 text-xs sm:text-sm py-2 px-4 sm:px-8">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
@@ -164,11 +168,11 @@ export default async function Home() {
       </div>
 
       {/* 2. NAVBAR */}
-      <header className="bg-white border-b border-gray-100 py-2.5 px-4 sm:px-8 sticky top-0 z-30 shadow-xs">
+      <header className="bg-white border-b border-gray-100 py-2.5 px-4 sm:px-8 sticky top-0 z-30 shadow-xs backdrop-blur-md bg-white/95">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo with playful school castle mark */}
           <a href="/" className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-300 via-pink-400 to-sky-400 p-1.5 flex items-center justify-center shadow-sm">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-300 via-pink-400 to-sky-400 p-1.5 flex items-center justify-center shadow-sm transform group-hover:rotate-6 transition-transform">
               <img src="/icons/school.png" alt="School Logo" className="w-6 h-6 object-contain brightness-0 invert" />
             </div>
             <div>
@@ -203,81 +207,13 @@ export default async function Home() {
         </div>
       </header>
 
-      {/* 3. HERO SECTION */}
+      {/* 3. HERO SECTION WITH PLAYFUL INTERACTIVE CAROUSEL */}
       <section className="relative pt-1 sm:pt-2 pb-8 lg:pt-2 lg:pb-12 px-4 sm:px-8 max-w-7xl mx-auto w-full flex-1 flex flex-col justify-center">
         {/* Floating Decorative Elements */}
-        <div className="absolute top-4 right-16 w-12 h-12 bg-pink-100 rounded-full blur-xl -z-10 opacity-70"></div>
-        <div className="absolute bottom-10 left-10 w-24 h-24 bg-yellow-100 rounded-full blur-2xl -z-10 opacity-70"></div>
+        <div className="absolute top-4 right-16 w-16 h-16 bg-pink-100 rounded-full blur-xl -z-10 opacity-70 animate-float"></div>
+        <div className="absolute bottom-10 left-10 w-24 h-24 bg-yellow-100 rounded-full blur-2xl -z-10 opacity-70 animate-float-reverse"></div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          {/* Left Column: Illustration Showcase */}
-          <div className="lg:col-span-6 flex justify-center relative">
-            <div className="relative w-full max-w-[360px] sm:max-w-[440px] md:max-w-[500px] lg:max-w-[530px] flex items-center justify-center">
-              {/* Tall Illustration Image */}
-              <div className="relative w-full flex items-center justify-center">
-                <img
-                  src={activeSlide?.image_url || '/homepage/H1.webp'}
-                  alt={activeSlide?.title || 'School Kids'}
-                  className="w-full h-auto max-h-[580px] sm:max-h-[620px] object-contain transform hover:scale-102 transition-transform duration-500"
-                />
-              </div>
-
-              {/* Playful colored floating pins/dots around tall image */}
-              <div className="absolute -top-3 left-4 w-6 h-6 bg-accent-pink rounded-full border-2 border-white animate-pulse"></div>
-              <div className="absolute bottom-10 -left-4 w-7 h-7 bg-secondary-color rounded-full border-2 border-white"></div>
-              <div className="absolute bottom-4 right-4 w-6 h-6 bg-accent-blue rounded-full border-2 border-white"></div>
-              <div className="absolute top-1/4 -right-3 w-5 h-5 bg-accent-green rounded-full border-2 border-white"></div>
-            </div>
-          </div>
-
-          {/* Right Column: Hero Content & Organic Blob */}
-          <div className="lg:col-span-6 relative z-10 lg:pl-6">
-            {/* Background Sunny Yellow Organic Blob */}
-            <div className="absolute -top-12 -left-10 w-64 h-64 bg-blob-yellow rounded-[60%_40%_70%_30%/40%_50%_60%_50%] -z-10 opacity-60 animate-float"></div>
-
-            {/* Diagonal striped decorative bubble */}
-            <div
-              className="absolute -bottom-8 right-6 w-32 h-32 rounded-[50%_50%_40%_60%/60%_40%_60%_40%] opacity-40 -z-10"
-              style={{
-                backgroundImage:
-                  'repeating-linear-gradient(45deg, var(--accent-blue) 0, var(--accent-blue) 2px, transparent 0, transparent 8px)',
-              }}
-            ></div>
-
-            {/* Fixed Two-Tone Title */}
-            <div className="space-y-1">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary-color leading-tight">
-                {activeSlide?.title || 'Practical teaching &'}
-              </h1>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-secondary-color leading-tight">
-                {activeSlide?.subtitle || 'Social Development'}
-              </h2>
-
-              {/* Paragraph Text */}
-              <p className="pt-4 text-gray-600 text-base sm:text-lg leading-relaxed max-w-xl font-medium">
-                We aim at success by creating skills necessary for kids to enrich &
-                empower in studies & sports.
-              </p>
-
-              {/* Pill Button */}
-              <div className="pt-6 flex items-center space-x-4">
-                <a
-                  href={activeSlide?.button_url || '/about'}
-                  className="inline-flex items-center justify-center px-8 py-3.5 bg-button-dark hover:opacity-90 font-bold text-sm rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5"
-                >
-                  {activeSlide?.button_text || 'Learn More'}
-                </a>
-              </div>
-            </div>
-
-            {/* Visual 3 Pink Indicator Dots matching screenshot */}
-            <div className="mt-12 flex items-center space-x-2.5">
-              <span className="w-3.5 h-3.5 rounded-full bg-accent-pink shadow-xs"></span>
-              <span className="w-3 h-3 rounded-full border-2 border-accent-pink bg-transparent"></span>
-              <span className="w-3 h-3 rounded-full border-2 border-accent-pink bg-transparent"></span>
-            </div>
-          </div>
-        </div>
+        <HeroCarousel slides={heroSlides} />
       </section>
 
       {/* 4. SOFT SKY BLUE WAVE BOTTOM SECTION WITH COLORFUL ROUND BADGES */}
@@ -297,37 +233,37 @@ export default async function Home() {
 
         {/* Pastel Sky Blue Strip with 4 Colorful Feature Badges */}
         <div className="bg-accent-soft-blue pb-16 pt-2 px-4 sm:px-8">
-          <div className="max-w-5xl mx-auto flex flex-wrap items-center justify-around gap-6 sm:gap-8">
+          <div className="max-w-5xl mx-auto flex flex-wrap items-center justify-around gap-6 sm:gap-8 reveal-on-scroll">
             {/* 1. Yellow Circle: Early Learning (Book) */}
             <div className="flex flex-col items-center group cursor-pointer">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-secondary-color text-white flex items-center justify-center shadow-md transform group-hover:scale-110 transition-transform p-5">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-secondary-color text-white flex items-center justify-center shadow-md transform group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300 p-5">
                 <img src="/icons/book.png" alt="Creative Learning" className="w-full h-full object-contain brightness-0 invert" />
               </div>
-              <span className="mt-3 font-bold text-gray-700 text-sm">Creative Learning</span>
+              <span className="mt-3 font-bold text-gray-700 text-sm group-hover:text-secondary-color transition-colors">Creative Learning</span>
             </div>
 
             {/* 2. Pink Circle: Little Teachers / Mentors (User) */}
             <div className="flex flex-col items-center group cursor-pointer">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-accent-pink text-white flex items-center justify-center shadow-md transform group-hover:scale-110 transition-transform p-5">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-accent-pink text-white flex items-center justify-center shadow-md transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 p-5">
                 <img src="/icons/user.png" alt="Caring Mentors" className="w-full h-full object-contain brightness-0 invert" />
               </div>
-              <span className="mt-3 font-bold text-gray-700 text-sm">Caring Mentors</span>
+              <span className="mt-3 font-bold text-gray-700 text-sm group-hover:text-accent-pink transition-colors">Caring Mentors</span>
             </div>
 
             {/* 3. Blue Circle: Child Care / Happiness (Happiness) */}
             <div className="flex flex-col items-center group cursor-pointer">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-accent-blue text-white flex items-center justify-center shadow-md transform group-hover:scale-110 transition-transform p-5">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-accent-blue text-white flex items-center justify-center shadow-md transform group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300 p-5">
                 <img src="/icons/happiness.png" alt="Healthy Growth" className="w-full h-full object-contain brightness-0 invert" />
               </div>
-              <span className="mt-3 font-bold text-gray-700 text-sm">Healthy Growth</span>
+              <span className="mt-3 font-bold text-gray-700 text-sm group-hover:text-accent-blue transition-colors">Healthy Growth</span>
             </div>
 
             {/* 4. Green Circle: Safe Campus (Security) */}
             <div className="flex flex-col items-center group cursor-pointer">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-accent-green text-white flex items-center justify-center shadow-md transform group-hover:scale-110 transition-transform p-5">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-accent-green text-white flex items-center justify-center shadow-md transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 p-5">
                 <img src="/icons/security.png" alt="Safe & Nurturing" className="w-full h-full object-contain brightness-0 invert" />
               </div>
-              <span className="mt-3 font-bold text-gray-700 text-sm">Safe & Nurturing</span>
+              <span className="mt-3 font-bold text-gray-700 text-sm group-hover:text-accent-green transition-colors">Safe & Nurturing</span>
             </div>
           </div>
         </div>
@@ -337,7 +273,7 @@ export default async function Home() {
       {notices.length > 0 && (
         <section id="notices" className="bg-[#faf9ff] py-16 px-4 sm:px-8 border-b border-purple-50">
           <div className="max-w-7xl mx-auto">
-            <div className="flex flex-wrap items-end justify-between border-b-2 border-purple-100 pb-4 mb-8 gap-4">
+            <div className="flex flex-wrap items-end justify-between border-b-2 border-purple-100 pb-4 mb-8 gap-4 reveal-on-scroll">
               <div>
                 <span className="text-xs font-extrabold tracking-wider uppercase text-accent-pink bg-pink-100 px-3 py-1 rounded-full">
                   Important Circulars
@@ -354,13 +290,13 @@ export default async function Home() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {notices.slice(0, 6).map((notice) => (
+              {notices.slice(0, 6).map((notice, idx) => (
                 <div
                   key={notice.id}
-                  className="p-6 rounded-3xl bg-white border border-purple-100 hover:border-pink-200 shadow-xs hover:shadow-lg transition-all duration-300 relative overflow-hidden flex flex-col justify-between group transform hover:-translate-y-1"
+                  className={`p-6 rounded-3xl bg-white border border-purple-100 hover:border-pink-200 shadow-xs hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between group transform hover:-translate-y-1.5 reveal-on-scroll delay-${(idx % 3) * 100 + 100}`}
                 >
                   {notice.is_urgent && (
-                    <span className="absolute top-4 right-4 text-[10px] font-bold uppercase tracking-wider bg-rose-500 text-white px-2.5 py-0.5 rounded-full shadow-xs">
+                    <span className="absolute top-4 right-4 text-[10px] font-bold uppercase tracking-wider bg-rose-500 text-white px-2.5 py-0.5 rounded-full shadow-xs animate-pulse">
                       Urgent
                     </span>
                   )}
@@ -379,7 +315,7 @@ export default async function Home() {
                   </div>
                   <a
                     href={`/notice/${notice.id}`}
-                    className="mt-5 text-xs font-bold text-primary-color group-hover:text-accent-pink inline-flex items-center"
+                    className="mt-5 text-xs font-bold text-primary-color group-hover:text-accent-pink inline-flex items-center transform group-hover:translate-x-1 transition-transform"
                   >
                     Read Circular →
                   </a>
