@@ -139,21 +139,21 @@ export default async function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left Column: Tall (Lomba) Illustration Showcase */}
           <div className="lg:col-span-6 flex justify-center relative">
-            <div className="relative w-full max-w-[380px] sm:max-w-[430px] md:max-w-[460px] flex items-center justify-center">
+            <div className="relative w-full max-w-[480px] sm:max-w-[540px] md:max-w-[620px] lg:max-w-[680px] flex items-center justify-center">
               {/* Tall Illustration Image */}
-              <div className="relative w-full p-2 sm:p-4 flex items-center justify-center">
+              <div className="relative w-full p-0 flex items-center justify-center">
                 <img
                   src={activeSlide?.image_url || '/homepage/H1.webp'}
                   alt={activeSlide?.title || 'School Kids'}
-                  className="w-full h-auto max-h-[520px] object-contain transform hover:scale-102 transition-transform duration-500"
+                  className="w-full h-auto max-h-[640px] sm:max-h-[720px] lg:max-h-[800px] object-contain transform hover:scale-102 transition-transform duration-500"
                 />
               </div>
 
               {/* Little playful colored floating pins/dots around tall image */}
-              <div className="absolute -top-3 left-6 w-6 h-6 bg-pink-500 rounded-full border-2 border-white animate-pulse"></div>
-              <div className="absolute bottom-10 -left-4 w-7 h-7 bg-amber-400 rounded-full border-2 border-white"></div>
-              <div className="absolute bottom-6 right-6 w-6 h-6 bg-sky-400 rounded-full border-2 border-white"></div>
-              <div className="absolute top-1/3 -right-3 w-5 h-5 bg-lime-400 rounded-full border-2 border-white"></div>
+              <div className="absolute -top-4 left-4 w-7 h-7 bg-pink-500 rounded-full border-2 border-white animate-pulse"></div>
+              <div className="absolute bottom-12 -left-6 w-8 h-8 bg-amber-400 rounded-full border-2 border-white"></div>
+              <div className="absolute bottom-4 right-4 w-7 h-7 bg-sky-400 rounded-full border-2 border-white"></div>
+              <div className="absolute top-1/4 -right-4 w-6 h-6 bg-lime-400 rounded-full border-2 border-white"></div>
             </div>
           </div>
 
