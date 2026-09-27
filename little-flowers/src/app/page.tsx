@@ -137,7 +137,7 @@ export default async function Home() {
         <div className="absolute bottom-20 left-10 w-24 h-24 bg-yellow-100 rounded-full blur-2xl -z-10 opacity-70"></div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left Column: Tall (Lomba) Illustration Showcase */}
+          {/* Left Column: Illustration Showcase */}
           <div className="lg:col-span-6 flex justify-center relative">
             <div className="relative w-full max-w-[360px] sm:max-w-[440px] md:max-w-[500px] lg:max-w-[530px] flex items-center justify-center">
               {/* Tall Illustration Image */}
