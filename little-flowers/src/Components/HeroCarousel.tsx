@@ -75,13 +75,13 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
           }}
         ></div>
 
-        {/* Dynamic Two-Tone Title */}
-        <div key={`text-${currentIndex}`} className="space-y-1 transition-all duration-500 animate-fadeIn">
+        {/* Fixed Two-Tone Title and Information */}
+        <div className="space-y-1">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary-color leading-tight">
-            {activeSlide?.title || 'Practical teaching &'}
+            Practical teaching &
           </h1>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-secondary-color leading-tight">
-            {activeSlide?.subtitle || 'Social Development'}
+            Social Development
           </h2>
 
           {/* Paragraph Text */}
@@ -93,10 +93,10 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
           {/* Pill Button */}
           <div className="pt-6 flex items-center space-x-4">
             <a
-              href={activeSlide?.button_url || '/about'}
+              href="/about"
               className="inline-flex items-center justify-center px-8 py-3.5 bg-button-dark hover:opacity-90 font-bold text-sm rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5"
             >
-              {activeSlide?.button_text || 'Learn More'}
+              Learn More
             </a>
           </div>
         </div>

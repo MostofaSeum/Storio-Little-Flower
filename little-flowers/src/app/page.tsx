@@ -27,16 +27,15 @@ export default async function Home() {
     storio.getNotices(tenantHost),
   ]);
 
-  // 4. Apply Rule 1: Fallback to demo data ONLY in standalone preview mode
+  // 4. Apply Rule 1: Fallback to demo data
   const layout: StorioLayoutResponse | null =
-    rawLayout || (isStandalone ? { settings: DEFAULT_DEMO_DATA.settings, customization: { config: {} }, navigation: { items: [] } } : null);
+    rawLayout || { settings: DEFAULT_DEMO_DATA.settings, customization: { config: {} }, navigation: { items: [] } };
 
+  // Use rawHeroSlides if tenant has populated 3+ slides, otherwise fallback to local DEFAULT_DEMO_DATA (H1, H2, H3)
   const heroSlides: StorioHeroSlide[] =
-    Array.isArray(rawHeroSlides) && rawHeroSlides.length > 0
+    Array.isArray(rawHeroSlides) && rawHeroSlides.length >= 3
       ? rawHeroSlides
-      : isStandalone
-      ? DEFAULT_DEMO_DATA.heroSlides
-      : [];
+      : DEFAULT_DEMO_DATA.heroSlides;
 
   const notices: StorioNotice[] =
     Array.isArray(rawNotices) && rawNotices.length > 0
