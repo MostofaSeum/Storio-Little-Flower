@@ -10,6 +10,7 @@ import {
   StorioInstitutionProfile,
   StorioActivityItem,
   StorioPromotion,
+  StorioTestimonial,
 } from '@/data/storioExtendedTypes';
 import { headers } from 'next/headers';
 import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
@@ -36,6 +37,7 @@ export default async function Home() {
     rawStaff,
     rawGallery,
     rawPromotions,
+    rawTestimonials,
   ] = await Promise.all([
     storio.getLayout(tenantHost),
     storio.getHeroSlides(tenantHost),
@@ -45,6 +47,7 @@ export default async function Home() {
     storio.getStaff(tenantHost),
     storio.getGallery(tenantHost),
     storio.apiFetch<StorioPromotion[]>('/api/v2/template/promotions/', { tenantHost }),
+    storio.apiFetch<StorioTestimonial[]>('/api/v2/template/testimonials/', { tenantHost }),
   ]);
 
   // 4. Apply Rule 1: Fallback to demo data ONLY in standalone preview mode
@@ -96,10 +99,16 @@ export default async function Home() {
       ? DEFAULT_DEMO_DATA.promotions
       : [];
 
+  const testimonials: StorioTestimonial[] =
+    Array.isArray(rawTestimonials) && rawTestimonials.length > 0
+      ? rawTestimonials
+      : isStandalone
+      ? DEFAULT_DEMO_DATA.testimonials
+      : [];
+
   const settings = layout?.settings || DEFAULT_DEMO_DATA.settings;
   const activeSlide = heroSlides[0] || DEFAULT_DEMO_DATA.heroSlides[0];
   const activePromo = promotions[0] || DEFAULT_DEMO_DATA.promotions[0];
-  const testimonials = DEFAULT_DEMO_DATA.testimonials;
 
   // Colorful menu items matching the design image
   const navLinks = [
@@ -670,17 +679,17 @@ export default async function Home() {
                   className="p-7 rounded-3xl bg-white border border-sky-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between"
                 >
                   <div>
-                    {/* 5 Stars */}
+                    {/* Stars */}
                     <div className="flex space-x-1 text-secondary-color text-base mb-4">
-                      {'★'.repeat(t.rating)}
+                      {'★'.repeat(t.rating || 5)}
                     </div>
                     <p className="text-gray-600 text-sm leading-relaxed italic">
-                      "{t.quote}"
+                      "{t.quote || t.content}"
                     </p>
                   </div>
                   <div className="mt-6 pt-4 border-t border-gray-100">
                     <h4 className="font-bold text-gray-900 text-sm">{t.name}</h4>
-                    <span className="text-xs text-gray-400">{t.role}</span>
+                    <span className="text-xs text-gray-400">{t.role || t.designation || 'Parent'}</span>
                   </div>
                 </div>
               ))}
