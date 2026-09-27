@@ -65,23 +65,5 @@ export const DEFAULT_DEMO_DATA: {
       button_url: "/about",
       order: 1,
     },
-    {
-      id: 2,
-      title: "Creative Learning &",
-      subtitle: "Skill Building",
-      image_url: "/homepage/H2.webp",
-      button_text: "Explore Facilities",
-      button_url: "/facilities",
-      order: 2,
-    },
-    {
-      id: 3,
-      title: "Nurturing Minds &",
-      subtitle: "Joyful Activities",
-      image_url: "/homepage/H3.webp",
-      button_text: "Join Admissions",
-      button_url: "/admission",
-      order: 3,
-    },
   ],
 };
