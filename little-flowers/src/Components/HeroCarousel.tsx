@@ -101,24 +101,25 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
           </div>
         </div>
 
-        {/* Interactive Carousel Indicator Dots */}
-        {totalSlides > 1 && (
-          <div className="mt-12 flex items-center space-x-3">
-            {slides.map((_, idx) => (
+        {/* Interactive Carousel Indicator Dots (Exactly 3 Pink Dots) */}
+        <div className="mt-12 flex items-center space-x-2.5">
+          {[0, 1, 2].map((idx) => {
+            const isActive = currentIndex === idx;
+            return (
               <button
                 key={idx}
                 type="button"
-                onClick={() => goToSlide(idx)}
+                onClick={() => goToSlide(idx % totalSlides)}
                 aria-label={`Go to slide ${idx + 1}`}
-                className={`transition-all duration-300 rounded-full focus:outline-hidden ${
-                  currentIndex === idx
-                    ? 'w-4 h-4 bg-[#ff4081] scale-110 shadow-xs ring-2 ring-pink-200'
-                    : 'w-3 h-3 border-2 border-[#ff4081] bg-transparent hover:bg-pink-100'
+                className={`transition-all duration-300 rounded-full cursor-pointer focus:outline-hidden ${
+                  isActive
+                    ? 'w-3.5 h-3.5 bg-[#ff4081] shadow-xs'
+                    : 'w-3 h-3 border-2 border-[#ff4081] bg-transparent hover:bg-pink-50'
                 }`}
               />
-            ))}
-          </div>
-        )}
+            );
+          })}
+        </div>
       </div>
     </div>
   );
