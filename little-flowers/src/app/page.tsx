@@ -236,7 +236,7 @@ export default async function Home() {
           <div className="max-w-5xl mx-auto flex flex-wrap items-center justify-around gap-6 sm:gap-8 reveal-on-scroll">
             {/* 1. Yellow Circle: Early Learning (Book) */}
             <div className="flex flex-col items-center group cursor-pointer">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-secondary-color text-white flex items-center justify-center shadow-md transform group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300 p-5">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-secondary-color text-white flex items-center justify-center shadow-md p-5 badge-interactive">
                 <img src="/icons/book.png" alt="Creative Learning" className="w-full h-full object-contain brightness-0 invert" />
               </div>
               <span className="mt-3 font-bold text-gray-700 text-sm group-hover:text-secondary-color transition-colors">Creative Learning</span>
@@ -244,7 +244,7 @@ export default async function Home() {
 
             {/* 2. Pink Circle: Little Teachers / Mentors (User) */}
             <div className="flex flex-col items-center group cursor-pointer">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-accent-pink text-white flex items-center justify-center shadow-md transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 p-5">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-accent-pink text-white flex items-center justify-center shadow-md p-5 badge-interactive">
                 <img src="/icons/user.png" alt="Caring Mentors" className="w-full h-full object-contain brightness-0 invert" />
               </div>
               <span className="mt-3 font-bold text-gray-700 text-sm group-hover:text-accent-pink transition-colors">Caring Mentors</span>
@@ -252,7 +252,7 @@ export default async function Home() {
 
             {/* 3. Blue Circle: Child Care / Happiness (Happiness) */}
             <div className="flex flex-col items-center group cursor-pointer">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-accent-blue text-white flex items-center justify-center shadow-md transform group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300 p-5">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-accent-blue text-white flex items-center justify-center shadow-md p-5 badge-interactive">
                 <img src="/icons/happiness.png" alt="Healthy Growth" className="w-full h-full object-contain brightness-0 invert" />
               </div>
               <span className="mt-3 font-bold text-gray-700 text-sm group-hover:text-accent-blue transition-colors">Healthy Growth</span>
@@ -260,7 +260,7 @@ export default async function Home() {
 
             {/* 4. Green Circle: Safe Campus (Security) */}
             <div className="flex flex-col items-center group cursor-pointer">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-accent-green text-white flex items-center justify-center shadow-md transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 p-5">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-accent-green text-white flex items-center justify-center shadow-md p-5 badge-interactive">
                 <img src="/icons/security.png" alt="Safe & Nurturing" className="w-full h-full object-contain brightness-0 invert" />
               </div>
               <span className="mt-3 font-bold text-gray-700 text-sm group-hover:text-accent-green transition-colors">Safe & Nurturing</span>
@@ -437,7 +437,7 @@ export default async function Home() {
                           <img
                             src={activity.featured_image_url}
                             alt={activity.title}
-                            className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+                            className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-700 ease-out"
                           />
                         </div>
                       )}
@@ -497,11 +497,11 @@ export default async function Home() {
                   key={member.id}
                   className={`flex flex-col items-center text-center p-6 bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 group transform hover:-translate-y-2 reveal-on-scroll delay-${(idx % 4) * 100 + 100}`}
                 >
-                  <div className={`w-32 h-32 rounded-full overflow-hidden p-1.5 ring-4 ${ringColors[idx % 4]} mb-4 shadow-sm group-hover:ring-offset-2 transition-all`}>
+                  <div className={`w-32 h-32 rounded-full overflow-hidden p-1.5 ring-4 ${ringColors[idx % 4]} mb-4 shadow-sm group-hover:ring-offset-2 transition-all duration-500`}>
                     <img
                       src={member.photo_url || '/icons/user.png'}
                       alt={member.name}
-                      className="w-full h-full object-cover rounded-full group-hover:scale-108 transition-transform duration-500"
+                      className="w-full h-full object-cover rounded-full group-hover:scale-[1.04] transition-transform duration-700 ease-out"
                     />
                   </div>
                   <h3 className="font-extrabold text-lg text-gray-900 group-hover:text-primary-color transition-colors">
@@ -579,7 +579,7 @@ export default async function Home() {
                 <img
                   src={item.image_url}
                   alt={item.title || 'Campus Moment'}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-800 ease-out"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                   <span className="text-white text-xs sm:text-sm font-bold">

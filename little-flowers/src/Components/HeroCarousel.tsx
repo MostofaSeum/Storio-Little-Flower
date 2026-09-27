@@ -49,7 +49,7 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
               key={activeSlide?.image_url || currentIndex}
               src={activeSlide?.image_url || '/homepage/H1.jpg'}
               alt={activeSlide?.title || 'School Kids'}
-              className="w-full h-auto max-h-[580px] sm:max-h-[620px] object-contain transform hover:scale-102 transition-transform duration-500 animate-fadeIn"
+              className="w-full h-auto max-h-[580px] sm:max-h-[620px] object-contain transition-transform duration-700 ease-out hover:scale-[1.018] animate-fadeIn"
             />
           </div>
 
