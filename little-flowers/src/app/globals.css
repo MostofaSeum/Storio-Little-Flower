@@ -3,20 +3,92 @@
 :root {
   --font-quicksand: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-fredoka: 'Fredoka', 'Quicksand', sans-serif;
+  
+  /* Little Flowers Design System Tokens */
   --primary: #6c4298;
   --secondary: #f39c12;
   --accent-pink: #ff4081;
+  --accent-pink-hover: #e91e63;
   --accent-blue: #4fc3f7;
   --accent-green: #8bc34a;
-  --accent-soft-blue: #e3f2fd;
+  --accent-soft-blue: #e1f5fe;
+  --topbar-bg: #111111;
+  --button-bg: #111111;
+  --button-text: #ffffff;
+  --blob-yellow: #fde68a;
+  --text-dark: #2d2b56;
+  --text-muted: #4b5563;
 }
 
 body {
   font-family: var(--font-quicksand);
+  color: var(--text-dark);
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-fredoka);
+}
+
+/* Global Reusable Color Utility Classes */
+.text-primary-color {
+  color: var(--primary);
+}
+
+.text-secondary-color {
+  color: var(--secondary);
+}
+
+.text-accent-pink {
+  color: var(--accent-pink);
+}
+
+.text-accent-blue {
+  color: var(--accent-blue);
+}
+
+.text-accent-green {
+  color: var(--accent-green);
+}
+
+.bg-primary-color {
+  background-color: var(--primary);
+}
+
+.bg-secondary-color {
+  background-color: var(--secondary);
+}
+
+.bg-accent-pink {
+  background-color: var(--accent-pink);
+}
+
+.bg-accent-blue {
+  background-color: var(--accent-blue);
+}
+
+.bg-accent-green {
+  background-color: var(--accent-green);
+}
+
+.bg-accent-soft-blue {
+  background-color: var(--accent-soft-blue);
+}
+
+.bg-topbar {
+  background-color: var(--topbar-bg);
+}
+
+.bg-blob-yellow {
+  background-color: var(--blob-yellow);
+}
+
+.bg-button-dark {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+}
+
+.border-accent-pink {
+  border-color: var(--accent-pink);
 }
 
 /* Wavy and organic animation helpers */
@@ -47,4 +119,3 @@ h1, h2, h3, h4, h5, h6 {
 .animate-fadeIn {
   animation: fadeIn 0.5s ease-out forwards;
 }
-

@@ -146,7 +146,8 @@ export default async function Home() {
         {/* Soft SVG Wave Divider */}
         <div className="w-full overflow-hidden leading-none">
           <svg
-            className="relative block w-full h-16 sm:h-24 text-[#e1f5fe]"
+            className="relative block w-full h-16 sm:h-24 text-accent-soft-blue"
+            style={{ color: 'var(--accent-soft-blue)' }}
             viewBox="0 0 1200 120"
             preserveAspectRatio="none"
             fill="currentColor"
@@ -156,11 +157,11 @@ export default async function Home() {
         </div>
 
         {/* Pastel Sky Blue Strip with 4 Colorful Feature Badges */}
-        <div className="bg-[#e1f5fe] pb-16 pt-2 px-4 sm:px-8">
+        <div className="bg-accent-soft-blue pb-16 pt-2 px-4 sm:px-8">
           <div className="max-w-5xl mx-auto flex flex-wrap items-center justify-around gap-6 sm:gap-8">
             {/* 1. Yellow Circle: Early Learning (Book) */}
             <div className="flex flex-col items-center group cursor-pointer">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#f39c12] text-white flex items-center justify-center shadow-md transform group-hover:scale-110 transition-transform p-5">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-secondary-color text-white flex items-center justify-center shadow-md transform group-hover:scale-110 transition-transform p-5">
                 <img src="/icons/book.png" alt="Creative Learning" className="w-full h-full object-contain brightness-0 invert" />
               </div>
               <span className="mt-3 font-bold text-gray-700 text-sm">Creative Learning</span>
@@ -168,7 +169,7 @@ export default async function Home() {
 
             {/* 2. Pink Circle: Little Teachers / Mentors (User) */}
             <div className="flex flex-col items-center group cursor-pointer">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#e91e63] text-white flex items-center justify-center shadow-md transform group-hover:scale-110 transition-transform p-5">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-accent-pink text-white flex items-center justify-center shadow-md transform group-hover:scale-110 transition-transform p-5">
                 <img src="/icons/user.png" alt="Caring Mentors" className="w-full h-full object-contain brightness-0 invert" />
               </div>
               <span className="mt-3 font-bold text-gray-700 text-sm">Caring Mentors</span>
@@ -176,7 +177,7 @@ export default async function Home() {
 
             {/* 3. Blue Circle: Child Care / Happiness (Happiness) */}
             <div className="flex flex-col items-center group cursor-pointer">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#29b6f6] text-white flex items-center justify-center shadow-md transform group-hover:scale-110 transition-transform p-5">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-accent-blue text-white flex items-center justify-center shadow-md transform group-hover:scale-110 transition-transform p-5">
                 <img src="/icons/happiness.png" alt="Healthy Growth" className="w-full h-full object-contain brightness-0 invert" />
               </div>
               <span className="mt-3 font-bold text-gray-700 text-sm">Healthy Growth</span>
@@ -184,7 +185,7 @@ export default async function Home() {
 
             {/* 4. Green Circle: Safe Campus (Security) */}
             <div className="flex flex-col items-center group cursor-pointer">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#8bc34a] text-white flex items-center justify-center shadow-md transform group-hover:scale-110 transition-transform p-5">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-accent-green text-white flex items-center justify-center shadow-md transform group-hover:scale-110 transition-transform p-5">
                 <img src="/icons/security.png" alt="Safe & Nurturing" className="w-full h-full object-contain brightness-0 invert" />
               </div>
               <span className="mt-3 font-bold text-gray-700 text-sm">Safe & Nurturing</span>
@@ -198,12 +199,12 @@ export default async function Home() {
         <section className="bg-white py-12 px-4 sm:px-8 max-w-7xl mx-auto w-full">
           <div className="flex items-center justify-between border-b-2 border-gray-100 pb-4 mb-6">
             <div>
-              <h3 className="text-2xl font-bold text-[#6c4298]">Campus Announcements</h3>
+              <h3 className="text-2xl font-bold text-primary-color">Campus Announcements</h3>
               <p className="text-sm text-gray-500">Stay updated with latest school circulars and events</p>
             </div>
             <a
               href="/notice"
-              className="text-xs sm:text-sm font-bold text-[#ff4081] hover:underline"
+              className="text-xs sm:text-sm font-bold text-accent-pink hover:underline"
             >
               View All Notices →
             </a>
@@ -221,7 +222,7 @@ export default async function Home() {
                   </span>
                 )}
                 <div>
-                  <span className="text-xs font-semibold text-[#f39c12]">
+                  <span className="text-xs font-semibold text-secondary-color">
                     {notice.published_date || 'Recent Notice'}
                   </span>
                   <h4 className="font-bold text-gray-800 text-base mt-2 line-clamp-2">
@@ -235,7 +236,7 @@ export default async function Home() {
                 </div>
                 <a
                   href={`/notice/${notice.id}`}
-                  className="mt-4 text-xs font-bold text-[#6c4298] hover:text-[#ff4081] inline-flex items-center"
+                  className="mt-4 text-xs font-bold text-primary-color hover:text-accent-pink inline-flex items-center"
                 >
                   Read Circular →
                 </a>
