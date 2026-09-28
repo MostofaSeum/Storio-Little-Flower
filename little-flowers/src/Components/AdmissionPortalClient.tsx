@@ -293,6 +293,13 @@ export default function AdmissionPortalClient({
         }
 
         // 2. Submit Application
+        // The backend requires email to be present inside form_data (as `email` or `guardian_email`)
+        const submissionFormData = {
+          ...formData,
+          email: email,
+          guardian_email: email,
+        };
+
         const submitResponse = await fetch(`${baseUrl}/api/v2/template/admission/applications/`, {
           method: 'POST',
           headers: {
@@ -300,23 +307,31 @@ export default function AdmissionPortalClient({
             'x-tenant-host': tenantHost,
           },
           body: JSON.stringify({
-            form_data: formData,
+            form_data: submissionFormData,
             otp_code: otpCode.trim(),
           }),
         });
 
         const submitData = await submitResponse.json().catch(() => null);
 
-        if (submitResponse.ok && submitData?.success) {
-          setApplicationNumber(submitData.application_number || `APP-${Date.now()}`);
+        if (submitResponse.ok && (submitData?.success || submitData?.application_number || submitResponse.status === 201)) {
+          setApplicationNumber(submitData.application_number || `ADM-${Date.now()}`);
           setCurrentStep(4);
         } else {
-          const errMsg =
+          let errMsg =
             submitData?.message ||
-            (submitData?.form_data ? submitData.form_data.join(', ') : null) ||
-            (submitData?.otp_code ? submitData.otp_code.join(', ') : null) ||
-            'Failed to submit application. Please verify details.';
-          setOtpError(errMsg);
+            (submitData?.email ? (Array.isArray(submitData.email) ? submitData.email.join(', ') : submitData.email) : null) ||
+            (submitData?.otp_code ? (Array.isArray(submitData.otp_code) ? submitData.otp_code.join(', ') : submitData.otp_code) : null);
+
+          if (!errMsg && submitData?.form_data) {
+            if (typeof submitData.form_data === 'object') {
+              errMsg = Object.values(submitData.form_data).flat().join(', ');
+            } else if (Array.isArray(submitData.form_data)) {
+              errMsg = submitData.form_data.join(', ');
+            }
+          }
+
+          setOtpError(errMsg || 'Failed to submit application. Please verify details.');
         }
       }
     } catch {
