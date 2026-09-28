@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StorioAdmissionFormConfig,
   StorioAdmissionOTPResponse,
@@ -272,41 +272,51 @@ export default function AdmissionPortalClient({
         );
         const email = emailField ? formData[emailField.id] : formData['guardian_email'] || formData['email'];
 
-        const verifyRes = await storio.apiFetch<StorioAdmissionOTPResponse>(
-          '/api/v2/template/admission/verify-otp/',
-          {
-            method: 'POST',
-            body: JSON.stringify({ email, otp_code: otpCode }),
-            headers: { 'Content-Type': 'application/json' },
-            tenantHost,
-          }
-        );
+        const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://api.storio.cloud';
 
-        if (!verifyRes?.success) {
-          setOtpError(verifyRes?.message || 'Invalid or expired OTP code.');
+        // 1. Verify OTP
+        const verifyResponse = await fetch(`${baseUrl}/api/v2/template/admission/verify-otp/`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-tenant-host': tenantHost,
+          },
+          body: JSON.stringify({ email, otp_code: otpCode.trim() }),
+        });
+
+        const verifyData = await verifyResponse.json().catch(() => null);
+
+        if (!verifyResponse.ok || !verifyData?.success) {
+          setOtpError(verifyData?.message || 'Invalid or expired OTP code.');
           setSubmitting(false);
           return;
         }
 
         // 2. Submit Application
-        const submitRes = await storio.apiFetch<StorioAdmissionApplicationResponse>(
-          '/api/v2/template/admission/applications/',
-          {
-            method: 'POST',
-            body: JSON.stringify({
-              form_data: formData,
-              otp_code: otpCode,
-            }),
-            headers: { 'Content-Type': 'application/json' },
-            tenantHost,
-          }
-        );
+        const submitResponse = await fetch(`${baseUrl}/api/v2/template/admission/applications/`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-tenant-host': tenantHost,
+          },
+          body: JSON.stringify({
+            form_data: formData,
+            otp_code: otpCode.trim(),
+          }),
+        });
 
-        if (submitRes && submitRes.success) {
-          setApplicationNumber(submitRes.application_number || `APP-${Date.now()}`);
+        const submitData = await submitResponse.json().catch(() => null);
+
+        if (submitResponse.ok && submitData?.success) {
+          setApplicationNumber(submitData.application_number || `APP-${Date.now()}`);
           setCurrentStep(4);
         } else {
-          setOtpError(submitRes?.message || 'Failed to submit application. Please verify details.');
+          const errMsg =
+            submitData?.message ||
+            (submitData?.form_data ? submitData.form_data.join(', ') : null) ||
+            (submitData?.otp_code ? submitData.otp_code.join(', ') : null) ||
+            'Failed to submit application. Please verify details.';
+          setOtpError(errMsg);
         }
       }
     } catch {
@@ -620,15 +630,25 @@ export default function AdmissionPortalClient({
               <h2 className="text-2xl font-black text-primary-color font-fredoka">
                 Verify Guardian Email
               </h2>
-              <p className="text-xs text-gray-600 font-medium mt-2 leading-relaxed">
-                We sent a 6-digit confirmation code to{' '}
-                <strong className="text-gray-900">{formData['guardian_email']}</strong>. Enter it
-                below to finalize your registration.
-              </p>
+              <div className="flex flex-wrap items-center justify-center gap-2 mt-2">
+                <p className="text-xs text-gray-600 font-medium leading-relaxed">
+                  We sent a 6-digit confirmation code to{' '}
+                  <strong className="text-gray-900 font-bold">
+                    {formData['guardian_email'] || formData['email']}
+                  </strong>.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setCurrentStep(2)}
+                  className="text-xs font-bold text-accent-pink hover:text-primary-color underline underline-offset-2 transition-colors cursor-pointer"
+                >
+                  Change Email
+                </button>
+              </div>
             </div>
 
             {otpSuccessMsg && (
-              <div className="p-3.5 rounded-2xl bg-amber-50 border border-amber-200 text-secondary-color text-xs font-bold">
+              <div className="p-3.5 rounded-2xl bg-amber-50 border border-amber-200 text-secondary-color text-xs font-bold animate-fadeIn transition-opacity duration-500">
                 ✓ {otpSuccessMsg}
               </div>
             )}
@@ -645,6 +665,25 @@ export default function AdmissionPortalClient({
               <span className="text-[11px] text-gray-400 block font-semibold">
                 Enter 6-digit verification code
               </span>
+            </div>
+
+            {/* Resend OTP with 60-second countdown timer */}
+            <div className="pt-1 flex items-center justify-center">
+              {resendCountdown > 0 ? (
+                <div className="inline-flex items-center space-x-2 text-xs font-semibold text-gray-400 bg-gray-50 px-4 py-2 rounded-full border border-gray-100">
+                  <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                  <span>Resend code in <strong className="text-gray-700 font-bold">{resendCountdown}s</strong></span>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  onClick={handleResendOTP}
+                  disabled={resending}
+                  className="text-xs font-extrabold text-primary-color hover:text-accent-pink underline underline-offset-4 transition-colors cursor-pointer disabled:opacity-50"
+                >
+                  {resending ? 'Sending new code...' : 'Didn’t receive the code? Resend Code'}
+                </button>
+              )}
             </div>
 
             {otpError && (
