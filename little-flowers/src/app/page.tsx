@@ -376,7 +376,7 @@ export default async function Home() {
             <div className="lg:col-span-5 relative reveal-on-scroll">
               <div className="relative mx-auto max-w-[420px] rounded-3xl overflow-hidden border-8 border-white shadow-xl transform -rotate-1 hover:rotate-0 hover:scale-102 transition-all duration-500">
                 <img
-                  src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?q=80&w=800&auto=format&fit=crop"
+                  src={profile.institution_image_url || "/homepage/About Our Academy/Trial 1.jpg"}
                   alt="Kindergarten Learners"
                   className="w-full h-[400px] object-cover"
                 />

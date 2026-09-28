@@ -121,6 +121,7 @@ export const DEFAULT_DEMO_DATA: {
     total_students_label: "Happy Children",
     total_teachers_label: "Caring Mentors",
     school_details: "Little Flowers Kindergarten provides experiential early childhood education centered on play, sensory exploration, creativity, and foundational social skills.",
+    institution_image_url: "/homepage/About Our Academy/Trial 1.jpg",
   },
   activities: [
     {
@@ -129,7 +130,7 @@ export const DEFAULT_DEMO_DATA: {
       slug: "playgroup",
       summary: "Sensory play, music, and motor skill building in a joyful atmosphere.",
       excerpt: "Age 2 - 3 Years",
-      featured_image_url: "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?q=80&w=600&auto=format&fit=crop",
+      featured_image_url: "/homepage/Early Exploration/Trial 1.jpg",
     },
     {
       id: 2,
@@ -137,7 +138,7 @@ export const DEFAULT_DEMO_DATA: {
       slug: "nursery",
       summary: "Early phonics, numbers, interactive storytelling, and creative art workshops.",
       excerpt: "Age 3 - 4 Years",
-      featured_image_url: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?q=80&w=600&auto=format&fit=crop",
+      featured_image_url: "/homepage/Early Exploration/Trial 2.webp",
     },
     {
       id: 3,
@@ -145,7 +146,7 @@ export const DEFAULT_DEMO_DATA: {
       slug: "kindergarten",
       summary: "Foundational reading, basic math concepts, scientific curiosity, and teamwork.",
       excerpt: "Age 4 - 6 Years",
-      featured_image_url: "https://images.unsplash.com/photo-1588072432836-e10032774350?q=80&w=600&auto=format&fit=crop",
+      featured_image_url: "/homepage/Early Exploration/Trial 1.jpg",
     },
     {
       id: 4,
@@ -153,7 +154,7 @@ export const DEFAULT_DEMO_DATA: {
       slug: "creative-club",
       summary: "Painting, ceramic pottery, rhythm instruments, and theatrical puppet play.",
       excerpt: "All Junior Grades",
-      featured_image_url: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=600&auto=format&fit=crop",
+      featured_image_url: "/homepage/Early Exploration/Trial 2.webp",
     },
   ],
   staff: [
@@ -162,7 +163,7 @@ export const DEFAULT_DEMO_DATA: {
       name: "Mrs. Sarah Jenkins",
       designation: "Headmistress & Early Child Specialist",
       department: "Administration",
-      photo_url: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=500&auto=format&fit=crop",
+      photo_url: "/homepage/Teachers/Teacher.jpg",
       bio: "14+ years of passion in child cognitive development and joyful learning.",
     },
     {
@@ -170,7 +171,7 @@ export const DEFAULT_DEMO_DATA: {
       name: "Ms. Emily Watson",
       designation: "Playgroup & Sensory Lead",
       department: "Early Childhood",
-      photo_url: "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?q=80&w=500&auto=format&fit=crop",
+      photo_url: "/homepage/Teachers/Teacher.jpg",
       bio: "Certified Montessori guide loving puppet theatre and expressive speech.",
     },
     {
@@ -178,7 +179,7 @@ export const DEFAULT_DEMO_DATA: {
       name: "Mr. David Miller",
       designation: "Physical Education & Games Coach",
       department: "Sports & Wellness",
-      photo_url: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=500&auto=format&fit=crop",
+      photo_url: "/homepage/Teachers/Teacher.jpg",
       bio: "Focusing on motor coordination, balance, and cooperative games for kids.",
     },
     {
@@ -186,7 +187,7 @@ export const DEFAULT_DEMO_DATA: {
       name: "Ms. Sophia Chen",
       designation: "Art, Craft & Clay Mentor",
       department: "Creative Arts",
-      photo_url: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=500&auto=format&fit=crop",
+      photo_url: "/homepage/Teachers/Teacher.jpg",
       bio: "Nurturing imaginative thinking through vibrant watercolor and sculpture.",
     },
   ],
@@ -194,37 +195,37 @@ export const DEFAULT_DEMO_DATA: {
     {
       id: 1,
       title: "Outdoor Splash & Play Day",
-      image_url: "https://images.unsplash.com/photo-1485546246426-74dc88dec4d9?q=80&w=600&auto=format&fit=crop",
+      image_url: "/homepage/Happy Memories/Trial 1.jpg",
       caption: "Joyful outdoor water fun on sunny Friday.",
     },
     {
       id: 2,
       title: "Storytelling Circle",
-      image_url: "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=600&auto=format&fit=crop",
+      image_url: "/homepage/Happy Memories/Trial 2.webp",
       caption: "Morning circle time discovering fairy tales.",
     },
     {
       id: 3,
       title: "Little Scientists Lab",
-      image_url: "https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=600&auto=format&fit=crop",
+      image_url: "/homepage/Happy Memories/Trial 1.jpg",
       caption: "Exploring plants and magnifying glasses.",
     },
     {
       id: 4,
       title: "Annual Colors Exhibition",
-      image_url: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=600&auto=format&fit=crop",
+      image_url: "/homepage/Happy Memories/Trial 2.webp",
       caption: "Colorful finger-painting masterpieces.",
     },
     {
       id: 5,
       title: "Mini Sports Day Champions",
-      image_url: "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?q=80&w=600&auto=format&fit=crop",
+      image_url: "/homepage/Happy Memories/Trial 1.jpg",
       caption: "Fun obstacle race and medal ceremony.",
     },
     {
       id: 6,
       title: "Music & Rhythm Session",
-      image_url: "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?q=80&w=600&auto=format&fit=crop",
+      image_url: "/homepage/Happy Memories/Trial 2.webp",
       caption: "Singing nursery rhymes with xylophones.",
     },
   ],
