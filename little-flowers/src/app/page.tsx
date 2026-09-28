@@ -375,10 +375,10 @@ export default async function Home() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {activities.slice(0, 4).map((activity, idx) => {
                 const borderColors = [
-                  'border-amber-300 hover:border-amber-400',
-                  'border-pink-300 hover:border-pink-400',
-                  'border-sky-300 hover:border-sky-400',
-                  'border-lime-300 hover:border-lime-400',
+                  'border-amber-300',
+                  'border-pink-300',
+                  'border-sky-300',
+                  'border-lime-300',
                 ];
                 const badgeColors = [
                   'bg-secondary-color text-white',
@@ -386,13 +386,20 @@ export default async function Home() {
                   'bg-accent-blue text-white',
                   'bg-accent-green text-white',
                 ];
+                const courseGlowClasses = [
+                  'course-card-amber',
+                  'course-card-pink',
+                  'course-card-sky',
+                  'course-card-lime',
+                ];
                 const directionClass = idx < 2 ? 'reveal-from-left' : 'reveal-from-right';
-                const delayClass = (idx === 0 || idx === 3) ? 'delay-200' : 'delay-100';
+                // Distinct staggered delays: outer cards come slightly earlier, inner cards follow
+                const delayClass = idx === 0 ? 'delay-100' : idx === 1 ? 'delay-250' : idx === 2 ? 'delay-250' : 'delay-100';
 
                 return (
                   <div
                     key={activity.id}
-                    className={`bg-white rounded-3xl p-6 border-2 ${borderColors[idx % 4]} flex flex-col justify-between group card-interactive cursor-pointer ${directionClass} ${delayClass}`}
+                    className={`bg-white rounded-3xl p-6 border-2 ${borderColors[idx % 4]} ${courseGlowClasses[idx % 4]} flex flex-col justify-between group card-interactive cursor-pointer ${directionClass} ${delayClass}`}
                   >
                     <div>
                       {activity.featured_image_url && (

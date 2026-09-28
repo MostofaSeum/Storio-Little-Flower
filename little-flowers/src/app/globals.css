@@ -188,8 +188,8 @@ html {
 /* Directional scroll reveals: from Left and from Right */
 .reveal-from-left {
   opacity: 0;
-  transform: translateX(-60px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateX(-120px);
+  transition: opacity 1.3s cubic-bezier(0.22, 1, 0.36, 1), transform 1.3s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
 }
 
@@ -200,8 +200,8 @@ html {
 
 .reveal-from-right {
   opacity: 0;
-  transform: translateX(60px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateX(120px);
+  transition: opacity 1.3s cubic-bezier(0.22, 1, 0.36, 1), transform 1.3s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
 }
 
@@ -214,18 +214,44 @@ html {
 .delay-100 { transition-delay: 100ms; }
 .delay-150 { transition-delay: 150ms; }
 .delay-200 { transition-delay: 200ms; }
+.delay-250 { transition-delay: 250ms; }
 .delay-300 { transition-delay: 300ms; }
 .delay-400 { transition-delay: 400ms; }
 
 /* Interactive Card Hover effect with smooth elevation and shadow */
 .card-interactive {
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease, border-color 0.4s ease, background-color 0.4s ease;
   will-change: transform, box-shadow;
 }
 
 .card-interactive:hover {
   transform: translateY(-8px) !important;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Neon Ambient Lighting & Color-matched Card Background Hover Effects */
+.course-card-amber:hover {
+  background-color: #fffdf5 !important;
+  border-color: #fbbf24 !important;
+  box-shadow: 0 14px 35px -4px rgba(245, 158, 11, 0.35), 0 0 20px 2px rgba(251, 191, 36, 0.25) !important;
+}
+
+.course-card-pink:hover {
+  background-color: #fdf2f8 !important;
+  border-color: #f472b6 !important;
+  box-shadow: 0 14px 35px -4px rgba(236, 72, 153, 0.35), 0 0 20px 2px rgba(244, 114, 182, 0.25) !important;
+}
+
+.course-card-sky:hover {
+  background-color: #f0f9ff !important;
+  border-color: #38bdf8 !important;
+  box-shadow: 0 14px 35px -4px rgba(14, 165, 233, 0.35), 0 0 20px 2px rgba(56, 189, 248, 0.25) !important;
+}
+
+.course-card-lime:hover {
+  background-color: #f7fee7 !important;
+  border-color: #a3e635 !important;
+  box-shadow: 0 14px 35px -4px rgba(132, 204, 22, 0.35), 0 0 20px 2px rgba(163, 230, 53, 0.25) !important;
 }
 
 /* Circle badges gentle bounce and smooth transition on group-hover and hover */
