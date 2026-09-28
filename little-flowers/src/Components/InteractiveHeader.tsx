@@ -135,8 +135,17 @@ export default function InteractiveHeader({ settings }: InteractiveHeaderProps) 
           </ul>
         </nav>
 
-        {/* Right Action: Enroll Button & Mobile Hamburger */}
-        <div className="flex items-center space-x-3 shrink-0">
+        {/* Right Action: Login / Enroll Button & Mobile Hamburger */}
+        <div className="flex items-center space-x-2 sm:space-x-3 shrink-0">
+          <a
+            href="/login"
+            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-purple-200 hover:bg-pastel-purple text-primary-color font-bold text-xs transition-all shadow-2xs"
+          >
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+            <span>Login</span>
+          </a>
 
           {/* Mobile Hamburger Button */}
           <button
@@ -188,13 +197,20 @@ export default function InteractiveHeader({ settings }: InteractiveHeaderProps) 
                 </a>
               );
             })}
-            <div className="pt-2">
+            <div className="pt-2 grid grid-cols-2 gap-2">
+              <a
+                href="/login"
+                onClick={() => setMobileMenuOpen(false)}
+                className="inline-flex items-center justify-center py-2.5 rounded-full border border-purple-200 text-primary-color font-bold text-xs hover:bg-pastel-purple text-center"
+              >
+                Portal Login
+              </a>
               <a
                 href="/admission"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full inline-flex items-center justify-center py-2.5 bg-secondary-color text-white font-bold rounded-full shadow-md text-xs"
+                className="inline-flex items-center justify-center py-2.5 bg-secondary-color text-white font-bold rounded-full shadow-md text-xs text-center"
               >
-                Enroll Now →
+                Enroll Now
               </a>
             </div>
           </nav>

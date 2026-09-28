@@ -63,6 +63,11 @@ export default function Footer({ settings }: FooterProps) {
                 Admission Portal
               </a>
             </li>
+            <li>
+              <a href="/login" className="hover:text-secondary-color transition-colors">
+                Parent & Staff Portal
+              </a>
+            </li>
           </ul>
         </div>
 

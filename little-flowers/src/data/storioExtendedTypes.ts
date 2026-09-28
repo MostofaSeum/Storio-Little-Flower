@@ -117,3 +117,37 @@ export interface StorioAdmissionApplicationResponse {
   application_number: string;
   message: string;
 }
+
+export interface StorioAuthLoginRequest {
+  email: string;
+  password: string;
+}
+
+export interface StorioAuthLoginResponse {
+  key?: string;
+  token?: string;
+  access?: string;
+  refresh?: string;
+  user?: {
+    id?: number | string;
+    email?: string;
+    username?: string;
+    first_name?: string;
+    last_name?: string;
+    name?: string;
+    role?: string;
+    is_staff?: boolean;
+  };
+  non_field_errors?: string[];
+  email?: string[];
+  password?: string[];
+  message?: string;
+  detail?: string;
+}
+
+export interface StorioUserSession {
+  email: string;
+  name: string;
+  role: 'parent' | 'staff';
+  token: string;
+}
