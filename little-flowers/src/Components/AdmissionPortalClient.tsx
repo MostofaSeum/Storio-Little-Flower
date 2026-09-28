@@ -8,6 +8,7 @@ import {
 } from '@/data/storioExtendedTypes';
 import { storio } from '@storio/template-sdk';
 import SplitText from '@/Components/SplitText';
+import PartyPopperExplosion from '@/Components/PartyPopperExplosion';
 
 interface AdmissionPortalClientProps {
   formConfig: StorioAdmissionFormConfig;
@@ -730,8 +731,13 @@ export default function AdmissionPortalClient({
         {/* STEP 4: Success & Confirmation */}
         {currentStep === 4 && (
           <div className="relative z-10 max-w-lg mx-auto py-8 text-center space-y-6 animate-fadeIn">
-            <div className="w-20 h-20 mx-auto rounded-3xl bg-accent-soft-blue flex items-center justify-center text-4xl shadow-md border-2 border-sky-200 animate-bounce">
-              🎉
+            {/* Realtime birthday popper confetti explosion canvas */}
+            <PartyPopperExplosion />
+
+            <div className="relative inline-block mx-auto">
+              <div className="w-20 h-20 mx-auto rounded-3xl bg-gradient-to-tr from-pink-100 via-amber-100 to-sky-100 flex items-center justify-center text-4xl shadow-lg border-2 border-purple-200 transform transition-transform hover:scale-105">
+                🎊
+              </div>
             </div>
 
             <div>
