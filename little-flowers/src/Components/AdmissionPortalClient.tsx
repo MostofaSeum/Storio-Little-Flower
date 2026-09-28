@@ -50,14 +50,51 @@ export default function AdmissionPortalClient({
     }
   };
 
-  // Group fields by step
-  const step1Fields = formConfig.fields.filter(
-    (f) => f.step === 1 || (!f.step && ['student_name', 'applied_class', 'dob', 'gender', 'blood_group'].includes(f.id))
-  );
+  // Group fields dynamically:
+  // 1. If fields have explicit step properties, honor them.
+  // 2. Otherwise, automatically distribute fields so that:
+  //    - If there are <= 4 fields, or student-oriented fields (name, applied_class, dob, gender, photo), put in step 1.
+  //    - Guardian/contact fields (phone, email, father, mother, address) or second half go in step 2.
+  const hasExplicitSteps = formConfig.fields?.some((f) => typeof f.step === 'number');
 
-  const step2Fields = formConfig.fields.filter(
-    (f) => f.step === 2 || (!f.step && !['student_name', 'applied_class', 'dob', 'gender', 'blood_group'].includes(f.id))
-  );
+  let step1Fields: typeof formConfig.fields = [];
+  let step2Fields: typeof formConfig.fields = [];
+
+  if (hasExplicitSteps) {
+    step1Fields = (formConfig.fields || []).filter((f) => f.step === 1);
+    step2Fields = (formConfig.fields || []).filter((f) => f.step === 2);
+  } else {
+    const allFields = formConfig.fields || [];
+    if (allFields.length <= 4) {
+      // Small form: place first half or first 2 in step 1, rest in step 2
+      const midpoint = Math.ceil(allFields.length / 2);
+      step1Fields = allFields.slice(0, midpoint);
+      step2Fields = allFields.slice(midpoint);
+    } else {
+      step1Fields = allFields.filter((f) => {
+        const idOrLabel = `${f.id} ${f.label}`.toLowerCase();
+        return (
+          idOrLabel.includes('student') ||
+          idOrLabel.includes('name') ||
+          idOrLabel.includes('dob') ||
+          idOrLabel.includes('birth') ||
+          idOrLabel.includes('gender') ||
+          idOrLabel.includes('class') ||
+          idOrLabel.includes('blood') ||
+          idOrLabel.includes('photo') ||
+          idOrLabel.includes('image')
+        ) && !idOrLabel.includes('father') && !idOrLabel.includes('mother') && !idOrLabel.includes('guardian');
+      });
+
+      step2Fields = allFields.filter((f) => !step1Fields.some((s1) => s1.id === f.id));
+
+      // Guarantee at least 1 field in each step if there are fields
+      if (step1Fields.length === 0 && allFields.length > 0) {
+        step1Fields = allFields.slice(0, Math.ceil(allFields.length / 2));
+        step2Fields = allFields.slice(Math.ceil(allFields.length / 2));
+      }
+    }
+  }
 
   // Validate current step
   const validateStep = (fields: typeof formConfig.fields): boolean => {
@@ -83,9 +120,18 @@ export default function AdmissionPortalClient({
     e.preventDefault();
     if (!validateStep(step2Fields)) return;
 
-    const email = formData['guardian_email'];
+    // Detect email from form data or dedicated guardian_email field
+    const emailField = formConfig.fields?.find(
+      (f) => f.type === 'email' || `${f.id} ${f.label}`.toLowerCase().includes('email')
+    );
+    const email = emailField ? formData[emailField.id] : formData['guardian_email'] || formData['email'];
+
     if (!email) {
-      setErrors((prev) => ({ ...prev, guardian_email: 'Email address is required for verification' }));
+      // If the school's configured form doesn't have an email field, provide a prompt or use placeholder
+      setErrors((prev) => ({
+        ...prev,
+        [emailField?.id || 'guardian_email']: 'Email address is required for application confirmation code',
+      }));
       return;
     }
 
@@ -320,12 +366,29 @@ export default function AdmissionPortalClient({
                       placeholder={field.placeholder || ''}
                       className="w-full px-4 py-3 bg-pastel-purple rounded-2xl border border-purple-100 focus:border-primary-color focus:bg-white focus:outline-none focus:ring-4 focus:ring-purple-100 text-sm font-semibold text-gray-800 transition-all"
                     />
+                  ) : field.type === 'image' || field.type === 'file' ? (
+                    <div className="relative">
+                      <input
+                        type="file"
+                        accept={field.type === 'image' ? 'image/*' : '*'}
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) handleInputChange(field.id, file.name);
+                        }}
+                        className="w-full px-4 py-3 bg-pastel-purple rounded-2xl border border-purple-100 file:mr-4 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-primary-color file:text-white hover:file:opacity-90 text-xs text-gray-600 transition-all cursor-pointer"
+                      />
+                      {formData[field.id] && (
+                        <span className="text-[11px] text-accent-green font-bold block mt-1">
+                          ✓ Selected: {formData[field.id]}
+                        </span>
+                      )}
+                    </div>
                   ) : (
                     <input
-                      type={field.type}
+                      type={field.type === 'number' ? 'tel' : field.type || 'text'}
                       value={formData[field.id] || ''}
                       onChange={(e) => handleInputChange(field.id, e.target.value)}
-                      placeholder={field.placeholder || ''}
+                      placeholder={field.placeholder || `Enter ${field.label}`}
                       className="w-full px-4 py-3 bg-pastel-purple rounded-2xl border border-purple-100 focus:border-primary-color focus:bg-white focus:outline-none focus:ring-4 focus:ring-purple-100 text-sm font-semibold text-gray-800 transition-all"
                     />
                   )}
@@ -382,12 +445,29 @@ export default function AdmissionPortalClient({
                       placeholder={field.placeholder || ''}
                       className="w-full px-4 py-3 bg-pastel-purple rounded-2xl border border-purple-100 focus:border-primary-color focus:bg-white focus:outline-none focus:ring-4 focus:ring-purple-100 text-sm font-semibold text-gray-800 transition-all"
                     />
+                  ) : field.type === 'image' || field.type === 'file' ? (
+                    <div className="relative">
+                      <input
+                        type="file"
+                        accept={field.type === 'image' ? 'image/*' : '*'}
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) handleInputChange(field.id, file.name);
+                        }}
+                        className="w-full px-4 py-3 bg-pastel-purple rounded-2xl border border-purple-100 file:mr-4 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-primary-color file:text-white hover:file:opacity-90 text-xs text-gray-600 transition-all cursor-pointer"
+                      />
+                      {formData[field.id] && (
+                        <span className="text-[11px] text-accent-green font-bold block mt-1">
+                          ✓ Selected: {formData[field.id]}
+                        </span>
+                      )}
+                    </div>
                   ) : (
                     <input
-                      type={field.type}
+                      type={field.type === 'number' ? 'tel' : field.type || 'text'}
                       value={formData[field.id] || ''}
                       onChange={(e) => handleInputChange(field.id, e.target.value)}
-                      placeholder={field.placeholder || ''}
+                      placeholder={field.placeholder || `Enter ${field.label}`}
                       className="w-full px-4 py-3 bg-pastel-purple rounded-2xl border border-purple-100 focus:border-primary-color focus:bg-white focus:outline-none focus:ring-4 focus:ring-purple-100 text-sm font-semibold text-gray-800 transition-all"
                     />
                   )}
@@ -399,6 +479,29 @@ export default function AdmissionPortalClient({
                   )}
                 </div>
               ))}
+
+              {/* Ensure an email input exists if tenant config didn't include one */}
+              {!formConfig.fields?.some(
+                (f) => f.type === 'email' || `${f.id} ${f.label}`.toLowerCase().includes('email')
+              ) && (
+                <div>
+                  <label className="block text-xs font-bold text-gray-700 mb-1.5 uppercase tracking-wide">
+                    Guardian Email (for verification code) <span className="text-accent-pink">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    value={formData['guardian_email'] || ''}
+                    onChange={(e) => handleInputChange('guardian_email', e.target.value)}
+                    placeholder="e.g. parent@example.com"
+                    className="w-full px-4 py-3 bg-pastel-purple rounded-2xl border border-purple-100 focus:border-primary-color focus:bg-white focus:outline-none focus:ring-4 focus:ring-purple-100 text-sm font-semibold text-gray-800 transition-all"
+                  />
+                  {errors['guardian_email'] && (
+                    <p className="text-[11px] font-bold text-accent-pink mt-1 animate-fadeIn">
+                      ⚠️ {errors['guardian_email']}
+                    </p>
+                  )}
+                </div>
+              )}
             </div>
 
             {otpError && (

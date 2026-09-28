@@ -76,7 +76,7 @@ export interface StorioFaq {
 export interface StorioAdmissionFormField {
   id: string;
   label: string;
-  type: 'text' | 'email' | 'tel' | 'number' | 'date' | 'select' | 'textarea';
+  type: 'text' | 'email' | 'tel' | 'number' | 'date' | 'select' | 'textarea' | 'image' | 'file' | string;
   required?: boolean;
   options?: string[];
   placeholder?: string;

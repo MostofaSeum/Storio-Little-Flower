@@ -137,13 +137,6 @@ export default function InteractiveHeader({ settings }: InteractiveHeaderProps) 
 
         {/* Right Action: Enroll Button & Mobile Hamburger */}
         <div className="flex items-center space-x-3 shrink-0">
-          <a
-            href="/admission"
-            className="hidden sm:inline-flex items-center space-x-2 px-5 py-2.5 bg-primary-color hover:opacity-90 text-white font-bold text-xs rounded-full shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5"
-          >
-            <span>Enroll Now</span>
-            <span>→</span>
-          </a>
 
           {/* Mobile Hamburger Button */}
           <button
