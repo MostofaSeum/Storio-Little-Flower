@@ -10,6 +10,7 @@ import {
   StorioInstitutionProfile,
   StorioActivityItem,
   StorioPromotion,
+  StorioEvent,
 } from '@/data/storioExtendedTypes';
 
 /**
@@ -32,6 +33,7 @@ export const DEFAULT_DEMO_DATA: {
   staff: StorioStaffMember[];
   gallery: StorioGalleryItem[];
   promotions: StorioPromotion[];
+  events: StorioEvent[];
   testimonials: Array<{ id: number; name: string; role: string; quote: string; rating: number; avatar_url?: string }>;
 } = {
   settings: {
@@ -238,6 +240,60 @@ export const DEFAULT_DEMO_DATA: {
       badge_text: "Admissions Open",
       cta_label: "Apply for Admission",
       cta_url: "/admission",
+    },
+  ],
+  events: [
+    {
+      id: 1,
+      title: "Annual Sports & Play Day",
+      slug: "annual-sports-day",
+      content: "A day full of fun obstacle races, junior relay sprints, parachute games, and medal celebrations.",
+      excerpt: "Obstacle runs, games & awards",
+      location: "Main Sunshine Playground",
+      start_date: "2026-10-15T09:00:00Z",
+      end_date: "2026-10-15T13:00:00Z",
+      status: "Upcoming",
+      is_featured: true,
+      featured_image: "/homepage/Happy Memories/Trial 1.jpg",
+    },
+    {
+      id: 2,
+      title: "Little Explorers Art Exhibition",
+      slug: "little-explorers-art-exhibition",
+      content: "Young artists showcase clay models, vibrant finger paintings, paper origami, and sensory sculptures.",
+      excerpt: "Clay modeling, watercolor & craft",
+      location: "Creative Arts Studio",
+      start_date: "2026-10-24T10:00:00Z",
+      end_date: "2026-10-24T14:30:00Z",
+      status: "Upcoming",
+      is_featured: false,
+      featured_image: "/homepage/Early Exploration/Trial 2.webp",
+    },
+    {
+      id: 3,
+      title: "Parent-Teacher Milestone Dialogue",
+      slug: "parent-teacher-dialogue",
+      content: "Personalized one-on-one sessions between mentors and parents to review growth milestones.",
+      excerpt: "Personalized child growth review",
+      location: "Junior Assembly Hall",
+      start_date: "2026-11-05T08:30:00Z",
+      end_date: "2026-11-05T12:00:00Z",
+      status: "Upcoming",
+      is_featured: false,
+      featured_image: "/homepage/About Our Academy/Trial 1.jpg",
+    },
+    {
+      id: 4,
+      title: "Puppet Theatre & Rhyme Festival",
+      slug: "puppet-theatre-rhyme-festival",
+      content: "An enchanting musical puppet show brought to life with live rhythm, nursery rhymes, and story songs.",
+      excerpt: "Live musical puppet performance",
+      location: "Sunshine Amphitheatre",
+      start_date: "2026-11-18T10:30:00Z",
+      end_date: "2026-11-18T13:30:00Z",
+      status: "Upcoming",
+      is_featured: true,
+      featured_image: "/homepage/Happy Memories/Trial 2.webp",
     },
   ],
   testimonials: [

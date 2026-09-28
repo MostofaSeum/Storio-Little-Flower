@@ -25,6 +25,7 @@ export default function InteractiveHeader({ settings }: InteractiveHeaderProps) 
     { label: 'Programs', href: '#programs', colorClass: 'text-sky-500 hover:text-sky-600' },
     { label: 'Teachers', href: '#teachers', colorClass: 'text-lime-600 hover:text-lime-700' },
     { label: 'Gallery', href: '#gallery', colorClass: 'text-indigo-600 hover:text-indigo-700' },
+    { label: 'Events', href: '#events', colorClass: 'text-emerald-600 hover:text-emerald-700' },
     { label: 'Admission', href: '/admission', colorClass: 'text-amber-600 hover:text-amber-700' },
     { label: 'Notices', href: '#notices', colorClass: 'text-pink-500 hover:text-pink-600' },
     { label: 'Contact', href: '#contact', colorClass: 'text-purple-600 hover:text-purple-700' },

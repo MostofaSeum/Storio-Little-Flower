@@ -51,3 +51,17 @@ export interface StorioTestimonial {
   rating?: number;
   avatar_url?: string;
 }
+
+export interface StorioEvent {
+  id: number;
+  title: string;
+  slug?: string;
+  content?: string;
+  excerpt?: string;
+  location?: string;
+  start_date?: string;
+  end_date?: string;
+  status?: string;
+  is_featured?: boolean;
+  featured_image?: string;
+}

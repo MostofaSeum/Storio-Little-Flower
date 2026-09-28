@@ -11,6 +11,7 @@ import {
   StorioActivityItem,
   StorioPromotion,
   StorioTestimonial,
+  StorioEvent,
 } from "@/data/storioExtendedTypes";
 import { headers } from "next/headers";
 import { DEFAULT_DEMO_DATA } from "@/data/defaultDemoData";
@@ -21,6 +22,7 @@ import AnimatedCounter from "@/Components/AnimatedCounter";
 import InteractiveGallery from "@/Components/InteractiveGallery";
 import TestimonialSlider from "@/Components/TestimonialSlider";
 import TypewriterText from "@/Components/TypewriterText";
+import AccordionGallery from "@/Components/AccordionGallery";
 
 export default async function Home() {
   // 1. Resolve host from incoming request
@@ -48,6 +50,7 @@ export default async function Home() {
     rawGallery,
     rawPromotions,
     rawTestimonials,
+    rawEvents,
   ] = await Promise.all([
     storio.getLayout(tenantHost),
     storio.getHeroSlides(tenantHost),
@@ -67,6 +70,7 @@ export default async function Home() {
     storio.apiFetch<StorioTestimonial[]>("/api/v2/template/testimonials/", {
       tenantHost,
     }),
+    storio.getEvents(tenantHost),
   ]);
 
   // 4. Apply Rule 1: Fallback to demo data ONLY in standalone preview mode
@@ -130,6 +134,13 @@ export default async function Home() {
       ? rawTestimonials
       : isStandalone
         ? DEFAULT_DEMO_DATA.testimonials
+        : [];
+
+  const events: StorioEvent[] =
+    Array.isArray(rawEvents) && rawEvents.length > 0
+      ? (rawEvents as unknown as StorioEvent[])
+      : isStandalone
+        ? DEFAULT_DEMO_DATA.events
         : [];
 
   const settings = layout?.settings || DEFAULT_DEMO_DATA.settings;
@@ -719,7 +730,40 @@ export default async function Home() {
         </section>
       )}
 
-      {/* 11. PARENT TESTIMONIALS */}
+      {/* 11. UPCOMING SCHOOL EVENTS (storio.getEvents - Accordion Gallery Effect) */}
+      {events && events.length > 0 && (
+        <section id="events" className="py-20 px-4 sm:px-8 bg-pastel-purple border-t border-purple-100/60">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex flex-wrap items-end justify-between gap-4 mb-12 reveal-on-scroll">
+              <div>
+                <span className="text-xs font-extrabold tracking-wider uppercase text-secondary-color bg-amber-100 px-3.5 py-1 rounded-full shadow-xs">
+                  Campus Life & Gatherings
+                </span>
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-primary-color mt-3">
+                  Upcoming Events & Celebrations
+                </h2>
+                <p className="text-gray-500 text-sm mt-1 font-medium">
+                  Hover over any event card to view the schedule, venue, and program overview.
+                </p>
+              </div>
+              <a
+                href="/events"
+                className="text-xs sm:text-sm font-bold text-primary-color hover:text-accent-pink transition-colors inline-flex items-center gap-1 group"
+              >
+                <span>Full School Calendar</span>
+                <span className="transform group-hover:translate-x-1 transition-transform">→</span>
+              </a>
+            </div>
+
+            {/* React Bits Style Accordion Gallery */}
+            <div className="reveal-on-scroll delay-150">
+              <AccordionGallery events={events} />
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* 12. PARENT TESTIMONIALS */}
       {testimonials && testimonials.length > 0 && (
         <section className="py-20 px-4 sm:px-8 bg-gradient-to-b from-accent-soft-blue/70 to-pink-50/40 border-t border-sky-100 relative overflow-hidden">
           {/* Subtle floating background decorations */}
