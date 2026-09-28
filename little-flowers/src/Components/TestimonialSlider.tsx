@@ -55,23 +55,42 @@ export default function TestimonialSlider({ testimonials }: TestimonialSliderPro
                   ))}
                 </div>
 
-                <p className="text-gray-700 text-sm leading-relaxed italic font-medium relative z-10">
-                  "{t.quote || t.content}"
+                <p className="text-gray-700 text-sm leading-relaxed italic font-medium relative z-10 line-clamp-4">
+                  "{t.message || t.quote || t.content}"
                 </p>
               </div>
 
               <div className="mt-6 pt-5 border-t border-gray-100 flex items-center space-x-3.5">
-                <div className="w-11 h-11 rounded-full bg-gradient-to-tr from-pink-300 to-amber-200 flex items-center justify-center text-primary-color font-extrabold text-sm shadow-inner ring-2 ring-white">
-                  {t.avatar_url ? (
-                    <img src={t.avatar_url} alt={t.name} className="w-full h-full object-cover rounded-full" />
-                  ) : (
-                    t.name.charAt(0)
-                  )}
-                </div>
+                {(() => {
+                  const photoSrc =
+                    t.avatar_url ||
+                    (t.photo_data?.file_url
+                      ? (t.photo_data.file_url.startsWith('http')
+                          ? t.photo_data.file_url
+                          : `https://api.storio.cloud${t.photo_data.file_url}`)
+                      : null);
+
+                  return (
+                    <div className="w-11 h-11 rounded-full bg-gradient-to-tr from-pink-300 to-amber-200 flex items-center justify-center text-primary-color font-extrabold text-sm shadow-inner ring-2 ring-white overflow-hidden shrink-0">
+                      {photoSrc ? (
+                        <img
+                          src={photoSrc}
+                          alt={t.name}
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                          }}
+                          className="w-full h-full object-cover rounded-full"
+                        />
+                      ) : (
+                        <span>{t.name?.charAt(0) || 'P'}</span>
+                      )}
+                    </div>
+                  );
+                })()}
                 <div>
                   <h4 className="font-extrabold text-gray-900 text-sm">{t.name}</h4>
                   <span className="text-[11px] font-semibold text-accent-pink block">
-                    {t.role || t.designation || 'Preschool Parent'}
+                    {t.designation || t.role || (t.organization ? `Parent (${t.organization})` : 'Preschool Parent')}
                   </span>
                 </div>
               </div>

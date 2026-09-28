@@ -46,10 +46,19 @@ export interface StorioTestimonial {
   name: string;
   role?: string;
   designation?: string;
+  organization?: string;
   quote?: string;
   content?: string;
+  message?: string;
   rating?: number;
   avatar_url?: string;
+  photo?: number;
+  photo_data?: {
+    id: number;
+    file_url?: string;
+    file?: string;
+    alt_text?: string;
+  };
 }
 
 export interface StorioEvent {
