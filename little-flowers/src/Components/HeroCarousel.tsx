@@ -74,26 +74,60 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
     (activeSlide as unknown as { buttonLink?: string })?.buttonLink ||
     '/about';
 
+  // Detect slide background type from API
+  const rawSlide = activeSlide as unknown as {
+    bgType?: 'image' | 'gradient' | 'color';
+    gradientFrom?: string;
+    gradientTo?: string;
+    gradientDir?: number;
+    bgColor?: string;
+    bgImage_data?: { file?: string };
+  };
+
+  const isGradient = rawSlide?.bgType === 'gradient' && rawSlide?.gradientFrom && rawSlide?.gradientTo;
+  const isColor = rawSlide?.bgType === 'color' && rawSlide?.bgColor;
+  const hasUploadedImage = Boolean(activeSlide?.image_url || rawSlide?.bgImage_data?.file);
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
-      {/* Left Column: Interactive Illustration Showcase with Floating Stat Badges */}
+      {/* Left Column: Interactive Showcase with Floating Stat Badges */}
       <div className="lg:col-span-6 flex justify-center relative">
         <div className="relative w-full max-w-[360px] sm:max-w-[440px] md:max-w-[500px] lg:max-w-[530px] flex items-center justify-center">
           
-          {/* Active Slide Image */}
+          {/* Active Slide Showcase: Handles Gradient, Solid Color, or Uploaded Image */}
           <div className="relative w-full flex items-center justify-center">
-            <img
-              key={slideImageUrl + currentIndex}
-              src={slideImageUrl}
-              alt={slideTitle}
-              onError={(e) => {
-                const target = e.currentTarget;
-                if (!target.src.endsWith('/homepage/H1.jpg')) {
-                  target.src = '/homepage/H1.jpg';
-                }
-              }}
-              className="w-full h-auto max-h-[580px] sm:max-h-[620px] object-contain transition-all duration-700 ease-out hover:scale-103 animate-fadeIn drop-shadow-xl"
-            />
+            {isGradient ? (
+              <div
+                key={'grad-' + currentIndex}
+                className="w-full h-[360px] sm:h-[440px] md:h-[480px] rounded-3xl shadow-2xl transition-all duration-700 ease-out animate-fadeIn relative overflow-hidden border border-white/20"
+                style={{
+                  background: `linear-gradient(${rawSlide.gradientDir || 90}deg, ${rawSlide.gradientFrom}, ${rawSlide.gradientTo})`,
+                }}
+              />
+            ) : isColor ? (
+              <div
+                key={'color-' + currentIndex}
+                className="w-full h-[360px] sm:h-[440px] md:h-[480px] rounded-3xl shadow-2xl transition-all duration-700 ease-out animate-fadeIn relative overflow-hidden border border-white/20"
+                style={{ backgroundColor: rawSlide.bgColor }}
+              />
+            ) : (
+              <img
+                key={slideImageUrl + currentIndex}
+                src={slideImageUrl}
+                alt={slideTitle}
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  if (!target.src.endsWith('/homepage/H1.jpg')) {
+                    target.src = '/homepage/H1.jpg';
+                  }
+                }}
+                className={`w-full ${
+                  hasUploadedImage && !slideImageUrl.includes('/homepage/H1.jpg')
+                    ? 'h-[360px] sm:h-[440px] md:h-[480px] object-cover rounded-3xl'
+                    : 'h-auto max-h-[580px] sm:max-h-[620px] object-contain'
+                } transition-all duration-700 ease-out hover:scale-103 animate-fadeIn drop-shadow-xl`}
+              />
+            )}
           </div>
 
           {/* Modern Floating Stat Badge 1: Top Right */}

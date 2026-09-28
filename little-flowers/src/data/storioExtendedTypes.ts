@@ -64,6 +64,12 @@ export interface StorioEvent {
   status?: string;
   is_featured?: boolean;
   featured_image?: string;
+  featured_image_detail?: {
+    id: number;
+    file: string;
+    file_name?: string;
+    alt_text?: string;
+  };
 }
 
 export interface StorioFaq {

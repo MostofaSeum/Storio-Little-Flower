@@ -42,6 +42,13 @@ export default function AccordionGallery({ events }: AccordionGalleryProps) {
             'bg-accent-green text-white',
           ];
 
+          const eventImage =
+            event.featured_image_detail?.file
+              ? (event.featured_image_detail.file.startsWith('http')
+                  ? event.featured_image_detail.file
+                  : `https://api.storio.cloud${event.featured_image_detail.file}`)
+              : event.featured_image || '/homepage/Happy Memories/Trial 1.jpg';
+
           return (
             <div
               key={event.id || idx}
@@ -57,8 +64,14 @@ export default function AccordionGallery({ events }: AccordionGalleryProps) {
             >
               {/* Background Image */}
               <img
-                src={event.featured_image || '/homepage/Happy Memories/Trial 1.jpg'}
+                src={eventImage}
                 alt={event.title}
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  if (!target.src.endsWith('/homepage/Happy Memories/Trial 1.jpg')) {
+                    target.src = '/homepage/Happy Memories/Trial 1.jpg';
+                  }
+                }}
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
 
@@ -165,6 +178,13 @@ export default function AccordionGallery({ events }: AccordionGalleryProps) {
             'bg-accent-green text-white',
           ];
 
+          const eventImage =
+            event.featured_image_detail?.file
+              ? (event.featured_image_detail.file.startsWith('http')
+                  ? event.featured_image_detail.file
+                  : `https://api.storio.cloud${event.featured_image_detail.file}`)
+              : event.featured_image || '/homepage/Happy Memories/Trial 1.jpg';
+
           return (
             <div
               key={event.id || idx}
@@ -173,8 +193,14 @@ export default function AccordionGallery({ events }: AccordionGalleryProps) {
             >
               <div className="relative h-44 w-full">
                 <img
-                  src={event.featured_image || '/homepage/Happy Memories/Trial 1.jpg'}
+                  src={eventImage}
                   alt={event.title}
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    if (!target.src.endsWith('/homepage/Happy Memories/Trial 1.jpg')) {
+                      target.src = '/homepage/Happy Memories/Trial 1.jpg';
+                    }
+                  }}
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-950/80 via-transparent to-transparent" />

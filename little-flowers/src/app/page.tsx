@@ -141,9 +141,16 @@ export default async function Home() {
         ? DEFAULT_DEMO_DATA.testimonials
         : [];
 
+  // Unpack events correctly whether the API returns a direct array or a paginated object { results: [...] }
+  const rawEventsList: StorioEvent[] = Array.isArray(rawEvents)
+    ? (rawEvents as unknown as StorioEvent[])
+    : Array.isArray((rawEvents as unknown as { results?: StorioEvent[] })?.results)
+      ? ((rawEvents as unknown as { results: StorioEvent[] }).results)
+      : [];
+
   const events: StorioEvent[] =
-    Array.isArray(rawEvents) && rawEvents.length > 0
-      ? (rawEvents as unknown as StorioEvent[])
+    rawEventsList.length > 0
+      ? rawEventsList
       : isStandalone
         ? DEFAULT_DEMO_DATA.events
         : [];
