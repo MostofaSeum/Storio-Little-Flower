@@ -42,6 +42,33 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
 
   const activeSlide = slides[currentIndex] || slides[0];
 
+  // Extract slide properties gracefully supporting both SDK normalized names and direct API properties
+  const slideImageUrl =
+    activeSlide?.image_url ||
+    (activeSlide as unknown as { bgImage_data?: { file?: string } })?.bgImage_data?.file
+      ? `${(activeSlide as unknown as { bgImage_data?: { file?: string } }).bgImage_data?.file?.startsWith('http') ? '' : 'https://api.storio.cloud'}${(activeSlide as unknown as { bgImage_data?: { file?: string } }).bgImage_data?.file}`
+      : '/homepage/H1.jpg';
+
+  const slideTitle =
+    activeSlide?.title ||
+    (activeSlide as unknown as { heading?: string })?.heading ||
+    'Practical teaching & Social Development';
+
+  const slideSubtitle =
+    activeSlide?.subtitle ||
+    (activeSlide as unknown as { subheading?: string })?.subheading ||
+    'We aim at success by creating skills necessary for kids to enrich & empower in studies & sports through sensory play, imagination, and loving guidance.';
+
+  const slideButtonText =
+    activeSlide?.button_text ||
+    (activeSlide as unknown as { buttonText?: string })?.buttonText ||
+    'Explore Academy';
+
+  const slideButtonUrl =
+    activeSlide?.button_url ||
+    (activeSlide as unknown as { buttonLink?: string })?.buttonLink ||
+    '/about';
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
       {/* Left Column: Interactive Illustration Showcase with Floating Stat Badges */}
@@ -51,9 +78,9 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
           {/* Active Slide Image */}
           <div className="relative w-full flex items-center justify-center">
             <img
-              key={activeSlide?.image_url || currentIndex}
-              src={activeSlide?.image_url || '/homepage/H1.jpg'}
-              alt={activeSlide?.title || 'School Kids'}
+              key={slideImageUrl + currentIndex}
+              src={slideImageUrl}
+              alt={slideTitle}
               className="w-full h-auto max-h-[580px] sm:max-h-[620px] object-contain transition-all duration-700 ease-out hover:scale-103 animate-fadeIn drop-shadow-xl"
             />
           </div>
@@ -114,28 +141,24 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
           <span>Admissions 2026-27</span>
         </div>
 
-        {/* Fixed Two-Tone Title and Information */}
+        {/* Dynamic Slide Title and Information */}
         <div className="space-y-1">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary-color leading-[1.15] tracking-tight">
-            Practical teaching &
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-primary-color leading-[1.15] tracking-tight font-fredoka">
+            {slideTitle}
           </h1>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-secondary-color leading-[1.15] tracking-tight">
-            Social Development
-          </h2>
 
           {/* Paragraph Text */}
           <p className="pt-4 text-gray-600 text-base sm:text-lg leading-relaxed max-w-xl font-medium">
-            We aim at success by creating skills necessary for kids to enrich &
-            empower in studies & sports through sensory play, imagination, and loving guidance.
+            {slideSubtitle}
           </p>
 
           {/* CTA Actions */}
           <div className="pt-6 flex flex-wrap items-center gap-4">
             <a
-              href="/about"
+              href={slideButtonUrl}
               className="inline-flex items-center justify-center px-8 py-4 bg-button-dark hover:bg-gray-800 text-white font-bold text-sm rounded-full shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-1 hover:scale-102"
             >
-              Explore Academy
+              {slideButtonText}
             </a>
             <a
               href="/admission"

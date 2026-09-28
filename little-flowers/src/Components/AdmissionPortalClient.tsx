@@ -199,7 +199,11 @@ export default function AdmissionPortalClient({
         }
       } else {
         // 1. Verify OTP
-        const email = formData['guardian_email'];
+        const emailField = formConfig.fields?.find(
+          (f) => f.type === 'email' || `${f.id} ${f.label}`.toLowerCase().includes('email')
+        );
+        const email = emailField ? formData[emailField.id] : formData['guardian_email'] || formData['email'];
+
         const verifyRes = await storio.apiFetch<StorioAdmissionOTPResponse>(
           '/api/v2/template/admission/verify-otp/',
           {

@@ -28,22 +28,33 @@ export default function InteractiveGallery({ items }: InteractiveGalleryProps) {
 
   const displayedItems = items.slice(0, 6);
 
+  const resolveImageUrl = (item: StorioGalleryItem): string => {
+    if (item.image_url) return item.image_url;
+    const mediaFile = (item as unknown as { media_data?: { file?: string } })?.media_data?.file;
+    if (mediaFile) {
+      return mediaFile.startsWith('http') ? mediaFile : `https://api.storio.cloud${mediaFile}`;
+    }
+    return '/homepage/gal1.png';
+  };
+
   return (
     <>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-        {displayedItems.map((item, idx) => (
-          <div
-            key={item.id || idx}
-            onClick={() => setSelectedItem(item)}
-            className={`group relative rounded-3xl overflow-hidden cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500 aspect-4/3 reveal-on-scroll delay-${(idx % 3) * 100 + 100} border-2 border-transparent hover:border-pink-300 transform hover:-translate-y-1.5`}
-          >
-            {/* Image */}
-            <img
-              src={item.image_url}
-              alt={item.title || 'Little Flowers Campus Moment'}
-              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-              loading="lazy"
-            />
+        {displayedItems.map((item, idx) => {
+          const imgUrl = resolveImageUrl(item);
+          return (
+            <div
+              key={item.id || idx}
+              onClick={() => setSelectedItem(item)}
+              className={`group relative rounded-3xl overflow-hidden cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500 aspect-4/3 reveal-on-scroll delay-${(idx % 3) * 100 + 100} border-2 border-transparent hover:border-pink-300 transform hover:-translate-y-1.5`}
+            >
+              {/* Image */}
+              <img
+                src={imgUrl}
+                alt={item.title || item.caption || 'Little Flowers Campus Moment'}
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                loading="lazy"
+              />
 
             {/* Gradient Overlay & Hover Floating Action */}
             <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4 sm:p-5">
@@ -69,8 +80,9 @@ export default function InteractiveGallery({ items }: InteractiveGalleryProps) {
               </span>
             </div>
           </div>
-        ))}
-      </div>
+        );
+      })}
+    </div>
 
       {/* Lightbox Modal */}
       {selectedItem && (
@@ -95,7 +107,7 @@ export default function InteractiveGallery({ items }: InteractiveGalleryProps) {
 
             <div className="relative max-h-[75vh] bg-gray-950 flex items-center justify-center overflow-hidden">
               <img
-                src={selectedItem.image_url}
+                src={resolveImageUrl(selectedItem)}
                 alt={selectedItem.title || 'Little Flowers'}
                 className="max-h-[75vh] w-auto object-contain"
               />

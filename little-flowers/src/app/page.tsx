@@ -552,16 +552,22 @@ export default async function Home() {
                         ? "delay-250"
                         : "delay-100";
 
+                const activityImage =
+                  activity.featured_image_url ||
+                  ((activity as unknown as { featured_image_data?: { file?: string } })?.featured_image_data?.file
+                    ? `https://api.storio.cloud${(activity as unknown as { featured_image_data?: { file?: string } })?.featured_image_data?.file}`
+                    : null);
+
                 return (
                   <div
                     key={activity.id}
                     className={`bg-white rounded-3xl p-6 border-2 ${borderColors[idx % 4]} ${courseGlowClasses[idx % 4]} flex flex-col justify-between group card-interactive cursor-pointer ${directionClass} ${delayClass}`}
                   >
                     <div>
-                      {activity.featured_image_url && (
+                      {activityImage && (
                         <div className="w-full h-44 rounded-2xl overflow-hidden mb-5">
                           <img
-                            src={activity.featured_image_url}
+                            src={activityImage}
                             alt={activity.title}
                             className="w-full h-full object-cover group-hover:scale-106 transition-transform duration-500 ease-out"
                           />
@@ -644,24 +650,32 @@ export default async function Home() {
                 "bg-lime-50 text-accent-green",
               ];
 
-              return (
-                <div
-                  key={member.id}
-                  className={`flex flex-col items-center text-center p-7 bg-white rounded-3xl border-2 border-gray-100 ${borderColors[idx % 4]} group mentor-card cursor-pointer reveal-on-scroll delay-${(idx % 4) * 100 + 100} relative overflow-hidden`}
-                >
-                  {/* Mentor Avatar with animated gradient halo */}
-                  <div className="relative mb-5">
-                    <div
-                      className={`w-32 h-32 rounded-full p-1 bg-gradient-to-tr ${ringGradients[idx % 4]} mentor-ring shadow-sm`}
-                    >
-                      <div className="w-full h-full rounded-full overflow-hidden bg-white p-0.5">
-                        <img
-                          src={member.photo_url || "/icons/user.png"}
-                          alt={member.name}
-                          className="w-full h-full object-cover rounded-full group-hover:scale-110 transition-transform duration-500 ease-out"
-                        />
+                const staffPhoto =
+                  member.photo_url ||
+                  ((member as unknown as { profile_pic_data?: { file?: string } })?.profile_pic_data?.file
+                    ? `https://api.storio.cloud${(member as unknown as { profile_pic_data?: { file?: string } })?.profile_pic_data?.file}`
+                    : (member as unknown as { profile_pic?: string })?.profile_pic
+                      ? `https://api.storio.cloud${(member as unknown as { profile_pic?: string })?.profile_pic}`
+                      : "/icons/user.png");
+
+                return (
+                  <div
+                    key={member.id}
+                    className={`flex flex-col items-center text-center p-7 bg-white rounded-3xl border-2 border-gray-100 ${borderColors[idx % 4]} group mentor-card cursor-pointer reveal-on-scroll delay-${(idx % 4) * 100 + 100} relative overflow-hidden`}
+                  >
+                    {/* Mentor Avatar with animated gradient halo */}
+                    <div className="relative mb-5">
+                      <div
+                        className={`w-32 h-32 rounded-full p-1 bg-gradient-to-tr ${ringGradients[idx % 4]} mentor-ring shadow-sm`}
+                      >
+                        <div className="w-full h-full rounded-full overflow-hidden bg-white p-0.5">
+                          <img
+                            src={staffPhoto}
+                            alt={member.name}
+                            className="w-full h-full object-cover rounded-full group-hover:scale-110 transition-transform duration-500 ease-out"
+                          />
+                        </div>
                       </div>
-                    </div>
 
                     {/* Cute floating sparkle dot */}
                     <div className="absolute bottom-1 right-2 w-5 h-5 rounded-full bg-white shadow-md flex items-center justify-center text-[10px] transform group-hover:scale-110 group-hover:rotate-12 transition-all">
