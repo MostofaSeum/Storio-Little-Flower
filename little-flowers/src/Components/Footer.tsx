@@ -15,11 +15,24 @@ export default function Footer({ settings }: FooterProps) {
         {/* Col 1: Branding & Mission */}
         <div className="space-y-4">
           <a href="/" className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-300 via-pink-400 to-sky-400 p-1.5 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-300 via-pink-400 to-sky-400 p-1 flex items-center justify-center overflow-hidden shadow-sm">
+              {settings?.logo_url ? (
+                <img
+                  src={settings.logo_url}
+                  alt={settings?.site_title || "School Logo"}
+                  className="w-full h-full object-contain rounded-lg"
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    target.style.display = 'none';
+                    const fallback = target.nextElementSibling as HTMLElement | null;
+                    if (fallback) fallback.style.display = 'block';
+                  }}
+                />
+              ) : null}
               <img
                 src="/icons/school.png"
-                alt="School Logo"
-                className="w-6 h-6 object-contain brightness-0 invert"
+                alt={settings?.site_title || "School Logo"}
+                className={`w-6 h-6 object-contain brightness-0 invert ${settings?.logo_url ? 'hidden' : 'block'}`}
               />
             </div>
             <span className="text-2xl font-bold tracking-tight text-white font-fredoka">

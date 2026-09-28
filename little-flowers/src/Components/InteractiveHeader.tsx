@@ -45,11 +45,24 @@ export default function InteractiveHeader({ settings }: InteractiveHeaderProps) 
       <div className="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between gap-4">
         {/* Logo with playful wiggle hover */}
         <a href="/" className="flex items-center space-x-3 group shrink-0">
-          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-amber-300 via-pink-400 to-sky-400 p-2 flex items-center justify-center shadow-md transform group-hover:rotate-12 group-hover:scale-105 transition-all duration-300">
+          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-amber-300 via-pink-400 to-sky-400 p-1.5 flex items-center justify-center shadow-md transform group-hover:rotate-12 group-hover:scale-105 transition-all duration-300 overflow-hidden">
+            {settings?.logo_url ? (
+              <img
+                src={settings.logo_url}
+                alt={settings?.site_title || 'School Logo'}
+                className="w-full h-full object-contain rounded-xl drop-shadow-xs"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  target.style.display = 'none';
+                  const fallback = target.nextElementSibling as HTMLElement | null;
+                  if (fallback) fallback.style.display = 'block';
+                }}
+              />
+            ) : null}
             <img
               src="/icons/school.png"
-              alt="School Logo"
-              className="w-full h-full object-contain brightness-0 invert drop-shadow-xs"
+              alt={settings?.site_title || 'School Logo'}
+              className={`w-full h-full object-contain brightness-0 invert drop-shadow-xs ${settings?.logo_url ? 'hidden' : 'block'}`}
             />
           </div>
           <div>

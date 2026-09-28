@@ -7,12 +7,14 @@ interface LoginPortalClientProps {
   tenantHost: string;
   isStandalone: boolean;
   siteTitle: string;
+  logoUrl?: string;
 }
 
 export default function LoginPortalClient({
   tenantHost,
   isStandalone,
   siteTitle,
+  logoUrl,
 }: LoginPortalClientProps) {
   const [activeRole, setActiveRole] = useState<'parent' | 'staff'>('parent');
   const [email, setEmail] = useState('');
@@ -224,11 +226,24 @@ export default function LoginPortalClient({
           {/* Header Title */}
           <div className="relative z-10 text-center mb-6">
             <div className="inline-block p-3 rounded-2xl bg-pastel-purple border border-purple-100 shadow-xs mb-3">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-amber-300 via-pink-400 to-sky-400 p-1.5 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-300 via-pink-400 to-sky-400 p-1 flex items-center justify-center overflow-hidden">
+                {logoUrl ? (
+                  <img
+                    src={logoUrl}
+                    alt={siteTitle}
+                    className="w-full h-full object-contain rounded-lg"
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      target.style.display = 'none';
+                      const fallback = target.nextElementSibling as HTMLElement | null;
+                      if (fallback) fallback.style.display = 'block';
+                    }}
+                  />
+                ) : null}
                 <img
                   src="/icons/school.png"
-                  alt="School Logo"
-                  className="w-full h-full object-contain brightness-0 invert drop-shadow-xs"
+                  alt={siteTitle}
+                  className={`w-6 h-6 object-contain brightness-0 invert drop-shadow-xs ${logoUrl ? 'hidden' : 'block'}`}
                 />
               </div>
             </div>

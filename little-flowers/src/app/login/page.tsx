@@ -50,6 +50,7 @@ export default async function LoginPage() {
           tenantHost={tenantHost}
           isStandalone={isStandalone}
           siteTitle={settings?.site_title || 'Little Flowers'}
+          logoUrl={settings?.logo_url}
         />
       </main>
 
