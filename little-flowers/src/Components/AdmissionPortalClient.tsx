@@ -730,22 +730,12 @@ export default function AdmissionPortalClient({
 
         {/* STEP 4: Success & Confirmation */}
         {currentStep === 4 && (
-          <div className="relative z-10 max-w-lg mx-auto py-8 text-center space-y-6 animate-fadeIn">
+          <div className="relative z-10 max-w-lg mx-auto py-4 text-center space-y-6 animate-fadeIn print:py-0 print:max-w-none print:text-left">
             {/* Realtime birthday popper confetti explosion canvas */}
             <PartyPopperExplosion />
 
-            <div className="relative inline-block mx-auto">
-              <div className="w-20 h-20 mx-auto rounded-3xl bg-gradient-to-tr from-pink-100 via-amber-100 to-sky-100 flex items-center justify-center shadow-lg border-2 border-purple-200 transform transition-transform hover:scale-105">
-                <div className="w-12 h-12 rounded-2xl bg-accent-green text-white flex items-center justify-center shadow-md">
-                  <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-
             <div>
-              <span className="text-xs font-extrabold uppercase tracking-wider text-accent-green bg-lime-100 px-3.5 py-1 rounded-full">
+              <span className="text-xs font-extrabold uppercase tracking-wider text-accent-green bg-lime-100 px-3.5 py-1 rounded-full print:border print:border-green-300">
                 Application Received Successfully!
               </span>
               <h2 className="text-3xl font-black text-primary-color mt-3 font-fredoka">
@@ -759,7 +749,7 @@ export default function AdmissionPortalClient({
             </div>
 
             {/* Printable Tracking Card */}
-            <div className="p-6 rounded-3xl bg-pastel-purple border-2 border-purple-200/80 text-left space-y-3 shadow-inner">
+            <div className="p-6 rounded-3xl bg-pastel-purple border-2 border-purple-200/80 text-left space-y-3 shadow-inner print:border print:border-gray-300 print:bg-white print:shadow-none">
               <div className="flex items-center justify-between border-b border-purple-100 pb-3">
                 <span className="text-xs font-bold text-gray-500 uppercase tracking-wide">
                   Application Tracking ID
@@ -782,22 +772,22 @@ export default function AdmissionPortalClient({
               </div>
             </div>
 
-            <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-left text-xs text-amber-900 space-y-1">
-              <p className="font-bold flex items-center gap-1.5">
-                <span>📋</span> Next Steps for Parents:
+            <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-left text-xs text-amber-900 space-y-1 print:border print:border-amber-300 print:bg-amber-50/50">
+              <p className="font-bold">
+                Next Steps for Parents:
               </p>
               <p className="text-gray-600 leading-relaxed text-[11px]">
                 Our admissions coordinator will review your form and contact you within 2 business days to schedule an informal parent-child interaction tour.
               </p>
             </div>
 
-            <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
+            <div className="pt-4 flex flex-wrap items-center justify-center gap-4 print:hidden">
               <button
                 type="button"
                 onClick={() => window.print()}
                 className="px-6 py-3 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-bold text-xs rounded-full shadow-sm transition-all cursor-pointer"
               >
-                🖨️ Print Confirmation
+                Print Confirmation
               </button>
               <a
                 href="/"
