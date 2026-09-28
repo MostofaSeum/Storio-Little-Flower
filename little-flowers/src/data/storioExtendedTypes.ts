@@ -72,3 +72,33 @@ export interface StorioFaq {
   answer: string;
   is_visible?: boolean;
 }
+
+export interface StorioAdmissionFormField {
+  id: string;
+  label: string;
+  type: 'text' | 'email' | 'tel' | 'number' | 'date' | 'select' | 'textarea';
+  required?: boolean;
+  options?: string[];
+  placeholder?: string;
+  step?: 1 | 2;
+}
+
+export interface StorioAdmissionFormConfig {
+  id: number;
+  is_active: boolean;
+  title?: string;
+  description?: string;
+  academic_session?: string;
+  fields: StorioAdmissionFormField[];
+}
+
+export interface StorioAdmissionOTPResponse {
+  success: boolean;
+  message: string;
+}
+
+export interface StorioAdmissionApplicationResponse {
+  success: boolean;
+  application_number: string;
+  message: string;
+}

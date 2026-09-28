@@ -12,6 +12,7 @@ import {
   StorioPromotion,
   StorioEvent,
   StorioFaq,
+  StorioAdmissionFormConfig,
 } from '@/data/storioExtendedTypes';
 
 /**
@@ -37,6 +38,7 @@ export const DEFAULT_DEMO_DATA: {
   events: StorioEvent[];
   testimonials: Array<{ id: number; name: string; role: string; quote: string; rating: number; avatar_url?: string }>;
   faqs: StorioFaq[];
+  admissionFormConfig: StorioAdmissionFormConfig;
 } = {
   settings: {
     site_title: "Little Flowers",
@@ -353,4 +355,105 @@ export const DEFAULT_DEMO_DATA: {
       is_visible: true,
     },
   ],
+  admissionFormConfig: {
+    id: 1,
+    is_active: true,
+    title: "Online Admission Application (2026-2027)",
+    description: "Please fill out the student and guardian details below to register for the upcoming academic year.",
+    academic_session: "2026-2027",
+    fields: [
+      {
+        id: "student_name",
+        label: "Applicant Full Name",
+        type: "text",
+        required: true,
+        placeholder: "e.g., Liam Arthur",
+        step: 1,
+      },
+      {
+        id: "applied_class",
+        label: "Target Class / Grade",
+        type: "select",
+        required: true,
+        options: [
+          "Playgroup (Age 2-3)",
+          "Nursery (Age 3-4)",
+          "Junior KG (Age 4-5)",
+          "Senior KG (Age 5-6)",
+        ],
+        step: 1,
+      },
+      {
+        id: "dob",
+        label: "Date of Birth",
+        type: "date",
+        required: true,
+        step: 1,
+      },
+      {
+        id: "gender",
+        label: "Gender",
+        type: "select",
+        required: true,
+        options: ["Male", "Female", "Other"],
+        step: 1,
+      },
+      {
+        id: "blood_group",
+        label: "Blood Group",
+        type: "select",
+        required: false,
+        options: ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"],
+        step: 1,
+      },
+      {
+        id: "father_name",
+        label: "Father's Full Name",
+        type: "text",
+        required: true,
+        placeholder: "e.g., John Arthur",
+        step: 2,
+      },
+      {
+        id: "mother_name",
+        label: "Mother's Full Name",
+        type: "text",
+        required: true,
+        placeholder: "e.g., Emily Arthur",
+        step: 2,
+      },
+      {
+        id: "guardian_phone",
+        label: "Primary Phone Number",
+        type: "tel",
+        required: true,
+        placeholder: "+1 (555) 000-0000",
+        step: 2,
+      },
+      {
+        id: "guardian_email",
+        label: "Guardian Email (For OTP Verification)",
+        type: "email",
+        required: true,
+        placeholder: "guardian@example.com",
+        step: 2,
+      },
+      {
+        id: "residential_address",
+        label: "Residential Address",
+        type: "textarea",
+        required: true,
+        placeholder: "Street address, apartment, city, postal code",
+        step: 2,
+      },
+      {
+        id: "medical_notes",
+        label: "Special Care / Dietary / Allergy Notes (Optional)",
+        type: "textarea",
+        required: false,
+        placeholder: "Any allergies or special guidance for our mentors...",
+        step: 2,
+      },
+    ],
+  },
 };
