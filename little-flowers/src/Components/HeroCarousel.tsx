@@ -42,12 +42,17 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
 
   const activeSlide = slides[currentIndex] || slides[0];
 
-  // Extract slide properties gracefully supporting both SDK normalized names and direct API properties
-  const slideImageUrl =
-    activeSlide?.image_url ||
-    (activeSlide as unknown as { bgImage_data?: { file?: string } })?.bgImage_data?.file
-      ? `${(activeSlide as unknown as { bgImage_data?: { file?: string } }).bgImage_data?.file?.startsWith('http') ? '' : 'https://api.storio.cloud'}${(activeSlide as unknown as { bgImage_data?: { file?: string } }).bgImage_data?.file}`
-      : '/homepage/H1.jpg';
+  // Extract slide image safely handling SDK normalized image_url, live API bgImage_data.file, or fallback
+  const getSlideImageUrl = (slide: typeof activeSlide): string => {
+    if (slide?.image_url) return slide.image_url;
+    const apiFile = (slide as unknown as { bgImage_data?: { file?: string } })?.bgImage_data?.file;
+    if (apiFile) {
+      return apiFile.startsWith('http') ? apiFile : `https://api.storio.cloud${apiFile}`;
+    }
+    return '/homepage/H1.jpg';
+  };
+
+  const slideImageUrl = getSlideImageUrl(activeSlide);
 
   const slideTitle =
     activeSlide?.title ||
@@ -81,6 +86,12 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
               key={slideImageUrl + currentIndex}
               src={slideImageUrl}
               alt={slideTitle}
+              onError={(e) => {
+                const target = e.currentTarget;
+                if (!target.src.endsWith('/homepage/H1.jpg')) {
+                  target.src = '/homepage/H1.jpg';
+                }
+              }}
               className="w-full h-auto max-h-[580px] sm:max-h-[620px] object-contain transition-all duration-700 ease-out hover:scale-103 animate-fadeIn drop-shadow-xl"
             />
           </div>
