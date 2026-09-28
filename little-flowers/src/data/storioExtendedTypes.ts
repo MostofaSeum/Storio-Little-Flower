@@ -65,3 +65,10 @@ export interface StorioEvent {
   is_featured?: boolean;
   featured_image?: string;
 }
+
+export interface StorioFaq {
+  id: number;
+  question: string;
+  answer: string;
+  is_visible?: boolean;
+}

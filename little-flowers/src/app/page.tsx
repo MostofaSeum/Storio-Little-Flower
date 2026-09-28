@@ -12,6 +12,7 @@ import {
   StorioPromotion,
   StorioTestimonial,
   StorioEvent,
+  StorioFaq,
 } from "@/data/storioExtendedTypes";
 import { headers } from "next/headers";
 import { DEFAULT_DEMO_DATA } from "@/data/defaultDemoData";
@@ -23,6 +24,7 @@ import InteractiveGallery from "@/Components/InteractiveGallery";
 import TestimonialSlider from "@/Components/TestimonialSlider";
 import TypewriterText from "@/Components/TypewriterText";
 import AccordionGallery from "@/Components/AccordionGallery";
+import FaqSection from "@/Components/FaqSection";
 
 export default async function Home() {
   // 1. Resolve host from incoming request
@@ -51,6 +53,7 @@ export default async function Home() {
     rawPromotions,
     rawTestimonials,
     rawEvents,
+    rawFaqs,
   ] = await Promise.all([
     storio.getLayout(tenantHost),
     storio.getHeroSlides(tenantHost),
@@ -71,6 +74,7 @@ export default async function Home() {
       tenantHost,
     }),
     storio.apiFetch<StorioEvent[]>("/api/events/", { tenantHost }),
+    storio.apiFetch<StorioFaq[]>("/api/v2/template/faqs/", { tenantHost }),
   ]);
 
   // 4. Apply Rule 1: Fallback to demo data ONLY in standalone preview mode
@@ -141,6 +145,13 @@ export default async function Home() {
       ? (rawEvents as unknown as StorioEvent[])
       : isStandalone
         ? DEFAULT_DEMO_DATA.events
+        : [];
+
+  const faqs: StorioFaq[] =
+    Array.isArray(rawFaqs) && rawFaqs.length > 0
+      ? (rawFaqs as unknown as StorioFaq[])
+      : isStandalone
+        ? DEFAULT_DEMO_DATA.faqs
         : [];
 
   const settings = layout?.settings || DEFAULT_DEMO_DATA.settings;
@@ -790,7 +801,10 @@ export default async function Home() {
         </section>
       )}
 
-      {/* 11. PLAYFUL COLORFUL FOOTER */}
+      {/* 13. FREQUENTLY ASKED QUESTIONS (SplitText from React Bits) */}
+      {faqs && faqs.length > 0 && <FaqSection faqs={faqs} />}
+
+      {/* 14. PLAYFUL COLORFUL FOOTER */}
       <footer
         id="contact"
         className="bg-topbar text-gray-300 pt-16 pb-8 px-4 sm:px-8 mt-auto border-t-4 border-accent-pink"

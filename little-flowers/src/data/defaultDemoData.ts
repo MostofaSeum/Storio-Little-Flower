@@ -11,6 +11,7 @@ import {
   StorioActivityItem,
   StorioPromotion,
   StorioEvent,
+  StorioFaq,
 } from '@/data/storioExtendedTypes';
 
 /**
@@ -35,6 +36,7 @@ export const DEFAULT_DEMO_DATA: {
   promotions: StorioPromotion[];
   events: StorioEvent[];
   testimonials: Array<{ id: number; name: string; role: string; quote: string; rating: number; avatar_url?: string }>;
+  faqs: StorioFaq[];
 } = {
   settings: {
     site_title: "Little Flowers",
@@ -317,6 +319,38 @@ export const DEFAULT_DEMO_DATA: {
       role: "Mother of Aaryan (Senior KG)",
       quote: "Outstanding early childhood environment! The safety standards, loving atmosphere, and creative curriculum exceeded our highest expectations.",
       rating: 5,
+    },
+  ],
+  faqs: [
+    {
+      id: 1,
+      question: "What age groups are accepted at Little Flowers?",
+      answer: "We warmly welcome children from ages 2 to 6 years across our Playgroup (2-3 yrs), Nursery (3-4 yrs), and Kindergarten programs (4-6 yrs).",
+      is_visible: true,
+    },
+    {
+      id: 2,
+      question: "What are your daily school timings?",
+      answer: "Our standard morning session runs Sunday through Thursday from 8:30 AM to 12:30 PM, with optional supervised care and creative clubs until 2:00 PM.",
+      is_visible: true,
+    },
+    {
+      id: 3,
+      question: "What is your student-to-teacher ratio?",
+      answer: "We maintain a low 8:1 ratio in playgroups and 10:1 in nursery classes to ensure personalized warmth, safety, and focused guidance for every little learner.",
+      is_visible: true,
+    },
+    {
+      id: 4,
+      question: "How can parents schedule a campus visit?",
+      answer: "You can book an interactive campus tour by clicking 'Enroll Now' or by visiting our Admission office Sunday through Thursday during morning hours.",
+      is_visible: true,
+    },
+    {
+      id: 5,
+      question: "What security and health safety measures are in place?",
+      answer: "Our campus is equipped with 24/7 CCTV surveillance, biometric visitor checkpoints, certified pediatric first-aid staff, and child-safe sanitized play areas.",
+      is_visible: true,
     },
   ],
 };
