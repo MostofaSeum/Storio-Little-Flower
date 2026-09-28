@@ -106,7 +106,7 @@ export const DEFAULT_DEMO_DATA: {
   heroSlides: [
     {
       id: 1,
-      title: "Practical teaching &",
+      title: "Practical teaching & Social Development",
       subtitle: "Social Development",
       image_url: "/homepage/H1.jpg",
       button_text: "Learn More",
