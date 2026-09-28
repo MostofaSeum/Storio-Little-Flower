@@ -141,7 +141,7 @@ export default function FaqSection({ faqs }: FaqSectionProps) {
               href="#contact"
               className="font-bold text-accent-pink hover:text-accent-pink-hover underline decoration-pink-300 underline-offset-4 transition-colors"
             >
-              Reach out to our campus office →
+              Reach out to our campus office
             </a>
           </p>
         </div>

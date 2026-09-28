@@ -363,7 +363,7 @@ export default async function Home() {
                 href="/notice"
                 className="text-xs sm:text-sm font-bold text-accent-pink hover:text-accent-pink-hover transition-colors"
               >
-                View All Notices →
+                View All Notices
               </a>
             </div>
 
@@ -395,7 +395,7 @@ export default async function Home() {
                     href={`/notice/${notice.id}`}
                     className="mt-5 text-xs font-bold text-primary-color group-hover:text-accent-pink inline-flex items-center transform group-hover:translate-x-1 transition-transform"
                   >
-                    Read Circular →
+                    Read Circular
                   </a>
                 </div>
               ))}
@@ -599,7 +599,7 @@ export default async function Home() {
                       href={`/activity/${activity.slug || activity.id}`}
                       className="mt-6 text-xs font-bold text-primary-color group-hover:text-accent-pink inline-flex items-center transform group-hover:translate-x-1 transition-transform"
                     >
-                      Program Details →
+                      Program Details
                     </a>
                   </div>
                 );
@@ -715,9 +715,6 @@ export default async function Home() {
                   <div className="mt-4 pt-3 border-t border-gray-50 w-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <span className="text-[11px] font-bold text-primary-color inline-flex items-center gap-1">
                       <span>View Profile</span>
-                      <span className="transform group-hover:translate-x-1 transition-transform">
-                        →
-                      </span>
                     </span>
                   </div>
                 </div>
@@ -793,9 +790,6 @@ export default async function Home() {
               className="text-xs sm:text-sm font-bold text-primary-color hover:text-accent-pink transition-colors inline-flex items-center gap-1 group"
             >
               <span>Explore Full Gallery</span>
-              <span className="transform group-hover:translate-x-1 transition-transform">
-                →
-              </span>
             </a>
           </div>
 
@@ -833,7 +827,6 @@ export default async function Home() {
                 className="text-xs sm:text-sm font-bold text-primary-color hover:text-accent-pink transition-colors inline-flex items-center gap-1 group"
               >
                 <span>Full School Calendar</span>
-                <span className="transform group-hover:translate-x-1 transition-transform">→</span>
               </a>
             </div>
 

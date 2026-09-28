@@ -506,7 +506,6 @@ export default function AdmissionPortalClient({
                 className="px-8 py-3.5 bg-primary-color hover:opacity-95 text-white font-extrabold text-sm rounded-full shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 inline-flex items-center gap-2 cursor-pointer"
               >
                 <span>Continue to Parent Details</span>
-                <span>→</span>
               </button>
             </div>
           </form>
@@ -614,7 +613,7 @@ export default function AdmissionPortalClient({
                 onClick={() => setCurrentStep(1)}
                 className="px-6 py-3 border border-purple-200 text-gray-600 hover:bg-purple-50 font-bold text-xs rounded-full transition-all cursor-pointer"
               >
-                ← Back
+                Back
               </button>
 
               <button
@@ -625,10 +624,7 @@ export default function AdmissionPortalClient({
                 {otpLoading ? (
                   <span>Sending Verification Code...</span>
                 ) : (
-                  <>
-                    <span>Proceed to Email Verification</span>
-                    <span>→</span>
-                  </>
+                  <span>Proceed to Email Verification</span>
                 )}
               </button>
             </div>
@@ -714,7 +710,7 @@ export default function AdmissionPortalClient({
                 onClick={() => setCurrentStep(2)}
                 className="w-full sm:w-auto px-6 py-3 border border-purple-200 text-gray-600 hover:bg-purple-50 font-bold text-xs rounded-full transition-all cursor-pointer"
               >
-                ← Back to Details
+                Back to Details
               </button>
 
               <button
@@ -722,7 +718,7 @@ export default function AdmissionPortalClient({
                 disabled={submitting}
                 className="w-full sm:w-auto px-8 py-3.5 bg-primary-color hover:opacity-95 text-white font-extrabold text-sm rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 cursor-pointer disabled:opacity-50"
               >
-                {submitting ? 'Submitting Application...' : 'Verify & Submit Application →'}
+                {submitting ? 'Submitting Application...' : 'Verify & Submit Application'}
               </button>
             </div>
           </form>
@@ -793,7 +789,7 @@ export default function AdmissionPortalClient({
                 href="/"
                 className="px-8 py-3 bg-primary-color hover:opacity-95 text-white font-extrabold text-xs rounded-full shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 cursor-pointer"
               >
-                Return to Homepage →
+                Return to Homepage
               </a>
             </div>
           </div>

@@ -380,7 +380,7 @@ export default function LoginPortalClient({
               disabled={loading}
               className="w-full py-3.5 bg-primary-color hover:opacity-95 text-white font-extrabold text-sm rounded-full shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 cursor-pointer disabled:opacity-50 mt-2"
             >
-              {loading ? 'Authenticating...' : `Sign In as ${activeRole === 'parent' ? 'Parent' : 'Staff'} →`}
+              {loading ? 'Authenticating...' : `Sign In as ${activeRole === 'parent' ? 'Parent' : 'Staff'}`}
             </button>
           </form>
 

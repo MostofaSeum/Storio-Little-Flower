@@ -210,7 +210,6 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
               className="inline-flex items-center justify-center px-7 py-4 bg-white hover:bg-pink-50 text-accent-pink font-bold text-sm rounded-full border-2 border-accent-pink shadow-sm hover:shadow-md transition-all transform hover:-translate-y-0.5"
             >
               <span>Book Campus Tour</span>
-              <span className="ml-2">→</span>
             </a>
           </div>
 
