@@ -20,6 +20,7 @@ import InteractiveHeader from "@/Components/InteractiveHeader";
 import AnimatedCounter from "@/Components/AnimatedCounter";
 import InteractiveGallery from "@/Components/InteractiveGallery";
 import TestimonialSlider from "@/Components/TestimonialSlider";
+import TypewriterText from "@/Components/TypewriterText";
 
 export default async function Home() {
   // 1. Resolve host from incoming request
@@ -659,8 +660,13 @@ export default async function Home() {
                   {activePromo.badge_text}
                 </span>
               )}
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-primary-color leading-tight">
-                {activePromo.title}
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-primary-color leading-tight min-h-[3rem] sm:min-h-[3.5rem] font-fredoka">
+                <TypewriterText
+                  text={activePromo.title || "Early Bird Admissions 2026-2027 Open!"}
+                  speed={65}
+                  delay={150}
+                  cursorColor="var(--accent-pink)"
+                />
               </h2>
               <p className="text-gray-700 text-sm sm:text-base font-medium">
                 {activePromo.subtitle || activePromo.description}
