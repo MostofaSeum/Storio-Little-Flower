@@ -34,6 +34,30 @@ export default function AdmissionPortalClient({
   const [otpLoading, setOtpLoading] = useState<boolean>(false);
   const [otpError, setOtpError] = useState<string | null>(null);
   const [otpSuccessMsg, setOtpSuccessMsg] = useState<string | null>(null);
+  const [resendCountdown, setResendCountdown] = useState<number>(60);
+  const [resending, setResending] = useState<boolean>(false);
+
+  // 60-second countdown for Resend Code when in Step 3
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (currentStep === 3 && resendCountdown > 0) {
+      timer = setInterval(() => {
+        setResendCountdown((prev) => prev - 1);
+      }, 1000);
+    }
+    return () => clearInterval(timer);
+  }, [currentStep, resendCountdown]);
+
+  // Auto-vanish success message after 5 seconds
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (otpSuccessMsg) {
+      timer = setTimeout(() => {
+        setOtpSuccessMsg(null);
+      }, 5000);
+    }
+    return () => clearTimeout(timer);
+  }, [otpSuccessMsg]);
 
   // Submission state
   const [submitting, setSubmitting] = useState<boolean>(false);
@@ -158,6 +182,7 @@ export default function AdmissionPortalClient({
         if (res && res.success) {
           setOtpSent(true);
           setOtpSuccessMsg(res.message || 'Verification code sent to your email.');
+          setResendCountdown(60);
           setCurrentStep(3);
         } else {
           setOtpError(res?.message || 'Failed to dispatch verification code. Please check your email.');
@@ -168,12 +193,55 @@ export default function AdmissionPortalClient({
       if (isStandalone) {
         setOtpSent(true);
         setOtpSuccessMsg('Demo OTP code dispatched! Use 123456 to test.');
+        setResendCountdown(60);
         setCurrentStep(3);
       } else {
         setOtpError('Network error connecting to admission server. Please try again.');
       }
     } finally {
       setOtpLoading(false);
+    }
+  };
+
+  const handleResendOTP = async () => {
+    if (resendCountdown > 0 || resending) return;
+
+    const emailField = formConfig.fields?.find(
+      (f) => f.type === 'email' || `${f.id} ${f.label}`.toLowerCase().includes('email')
+    );
+    const email = emailField ? formData[emailField.id] : formData['guardian_email'] || formData['email'];
+
+    if (!email) return;
+
+    setResending(true);
+    setOtpError(null);
+
+    try {
+      if (isStandalone) {
+        setOtpSuccessMsg('New demo verification code dispatched! Use 123456 to verify.');
+        setResendCountdown(60);
+      } else {
+        const res = await storio.apiFetch<StorioAdmissionOTPResponse>(
+          '/api/v2/template/admission/send-otp/',
+          {
+            method: 'POST',
+            body: JSON.stringify({ email }),
+            headers: { 'Content-Type': 'application/json' },
+            tenantHost,
+          }
+        );
+
+        if (res && res.success) {
+          setOtpSuccessMsg(res.message || 'Verification code sent to your email.');
+          setResendCountdown(60);
+        } else {
+          setOtpError(res?.message || 'Failed to resend verification code.');
+        }
+      }
+    } catch {
+      setOtpError('Network error resending code. Please try again.');
+    } finally {
+      setResending(false);
     }
   };
 
