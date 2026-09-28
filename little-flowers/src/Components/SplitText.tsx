@@ -83,7 +83,7 @@ const SplitText: React.FC<SplitTextProps> = ({
     }
 
     const startPct = (1 - threshold) * 100;
-    const marginMatch = /^(-?\d+(?:\.\d+)?)(px|em|rem|%)?$/.exec(rootMargin);
+    const marginMatch = rootMargin.match(/^(-?\d+(?:\.\d+)?)(px|em|rem|%)?$/);
     const marginValue = marginMatch ? parseFloat(marginMatch[1]) : 0;
     const marginUnit = marginMatch ? marginMatch[2] || 'px' : 'px';
     const sign =
