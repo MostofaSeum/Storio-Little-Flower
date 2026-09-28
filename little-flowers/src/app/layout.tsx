@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Quicksand, Fredoka } from "next/font/google";
 import "./globals.css";
+import ClickSpark from "@/Components/ClickSpark";
 
 const quicksand = Quicksand({
   variable: "--font-quicksand",
@@ -30,6 +31,7 @@ export default function RootLayout({
       className={`${quicksand.variable} ${fredoka.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans bg-white text-gray-800">
+        <ClickSpark />
         {children}
       </body>
     </html>
