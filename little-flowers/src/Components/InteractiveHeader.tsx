@@ -83,15 +83,15 @@ export default function InteractiveHeader({ settings }: InteractiveHeaderProps) 
                       borderColor: isActive ? item.color : undefined,
                     }}
                   >
-                    {/* React Bits Circular expanding background fill */}
+                    {/* React Bits Circular expanding background fill - fully covers entire pill */}
                     <span
-                      className="absolute left-1/2 bottom-0 -translate-x-1/2 rounded-full pointer-events-none transition-transform duration-500 ease-out z-[1]"
+                      className="absolute inset-0 m-auto rounded-full pointer-events-none transition-transform duration-300 ease-out z-[1]"
                       style={{
                         backgroundColor: item.bgHover,
-                        width: '180px',
-                        height: '180px',
-                        transform: `translate(-50%, 50%) scale(${isHovered ? 1 : 0})`,
-                        transformOrigin: 'bottom center',
+                        width: '240px',
+                        height: '240px',
+                        transform: isHovered ? 'scale(1.2)' : 'scale(0)',
+                        transformOrigin: 'center center',
                       }}
                       aria-hidden="true"
                     />
