@@ -11,7 +11,9 @@ import { useEffect } from 'react';
  */
 export default function ScrollObserver() {
   useEffect(() => {
-    const elements = document.querySelectorAll('.reveal-on-scroll');
+    const elements = document.querySelectorAll(
+      '.reveal-on-scroll, .reveal-from-left, .reveal-from-right'
+    );
     if (!elements || elements.length === 0) return;
 
     const observer = new IntersectionObserver(

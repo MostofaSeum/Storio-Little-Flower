@@ -16,6 +16,10 @@ import { headers } from 'next/headers';
 import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
 import HeroCarousel from '@/Components/HeroCarousel';
 import ScrollObserver from '@/Components/ScrollObserver';
+import InteractiveHeader from '@/Components/InteractiveHeader';
+import AnimatedCounter from '@/Components/AnimatedCounter';
+import InteractiveGallery from '@/Components/InteractiveGallery';
+import TestimonialSlider from '@/Components/TestimonialSlider';
 
 export default async function Home() {
   // 1. Resolve host from incoming request
@@ -109,103 +113,58 @@ export default async function Home() {
       : [];
 
   const settings = layout?.settings || DEFAULT_DEMO_DATA.settings;
-  const activeSlide = heroSlides[0] || DEFAULT_DEMO_DATA.heroSlides[0];
   const activePromo = promotions[0] || DEFAULT_DEMO_DATA.promotions[0];
-
-  // Colorful menu items matching the design image
-  const navLinks = [
-    { label: 'Home', href: '/', colorClass: 'text-lime-600 border-b-2 border-lime-500' },
-    { label: 'About', href: '#about', colorClass: 'text-pink-600 hover:text-pink-700' },
-    { label: 'Programs', href: '#programs', colorClass: 'text-sky-500 hover:text-sky-600' },
-    { label: 'Teachers', href: '#teachers', colorClass: 'text-lime-600 hover:text-lime-700' },
-    { label: 'Gallery', href: '#gallery', colorClass: 'text-indigo-600 hover:text-indigo-700' },
-    { label: 'Admission', href: '/admission', colorClass: 'text-amber-600 hover:text-amber-700' },
-    { label: 'Notices', href: '#notices', colorClass: 'text-pink-500 hover:text-pink-600' },
-    { label: 'Contact', href: '#contact', colorClass: 'text-purple-600 hover:text-purple-700' },
-  ];
 
   return (
     <div className="min-h-screen bg-white text-gray-800 flex flex-col overflow-x-hidden selection:bg-pink-100 selection:text-pink-700">
       <ScrollObserver />
 
       {/* 1. TOP BLACK CONTACT BAR */}
-      <div className="bg-topbar text-gray-300 text-xs sm:text-sm py-2 px-4 sm:px-8">
+      <div className="bg-topbar text-gray-300 text-xs sm:text-sm py-2 px-4 sm:px-8 border-b border-gray-800">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
           {/* Left: Email & Phone */}
           <div className="flex items-center space-x-6">
             <a
               href={`mailto:${settings?.contact_email || 'info@example.com'}`}
-              className="flex items-center space-x-2 hover:text-white transition-colors"
+              className="flex items-center space-x-2 hover:text-accent-pink transition-colors group"
             >
-              <img src="/icons/mail.png" alt="Email" className="w-4 h-4 object-contain brightness-0 invert opacity-80" />
+              <img src="/icons/mail.png" alt="Email" className="w-4 h-4 object-contain brightness-0 invert opacity-80 group-hover:opacity-100" />
               <span>{settings?.contact_email || 'info@example.com'}</span>
             </a>
             <a
               href={`tel:${settings?.phone_number || '+1 8 888 567.890.03'}`}
-              className="flex items-center space-x-2 hover:text-white transition-colors"
+              className="flex items-center space-x-2 hover:text-secondary-color transition-colors group"
             >
-              <img src="/icons/telephone.png" alt="Phone" className="w-4 h-4 object-contain brightness-0 invert opacity-80" />
+              <img src="/icons/telephone.png" alt="Phone" className="w-4 h-4 object-contain brightness-0 invert opacity-80 group-hover:opacity-100" />
               <span>{settings?.phone_number || '8 888 567.890.03'}</span>
             </a>
           </div>
 
-          {/* Right: Social Links */}
+          {/* Right: Quick School Badge & Socials */}
           <div className="flex items-center space-x-4">
-            <a href="https://facebook.com" target="_blank" rel="noreferrer" className="hover:text-white text-gray-400 font-bold text-xs">
-              f
-            </a>
-            <a href="https://twitter.com" target="_blank" rel="noreferrer" className="hover:text-white text-gray-400 font-bold text-xs">
-              𝕏
-            </a>
-            <a href="https://google.com" target="_blank" rel="noreferrer" className="hover:text-white text-gray-400 font-bold text-xs">
-              G+
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="hover:text-white text-gray-400 font-bold text-xs">
-              in
-            </a>
+            <span className="hidden sm:inline-block text-[11px] font-bold text-amber-300 bg-amber-950/60 px-2.5 py-0.5 rounded-full border border-amber-500/30">
+              🌱 Admissions Open 2026-27
+            </span>
+            <div className="flex items-center space-x-3 text-gray-400">
+              <a href="https://facebook.com" target="_blank" rel="noreferrer" className="hover:text-accent-pink transition-colors font-bold text-xs">
+                f
+              </a>
+              <a href="https://twitter.com" target="_blank" rel="noreferrer" className="hover:text-sky-400 transition-colors font-bold text-xs">
+                𝕏
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="hover:text-pink-400 transition-colors font-bold text-xs">
+                IG
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="hover:text-indigo-400 transition-colors font-bold text-xs">
+                in
+              </a>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* 2. NAVBAR */}
-      <header className="bg-white border-b border-gray-100 py-2.5 px-4 sm:px-8 sticky top-0 z-30 shadow-xs backdrop-blur-md bg-white/95">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          {/* Logo with playful school castle mark */}
-          <a href="/" className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-300 via-pink-400 to-sky-400 p-1.5 flex items-center justify-center shadow-sm transform group-hover:rotate-6 transition-transform">
-              <img src="/icons/school.png" alt="School Logo" className="w-6 h-6 object-contain brightness-0 invert" />
-            </div>
-            <div>
-              <span className="text-2xl font-bold tracking-tight text-gray-900 font-fredoka">
-                {settings?.site_title || 'Little Flowers'}
-              </span>
-            </div>
-          </a>
-
-          {/* Navigation links with distinct playful colors */}
-          <nav className="hidden lg:flex items-center space-x-6 text-sm font-semibold">
-            {navLinks.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className={`py-1 px-1 transition-all ${item.colorClass}`}
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-
-          {/* Mobile Apply CTA button */}
-          <div className="lg:hidden">
-            <a
-              href="/admission"
-              className="px-4 py-1.5 bg-accent-pink text-white font-bold text-xs rounded-full shadow-sm hover:opacity-90"
-            >
-              Apply
-            </a>
-          </div>
-        </div>
-      </header>
+      {/* 2. MODERN INTERACTIVE NAVBAR */}
+      <InteractiveHeader settings={settings} />
 
       {/* 3. HERO SECTION WITH PLAYFUL INTERACTIVE CAROUSEL */}
       <section className="relative pt-1 sm:pt-2 pb-8 lg:pt-2 lg:pb-12 px-4 sm:px-8 max-w-7xl mx-auto w-full flex-1 flex flex-col justify-center">
@@ -358,26 +317,28 @@ export default async function Home() {
                   'Little Flowers Kindergarten provides experiential early childhood education centered on play, sensory exploration, creativity, and foundational social skills.'}
               </p>
 
-              {/* Stats Highlights */}
+              {/* Stats Highlights with Animated Counter */}
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-2">
-                <div className="p-4 rounded-2xl bg-soft-amber border border-amber-200 card-hover-playful">
-                  <div className="text-3xl font-extrabold text-secondary-color">
-                    {profile.total_students || 450}+
+                <div className="p-4 rounded-2xl bg-soft-amber border border-amber-200 card-interactive">
+                  <div className="text-3xl font-extrabold text-secondary-color flex items-center">
+                    <AnimatedCounter end={profile.total_students || 450} suffix="+" />
                   </div>
                   <div className="text-xs font-bold text-gray-600 mt-1">
                     {profile.total_students_label || 'Happy Children'}
                   </div>
                 </div>
-                <div className="p-4 rounded-2xl bg-soft-pink border border-pink-200 card-hover-playful">
-                  <div className="text-3xl font-extrabold text-accent-pink">
-                    {profile.total_teachers || 35}+
+                <div className="p-4 rounded-2xl bg-soft-pink border border-pink-200 card-interactive">
+                  <div className="text-3xl font-extrabold text-accent-pink flex items-center">
+                    <AnimatedCounter end={profile.total_teachers || 35} suffix="+" />
                   </div>
                   <div className="text-xs font-bold text-gray-600 mt-1">
                     {profile.total_teachers_label || 'Caring Mentors'}
                   </div>
                 </div>
-                <div className="p-4 rounded-2xl bg-accent-soft-blue border border-sky-200 col-span-2 sm:col-span-1 card-hover-playful">
-                  <div className="text-3xl font-extrabold text-primary-color">100%</div>
+                <div className="p-4 rounded-2xl bg-accent-soft-blue border border-sky-200 col-span-2 sm:col-span-1 card-interactive">
+                  <div className="text-3xl font-extrabold text-primary-color flex items-center">
+                    <AnimatedCounter end={100} suffix="%" />
+                  </div>
                   <div className="text-xs font-bold text-gray-600 mt-1">Safe Campus & Care</div>
                 </div>
               </div>
@@ -425,11 +386,13 @@ export default async function Home() {
                   'bg-accent-blue text-white',
                   'bg-accent-green text-white',
                 ];
+                const directionClass = idx < 2 ? 'reveal-from-left' : 'reveal-from-right';
+                const delayClass = (idx === 0 || idx === 3) ? 'delay-200' : 'delay-100';
 
                 return (
                   <div
                     key={activity.id}
-                    className={`bg-white rounded-3xl p-6 border-2 ${borderColors[idx % 4]} flex flex-col justify-between group card-interactive cursor-pointer reveal-on-scroll delay-${(idx % 4) * 100 + 100}`}
+                    className={`bg-white rounded-3xl p-6 border-2 ${borderColors[idx % 4]} flex flex-col justify-between group card-interactive cursor-pointer ${directionClass} ${delayClass}`}
                   >
                     <div>
                       {activity.featured_image_url && (
@@ -561,75 +524,44 @@ export default async function Home() {
               <h2 className="text-3xl sm:text-4xl font-extrabold text-primary-color mt-3">
                 Life at Little Flowers
               </h2>
+              <p className="text-gray-500 text-sm mt-1 font-medium">Click on any moment to zoom and view details</p>
             </div>
             <a
               href="/gallery"
-              className="text-xs sm:text-sm font-bold text-primary-color hover:text-accent-pink transition-colors"
+              className="text-xs sm:text-sm font-bold text-primary-color hover:text-accent-pink transition-colors inline-flex items-center gap-1 group"
             >
-              Explore Full Gallery →
+              <span>Explore Full Gallery</span>
+              <span className="transform group-hover:translate-x-1 transition-transform">→</span>
             </a>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-            {galleryItems.slice(0, 6).map((item, idx) => (
-              <div
-                key={item.id}
-                className={`relative rounded-3xl overflow-hidden group shadow-sm hover:shadow-2xl transition-all duration-300 aspect-4/3 reveal-on-scroll delay-${(idx % 3) * 100 + 100}`}
-              >
-                <img
-                  src={item.image_url}
-                  alt={item.title || 'Campus Moment'}
-                  className="w-full h-full object-cover group-hover:scale-106 transition-transform duration-500 ease-out"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                  <span className="text-white text-xs sm:text-sm font-bold">
-                    {item.title || item.caption}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
+          {/* Interactive Lightbox Gallery */}
+          <InteractiveGallery items={galleryItems} />
         </section>
       )}
 
       {/* 11. PARENT TESTIMONIALS */}
       {testimonials && testimonials.length > 0 && (
-        <section className="py-20 px-4 sm:px-8 bg-accent-soft-blue/60 border-t border-sky-100">
-          <div className="max-w-7xl mx-auto">
+        <section className="py-20 px-4 sm:px-8 bg-gradient-to-b from-accent-soft-blue/70 to-pink-50/40 border-t border-sky-100 relative overflow-hidden">
+          {/* Subtle floating background decorations */}
+          <div className="absolute top-10 left-10 w-40 h-40 bg-pink-200 rounded-full blur-3xl opacity-40 pointer-events-none"></div>
+          <div className="absolute bottom-10 right-10 w-48 h-48 bg-amber-200 rounded-full blur-3xl opacity-40 pointer-events-none"></div>
+
+          <div className="max-w-7xl mx-auto relative z-10">
             <div className="text-center max-w-2xl mx-auto mb-14 reveal-on-scroll">
-              <span className="text-xs font-extrabold tracking-wider uppercase text-accent-pink bg-pink-100 px-3 py-1 rounded-full">
+              <span className="text-xs font-extrabold tracking-wider uppercase text-accent-pink bg-pink-100 px-3.5 py-1 rounded-full shadow-xs">
                 Parent Voices
               </span>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-primary-color mt-3">
                 Loved by Families
               </h2>
-              <p className="text-gray-500 text-sm mt-2 font-medium">
-                Hear what parents say about their child’s joyful journey with us.
+              <p className="text-gray-600 text-sm mt-2 font-medium">
+                Hear what parents say about their child’s joyful journey with Little Flowers.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {testimonials.map((t, idx) => (
-                <div
-                  key={t.id}
-                  className={`p-7 rounded-3xl bg-white border border-sky-100 flex flex-col justify-between group card-interactive cursor-pointer reveal-on-scroll delay-${(idx % 3) * 100 + 100}`}
-                >
-                  <div>
-                    {/* Stars */}
-                    <div className="flex space-x-1 text-secondary-color text-base mb-4">
-                      {'★'.repeat(t.rating || 5)}
-                    </div>
-                    <p className="text-gray-600 text-sm leading-relaxed italic">
-                      "{t.quote || t.content}"
-                    </p>
-                  </div>
-                  <div className="mt-6 pt-4 border-t border-gray-100">
-                    <h4 className="font-bold text-gray-900 text-sm">{t.name}</h4>
-                    <span className="text-xs text-gray-400">{t.role || t.designation || 'Parent'}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
+            {/* Interactive Testimonial Slider */}
+            <TestimonialSlider testimonials={testimonials} />
           </div>
         </section>
       )}
@@ -694,6 +626,18 @@ export default async function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Floating Modern Action Button (Bottom Right) */}
+      <aside aria-label="Quick Enrollment Action" className="fixed bottom-6 right-6 z-40">
+        <a
+          href="/admission"
+          className="flex items-center space-x-2.5 bg-gradient-to-r from-accent-pink to-rose-500 hover:from-rose-500 hover:to-accent-pink text-white font-extrabold text-xs sm:text-sm py-3 px-5 rounded-full shadow-2xl hover:shadow-pink-400/50 transform hover:scale-108 transition-all duration-300 ring-4 ring-white"
+        >
+          <span className="text-base animate-bounce">🎒</span>
+          <span>Enroll Your Child</span>
+          <span className="w-2 h-2 rounded-full bg-white animate-ping"></span>
+        </a>
+      </aside>
     </div>
   );
 }

@@ -185,6 +185,31 @@ html {
   transform: translateY(0);
 }
 
+/* Directional scroll reveals: from Left and from Right */
+.reveal-from-left {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-from-left.is-revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-from-right {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-from-right.is-revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 /* Stagger delay utilities */
 .delay-100 { transition-delay: 100ms; }
 .delay-150 { transition-delay: 150ms; }
@@ -211,9 +236,47 @@ html {
 
 .group:hover .badge-interactive,
 .badge-interactive:hover {
-  transform: translateY(-6px) scale(1.08) !important;
-  box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.15) !important;
+  transform: translateY(-8px) scale(1.1) !important;
+  box-shadow: 0 14px 28px -6px rgba(0, 0, 0, 0.18) !important;
 }
+
+/* Wiggle animation for playful badges & icons */
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-4deg); }
+  75% { transform: rotate(4deg); }
+}
+
+.hover\:animate-wiggle:hover {
+  animation: wiggle 0.4s ease-in-out infinite;
+}
+
+/* Soft shimmer effect for active cards */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.animate-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0,
+    rgba(255, 255, 255, 0.25) 20%,
+    rgba(255, 255, 255, 0.5) 60%,
+    rgba(255, 255, 255, 0)
+  );
+  animation: shimmer 2.5s infinite;
+}
+
 
 
 
