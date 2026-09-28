@@ -70,7 +70,7 @@ export default async function Home() {
     storio.apiFetch<StorioTestimonial[]>("/api/v2/template/testimonials/", {
       tenantHost,
     }),
-    storio.getEvents(tenantHost),
+    storio.apiFetch<StorioEvent[]>("/api/events/", { tenantHost }),
   ]);
 
   // 4. Apply Rule 1: Fallback to demo data ONLY in standalone preview mode
