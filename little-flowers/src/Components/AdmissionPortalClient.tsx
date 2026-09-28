@@ -355,9 +355,9 @@ export default function AdmissionPortalClient({
   ];
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12 print:p-0 print:m-0 print:max-w-none">
       {/* 1. Header Banner */}
-      <div className="text-center mb-10">
+      <div className="text-center mb-10 print:hidden">
         <span className="inline-block text-xs font-extrabold tracking-wider uppercase text-secondary-color bg-amber-100 px-3.5 py-1 rounded-full shadow-xs mb-3">
           {formConfig.academic_session || '2026 - 2027'} Admissions Open
         </span>
@@ -378,7 +378,7 @@ export default function AdmissionPortalClient({
       </div>
 
       {/* 2. Visual Stepper Bar */}
-      <div className="mb-12 bg-white rounded-3xl p-4 sm:p-6 border border-purple-100 shadow-sm">
+      <div className="mb-12 bg-white rounded-3xl p-4 sm:p-6 border border-purple-100 shadow-sm print:hidden">
         <div className="grid grid-cols-4 gap-2 sm:gap-4 relative">
           {steps.map((st) => {
             const isCompleted = currentStep > st.num;
@@ -415,10 +415,10 @@ export default function AdmissionPortalClient({
       </div>
 
       {/* 3. Interactive Multi-Step Form Card */}
-      <div className="bg-white rounded-3xl p-6 sm:p-10 border-2 border-purple-100 shadow-md relative overflow-hidden">
+      <div className="bg-white rounded-3xl p-6 sm:p-10 border-2 border-purple-100 shadow-md relative overflow-hidden print:p-0 print:border-none print:shadow-none">
         {/* Decorative corner background aura */}
-        <div className="absolute top-0 right-0 w-48 h-48 bg-soft-amber rounded-full blur-3xl opacity-60 pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-48 h-48 bg-soft-pink rounded-full blur-3xl opacity-60 pointer-events-none" />
+        <div className="absolute top-0 right-0 w-48 h-48 bg-soft-amber rounded-full blur-3xl opacity-60 pointer-events-none print:hidden" />
+        <div className="absolute bottom-0 left-0 w-48 h-48 bg-soft-pink rounded-full blur-3xl opacity-60 pointer-events-none print:hidden" />
 
         {/* STEP 1: Student Information */}
         {currentStep === 1 && (

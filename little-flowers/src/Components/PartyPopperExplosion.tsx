@@ -124,7 +124,7 @@ export default function PartyPopperExplosion() {
   return (
     <canvas
       ref={canvasRef}
-      className="pointer-events-none absolute inset-0 z-30 w-full h-full overflow-hidden"
+      className="pointer-events-none absolute inset-0 z-30 w-full h-full overflow-hidden print:hidden"
     />
   );
 }

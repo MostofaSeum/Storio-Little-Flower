@@ -9,7 +9,7 @@ export default function Footer({ settings }: FooterProps) {
   return (
     <footer
       id="contact"
-      className="bg-topbar text-gray-300 pt-16 pb-8 px-4 sm:px-8 mt-auto border-t-4 border-accent-pink"
+      className="bg-topbar text-gray-300 pt-16 pb-8 px-4 sm:px-8 mt-auto border-t-4 border-accent-pink print:hidden"
     >
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-gray-800">
         {/* Col 1: Branding & Mission */}

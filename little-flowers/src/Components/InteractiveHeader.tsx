@@ -36,7 +36,7 @@ export default function InteractiveHeader({ settings }: InteractiveHeaderProps) 
 
   return (
     <header
-      className={`sticky top-0 z-40 transition-all duration-300 ${
+      className={`sticky top-0 z-40 transition-all duration-300 print:hidden ${
         isScrolled
           ? 'py-2.5 bg-white/95 backdrop-blur-md shadow-md border-b border-gray-100'
           : 'py-3.5 bg-white border-b border-gray-100'
