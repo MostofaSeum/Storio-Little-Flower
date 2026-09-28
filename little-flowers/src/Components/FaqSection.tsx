@@ -89,7 +89,16 @@ export default function FaqSection({ faqs }: FaqSectionProps) {
                       {idx + 1}
                     </span>
                     <span className="font-extrabold text-gray-900 text-sm sm:text-base hover:text-primary-color transition-colors">
-                      {faq.question}
+                      <SplitText
+                        text={faq.question}
+                        tag="span"
+                        splitType="words, chars"
+                        delay={15}
+                        duration={0.6}
+                        ease="power3.out"
+                        textAlign="left"
+                        className="inline"
+                      />
                     </span>
                   </div>
 
@@ -104,9 +113,19 @@ export default function FaqSection({ faqs }: FaqSectionProps) {
 
                 {isOpen && (
                   <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-gray-600 leading-relaxed border-t border-purple-50 animate-fadeIn">
-                    <p className="pl-10 sm:pl-12 font-medium text-gray-600">
-                      {faq.answer}
-                    </p>
+                    <div className="pl-10 sm:pl-12 font-medium text-gray-600">
+                      <SplitText
+                        key={`answer-${faq.id}`}
+                        text={faq.answer}
+                        tag="p"
+                        splitType="words"
+                        delay={25}
+                        duration={0.5}
+                        ease="power2.out"
+                        triggerOnMount={true}
+                        textAlign="left"
+                      />
+                    </div>
                   </div>
                 )}
               </div>

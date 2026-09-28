@@ -25,6 +25,7 @@ import TestimonialSlider from "@/Components/TestimonialSlider";
 import TypewriterText from "@/Components/TypewriterText";
 import AccordionGallery from "@/Components/AccordionGallery";
 import FaqSection from "@/Components/FaqSection";
+import SplitText from "@/Components/SplitText";
 
 export default async function Home() {
   // 1. Resolve host from incoming request
@@ -334,8 +335,17 @@ export default async function Home() {
                 <span className="text-xs font-extrabold tracking-wider uppercase text-accent-pink bg-pink-100 px-3 py-1 rounded-full">
                   Important Circulars
                 </span>
-                <h3 className="text-3xl font-extrabold text-primary-color mt-2">
-                  Campus Announcements
+                <h3 className="text-3xl font-extrabold text-primary-color mt-2 font-fredoka">
+                  <SplitText
+                    text="Campus Announcements"
+                    tag="span"
+                    splitType="chars"
+                    delay={30}
+                    duration={0.7}
+                    ease="power3.out"
+                    textAlign="left"
+                    className="inline-block"
+                  />
                 </h3>
                 <p className="text-sm text-gray-500 font-medium">
                   Stay updated with latest school circulars, events, and
@@ -418,9 +428,17 @@ export default async function Home() {
               <div className="inline-block bg-accent-soft-blue text-primary-color font-bold text-xs uppercase px-3.5 py-1 rounded-full">
                 About Our Academy
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-primary-color leading-tight">
-                A Loving Second Home for{" "}
-                <span className="text-secondary-color">Your Little Ones</span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-primary-color leading-tight font-fredoka">
+                <SplitText
+                  text="A Loving Second Home for Your Little Ones"
+                  tag="span"
+                  splitType="words, chars"
+                  delay={30}
+                  duration={0.7}
+                  ease="power3.out"
+                  textAlign="left"
+                  className="inline-block"
+                />
               </h2>
               <p className="text-gray-600 text-base leading-relaxed">
                 {profile.school_details ||
@@ -485,8 +503,16 @@ export default async function Home() {
               <span className="text-xs font-extrabold tracking-wider uppercase text-accent-pink bg-pink-100 px-3 py-1 rounded-full">
                 Early Exploration
               </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-primary-color mt-3">
-                Our Learning Programs
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-primary-color mt-3 font-fredoka">
+                <SplitText
+                  text="Our Learning Programs"
+                  tag="span"
+                  splitType="chars"
+                  delay={30}
+                  duration={0.7}
+                  ease="power3.out"
+                  className="inline-block"
+                />
               </h2>
               <p className="text-gray-500 text-sm mt-2 font-medium">
                 Tailored age-appropriate programs designed to kindle imagination
@@ -580,8 +606,16 @@ export default async function Home() {
             <span className="text-xs font-extrabold tracking-wider uppercase text-secondary-color bg-amber-100 px-3 py-1 rounded-full">
               Warm & Caring
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-primary-color mt-3">
-              Meet Our Loving Mentors
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-primary-color mt-3 font-fredoka">
+              <SplitText
+                text="Meet Our Loving Mentors"
+                tag="span"
+                splitType="chars"
+                delay={30}
+                duration={0.7}
+                ease="power3.out"
+                className="inline-block"
+              />
             </h2>
             <p className="text-gray-500 text-sm mt-2 font-medium">
               Certified childhood educators dedicated to giving every child
@@ -718,8 +752,16 @@ export default async function Home() {
               <span className="text-xs font-extrabold tracking-wider uppercase text-accent-blue bg-sky-100 px-3 py-1 rounded-full">
                 Happy Memories
               </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-primary-color mt-3">
-                Life at Little Flowers
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-primary-color mt-3 font-fredoka">
+                <SplitText
+                  text="Life at Little Flowers"
+                  tag="span"
+                  splitType="chars"
+                  delay={30}
+                  duration={0.7}
+                  ease="power3.out"
+                  className="inline-block"
+                />
               </h2>
               <p className="text-gray-500 text-sm mt-1 font-medium">
                 Click on any moment to zoom and view details
@@ -750,8 +792,16 @@ export default async function Home() {
                 <span className="text-xs font-extrabold tracking-wider uppercase text-secondary-color bg-amber-100 px-3.5 py-1 rounded-full shadow-xs">
                   Campus Life & Gatherings
                 </span>
-                <h2 className="text-3xl sm:text-4xl font-extrabold text-primary-color mt-3">
-                  Upcoming Events & Celebrations
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-primary-color mt-3 font-fredoka">
+                  <SplitText
+                    text="Upcoming Events & Celebrations"
+                    tag="span"
+                    splitType="words, chars"
+                    delay={30}
+                    duration={0.7}
+                    ease="power3.out"
+                    className="inline-block"
+                  />
                 </h2>
                 <p className="text-gray-500 text-sm mt-1 font-medium">
                   Hover over any event card to view the schedule, venue, and program overview.
@@ -786,8 +836,16 @@ export default async function Home() {
               <span className="text-xs font-extrabold tracking-wider uppercase text-accent-pink bg-pink-100 px-3.5 py-1 rounded-full shadow-xs">
                 Parent Voices
               </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-primary-color mt-3">
-                Loved by Families
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-primary-color mt-3 font-fredoka">
+                <SplitText
+                  text="Loved by Families"
+                  tag="span"
+                  splitType="chars"
+                  delay={30}
+                  duration={0.7}
+                  ease="power3.out"
+                  className="inline-block"
+                />
               </h2>
               <p className="text-gray-600 text-sm mt-2 font-medium">
                 Hear what parents say about their child’s joyful journey with
