@@ -735,8 +735,12 @@ export default function AdmissionPortalClient({
             <PartyPopperExplosion />
 
             <div className="relative inline-block mx-auto">
-              <div className="w-20 h-20 mx-auto rounded-3xl bg-gradient-to-tr from-pink-100 via-amber-100 to-sky-100 flex items-center justify-center text-4xl shadow-lg border-2 border-purple-200 transform transition-transform hover:scale-105">
-                🎊
+              <div className="w-20 h-20 mx-auto rounded-3xl bg-gradient-to-tr from-pink-100 via-amber-100 to-sky-100 flex items-center justify-center shadow-lg border-2 border-purple-200 transform transition-transform hover:scale-105">
+                <div className="w-12 h-12 rounded-2xl bg-accent-green text-white flex items-center justify-center shadow-md">
+                  <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
               </div>
             </div>
 
