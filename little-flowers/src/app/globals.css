@@ -1,9 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --font-quicksand: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-fredoka: 'Fredoka', 'Quicksand', sans-serif;
-  
+  --font-quicksand:
+    "Quicksand", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+  --font-fredoka: "Fredoka", "Quicksand", sans-serif;
+
   /* Little Flowers Design System Tokens */
   --primary: #6c4298;
   --secondary: #f39c12;
@@ -28,7 +30,12 @@ body {
   color: var(--text-dark);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-fredoka);
 }
 
@@ -110,9 +117,22 @@ h1, h2, h3, h4, h5, h6 {
   border-color: var(--accent-pink);
 }
 
+.border-secondary-color {
+  border-color: var(--secondary);
+}
+
+.border-accent-blue {
+  border-color: var(--accent-blue);
+}
+
+.border-accent-green {
+  border-color: var(--accent-green);
+}
+
 /* Wavy and organic animation helpers */
 @keyframes floatSlow {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px) rotate(0deg);
   }
   50% {
@@ -125,7 +145,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @keyframes floatReverse {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px) rotate(0deg);
   }
   50% {
@@ -138,7 +159,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @keyframes pulseGlow {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
     opacity: 0.8;
   }
@@ -176,7 +198,9 @@ html {
 .reveal-on-scroll {
   opacity: 0;
   transform: translateY(28px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
@@ -189,7 +213,9 @@ html {
 .reveal-from-left {
   opacity: 0;
   transform: translateX(-120px);
-  transition: opacity 1.3s cubic-bezier(0.22, 1, 0.36, 1), transform 1.3s cubic-bezier(0.22, 1, 0.36, 1);
+  transition:
+    opacity 1.3s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.3s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
 }
 
@@ -201,7 +227,9 @@ html {
 .reveal-from-right {
   opacity: 0;
   transform: translateX(120px);
-  transition: opacity 1.3s cubic-bezier(0.22, 1, 0.36, 1), transform 1.3s cubic-bezier(0.22, 1, 0.36, 1);
+  transition:
+    opacity 1.3s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.3s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
 }
 
@@ -211,52 +239,128 @@ html {
 }
 
 /* Stagger delay utilities */
-.delay-100 { transition-delay: 100ms; }
-.delay-150 { transition-delay: 150ms; }
-.delay-200 { transition-delay: 200ms; }
-.delay-250 { transition-delay: 250ms; }
-.delay-300 { transition-delay: 300ms; }
-.delay-400 { transition-delay: 400ms; }
+.delay-100 {
+  transition-delay: 100ms;
+}
+.delay-150 {
+  transition-delay: 150ms;
+}
+.delay-200 {
+  transition-delay: 200ms;
+}
+.delay-250 {
+  transition-delay: 250ms;
+}
+.delay-300 {
+  transition-delay: 300ms;
+}
+.delay-400 {
+  transition-delay: 400ms;
+}
 
 /* Interactive Card Hover effect with smooth elevation and shadow */
 .card-interactive {
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease, border-color 0.4s ease, background-color 0.4s ease;
+  transition:
+    transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+    box-shadow 0.4s ease,
+    border-color 0.4s ease,
+    background-color 0.4s ease;
   will-change: transform, box-shadow;
 }
 
 .card-interactive:hover {
   transform: translateY(-8px) !important;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.08),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
 }
 
-/* Neon Ambient Lighting & Color-matched Card Background Hover Effects */
+/* Neon Ambient Lighting & Color-matched Card Background Hover Effects using :root tokens */
 .course-card-amber:hover {
-  background-color: #fffdf5 !important;
-  border-color: #fbbf24 !important;
-  box-shadow: 0 14px 35px -4px rgba(245, 158, 11, 0.35), 0 0 20px 2px rgba(251, 191, 36, 0.25) !important;
+  background-color: var(--bg-soft-amber) !important;
+  border-color: var(--secondary) !important;
+  box-shadow:
+    0 14px 35px -4px color-mix(in srgb, var(--secondary) 35%, transparent),
+    0 0 20px 2px color-mix(in srgb, var(--secondary) 25%, transparent) !important;
 }
 
 .course-card-pink:hover {
-  background-color: #fdf2f8 !important;
-  border-color: #f472b6 !important;
-  box-shadow: 0 14px 35px -4px rgba(236, 72, 153, 0.35), 0 0 20px 2px rgba(244, 114, 182, 0.25) !important;
+  background-color: var(--bg-soft-pink) !important;
+  border-color: var(--accent-pink) !important;
+  box-shadow:
+    0 14px 35px -4px color-mix(in srgb, var(--accent-pink) 35%, transparent),
+    0 0 20px 2px color-mix(in srgb, var(--accent-pink) 25%, transparent) !important;
 }
 
 .course-card-sky:hover {
-  background-color: #f0f9ff !important;
-  border-color: #38bdf8 !important;
-  box-shadow: 0 14px 35px -4px rgba(14, 165, 233, 0.35), 0 0 20px 2px rgba(56, 189, 248, 0.25) !important;
+  background-color: var(--accent-soft-blue) !important;
+  border-color: var(--accent-blue) !important;
+  box-shadow:
+    0 14px 35px -4px color-mix(in srgb, var(--accent-blue) 35%, transparent),
+    0 0 20px 2px color-mix(in srgb, var(--accent-blue) 25%, transparent) !important;
 }
 
 .course-card-lime:hover {
-  background-color: #f7fee7 !important;
-  border-color: #a3e635 !important;
-  box-shadow: 0 14px 35px -4px rgba(132, 204, 22, 0.35), 0 0 20px 2px rgba(163, 230, 53, 0.25) !important;
+  background-color: color-mix(
+    in srgb,
+    var(--accent-green) 12%,
+    white
+  ) !important;
+  border-color: var(--accent-green) !important;
+  box-shadow:
+    0 14px 35px -4px color-mix(in srgb, var(--accent-green) 35%, transparent),
+    0 0 20px 2px color-mix(in srgb, var(--accent-green) 25%, transparent) !important;
+}
+
+/* Mentor Cards Interactive Playful Hover & Halo Glow */
+.mentor-card {
+  transition:
+    transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.45s ease,
+    border-color 0.45s ease,
+    background-color 0.45s ease;
+  will-change: transform, box-shadow;
+}
+
+.mentor-card:hover {
+  transform: translateY(-10px) !important;
+  box-shadow:
+    0 22px 35px -8px rgba(108, 66, 152, 0.18),
+    0 10px 15px -5px rgba(255, 64, 129, 0.12) !important;
+}
+
+/* Mentor Avatar Ring Rotating Pulse Effect */
+@keyframes spinSlow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.mentor-ring {
+  transition:
+    transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.4s ease;
+}
+
+.mentor-card:hover .mentor-ring {
+  transform: scale(1.08) rotate(4deg);
+  box-shadow: 0 10px 25px -4px
+    color-mix(in srgb, var(--primary) 30%, transparent);
+}
+
+.mentor-card:hover .mentor-social-pill {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Circle badges gentle bounce and smooth transition on group-hover and hover */
 .badge-interactive {
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+  transition:
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.4s ease;
   will-change: transform;
 }
 
@@ -268,9 +372,16 @@ html {
 
 /* Wiggle animation for playful badges & icons */
 @keyframes wiggle {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(-4deg); }
-  75% { transform: rotate(4deg); }
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-4deg);
+  }
+  75% {
+    transform: rotate(4deg);
+  }
 }
 
 .hover\:animate-wiggle:hover {
@@ -279,8 +390,12 @@ html {
 
 /* Soft shimmer effect for active cards */
 @keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 .animate-shimmer {
@@ -289,9 +404,12 @@ html {
 }
 
 .animate-shimmer::after {
-  content: '';
+  content: "";
   position: absolute;
-  top: 0; right: 0; bottom: 0; left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   transform: translateX(-100%);
   background-image: linear-gradient(
     90deg,
@@ -302,8 +420,3 @@ html {
   );
   animation: shimmer 2.5s infinite;
 }
-
-
-
-
-
