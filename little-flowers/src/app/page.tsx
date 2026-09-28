@@ -732,7 +732,7 @@ export default async function Home() {
 
       {/* 11. UPCOMING SCHOOL EVENTS (storio.getEvents - Accordion Gallery Effect) */}
       {events && events.length > 0 && (
-        <section id="events" className="py-20 px-4 sm:px-8 bg-pastel-purple border-t border-purple-100/60">
+        <section id="events" className="py-20 px-4 sm:px-8 bg-white">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-wrap items-end justify-between gap-4 mb-12 reveal-on-scroll">
               <div>

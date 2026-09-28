@@ -96,10 +96,16 @@ export default function AccordionGallery({ events }: AccordionGalleryProps) {
                 </div>
               )}
 
-              {/* Collapsed State Title (Vertical rotated text when not active) */}
+              {/* Collapsed State Title (Vertical text when not active) */}
               {!isActive && (
-                <div className="absolute inset-0 flex items-end justify-center pb-8 pointer-events-none">
-                  <span className="text-white font-extrabold text-sm tracking-wide transform -rotate-90 whitespace-nowrap origin-center drop-shadow-md">
+                <div className="absolute inset-0 top-20 flex items-center justify-center pointer-events-none p-2">
+                  <span
+                    className="text-white font-extrabold text-sm sm:text-base tracking-wider drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] line-clamp-1 select-none"
+                    style={{
+                      writingMode: 'vertical-rl',
+                      transform: 'rotate(180deg)',
+                    }}
+                  >
                     {event.title}
                   </span>
                 </div>
