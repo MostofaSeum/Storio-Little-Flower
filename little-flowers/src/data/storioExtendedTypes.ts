@@ -7,12 +7,21 @@
 export interface LittleFlowersCustomizationConfig {
   primaryColor?: string;
   secondaryColor?: string;
+  accentColor?: string;
+  backgroundColor?: string;
+  surfaceColor?: string;
+  textColor?: string;
+  headingColor?: string;
+  footerColor?: string;
+  buttonColor?: string;
+  buttonTextColor?: string;
+  buttonHoverColor?: string;
+  buttonTextHoverColor?: string;
+  activeNavBgColor?: string;
+  activeNavTextColor?: string;
   accentPink?: string;
   accentBlue?: string;
   topbarBgColor?: string;
-  buttonColor?: string;
-  buttonTextColor?: string;
-  textColor?: string;
   fontFamily?: string;
   borderRadius?: string;
   showTopBar?: boolean;

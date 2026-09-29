@@ -6,15 +6,87 @@
     "colors": [
       {
         "id": "primaryColor",
-        "label": "Primary Purple Heading",
+        "label": "Primary Color",
         "type": "color",
-        "default": "#6c4298"
+        "default": "#831c07"
       },
       {
         "id": "secondaryColor",
-        "label": "Secondary Sunny Yellow",
+        "label": "Secondary Color",
         "type": "color",
-        "default": "#f39c12"
+        "default": "#b45309"
+      },
+      {
+        "id": "accentColor",
+        "label": "Tertiary / Accent Color",
+        "type": "color",
+        "default": "#d97706"
+      },
+      {
+        "id": "backgroundColor",
+        "label": "Background Color",
+        "type": "color",
+        "default": "#ffffff"
+      },
+      {
+        "id": "surfaceColor",
+        "label": "Surface Color",
+        "type": "color",
+        "default": "#f8fafc"
+      },
+      {
+        "id": "textColor",
+        "label": "Text Color",
+        "type": "color",
+        "default": "#1e293b"
+      },
+      {
+        "id": "headingColor",
+        "label": "Heading Color",
+        "type": "color",
+        "default": "#831c07"
+      },
+      {
+        "id": "footerColor",
+        "label": "Footer Background Color",
+        "type": "color",
+        "default": "#1e293b"
+      },
+      {
+        "id": "buttonColor",
+        "label": "Button Color",
+        "type": "color",
+        "default": "#831c07"
+      },
+      {
+        "id": "buttonTextColor",
+        "label": "Button Text Color",
+        "type": "color",
+        "default": "#ffffff"
+      },
+      {
+        "id": "buttonHoverColor",
+        "label": "Button Hover Color",
+        "type": "color",
+        "default": "#b45309"
+      },
+      {
+        "id": "buttonTextHoverColor",
+        "label": "Button Text Hover Color",
+        "type": "color",
+        "default": "#ffffff"
+      },
+      {
+        "id": "activeNavBgColor",
+        "label": "Active Nav BG Color",
+        "type": "color",
+        "default": "#fef3c7"
+      },
+      {
+        "id": "activeNavTextColor",
+        "label": "Active Nav Text Color",
+        "type": "color",
+        "default": "#831c07"
       },
       {
         "id": "accentPink",
@@ -33,24 +105,6 @@
         "label": "Top Bar Background",
         "type": "color",
         "default": "#111111"
-      },
-      {
-        "id": "buttonColor",
-        "label": "Button Color",
-        "type": "color",
-        "default": "#111111"
-      },
-      {
-        "id": "buttonTextColor",
-        "label": "Button Text Color",
-        "type": "color",
-        "default": "#ffffff"
-      },
-      {
-        "id": "textColor",
-        "label": "Body Text Color",
-        "type": "color",
-        "default": "#555555"
       }
     ],
     "typography": [
