@@ -34,7 +34,7 @@ export default function EventsSection({ events }: EventsSectionProps) {
             </p>
           </div>
           <a
-            href="/events"
+            href="/event"
             className="text-xs sm:text-sm font-bold text-primary-color hover:text-accent-pink transition-colors inline-flex items-center gap-1 group"
           >
             <span>Full School Calendar</span>
