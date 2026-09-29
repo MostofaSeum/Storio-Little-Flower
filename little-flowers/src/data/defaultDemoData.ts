@@ -13,6 +13,7 @@ import {
   StorioEvent,
   StorioFaq,
   StorioAdmissionFormConfig,
+  LittleFlowersCustomizationConfig,
 } from '@/data/storioExtendedTypes';
 
 /**
@@ -27,6 +28,7 @@ import {
  */
 export const DEFAULT_DEMO_DATA: {
   settings: StorioSettingsResponse;
+  customization: LittleFlowersCustomizationConfig;
   notices: StorioNotice[];
   heroSlides: StorioHeroSlide[];
   layout?: StorioLayoutResponse;
@@ -40,6 +42,23 @@ export const DEFAULT_DEMO_DATA: {
   faqs: StorioFaq[];
   admissionFormConfig: StorioAdmissionFormConfig;
 } = {
+  customization: {
+    primaryColor: '#6c4298',
+    secondaryColor: '#f39c12',
+    accentPink: '#ff4081',
+    accentBlue: '#e3f2fd',
+    topbarBgColor: '#111111',
+    buttonColor: '#111111',
+    buttonTextColor: '#ffffff',
+    textColor: '#555555',
+    fontFamily: 'Fredoka, Nunito, sans-serif',
+    borderRadius: '9999px',
+    showTopBar: true,
+    showWaveDivider: true,
+    heroTitle1: 'Practical teaching &',
+    heroTitle2: 'Social Development',
+    heroDescription: 'We aim at success by creating skills necessary for kids to enrich & empower in studies & sports.',
+  },
   settings: {
     site_title: "Little Flowers",
     site_tagline: "Inspiring Little Minds Every Day",

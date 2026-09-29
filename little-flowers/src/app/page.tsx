@@ -13,6 +13,7 @@ import {
   StorioTestimonial,
   StorioEvent,
   StorioFaq,
+  LittleFlowersCustomizationConfig,
 } from "@/data/storioExtendedTypes";
 import { headers } from "next/headers";
 import { DEFAULT_DEMO_DATA } from "@/data/defaultDemoData";
@@ -26,6 +27,7 @@ import TypewriterText from "@/Components/TypewriterText";
 import AccordionGallery from "@/Components/AccordionGallery";
 import FaqSection from "@/Components/FaqSection";
 import SplitText from "@/Components/SplitText";
+import DynamicThemeStyles from "@/Components/DynamicThemeStyles";
 
 export default async function Home() {
   // 1. Resolve host from incoming request
@@ -165,81 +167,94 @@ export default async function Home() {
   const settings = layout?.settings || DEFAULT_DEMO_DATA.settings;
   const activePromo = promotions[0] || DEFAULT_DEMO_DATA.promotions[0];
 
+  // Customization preferences from CMS Admin Dashboard (with local fallback)
+  const customization: LittleFlowersCustomizationConfig = {
+    ...DEFAULT_DEMO_DATA.customization,
+    ...(layout?.customization?.config as LittleFlowersCustomizationConfig || {}),
+  };
+
+  const showTopBar = customization.showTopBar !== false;
+
   return (
     <div className="min-h-screen bg-white text-gray-800 flex flex-col overflow-x-hidden selection:bg-pink-100 selection:text-pink-700">
+      {/* Dynamic CSS Variables injected from Storio CMS Customization Config */}
+      <DynamicThemeStyles customization={customization} />
+
       <ScrollObserver />
 
       {/* 1. TOP BLACK CONTACT BAR */}
-      <div className="bg-topbar text-gray-300 text-xs sm:text-sm py-2 px-4 sm:px-8 border-b border-gray-800">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
-          {/* Left: Email & Phone */}
-          <div className="flex items-center space-x-6">
-            <a
-              href={`mailto:${settings?.contact_email || "info@example.com"}`}
-              className="flex items-center space-x-2 hover:text-accent-pink transition-colors group"
-            >
-              <img
-                src="/icons/mail.png"
-                alt="Email"
-                className="w-4 h-4 object-contain brightness-0 invert opacity-80 group-hover:opacity-100"
-              />
-              <span>{settings?.contact_email || "info@example.com"}</span>
-            </a>
-            <a
-              href={`tel:${settings?.phone_number || "+1 8 888 567.890.03"}`}
-              className="flex items-center space-x-2 hover:text-secondary-color transition-colors group"
-            >
-              <img
-                src="/icons/telephone.png"
-                alt="Phone"
-                className="w-4 h-4 object-contain brightness-0 invert opacity-80 group-hover:opacity-100"
-              />
-              <span>{settings?.phone_number || "8 888 567.890.03"}</span>
-            </a>
-          </div>
+      {showTopBar && (
+        <div className="bg-topbar text-gray-300 text-xs sm:text-sm py-2 px-4 sm:px-8 border-b border-gray-800">
+          <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+            {/* Left: Email & Phone */}
+            <div className="flex items-center space-x-6">
+              <a
+                href={`mailto:${settings?.contact_email || "info@example.com"}`}
+                className="flex items-center space-x-2 hover:text-accent-pink transition-colors group"
+              >
+                <img
+                  src="/icons/mail.png"
+                  alt="Email"
+                  className="w-4 h-4 object-contain brightness-0 invert opacity-80 group-hover:opacity-100"
+                />
+                <span>{settings?.contact_email || "info@example.com"}</span>
+              </a>
+              <a
+                href={`tel:${settings?.phone_number || "+1 8 888 567.890.03"}`}
+                className="flex items-center space-x-2 hover:text-secondary-color transition-colors group"
+              >
+                <img
+                  src="/icons/telephone.png"
+                  alt="Phone"
+                  className="w-4 h-4 object-contain brightness-0 invert opacity-80 group-hover:opacity-100"
+                />
+                <span>{settings?.phone_number || "8 888 567.890.03"}</span>
+              </a>
+            </div>
 
-          {/* Right: Quick School Badge & Socials */}
-          <div className="flex items-center space-x-4">
-            <span className="hidden sm:inline-block text-[11px] font-bold text-amber-300 bg-amber-950/60 px-2.5 py-0.5 rounded-full border border-amber-500/30">
-              🌱 Admissions Open 2026-27
-            </span>
-            <div className="flex items-center space-x-3 text-gray-400">
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noreferrer"
-                className="hover:text-accent-pink transition-colors font-bold text-xs"
-              >
-                f
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noreferrer"
-                className="hover:text-sky-400 transition-colors font-bold text-xs"
-              >
-                𝕏
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noreferrer"
-                className="hover:text-pink-400 transition-colors font-bold text-xs"
-              >
-                IG
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noreferrer"
-                className="hover:text-indigo-400 transition-colors font-bold text-xs"
-              >
-                in
-              </a>
+            {/* Right: Quick School Badge & Socials */}
+            <div className="flex items-center space-x-4">
+              <span className="hidden sm:inline-block text-[11px] font-bold text-amber-300 bg-amber-950/60 px-2.5 py-0.5 rounded-full border border-amber-500/30">
+                🌱 Admissions Open 2026-27
+              </span>
+              <div className="flex items-center space-x-3 text-gray-400">
+                <a
+                  href="https://facebook.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-accent-pink transition-colors font-bold text-xs"
+                >
+                  f
+                </a>
+                <a
+                  href="https://twitter.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-sky-400 transition-colors font-bold text-xs"
+                >
+                  𝕏
+                </a>
+                <a
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-pink-400 transition-colors font-bold text-xs"
+                >
+                  IG
+                </a>
+                <a
+                  href="https://linkedin.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-indigo-400 transition-colors font-bold text-xs"
+                >
+                  in
+                </a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* 2. MODERN INTERACTIVE NAVBAR */}
       <InteractiveHeader settings={settings} />
@@ -256,17 +271,19 @@ export default async function Home() {
       {/* 4. SOFT SKY BLUE WAVE BOTTOM SECTION WITH COLORFUL ROUND BADGES */}
       <div className="relative mt-auto">
         {/* Soft SVG Wave Divider */}
-        <div className="w-full overflow-hidden leading-none">
-          <svg
-            className="relative block w-full h-16 sm:h-24 text-accent-soft-blue"
-            style={{ color: "var(--accent-soft-blue)" }}
-            viewBox="0 0 1200 120"
-            preserveAspectRatio="none"
-            fill="currentColor"
-          >
-            <path d="M0,0 C150,90 400,100 600,40 C800,-20 1050,80 1200,20 L1200,120 L0,120 Z"></path>
-          </svg>
-        </div>
+        {customization.showWaveDivider !== false && (
+          <div className="w-full overflow-hidden leading-none">
+            <svg
+              className="relative block w-full h-16 sm:h-24 text-accent-soft-blue"
+              style={{ color: "var(--accent-soft-blue)" }}
+              viewBox="0 0 1200 120"
+              preserveAspectRatio="none"
+              fill="currentColor"
+            >
+              <path d="M0,0 C150,90 400,100 600,40 C800,-20 1050,80 1200,20 L1200,120 L0,120 Z"></path>
+            </svg>
+          </div>
+        )}
 
         {/* Pastel Sky Blue Strip with 4 Colorful Feature Badges */}
         <div className="bg-accent-soft-blue pb-16 pt-2 px-4 sm:px-8">

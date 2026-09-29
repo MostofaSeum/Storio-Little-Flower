@@ -1,17 +1,38 @@
+import { headers } from 'next/headers';
+import { storio, StorioLayoutResponse } from '@storio/template-sdk';
+import { LittleFlowersCustomizationConfig } from '@/data/storioExtendedTypes';
+import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
+import DynamicThemeStyles from '@/Components/DynamicThemeStyles';
 import DemoNoticeSection from '@/Components/DemoNoticeSection';
 
 /**
  * ============================================================================
  * Notice Page (/notice)
  * ============================================================================
- * This page serves as a reference implementation for template developers.
- * It loads `DemoNoticeSection`, an asynchronous Server Component that fetches data
+ * Loads `DemoNoticeSection`, an asynchronous Server Component that fetches data
  * using the `@storio/template-sdk`.
  * ============================================================================
  */
-export default function NoticePage() {
+export default async function NoticePage() {
+  const headersList = await headers();
+  const rawHost = headersList.get('x-tenant-host') || headersList.get('host') || '';
+  const host = rawHost.split(':')[0];
+
+  const linkedTenant = process.env.NEXT_PUBLIC_STORIO_TENANT_HOST;
+  const isLocalHost = host === 'localhost' || host === '127.0.0.1' || host === '::1';
+  const isStandalone = isLocalHost && !linkedTenant;
+  const tenantHost = linkedTenant || (isStandalone ? 'demo.storio.cloud' : host);
+
+  const rawLayout: StorioLayoutResponse | null = await storio.getLayout(tenantHost);
+
+  const customization: LittleFlowersCustomizationConfig = {
+    ...DEFAULT_DEMO_DATA.customization,
+    ...(rawLayout?.customization?.config as LittleFlowersCustomizationConfig || {}),
+  };
+
   return (
     <main className="min-h-screen bg-white text-gray-900 p-8 max-w-4xl mx-auto font-sans">
+      <DynamicThemeStyles customization={customization} />
       <h1 className="text-2xl font-bold mb-4">Notice Board</h1>
 
       {/* Developer Guidance Box */}

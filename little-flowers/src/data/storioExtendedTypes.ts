@@ -4,6 +4,24 @@
  * Based on the Storio V2 API endpoints specification from docs/Storio_SDK_V2_Endpoints_and_Methods_Guide.md.
  * Used for endpoints called via storio.apiFetch<T>() when not in base SDK bundle.
  */
+export interface LittleFlowersCustomizationConfig {
+  primaryColor?: string;
+  secondaryColor?: string;
+  accentPink?: string;
+  accentBlue?: string;
+  topbarBgColor?: string;
+  buttonColor?: string;
+  buttonTextColor?: string;
+  textColor?: string;
+  fontFamily?: string;
+  borderRadius?: string;
+  showTopBar?: boolean;
+  showWaveDivider?: boolean;
+  heroTitle1?: string;
+  heroTitle2?: string;
+  heroDescription?: string;
+  [key: string]: unknown;
+}
 
 export interface StorioInstitutionProfile {
   id: number;

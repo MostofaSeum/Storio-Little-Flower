@@ -1,11 +1,12 @@
 import React from 'react';
 import { headers } from 'next/headers';
 import { storio, StorioLayoutResponse } from '@storio/template-sdk';
-import { StorioAdmissionFormConfig } from '@/data/storioExtendedTypes';
+import { StorioAdmissionFormConfig, LittleFlowersCustomizationConfig } from '@/data/storioExtendedTypes';
 import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
 import InteractiveHeader from '@/Components/InteractiveHeader';
 import Footer from '@/Components/Footer';
 import AdmissionPortalClient from '@/Components/AdmissionPortalClient';
+import DynamicThemeStyles from '@/Components/DynamicThemeStyles';
 
 export const metadata = {
   title: 'Online Admission Portal — Little Flowers Kindergarten',
@@ -61,8 +62,17 @@ export default async function AdmissionPage() {
 
   const settings = layout?.settings || DEFAULT_DEMO_DATA.settings;
 
+  // Customization preferences from CMS Admin Dashboard (with local fallback)
+  const customization: LittleFlowersCustomizationConfig = {
+    ...DEFAULT_DEMO_DATA.customization,
+    ...(layout?.customization?.config as LittleFlowersCustomizationConfig || {}),
+  };
+
   return (
     <div className="min-h-screen bg-pastel-purple text-gray-800 flex flex-col selection:bg-pink-100 selection:text-pink-700">
+      {/* Dynamic CSS Variables injected from Storio CMS Customization Config */}
+      <DynamicThemeStyles customization={customization} />
+
       {/* 1. PillNav Header */}
       <InteractiveHeader settings={settings} />
 
