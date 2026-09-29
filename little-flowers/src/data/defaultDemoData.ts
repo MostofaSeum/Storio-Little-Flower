@@ -5,6 +5,7 @@ import {
   StorioLayoutResponse,
   StorioStaffMember,
   StorioGalleryItem,
+  StorioBlogPost,
 } from '@storio/template-sdk';
 import {
   StorioInstitutionProfile,
@@ -31,6 +32,7 @@ export const DEFAULT_DEMO_DATA: {
   settings: StorioSettingsResponse;
   customization: LittleFlowersCustomizationConfig;
   notices: StorioNotice[];
+  blogs: StorioBlogPost[];
   heroSlides: StorioHeroSlide[];
   layout?: StorioLayoutResponse;
   institutionProfile: StorioInstitutionProfile;
@@ -133,6 +135,38 @@ export const DEFAULT_DEMO_DATA: {
       content: "One-on-one personalized meetings with class mentors to review cognitive and social milestones.",
       published_date: "2026-10-08",
       is_urgent: false,
+    },
+  ],
+  blogs: [
+    {
+      id: 1,
+      title: "Play-Based Learning: Why Early Childhood Education Thrives on Play",
+      slug: "play-based-learning-early-childhood",
+      summary: "Discover how purposeful play fosters problem solving, emotional resilience, and lifelong curiosity in toddlers.",
+      content: "<p>In the formative years of childhood, play is not merely a break from learning—it <strong>is</strong> how children make sense of the world. At Little Flowers Kindergarten, our pedagogical framework weaves structured games, sensory exploration, and interactive discovery into everyday classroom routines.</p><p>When children engage with building blocks, collaborate during imaginative puppet theater, or explore sensory nature tables, their brains form vital neural connections that build future scientific, linguistic, and emotional competence.</p><h3>Key Benefits of Play in Early Education:</h3><ul><li><strong>Cognitive Agility:</strong> Enhances critical thinking and spatial comprehension.</li><li><strong>Emotional Resilience:</strong> Teaches patience, turn-taking, and peer cooperation.</li><li><strong>Gross & Fine Motor Skills:</strong> Strengthens hand-eye coordination through tactile crafts.</li></ul>",
+      featured_image_url: "/homepage/H1.jpg",
+      category_name: "Child Development",
+      published_at: "2026-09-15T09:00:00Z",
+    },
+    {
+      id: 2,
+      title: "Nurturing Healthy Social & Emotional Foundations at Kindergarten",
+      slug: "social-emotional-foundations-kindergarten",
+      summary: "How compassionate mentorship and inclusive circle times empower young learners with confidence and empathy.",
+      content: "<p>Transitioning into school life is an exciting milestone for both children and parents. Our daily morning circle time creates an emotionally secure environment where learners express feelings, share thoughts, and celebrate peers.</p><p>Through compassionate listening exercises and collaborative group activities, children develop empathy and positive social skills that prepare them for primary school and beyond.</p>",
+      featured_image_url: "/homepage/H2.jpg",
+      category_name: "Parenting & School Life",
+      published_at: "2026-09-22T11:30:00Z",
+    },
+    {
+      id: 3,
+      title: "Creative Arts and Gardening: Connecting Little Learners to Nature",
+      slug: "creative-arts-gardening-nature",
+      summary: "Exploring our Little Farmers initiative and hands-on art studios where creativity blossoms outdoors.",
+      content: "<p>Our garden courtyards and studio spaces provide children the canvas to paint, plant, and wonder. Caring for seedlings teaches patience and environmental stewardship, while open-ended art sparks unrestrained imagination.</p>",
+      featured_image_url: "/homepage/H3.jpg",
+      category_name: "Activities & Nature",
+      published_at: "2026-09-27T14:15:00Z",
     },
   ],
   heroSlides: [
