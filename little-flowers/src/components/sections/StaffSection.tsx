@@ -1,6 +1,7 @@
 import React from 'react';
 import { StorioStaffMember } from '@storio/template-sdk';
 import SplitText from '@/components/ui/SplitText';
+import { getStaffMemberPhoto } from '@/lib/storio';
 
 interface StaffSectionProps {
   staffList: StorioStaffMember[];
@@ -56,13 +57,7 @@ export default function StaffSection({ staffList }: StaffSectionProps) {
             "bg-lime-50 text-accent-green",
           ];
 
-          const staffPhoto =
-            member.photo_url ||
-            ((member as unknown as { profile_pic_data?: { file?: string } })?.profile_pic_data?.file
-              ? `https://api.storio.cloud${(member as unknown as { profile_pic_data?: { file?: string } })?.profile_pic_data?.file}`
-              : (member as unknown as { profile_pic?: string })?.profile_pic
-                ? `https://api.storio.cloud${(member as unknown as { profile_pic?: string })?.profile_pic}`
-                : "/icons/user.png");
+          const staffPhoto = getStaffMemberPhoto(member);
 
           return (
             <div

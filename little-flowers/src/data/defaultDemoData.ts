@@ -38,6 +38,7 @@ export const DEFAULT_DEMO_DATA: {
   institutionProfile: StorioInstitutionProfile;
   activities: StorioActivityItem[];
   staff: StorioStaffMember[];
+  team: StorioStaffMember[];
   gallery: StorioGalleryItem[];
   promotions: StorioPromotion[];
   events: StorioEvent[];
@@ -261,6 +262,32 @@ export const DEFAULT_DEMO_DATA: {
       department: "Creative Arts",
       photo_url: "/homepage/Teachers/Teacher.jpg",
       bio: "Nurturing imaginative thinking through vibrant watercolor and sculpture.",
+    },
+  ],
+  team: [
+    {
+      id: 1,
+      name: "Dr. Eleanor Vance",
+      designation: "Chairperson & Trustee",
+      department: "Governing Body",
+      photo_url: "/homepage/Teachers/Teacher.jpg",
+      bio: "Lifelong advocate for child education, early literacy, and community wellness.",
+    },
+    {
+      id: 2,
+      name: "Arthur Pendelton",
+      designation: "Executive Director",
+      department: "Management Board",
+      photo_url: "/homepage/Teachers/Teacher.jpg",
+      bio: "Guiding institutional operations, academic excellence, and campus safety standards.",
+    },
+    {
+      id: 3,
+      name: "Prof. Kenneth Clarke",
+      designation: "Academic Council Advisor",
+      department: "Academic Advisory",
+      photo_url: "/homepage/Teachers/Teacher.jpg",
+      bio: "Curriculum designer and consultant on playful childhood pedagogy.",
     },
   ],
   gallery: [
