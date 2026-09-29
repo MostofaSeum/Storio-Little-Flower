@@ -38,7 +38,7 @@ export default async function VideosGalleryPage() {
   const videos: StorioReelItem[] = Array.isArray(rawReels) ? rawReels : [];
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-gray-900 selection:bg-accent-pink selection:text-white">
+    <div className="min-h-screen flex flex-col bg-white text-gray-900 selection:bg-pink-100 selection:text-pink-700">
       <DynamicThemeStyles customization={customization} />
       <InteractiveHeader settings={settings} navigation={navigation} />
 

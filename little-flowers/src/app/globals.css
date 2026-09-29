@@ -30,6 +30,12 @@ body {
   color: var(--text-dark);
 }
 
+::selection {
+  background-color: #fce7f3; /* soft pink bg */
+  color: #be185d; /* clear dark pink text */
+}
+
+
 h1,
 h2,
 h3,
