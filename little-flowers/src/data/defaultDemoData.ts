@@ -331,8 +331,8 @@ export const DEFAULT_DEMO_DATA: {
   promotions: [
     {
       id: 1,
-      title: "Early Bird Admissions 2026-2027 Open!",
-      subtitle: "Limited seats for Playgroup, Nursery & Kindergarten",
+      title: "Admissions Open for New Academic Session!",
+      subtitle: "Join our vibrant, experiential early learning community.",
       description: "Give your child the gift of joyful, exploratory education with caring teachers and modern facilities.",
       badge_text: "Admissions Open",
       cta_label: "Apply for Admission",

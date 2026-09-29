@@ -116,6 +116,11 @@ export interface StorioPromotion {
   badge_text?: string;
   cta_label?: string;
   cta_url?: string;
+  image?: number | string;
+  image_detail?: {
+    file?: string;
+    file_url?: string;
+  };
 }
 
 export interface StorioTestimonial {
