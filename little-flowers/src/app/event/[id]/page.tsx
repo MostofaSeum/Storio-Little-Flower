@@ -124,11 +124,6 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
                 Featured Event
               </span>
             )}
-            {event.status && (
-              <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 capitalize">
-                {event.status}
-              </span>
-            )}
           </div>
 
           {/* Event Title */}

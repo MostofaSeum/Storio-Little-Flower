@@ -131,11 +131,6 @@ export default async function ActivityDetailPage({ params }: ActivityDetailPageP
                 Featured Program
               </span>
             )}
-            {activity.status_display && (
-              <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                {activity.status_display}
-              </span>
-            )}
           </div>
 
           {/* Title */}
@@ -221,14 +216,7 @@ export default async function ActivityDetailPage({ params }: ActivityDetailPageP
           )}
 
           {/* Bottom Actions */}
-          <div className="mt-12 pt-6 border-t border-purple-100 flex items-center justify-between">
-            <Link
-              href="/#programs"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-pastel-purple text-primary-color font-bold text-xs hover:bg-purple-100 transition-colors"
-            >
-              <span>← Back to All Programs</span>
-            </Link>
-
+          <div className="mt-12 pt-6 border-t border-purple-100 flex items-center justify-end">
             <Link
               href="/admission"
               className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary-color text-white font-bold text-xs hover:opacity-90 transition-opacity shadow-md"
