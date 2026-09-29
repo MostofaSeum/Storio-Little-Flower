@@ -60,6 +60,9 @@ export default function AdmissionPortalClient({
     return () => clearTimeout(timer);
   }, [otpSuccessMsg]);
 
+  // Image previews state
+  const [imagePreviews, setImagePreviews] = useState<Record<string, string>>({});
+
   // Submission state
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [applicationNumber, setApplicationNumber] = useState<string>('');
@@ -75,11 +78,25 @@ export default function AdmissionPortalClient({
     }
   };
 
+  const handlePhoneChange = (fieldId: string, rawValue: string) => {
+    // Only allow digits, plus sign at the start, spaces, and dashes
+    const sanitized = rawValue.replace(/[^\d+\s-]/g, '');
+    handleInputChange(fieldId, sanitized);
+  };
+
+  const handleFileChange = (fieldId: string, file: File | undefined) => {
+    if (!file) return;
+    handleInputChange(fieldId, file.name);
+
+    if (file.type.startsWith('image/')) {
+      const previewUrl = URL.createObjectURL(file);
+      setImagePreviews((prev) => ({ ...prev, [fieldId]: previewUrl }));
+    }
+  };
+
   // Group fields dynamically:
-  // 1. If fields have explicit step properties, honor them.
-  // 2. Otherwise, automatically distribute fields so that:
-  //    - If there are <= 4 fields, or student-oriented fields (name, applied_class, dob, gender, photo), put in step 1.
-  //    - Guardian/contact fields (phone, email, father, mother, address) or second half go in step 2.
+  // Step 1: Little Learner's profile (only learner's name, photo, birth date, gender, applied class)
+  // Step 2: Parents & Contact details (Phone, Father's Name, Mother's Name, Email, Address, Notes)
   const hasExplicitSteps = formConfig.fields?.some((f) => typeof f.step === 'number');
 
   let step1Fields: typeof formConfig.fields = [];
@@ -90,34 +107,44 @@ export default function AdmissionPortalClient({
     step2Fields = (formConfig.fields || []).filter((f) => f.step === 2);
   } else {
     const allFields = formConfig.fields || [];
-    if (allFields.length <= 4) {
-      // Small form: place first half or first 2 in step 1, rest in step 2
-      const midpoint = Math.ceil(allFields.length / 2);
-      step1Fields = allFields.slice(0, midpoint);
-      step2Fields = allFields.slice(midpoint);
-    } else {
-      step1Fields = allFields.filter((f) => {
-        const idOrLabel = `${f.id} ${f.label}`.toLowerCase();
-        return (
-          idOrLabel.includes('student') ||
-          idOrLabel.includes('name') ||
-          idOrLabel.includes('dob') ||
-          idOrLabel.includes('birth') ||
-          idOrLabel.includes('gender') ||
-          idOrLabel.includes('class') ||
-          idOrLabel.includes('blood') ||
-          idOrLabel.includes('photo') ||
-          idOrLabel.includes('image')
-        ) && !idOrLabel.includes('father') && !idOrLabel.includes('mother') && !idOrLabel.includes('guardian');
-      });
 
-      step2Fields = allFields.filter((f) => !step1Fields.some((s1) => s1.id === f.id));
+    // Filter Step 1 strictly to learner details (excluding phone, contact, father, mother, guardian)
+    step1Fields = allFields.filter((f) => {
+      const idOrLabel = `${f.id} ${f.label}`.toLowerCase();
+      const isContactOrParent =
+        idOrLabel.includes('phone') ||
+        idOrLabel.includes('mobile') ||
+        idOrLabel.includes('contact') ||
+        idOrLabel.includes('email') ||
+        idOrLabel.includes('father') ||
+        idOrLabel.includes('mother') ||
+        idOrLabel.includes('parent') ||
+        idOrLabel.includes('guardian') ||
+        idOrLabel.includes('address');
 
-      // Guarantee at least 1 field in each step if there are fields
-      if (step1Fields.length === 0 && allFields.length > 0) {
-        step1Fields = allFields.slice(0, Math.ceil(allFields.length / 2));
-        step2Fields = allFields.slice(Math.ceil(allFields.length / 2));
-      }
+      if (isContactOrParent) return false;
+
+      return (
+        idOrLabel.includes('name') ||
+        idOrLabel.includes('student') ||
+        idOrLabel.includes('learner') ||
+        idOrLabel.includes('dob') ||
+        idOrLabel.includes('birth') ||
+        idOrLabel.includes('gender') ||
+        idOrLabel.includes('class') ||
+        idOrLabel.includes('blood') ||
+        idOrLabel.includes('photo') ||
+        idOrLabel.includes('image') ||
+        f.type === 'image'
+      );
+    });
+
+    step2Fields = allFields.filter((f) => !step1Fields.some((s1) => s1.id === f.id));
+
+    // Fallback if no match: first field (Learner's Name) in Step 1, rest in Step 2
+    if (step1Fields.length === 0 && allFields.length > 0) {
+      step1Fields = [allFields[0]];
+      step2Fields = allFields.slice(1);
     }
   }
 
@@ -465,25 +492,54 @@ export default function AdmissionPortalClient({
                       className="w-full px-4 py-3 bg-pastel-purple rounded-2xl border border-purple-100 focus:border-primary-color focus:bg-white focus:outline-none focus:ring-4 focus:ring-purple-100 text-sm font-semibold text-gray-800 transition-all"
                     />
                   ) : field.type === 'image' || field.type === 'file' ? (
-                    <div className="relative">
-                      <input
-                        type="file"
-                        accept={field.type === 'image' ? 'image/*' : '*'}
-                        onChange={(e) => {
-                          const file = e.target.files?.[0];
-                          if (file) handleInputChange(field.id, file.name);
-                        }}
-                        className="w-full px-4 py-3 bg-pastel-purple rounded-2xl border border-purple-100 file:mr-4 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-primary-color file:text-white hover:file:opacity-90 text-xs text-gray-600 transition-all cursor-pointer"
-                      />
-                      {formData[field.id] && (
+                    <div className="space-y-3">
+                      <div className="relative">
+                        <input
+                          type="file"
+                          accept={field.type === 'image' ? 'image/*' : '*'}
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            handleFileChange(field.id, file);
+                          }}
+                          className="w-full px-4 py-3 bg-pastel-purple rounded-2xl border border-purple-100 file:mr-4 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-primary-color file:text-white hover:file:opacity-90 text-xs text-gray-600 transition-all cursor-pointer"
+                        />
+                      </div>
+
+                      {/* Live Image Preview */}
+                      {imagePreviews[field.id] ? (
+                        <div className="flex items-center gap-3 p-2.5 bg-white rounded-2xl border border-purple-100 shadow-sm animate-fadeIn">
+                          <img
+                            src={imagePreviews[field.id]}
+                            alt="Selected preview"
+                            className="w-16 h-16 object-cover rounded-xl border border-purple-100 shadow-inner"
+                          />
+                          <div className="flex-1 min-w-0">
+                            <span className="text-[11px] font-bold text-accent-green block">
+                              ✓ Photo Selected
+                            </span>
+                            <span className="text-xs text-gray-500 truncate block">
+                              {formData[field.id]}
+                            </span>
+                          </div>
+                        </div>
+                      ) : formData[field.id] ? (
                         <span className="text-[11px] text-accent-green font-bold block mt-1">
                           ✓ Selected: {formData[field.id]}
                         </span>
-                      )}
+                      ) : null}
                     </div>
+                  ) : field.type === 'number' || field.type === 'tel' || `${field.id} ${field.label}`.toLowerCase().includes('phone') ? (
+                    <input
+                      type="tel"
+                      inputMode="numeric"
+                      value={formData[field.id] || ''}
+                      onChange={(e) => handlePhoneChange(field.id, e.target.value)}
+                      placeholder={field.placeholder || `Enter ${field.label} (numbers only)`}
+                      className="w-full px-4 py-3 bg-pastel-purple rounded-2xl border border-purple-100 focus:border-primary-color focus:bg-white focus:outline-none focus:ring-4 focus:ring-purple-100 text-sm font-semibold text-gray-800 transition-all"
+                    />
                   ) : (
                     <input
-                      type={field.type === 'number' ? 'tel' : field.type || 'text'}
+                      type={field.type || 'text'}
                       value={formData[field.id] || ''}
                       onChange={(e) => handleInputChange(field.id, e.target.value)}
                       placeholder={field.placeholder || `Enter ${field.label}`}
@@ -543,25 +599,54 @@ export default function AdmissionPortalClient({
                       className="w-full px-4 py-3 bg-pastel-purple rounded-2xl border border-purple-100 focus:border-primary-color focus:bg-white focus:outline-none focus:ring-4 focus:ring-purple-100 text-sm font-semibold text-gray-800 transition-all"
                     />
                   ) : field.type === 'image' || field.type === 'file' ? (
-                    <div className="relative">
-                      <input
-                        type="file"
-                        accept={field.type === 'image' ? 'image/*' : '*'}
-                        onChange={(e) => {
-                          const file = e.target.files?.[0];
-                          if (file) handleInputChange(field.id, file.name);
-                        }}
-                        className="w-full px-4 py-3 bg-pastel-purple rounded-2xl border border-purple-100 file:mr-4 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-primary-color file:text-white hover:file:opacity-90 text-xs text-gray-600 transition-all cursor-pointer"
-                      />
-                      {formData[field.id] && (
+                    <div className="space-y-3">
+                      <div className="relative">
+                        <input
+                          type="file"
+                          accept={field.type === 'image' ? 'image/*' : '*'}
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            handleFileChange(field.id, file);
+                          }}
+                          className="w-full px-4 py-3 bg-pastel-purple rounded-2xl border border-purple-100 file:mr-4 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-primary-color file:text-white hover:file:opacity-90 text-xs text-gray-600 transition-all cursor-pointer"
+                        />
+                      </div>
+
+                      {/* Live Image Preview */}
+                      {imagePreviews[field.id] ? (
+                        <div className="flex items-center gap-3 p-2.5 bg-white rounded-2xl border border-purple-100 shadow-sm animate-fadeIn">
+                          <img
+                            src={imagePreviews[field.id]}
+                            alt="Selected preview"
+                            className="w-16 h-16 object-cover rounded-xl border border-purple-100 shadow-inner"
+                          />
+                          <div className="flex-1 min-w-0">
+                            <span className="text-[11px] font-bold text-accent-green block">
+                              ✓ Photo Selected
+                            </span>
+                            <span className="text-xs text-gray-500 truncate block">
+                              {formData[field.id]}
+                            </span>
+                          </div>
+                        </div>
+                      ) : formData[field.id] ? (
                         <span className="text-[11px] text-accent-green font-bold block mt-1">
                           ✓ Selected: {formData[field.id]}
                         </span>
-                      )}
+                      ) : null}
                     </div>
+                  ) : field.type === 'number' || field.type === 'tel' || `${field.id} ${field.label}`.toLowerCase().includes('phone') ? (
+                    <input
+                      type="tel"
+                      inputMode="numeric"
+                      value={formData[field.id] || ''}
+                      onChange={(e) => handlePhoneChange(field.id, e.target.value)}
+                      placeholder={field.placeholder || `Enter ${field.label} (numbers only)`}
+                      className="w-full px-4 py-3 bg-pastel-purple rounded-2xl border border-purple-100 focus:border-primary-color focus:bg-white focus:outline-none focus:ring-4 focus:ring-purple-100 text-sm font-semibold text-gray-800 transition-all"
+                    />
                   ) : (
                     <input
-                      type={field.type === 'number' ? 'tel' : field.type || 'text'}
+                      type={field.type || 'text'}
                       value={formData[field.id] || ''}
                       onChange={(e) => handleInputChange(field.id, e.target.value)}
                       placeholder={field.placeholder || `Enter ${field.label}`}
