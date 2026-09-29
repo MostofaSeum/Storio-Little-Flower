@@ -37,7 +37,7 @@ export default function StaffSection({ staffList }: StaffSectionProps) {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        {staffList.slice(0, 4).map((member, idx) => {
+        {staffList.map((member, idx) => {
           const borderColors = [
             "hover:border-secondary-color",
             "hover:border-accent-pink",
@@ -58,11 +58,22 @@ export default function StaffSection({ staffList }: StaffSectionProps) {
           ];
 
           const staffPhoto = getStaffMemberPhoto(member);
+          const designation =
+            member.designation ||
+            (member as { role?: string }).role ||
+            "Teacher & Mentor";
+
+          // If department is numeric ID (like 1), prefer department_name
+          const rawDept = (member as { department_name?: string }).department_name || member.department;
+          const departmentName =
+            rawDept && isNaN(Number(rawDept))
+              ? String(rawDept)
+              : (member as { department_name?: string }).department_name || null;
 
           return (
             <div
               key={member.id}
-              className={`flex flex-col items-center text-center p-7 bg-white rounded-3xl border-2 border-gray-100 ${borderColors[idx % 4]} group mentor-card cursor-pointer reveal-on-scroll delay-${(idx % 4) * 100 + 100} relative overflow-hidden`}
+              className={`flex flex-col items-center text-center p-7 bg-white rounded-3xl border-2 border-gray-100 ${borderColors[idx % 4]} group mentor-card reveal-on-scroll delay-${(idx % 4) * 100 + 100} relative overflow-hidden`}
             >
               {/* Mentor Avatar with animated gradient halo */}
               <div className="relative mb-5">
@@ -73,14 +84,9 @@ export default function StaffSection({ staffList }: StaffSectionProps) {
                     <img
                       src={staffPhoto}
                       alt={member.name}
-                      className="w-full h-full object-cover rounded-full group-hover:scale-110 transition-transform duration-500 ease-out"
+                      className="w-full h-full object-cover rounded-full group-hover:scale-105 transition-transform duration-500 ease-out"
                     />
                   </div>
-                </div>
-
-                {/* Floating sparkle dot */}
-                <div className="absolute bottom-1 right-2 w-5 h-5 rounded-full bg-white shadow-md flex items-center justify-center text-[10px] transform group-hover:scale-110 group-hover:rotate-12 transition-all">
-                  ✨
                 </div>
               </div>
 
@@ -89,28 +95,23 @@ export default function StaffSection({ staffList }: StaffSectionProps) {
                 {member.name}
               </h3>
               <span className="text-xs font-bold text-accent-pink mt-1">
-                {member.designation}
+                {designation}
               </span>
 
-              {/* Department / Specialty Pill */}
-              <span
-                className={`inline-block text-[11px] font-bold px-3 py-0.5 rounded-full mt-2.5 ${tagColors[idx % 4]} transition-transform duration-300 group-hover:scale-105`}
-              >
-                {member.department || "Early Childhood Specialist"}
-              </span>
-
-              {member.bio && (
-                <p className="text-xs text-gray-500 mt-2.5 line-clamp-2 leading-relaxed">
-                  {member.bio}
-                </p>
+              {/* Department / Specialty Pill (Only if available text, never raw ID number) */}
+              {departmentName && (
+                <span
+                  className={`inline-block text-[11px] font-bold px-3 py-0.5 rounded-full mt-2.5 ${tagColors[idx % 4]} transition-transform duration-300 group-hover:scale-105`}
+                >
+                  {departmentName}
+                </span>
               )}
 
-              {/* Interactive hover prompt */}
-              <div className="mt-4 pt-3 border-t border-gray-50 w-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <span className="text-[11px] font-bold text-primary-color inline-flex items-center gap-1">
-                  <span>View Profile &rarr;</span>
-                </span>
-              </div>
+              {member.bio && (
+                <p className="text-xs text-gray-500 mt-2.5 line-clamp-3 leading-relaxed">
+                  {member.bio.replace(/;;/g, ' ')}
+                </p>
+              )}
             </div>
           );
         })}
