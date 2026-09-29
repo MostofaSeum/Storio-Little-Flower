@@ -102,8 +102,16 @@ export default async function AboutPage() {
               <div className="inline-block bg-purple-100 text-primary-color font-bold text-xs uppercase px-3.5 py-1 rounded-full">
                 Our Story &amp; Philosophy
               </div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 leading-tight">
-                Nurturing Wonder, Creativity &amp; Empathy
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 leading-tight font-fredoka">
+                <SplitText
+                  text="Nurturing Wonder, Creativity & Empathy"
+                  tag="span"
+                  splitType="words, chars"
+                  delay={30}
+                  duration={0.7}
+                  ease="power3.out"
+                  className="inline-block"
+                />
               </h1>
               <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
                 {profile?.school_details ||
@@ -143,7 +151,15 @@ export default async function AboutPage() {
                   Institutional Leadership
                 </span>
                 <h2 className="text-2xl sm:text-4xl font-extrabold text-gray-900 mt-3 font-fredoka">
-                  Governing Body &amp; Advisory Board
+                  <SplitText
+                    text="Governing Body & Advisory Board"
+                    tag="span"
+                    splitType="words, chars"
+                    delay={35}
+                    duration={0.7}
+                    ease="power3.out"
+                    className="inline-block"
+                  />
                 </h2>
                 <p className="text-gray-500 text-sm mt-2 font-medium">
                   Guiding our vision, educational excellence, and strategic foundation.
@@ -199,7 +215,15 @@ export default async function AboutPage() {
                     Loving &amp; Certified
                   </span>
                   <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 mt-2 font-fredoka">
-                    Our Dedicated Mentors
+                    <SplitText
+                      text="Our Dedicated Mentors"
+                      tag="span"
+                      splitType="words, chars"
+                      delay={35}
+                      duration={0.7}
+                      ease="power3.out"
+                      className="inline-block"
+                    />
                   </h2>
                 </div>
                 <Link
