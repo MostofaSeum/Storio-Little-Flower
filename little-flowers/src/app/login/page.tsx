@@ -1,10 +1,12 @@
 import React from 'react';
 import { headers } from 'next/headers';
 import { storio, StorioLayoutResponse } from '@storio/template-sdk';
+import { LittleFlowersCustomizationConfig, StorioDynamicNavItem } from '@/data/storioExtendedTypes';
 import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
 import InteractiveHeader from '@/Components/InteractiveHeader';
 import Footer from '@/Components/Footer';
 import LoginPortalClient from '@/Components/LoginPortalClient';
+import DynamicThemeStyles from '@/Components/DynamicThemeStyles';
 
 export const metadata = {
   title: 'Portal Login — Little Flowers Kindergarten',
@@ -39,10 +41,31 @@ export default async function LoginPage() {
 
   const settings = layout?.settings || DEFAULT_DEMO_DATA.settings;
 
+  // Customization preferences from CMS Admin Dashboard (with local fallback)
+  const customization: LittleFlowersCustomizationConfig = {
+    ...DEFAULT_DEMO_DATA.customization,
+    ...(layout?.customization?.config as LittleFlowersCustomizationConfig || {}),
+  };
+
+  // Dynamic Navigation menu items from Storio CMS
+  const cmsNavLinks =
+    (layout?.customization?.config?.navbarLinks as StorioDynamicNavItem[] | undefined) ||
+    layout?.navigation?.items;
+
+  const navigation: StorioDynamicNavItem[] =
+    Array.isArray(cmsNavLinks) && cmsNavLinks.length > 0
+      ? cmsNavLinks
+      : isStandalone
+        ? DEFAULT_DEMO_DATA.navigation
+        : [];
+
   return (
     <div className="min-h-screen bg-pastel-purple text-gray-800 flex flex-col selection:bg-pink-100 selection:text-pink-700">
+      {/* Dynamic CSS Variables injected from Storio CMS Customization Config */}
+      <DynamicThemeStyles customization={customization} />
+
       {/* 1. Header Navigation */}
-      <InteractiveHeader settings={settings} />
+      <InteractiveHeader settings={settings} navigation={navigation} />
 
       {/* 2. Login Portal Main Body */}
       <main className="flex-1 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
