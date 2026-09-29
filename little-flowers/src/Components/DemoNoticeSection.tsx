@@ -106,10 +106,21 @@ export default async function DemoNoticeSection() {
               <p className="text-sm text-gray-600 mt-2">{notice.content}</p>
             )}
 
-            {/* Publication Date */}
-            {notice.published_date && (
-              <span className="text-xs text-gray-400 block mt-2">{notice.published_date}</span>
-            )}
+            {/* Publication Date & Read Detail Link */}
+            <div className="flex items-center justify-between mt-3 pt-2 border-t border-gray-100">
+              {notice.published_date ? (
+                <span className="text-xs text-gray-400">{notice.published_date}</span>
+              ) : (
+                <span className="text-xs text-gray-400">Notice Circular</span>
+              )}
+              <a
+                href={`/notice/${notice.id}`}
+                className="text-xs font-bold text-primary-color hover:text-accent-pink transition-colors inline-flex items-center gap-1"
+              >
+                <span>Read Full Circular</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
           </div>
         ))}
       </div>
