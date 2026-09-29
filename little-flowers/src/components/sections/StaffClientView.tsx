@@ -7,10 +7,15 @@ import { getStaffMemberPhoto } from '@/lib/media';
 interface StaffClientViewProps {
   staffList: StorioStaffMember[];
   teamList: StorioStaffMember[];
+  initialTab?: 'all' | 'teachers' | 'leadership';
 }
 
-export default function StaffClientView({ staffList, teamList }: StaffClientViewProps) {
-  const [activeTab, setActiveTab] = useState<'all' | 'teachers' | 'leadership'>('all');
+export default function StaffClientView({
+  staffList,
+  teamList,
+  initialTab = 'all',
+}: StaffClientViewProps) {
+  const [activeTab, setActiveTab] = useState<'all' | 'teachers' | 'leadership'>(initialTab);
   const [searchQuery, setSearchQuery] = useState('');
 
   // Normalize and combine members with category tags

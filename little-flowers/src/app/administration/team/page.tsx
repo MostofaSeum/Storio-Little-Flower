@@ -1,0 +1,82 @@
+import React from 'react';
+import { storio, StorioStaffMember } from '@storio/template-sdk';
+import { getTenantContext, getTemplateLayout } from '@/lib/storio';
+import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
+import InteractiveHeader from '@/components/layout/InteractiveHeader';
+import Footer from '@/components/layout/Footer';
+import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
+import StaffClientView from '@/components/sections/StaffClientView';
+import SplitText from '@/components/ui/SplitText';
+
+export const metadata = {
+  title: 'Committee Members & Governing Body — Little Flowers',
+  description: 'Our governing committee, trustees, and management board members.',
+};
+
+export default async function CommitteeMembersPage() {
+  const { tenantHost, isStandalone } = await getTenantContext();
+  const { settings, customization, navigation } = await getTemplateLayout(tenantHost, isStandalone);
+
+  const [rawStaff, rawTeam] = await Promise.all([
+    storio.getStaff(tenantHost),
+    storio.getTeam(tenantHost),
+  ]);
+
+  const staffList: StorioStaffMember[] =
+    Array.isArray(rawStaff) && rawStaff.length > 0
+      ? rawStaff
+      : isStandalone
+        ? DEFAULT_DEMO_DATA.staff || []
+        : [];
+
+  const teamList: StorioStaffMember[] =
+    Array.isArray(rawTeam) && rawTeam.length > 0
+      ? rawTeam
+      : isStandalone
+        ? DEFAULT_DEMO_DATA.team || []
+        : [];
+
+  return (
+    <div className="min-h-screen flex flex-col bg-white text-gray-900 selection:bg-accent-pink selection:text-white">
+      <DynamicThemeStyles customization={customization} />
+      <InteractiveHeader settings={settings} navigation={navigation} />
+
+      <main className="flex-1">
+        {/* Hero Section */}
+        <section className="relative overflow-hidden bg-pastel-purple py-12 sm:py-16 border-b border-purple-100">
+          <div className="max-w-7xl mx-auto px-4 sm:px-8 relative z-10 text-center">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase bg-white text-primary-color border border-purple-200 shadow-2xs mb-4">
+              <span className="w-2 h-2 rounded-full bg-secondary-color animate-pulse" />
+              Administrative Governance
+            </span>
+
+            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight">
+              <SplitText
+                text="Committee Members"
+                className="inline-block text-primary-color"
+                tag="span"
+              />
+            </h1>
+
+            <p className="mt-4 text-base sm:text-lg text-gray-600 leading-relaxed font-quicksand max-w-2xl mx-auto">
+              Our governing body, trustees, and advisors steering the academy towards excellence.
+            </p>
+          </div>
+        </section>
+
+        {/* Directory Body */}
+        <section className="py-12 sm:py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-8">
+            <StaffClientView
+              staffList={staffList}
+              teamList={teamList}
+              initialTab="leadership"
+            />
+          </div>
+        </section>
+      </main>
+
+      <Footer settings={settings} />
+    </div>
+  );
+}

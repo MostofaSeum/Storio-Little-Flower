@@ -69,3 +69,22 @@ export function getStaffMemberPhoto(member: unknown): string {
 
   return rawPath;
 }
+
+/**
+ * General purpose media URL resolver for any raw relative or absolute file path.
+ */
+export function resolveMediaUrl(rawPath?: string | null): string {
+  if (!rawPath) return '';
+  if (rawPath.startsWith('http://') || rawPath.startsWith('https://')) {
+    return rawPath;
+  }
+  if (rawPath.startsWith('/media/')) {
+    const backendUrl =
+      process.env.BACKEND_INTERNAL_URL ||
+      process.env.NEXT_PUBLIC_API_URL ||
+      process.env.NEXT_PUBLIC_API_BASE_URL ||
+      'https://api.storio.cloud';
+    return `${backendUrl.replace(/\/$/, '')}${rawPath}`;
+  }
+  return rawPath;
+}
