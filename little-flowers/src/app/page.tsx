@@ -14,6 +14,7 @@ import {
   StorioEvent,
   StorioFaq,
   LittleFlowersCustomizationConfig,
+  StorioDynamicNavItem,
 } from "@/data/storioExtendedTypes";
 import { headers } from "next/headers";
 import { DEFAULT_DEMO_DATA } from "@/data/defaultDemoData";
@@ -173,6 +174,18 @@ export default async function Home() {
     ...(layout?.customization?.config as LittleFlowersCustomizationConfig || {}),
   };
 
+  // Dynamic Navigation menu items from Storio CMS (layout.navigation or customization.config.navbarLinks)
+  const cmsNavLinks =
+    (layout?.customization?.config?.navbarLinks as StorioDynamicNavItem[] | undefined) ||
+    layout?.navigation?.items;
+
+  const navigation: StorioDynamicNavItem[] =
+    Array.isArray(cmsNavLinks) && cmsNavLinks.length > 0
+      ? cmsNavLinks
+      : isStandalone
+        ? DEFAULT_DEMO_DATA.navigation
+        : [];
+
   const showTopBar = customization.showTopBar !== false;
 
   return (
@@ -256,8 +269,8 @@ export default async function Home() {
         </div>
       )}
 
-      {/* 2. MODERN INTERACTIVE NAVBAR */}
-      <InteractiveHeader settings={settings} />
+      {/* 2. MODERN INTERACTIVE NAVBAR WITH CMS DYNAMIC LINKS */}
+      <InteractiveHeader settings={settings} navigation={navigation} />
 
       {/* 3. HERO SECTION WITH PLAYFUL INTERACTIVE CAROUSEL */}
       <section className="relative pt-1 sm:pt-2 pb-8 lg:pt-2 lg:pb-12 px-4 sm:px-8 max-w-7xl mx-auto w-full flex-1 flex flex-col justify-center">

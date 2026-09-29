@@ -2,16 +2,19 @@
 
 import React, { useState, useEffect } from 'react';
 import { StorioSettingsResponse } from '@storio/template-sdk';
+import { StorioDynamicNavItem } from '@/data/storioExtendedTypes';
 
 interface InteractiveHeaderProps {
   settings: StorioSettingsResponse;
+  navigation?: StorioDynamicNavItem[];
 }
 
-export default function InteractiveHeader({ settings }: InteractiveHeaderProps) {
+export default function InteractiveHeader({ settings, navigation }: InteractiveHeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('Home');
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const [openDropdownIdx, setOpenDropdownIdx] = useState<number | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,18 +24,51 @@ export default function InteractiveHeader({ settings }: InteractiveHeaderProps) 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Kindergarten theme colorful links using existing tokens from globals.css
-  const navLinks = [
-    { label: 'Home', href: '/', color: 'var(--accent-green)', bgHover: 'var(--accent-green)' },
-    { label: 'About', href: '#about', color: 'var(--accent-pink)', bgHover: 'var(--accent-pink)' },
-    { label: 'Programs', href: '#programs', color: 'var(--accent-blue)', bgHover: 'var(--accent-blue)' },
-    { label: 'Teachers', href: '#teachers', color: 'var(--secondary)', bgHover: 'var(--secondary)' },
-    { label: 'Gallery', href: '#gallery', color: 'var(--primary)', bgHover: 'var(--primary)' },
-    { label: 'Events', href: '#events', color: 'var(--secondary)', bgHover: 'var(--secondary)' },
-    { label: 'Admission', href: '/admission', color: 'var(--accent-pink)', bgHover: 'var(--accent-pink)' },
-    { label: 'Notices', href: '#notices', color: 'var(--primary)', bgHover: 'var(--primary)' },
-    { label: 'Contact', href: '#contact', color: 'var(--accent-blue)', bgHover: 'var(--accent-blue)' },
+  // Playful kindergarten palette mapped in order to navigation links
+  const colorPalette = [
+    'var(--accent-green)',
+    'var(--accent-pink)',
+    'var(--accent-blue)',
+    'var(--secondary)',
+    'var(--primary)',
+    'var(--accent-green)',
+    'var(--secondary)',
+    'var(--accent-pink)',
+    'var(--accent-blue)',
   ];
+
+  // Default fallback links if none returned
+  const defaultNavLinks: StorioDynamicNavItem[] = [
+    { name: 'Home', href: '/' },
+    { name: 'About', href: '#about' },
+    { name: 'Programs', href: '#programs' },
+    { name: 'Teachers', href: '#teachers' },
+    { name: 'Gallery', href: '#gallery' },
+    { name: 'Events', href: '#events' },
+    { name: 'Admission', href: '/admission' },
+    { name: 'Notices', href: '#notices' },
+    { name: 'Contact', href: '#contact' },
+  ];
+
+  const rawLinks = Array.isArray(navigation) && navigation.length > 0 ? navigation : defaultNavLinks;
+
+  // Filter visible links and normalize label & href
+  const navLinks = rawLinks
+    .filter((item) => item.isVisible !== false)
+    .map((item, index) => {
+      const label = item.name || item.label || 'Link';
+      const href = item.href || item.url || '#';
+      const color = colorPalette[index % colorPalette.length];
+      const children = item.subLinks || item.children || [];
+      return {
+        ...item,
+        label,
+        href,
+        color,
+        children,
+        hasDropdown: children.length > 0,
+      };
+    });
 
   return (
     <header
@@ -73,7 +109,7 @@ export default function InteractiveHeader({ settings }: InteractiveHeaderProps) 
           </div>
         </a>
 
-        {/* React Bits Authentic PillNav (Desktop) */}
+        {/* Dynamic Interactive PillNav (Desktop) */}
         <nav
           aria-label="Primary navigation"
           className="hidden lg:flex items-center rounded-full p-1 bg-pastel-purple border border-purple-100 shadow-xs"
@@ -82,25 +118,36 @@ export default function InteractiveHeader({ settings }: InteractiveHeaderProps) 
             {navLinks.map((item, i) => {
               const isActive = activeTab === item.label;
               const isHovered = hoveredIdx === i;
+              const isDropdownOpen = openDropdownIdx === i;
 
               return (
-                <li key={item.label} role="none" className="relative flex items-center">
+                <li
+                  key={item.id || item.label}
+                  role="none"
+                  className="relative flex items-center"
+                  onMouseEnter={() => {
+                    setHoveredIdx(i);
+                    if (item.hasDropdown) setOpenDropdownIdx(i);
+                  }}
+                  onMouseLeave={() => {
+                    setHoveredIdx(null);
+                    if (item.hasDropdown) setOpenDropdownIdx(null);
+                  }}
+                >
                   <a
                     role="menuitem"
                     href={item.href}
                     onClick={() => setActiveTab(item.label)}
-                    onMouseEnter={() => setHoveredIdx(i)}
-                    onMouseLeave={() => setHoveredIdx(null)}
-                    className="relative overflow-hidden inline-flex items-center justify-center h-9 px-4 rounded-full font-bold text-xs tracking-wide uppercase transition-all duration-300 group cursor-pointer select-none bg-white border border-gray-100/80 shadow-xs hover:shadow-md"
+                    className="relative overflow-hidden inline-flex items-center justify-center h-9 px-4 rounded-full font-bold text-xs tracking-wide uppercase transition-all duration-300 group cursor-pointer select-none bg-white border border-gray-100/80 shadow-xs hover:shadow-md gap-1"
                     style={{
                       borderColor: isActive ? item.color : undefined,
                     }}
                   >
-                    {/* React Bits Circular expanding background fill - fully covers entire pill */}
+                    {/* Expanding circular background fill */}
                     <span
                       className="absolute inset-0 m-auto rounded-full pointer-events-none transition-transform duration-300 ease-out z-[1]"
                       style={{
-                        backgroundColor: item.bgHover,
+                        backgroundColor: item.color,
                         width: '240px',
                         height: '240px',
                         transform: isHovered ? 'scale(1.2)' : 'scale(0)',
@@ -109,7 +156,7 @@ export default function InteractiveHeader({ settings }: InteractiveHeaderProps) 
                       aria-hidden="true"
                     />
 
-                    {/* React Bits Dual Label Stack: Default text translates UP, Hovered text translates IN */}
+                    {/* Dual Label Stack: Default translates UP, Hovered translates IN */}
                     <span className="relative inline-block h-4 overflow-hidden z-[2]">
                       <span
                         className="block transition-transform duration-300 ease-out"
@@ -131,6 +178,21 @@ export default function InteractiveHeader({ settings }: InteractiveHeaderProps) 
                       </span>
                     </span>
 
+                    {/* Dropdown Chevron indicator if children exist */}
+                    {item.hasDropdown && (
+                      <svg
+                        className={`w-3 h-3 z-[2] transition-transform duration-200 ${
+                          isHovered ? 'text-white' : 'text-gray-400'
+                        } ${isDropdownOpen ? 'rotate-180' : ''}`}
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    )}
+
                     {/* Active Bottom Dot Pill Indicator */}
                     {isActive && (
                       <span
@@ -142,6 +204,25 @@ export default function InteractiveHeader({ settings }: InteractiveHeaderProps) 
                       />
                     )}
                   </a>
+
+                  {/* Dropdown Sub-menu Popover */}
+                  {item.hasDropdown && isDropdownOpen && (
+                    <div className="absolute top-full left-0 mt-1 min-w-[200px] bg-white rounded-2xl shadow-xl border border-gray-100 py-2 z-50 animate-fadeIn">
+                      {item.children.map((subItem) => {
+                        const subLabel = subItem.name || subItem.label || '';
+                        const subHref = subItem.href || subItem.url || '#';
+                        return (
+                          <a
+                            key={subItem.id || subLabel}
+                            href={subHref}
+                            className="block px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-pastel-purple hover:text-primary-color transition-colors"
+                          >
+                            {subLabel}
+                          </a>
+                        );
+                      })}
+                    </div>
+                  )}
                 </li>
               );
             })}
@@ -177,37 +258,54 @@ export default function InteractiveHeader({ settings }: InteractiveHeaderProps) 
         </div>
       </div>
 
-      {/* Mobile Dropdown Menu with Pill items */}
+      {/* Mobile Dropdown Menu with Pill items & Nested Sub-links */}
       {mobileMenuOpen && (
         <div className="lg:hidden bg-white/98 backdrop-blur-lg border-b border-gray-200 px-6 py-4 animate-fadeIn">
           <nav className="flex flex-col space-y-2 font-semibold text-sm">
             {navLinks.map((item) => {
               const isCurrent = activeTab === item.label;
               return (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  onClick={() => {
-                    setActiveTab(item.label);
-                    setMobileMenuOpen(false);
-                  }}
-                  className={`py-2 px-4 rounded-full text-xs font-bold transition-all flex items-center justify-between ${
-                    isCurrent
-                      ? 'bg-pastel-purple shadow-xs font-extrabold'
-                      : 'text-gray-600 hover:bg-gray-50'
-                  }`}
-                  style={{
-                    color: item.color,
-                  }}
-                >
-                  <span>{item.label}</span>
-                  {isCurrent && (
-                    <span
-                      className="w-2 h-2 rounded-full"
-                      style={{ backgroundColor: item.color }}
-                    />
+                <div key={item.id || item.label} className="flex flex-col">
+                  <a
+                    href={item.href}
+                    onClick={() => {
+                      setActiveTab(item.label);
+                      if (!item.hasDropdown) setMobileMenuOpen(false);
+                    }}
+                    className={`py-2 px-4 rounded-full text-xs font-bold transition-all flex items-center justify-between ${
+                      isCurrent
+                        ? 'bg-pastel-purple shadow-xs font-extrabold'
+                        : 'text-gray-600 hover:bg-gray-50'
+                    }`}
+                    style={{
+                      color: item.color,
+                    }}
+                  >
+                    <span>{item.label}</span>
+                    {isCurrent && (
+                      <span
+                        className="w-2 h-2 rounded-full"
+                        style={{ backgroundColor: item.color }}
+                      />
+                    )}
+                  </a>
+
+                  {/* Mobile sub-links */}
+                  {item.hasDropdown && (
+                    <div className="pl-6 py-1 space-y-1">
+                      {item.children.map((subItem) => (
+                        <a
+                          key={subItem.id || subItem.name || subItem.label}
+                          href={subItem.href || subItem.url || '#'}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="block py-1.5 px-3 rounded-lg text-xs font-medium text-gray-500 hover:text-primary-color hover:bg-gray-50"
+                        >
+                          • {subItem.name || subItem.label}
+                        </a>
+                      ))}
+                    </div>
                   )}
-                </a>
+                </div>
               );
             })}
             <div className="pt-2 grid grid-cols-2 gap-2">

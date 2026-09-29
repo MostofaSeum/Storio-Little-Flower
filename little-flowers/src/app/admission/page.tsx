@@ -1,7 +1,11 @@
 import React from 'react';
 import { headers } from 'next/headers';
 import { storio, StorioLayoutResponse } from '@storio/template-sdk';
-import { StorioAdmissionFormConfig, LittleFlowersCustomizationConfig } from '@/data/storioExtendedTypes';
+import {
+  StorioAdmissionFormConfig,
+  LittleFlowersCustomizationConfig,
+  StorioDynamicNavItem,
+} from '@/data/storioExtendedTypes';
 import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
 import InteractiveHeader from '@/Components/InteractiveHeader';
 import Footer from '@/Components/Footer';
@@ -68,13 +72,25 @@ export default async function AdmissionPage() {
     ...(layout?.customization?.config as LittleFlowersCustomizationConfig || {}),
   };
 
+  // Dynamic Navigation menu items from Storio CMS
+  const cmsNavLinks =
+    (layout?.customization?.config?.navbarLinks as StorioDynamicNavItem[] | undefined) ||
+    layout?.navigation?.items;
+
+  const navigation: StorioDynamicNavItem[] =
+    Array.isArray(cmsNavLinks) && cmsNavLinks.length > 0
+      ? cmsNavLinks
+      : isStandalone
+        ? DEFAULT_DEMO_DATA.navigation
+        : [];
+
   return (
     <div className="min-h-screen bg-pastel-purple text-gray-800 flex flex-col selection:bg-pink-100 selection:text-pink-700">
       {/* Dynamic CSS Variables injected from Storio CMS Customization Config */}
       <DynamicThemeStyles customization={customization} />
 
       {/* 1. PillNav Header */}
-      <InteractiveHeader settings={settings} />
+      <InteractiveHeader settings={settings} navigation={navigation} />
 
       {/* 2. Main Admission Portal Area */}
       <main className="flex-1">

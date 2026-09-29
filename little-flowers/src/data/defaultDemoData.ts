@@ -14,6 +14,7 @@ import {
   StorioFaq,
   StorioAdmissionFormConfig,
   LittleFlowersCustomizationConfig,
+  StorioDynamicNavItem,
 } from '@/data/storioExtendedTypes';
 
 /**
@@ -41,7 +42,19 @@ export const DEFAULT_DEMO_DATA: {
   testimonials: Array<{ id: number; name: string; role: string; quote: string; rating: number; avatar_url?: string }>;
   faqs: StorioFaq[];
   admissionFormConfig: StorioAdmissionFormConfig;
+  navigation: StorioDynamicNavItem[];
 } = {
+  navigation: [
+    { id: "1", name: "Home", href: "/" },
+    { id: "2", name: "About", href: "/about" },
+    { id: "3", name: "Facilities", href: "/facilities" },
+    { id: "4", name: "Notices", href: "/notice" },
+    { id: "5", name: "Blog", href: "/blog" },
+    { id: "6", name: "Admission", href: "/admission" },
+    { id: "7", name: "Faculty", href: "/staff" },
+    { id: "8", name: "Gallery", href: "/gallery" },
+    { id: "9", name: "Contact", href: "/contact" },
+  ],
   customization: {
     primaryColor: '#6c4298',
     secondaryColor: '#f39c12',

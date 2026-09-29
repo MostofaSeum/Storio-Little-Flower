@@ -32,6 +32,18 @@ export interface LittleFlowersCustomizationConfig {
   [key: string]: unknown;
 }
 
+export interface StorioDynamicNavItem {
+  id?: string | number;
+  name?: string;
+  label?: string;
+  href?: string;
+  url?: string;
+  target?: string;
+  subLinks?: StorioDynamicNavItem[];
+  children?: StorioDynamicNavItem[];
+  isVisible?: boolean;
+}
+
 export interface StorioInstitutionProfile {
   id: number;
   institution_image_url?: string;
