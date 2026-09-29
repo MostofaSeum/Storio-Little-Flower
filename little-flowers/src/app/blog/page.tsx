@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { storio, StorioBlogPost } from '@storio/template-sdk';
-import { getTenantContext, getTemplateLayout } from '@/lib/storio';
+import { getTenantContext, getTemplateLayout, getBlogPostImageUrl } from '@/lib/storio';
 import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
 import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
@@ -77,6 +77,7 @@ export default async function BlogPage() {
           {blogs.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {blogs.map((post) => {
+                const imageUrl = getBlogPostImageUrl(post as Parameters<typeof getBlogPostImageUrl>[0]);
                 const formattedDate = post.published_at
                   ? new Date(post.published_at).toLocaleDateString('en-US', {
                       year: 'numeric',
@@ -91,10 +92,10 @@ export default async function BlogPage() {
                     className="bg-white rounded-3xl overflow-hidden border border-purple-50 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group transform hover:-translate-y-1"
                   >
                     {/* Featured Image */}
-                    {post.featured_image_url ? (
+                    {imageUrl ? (
                       <div className="relative w-full h-52 bg-purple-50 overflow-hidden">
                         <img
-                          src={post.featured_image_url}
+                          src={imageUrl}
                           alt={post.title}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         />

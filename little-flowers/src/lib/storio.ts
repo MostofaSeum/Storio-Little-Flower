@@ -71,3 +71,34 @@ export async function getTemplateLayout(tenantHost: string, isStandalone: boolea
 
   return { layout, settings, customization, navigation };
 }
+
+/**
+ * Resolves full image URL for a blog post.
+ * Handles:
+ * 1. SDK field: post.featured_image_url
+ * 2. Backend API payload field: post.featured_image_data?.file
+ * 3. Relative backend media paths (e.g. /media/uploads/image.webp)
+ */
+export function getBlogPostImageUrl(post: {
+  featured_image_url?: string;
+  featured_image_data?: { file?: string };
+}): string | null {
+  const rawPath = post.featured_image_url || post.featured_image_data?.file;
+  if (!rawPath) return null;
+
+  if (rawPath.startsWith('http://') || rawPath.startsWith('https://')) {
+    return rawPath;
+  }
+
+  // If it starts with /media/, resolve against CMS backend URL
+  if (rawPath.startsWith('/media/')) {
+    const backendUrl =
+      process.env.BACKEND_INTERNAL_URL ||
+      process.env.NEXT_PUBLIC_API_URL ||
+      process.env.NEXT_PUBLIC_API_BASE_URL ||
+      'https://api.storio.cloud';
+    return `${backendUrl.replace(/\/$/, '')}${rawPath}`;
+  }
+
+  return rawPath;
+}

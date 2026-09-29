@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { storio, StorioBlogPost } from '@storio/template-sdk';
-import { getTenantContext, getTemplateLayout } from '@/lib/storio';
+import { getTenantContext, getTemplateLayout, getBlogPostImageUrl } from '@/lib/storio';
 import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
 import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
@@ -72,6 +72,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
+  const imageUrl = getBlogPostImageUrl(article as Parameters<typeof getBlogPostImageUrl>[0]);
+
   const formattedDate = article.published_at
     ? new Date(article.published_at).toLocaleDateString('en-US', {
         year: 'numeric',
@@ -135,10 +137,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             )}
 
             {/* Featured Image */}
-            {article.featured_image_url && (
+            {imageUrl && (
               <div className="w-full h-64 sm:h-96 rounded-2xl overflow-hidden mb-10 shadow-sm bg-purple-50">
                 <img
-                  src={article.featured_image_url}
+                  src={imageUrl}
                   alt={article.title}
                   className="w-full h-full object-cover"
                 />
@@ -155,12 +157,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
             {/* Bottom Actions */}
             <div className="mt-12 pt-8 border-t border-gray-100 flex flex-wrap items-center justify-between gap-4">
-              <Link
-                href="/blog"
-                className="px-6 py-3 rounded-full bg-purple-50 text-primary-color font-semibold text-sm hover:bg-purple-100 transition-colors"
-              >
-                &larr; More Articles
-              </Link>
               <Link
                 href="/admission"
                 className="px-6 py-3 rounded-full bg-primary-color text-white font-semibold text-sm hover:bg-primary-hover shadow-sm transition-all"
