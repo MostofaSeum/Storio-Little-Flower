@@ -14,27 +14,49 @@ export default function StaffClientView({ staffList, teamList }: StaffClientView
   const [searchQuery, setSearchQuery] = useState('');
 
   // Normalize and combine members with category tags
-  const teachers = staffList.map((s) => ({
-    ...s,
-    group: 'teachers' as const,
-    displayName: s.name || (s as { fullname?: string }).fullname || 'Faculty Member',
-    displayRole: s.designation || (s as { role?: string }).role || 'Teacher / Mentor',
-    displayDept: s.department || (s as { department_name?: string }).department_name || (s as { section_name?: string }).section_name || 'Academic',
-    displayBio: s.bio || (s as { experience?: string }).experience || '',
-    displayEmail: s.email || '',
-    displayPhone: s.phone_number || (s as { phone?: string }).phone || '',
-  }));
+  const teachers = staffList.map((s) => {
+    const raw = s as unknown as Record<string, unknown>;
+    const name = String(s.name || raw.fullname || raw.title || 'Faculty Member');
+    const role = String(s.designation || raw.role || raw.position || '');
+    const dept = String(raw.department_name || (isNaN(Number(s.department)) ? s.department : '') || raw.section_name || '');
+    const bio = String(s.bio || raw.experience || '');
+    const email = String(s.email || '');
+    const phone = String(s.phone_number || raw.phone || '');
 
-  const leadership = teamList.map((t) => ({
-    ...t,
-    group: 'leadership' as const,
-    displayName: t.name || (t as { fullname?: string }).fullname || 'Board Member',
-    displayRole: t.designation || (t as { role?: string }).role || 'Executive Member',
-    displayDept: t.department || (t as { department_name?: string }).department_name || (t as { section_name?: string }).section_name || 'Governing Body',
-    displayBio: t.bio || (t as { experience?: string }).experience || '',
-    displayEmail: t.email || '',
-    displayPhone: t.phone_number || (t as { phone?: string }).phone || '',
-  }));
+    return {
+      ...s,
+      group: 'teachers' as const,
+      displayName: name,
+      displayRole: role,
+      displayDept: dept,
+      displayBio: bio,
+      displayEmail: email,
+      displayPhone: phone,
+      searchIndex: `${name} ${role} ${dept} ${bio} ${email} ${phone}`.toLowerCase(),
+    };
+  });
+
+  const leadership = teamList.map((t) => {
+    const raw = t as unknown as Record<string, unknown>;
+    const name = String(t.name || raw.fullname || raw.title || 'Board Member');
+    const role = String(t.designation || raw.role || raw.position || '');
+    const dept = String(raw.section_name || raw.department_name || (isNaN(Number(t.department)) ? t.department : '') || 'Governing Body');
+    const bio = String(t.bio || raw.experience || '');
+    const email = String(t.email || '');
+    const phone = String(t.phone_number || raw.phone || '');
+
+    return {
+      ...t,
+      group: 'leadership' as const,
+      displayName: name,
+      displayRole: role,
+      displayDept: dept,
+      displayBio: bio,
+      displayEmail: email,
+      displayPhone: phone,
+      searchIndex: `${name} ${role} ${dept} ${bio} ${email} ${phone}`.toLowerCase(),
+    };
+  });
 
   const allMembers = [...teachers, ...leadership];
 
@@ -46,15 +68,12 @@ export default function StaffClientView({ staffList, teamList }: StaffClientView
 
     if (!matchesTab) return false;
 
-    if (!searchQuery.trim()) return true;
+    const trimmed = searchQuery.trim().toLowerCase();
+    if (!trimmed) return true;
 
-    const q = searchQuery.toLowerCase();
-    return (
-      member.displayName.toLowerCase().includes(q) ||
-      member.displayRole.toLowerCase().includes(q) ||
-      member.displayDept.toLowerCase().includes(q) ||
-      member.displayBio.toLowerCase().includes(q)
-    );
+    // Fast multi-keyword matching: every keyword entered must match somewhere in the search index
+    const keywords = trimmed.split(/\s+/).filter(Boolean);
+    return keywords.every((kw) => member.searchIndex.includes(kw));
   });
 
   return (
@@ -72,7 +91,7 @@ export default function StaffClientView({ staffList, teamList }: StaffClientView
                 : 'text-gray-600 hover:text-gray-900'
             }`}
           >
-            All Members ({allMembers.length})
+            All ({allMembers.length})
           </button>
           <button
             type="button"
@@ -83,7 +102,7 @@ export default function StaffClientView({ staffList, teamList }: StaffClientView
                 : 'text-gray-600 hover:text-gray-900'
             }`}
           >
-            Mentors &amp; Faculty ({teachers.length})
+            Faculty ({teachers.length})
           </button>
           <button
             type="button"
@@ -98,17 +117,17 @@ export default function StaffClientView({ staffList, teamList }: StaffClientView
           </button>
         </div>
 
-        {/* Search Input */}
+        {/* Search Input with Clear Button */}
         <div className="relative w-full sm:w-72">
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search by name, role, or subject..."
-            className="w-full pl-10 pr-4 py-2 text-sm bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-primary-color focus:bg-white transition"
+            className="w-full pl-10 pr-9 py-2.5 text-sm bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-primary-color focus:bg-white transition text-gray-900"
           />
           <svg
-            className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2"
+            className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -120,6 +139,15 @@ export default function StaffClientView({ staffList, teamList }: StaffClientView
               d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
             />
           </svg>
+          {searchQuery && (
+            <button
+              type="button"
+              onClick={() => setSearchQuery('')}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700 p-0.5 text-xs rounded-full"
+            >
+              ✕
+            </button>
+          )}
         </div>
       </div>
 
