@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Quicksand, Fredoka } from "next/font/google";
 import "./globals.css";
-import ClickSpark from "@/Components/ClickSpark";
+import ClickSpark from "@/components/ui/ClickSpark";
 
 const quicksand = Quicksand({
   variable: "--font-quicksand",

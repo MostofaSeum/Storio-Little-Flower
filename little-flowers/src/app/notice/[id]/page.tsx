@@ -1,13 +1,12 @@
 import React from 'react';
-import { headers } from 'next/headers';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { storio, StorioLayoutResponse, StorioNotice } from '@storio/template-sdk';
-import { LittleFlowersCustomizationConfig, StorioDynamicNavItem } from '@/data/storioExtendedTypes';
+import { storio, StorioNotice } from '@storio/template-sdk';
 import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
-import InteractiveHeader from '@/Components/InteractiveHeader';
-import Footer from '@/Components/Footer';
-import DynamicThemeStyles from '@/Components/DynamicThemeStyles';
+import { getTenantContext, getTemplateLayout } from '@/lib/storio';
+import InteractiveHeader from '@/components/layout/InteractiveHeader';
+import Footer from '@/components/layout/Footer';
+import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 
 interface NoticeDetailPageProps {
   params: Promise<{ id: string }>;
@@ -24,55 +23,18 @@ export async function generateMetadata({ params }: NoticeDetailPageProps) {
 export default async function NoticeDetailPage({ params }: NoticeDetailPageProps) {
   const { id } = await params;
 
-  // 1. Resolve host from incoming request
-  const headersList = await headers();
-  const rawHost = headersList.get('x-tenant-host') || headersList.get('host') || '';
-  const host = rawHost.split(':')[0];
+  // 1. Resolve host and tenant context
+  const { tenantHost, isStandalone } = await getTenantContext();
 
-  // 2. Check for linked tenant vs Standalone mode (Rule 1)
-  const linkedTenant = process.env.NEXT_PUBLIC_STORIO_TENANT_HOST;
-  const isLocalHost = host === 'localhost' || host === '127.0.0.1' || host === '::1';
-  const isStandalone = isLocalHost && !linkedTenant;
-  const tenantHost = linkedTenant || (isStandalone ? 'demo.storio.cloud' : host);
-
-  // 3. Fetch layout settings & notice detail via storio.getNoticeDetail(id)
-  const [rawLayout, rawNotice] = await Promise.all([
-    storio.getLayout(tenantHost),
+  // 2. Fetch layout and notice detail in parallel
+  const [templateLayout, rawNotice] = await Promise.all([
+    getTemplateLayout(tenantHost, isStandalone),
     storio.getNoticeDetail(id, tenantHost),
   ]);
 
-  // 4. Apply Rule 1 fallback
-  const layout: StorioLayoutResponse | null =
-    rawLayout ||
-    (isStandalone
-      ? {
-          settings: DEFAULT_DEMO_DATA.settings,
-          customization: { config: {} },
-          navigation: { items: [] },
-        }
-      : null);
+  const { settings, customization, navigation } = templateLayout;
 
-  const settings = layout?.settings || DEFAULT_DEMO_DATA.settings;
-
-  // Customization preferences
-  const customization: LittleFlowersCustomizationConfig = {
-    ...DEFAULT_DEMO_DATA.customization,
-    ...(layout?.customization?.config as LittleFlowersCustomizationConfig || {}),
-  };
-
-  // Dynamic Navigation menu items from Storio CMS
-  const cmsNavLinks =
-    (layout?.customization?.config?.navbarLinks as StorioDynamicNavItem[] | undefined) ||
-    layout?.navigation?.items;
-
-  const navigation: StorioDynamicNavItem[] =
-    Array.isArray(cmsNavLinks) && cmsNavLinks.length > 0
-      ? cmsNavLinks
-      : isStandalone
-        ? DEFAULT_DEMO_DATA.navigation
-        : [];
-
-  // Fallback to local demo notice if in Standalone mode
+  // 3. Fallback to local demo notice if in Standalone mode
   const demoNotice = DEFAULT_DEMO_DATA.notices.find(
     (n) => String(n.id) === String(id) || n.slug === id
   ) || DEFAULT_DEMO_DATA.notices[0];

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { StorioFaq } from '@/data/storioExtendedTypes';
-import SplitText from '@/Components/SplitText';
+import SplitText from '@/components/ui/SplitText';
 
 interface FaqSectionProps {
   faqs: StorioFaq[];

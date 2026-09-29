@@ -7,8 +7,8 @@ import {
   StorioAdmissionApplicationResponse,
 } from '@/data/storioExtendedTypes';
 import { storio } from '@storio/template-sdk';
-import SplitText from '@/Components/SplitText';
-import PartyPopperExplosion from '@/Components/PartyPopperExplosion';
+import SplitText from '@/components/ui/SplitText';
+import PartyPopperExplosion from '@/components/ui/PartyPopperExplosion';
 
 interface AdmissionPortalClientProps {
   formConfig: StorioAdmissionFormConfig;
