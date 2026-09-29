@@ -38,14 +38,14 @@ export default function ExamResultsClientView({ results }: ExamResultsClientView
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-5">
       {/* 3 Interactive Category Tabs (School, Public, Admission) */}
       <div className="flex justify-center">
-        <div className="inline-flex items-center p-1.5 bg-pastel-purple border border-purple-100 rounded-full shadow-xs gap-1.5">
+        <div className="inline-flex items-center p-1 bg-pastel-purple border border-purple-100 rounded-full shadow-xs gap-1">
           <button
             type="button"
             onClick={() => setActiveTab('school')}
-            className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold tracking-wide uppercase transition-all duration-300 flex items-center gap-2 ${
+            className={`px-4 py-2 rounded-full text-xs sm:text-sm font-bold tracking-wide uppercase transition-all duration-300 flex items-center gap-1.5 ${
               activeTab === 'school'
                 ? 'bg-primary-color text-white shadow-md'
                 : 'text-gray-600 hover:text-primary-color hover:bg-white/80'
