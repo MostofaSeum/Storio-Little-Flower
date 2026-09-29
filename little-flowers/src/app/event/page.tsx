@@ -144,10 +144,13 @@ export default async function EventsPage() {
                           <span className="text-xs font-bold text-secondary-color">
                             {year}
                           </span>
-                          <span className="inline-flex items-center gap-1 text-xs font-bold text-primary-color group-hover:text-accent-pink transition-colors">
-                            <span>Campus Event</span>
+                          <Link
+                            href={`/event/${event.id}`}
+                            className="inline-flex items-center gap-1 text-xs font-bold text-primary-color group-hover:text-accent-pink transition-colors"
+                          >
+                            <span>Event Details</span>
                             <span>→</span>
-                          </span>
+                          </Link>
                         </div>
                       </div>
                     </article>
