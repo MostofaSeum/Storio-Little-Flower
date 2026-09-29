@@ -7,6 +7,7 @@ import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
 import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
+import SplitText from '@/components/ui/SplitText';
 
 export const metadata = {
   title: 'Blog & Educational Stories — Little Flowers Kindergarten',
@@ -65,8 +66,17 @@ export default async function BlogPage() {
               <span>🌸</span>
               <span>Our Stories & Insights</span>
             </div>
-            <h1 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tight mb-4">
-              Stories, News &amp; Updates
+            <h1 className="text-3xl md:text-5xl font-extrabold text-primary-color tracking-tight mb-4 font-fredoka">
+              <SplitText
+                text="Stories, News & Updates"
+                tag="span"
+                splitType="chars"
+                delay={35}
+                duration={0.8}
+                ease="power3.out"
+                textAlign="center"
+                className="inline-block text-primary-color"
+              />
             </h1>
             <p className="text-gray-600 text-base md:text-lg">
               Explore insightful guides on early childhood development, exciting campus milestones, and classroom activities.
