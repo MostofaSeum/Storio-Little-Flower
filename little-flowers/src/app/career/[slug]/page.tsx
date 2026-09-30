@@ -84,7 +84,7 @@ export default async function CareerDetailPage({ params }: CareerDetailPageProps
               Home
             </Link>
             <span>/</span>
-            <Link href="/careers" className="hover:text-primary-color transition-colors">
+            <Link href="/career" className="hover:text-primary-color transition-colors">
               Careers
             </Link>
             <span>/</span>
@@ -221,7 +221,7 @@ export default async function CareerDetailPage({ params }: CareerDetailPageProps
           {/* Action Bar */}
           <div className="mt-10 pt-6 border-t border-purple-100 flex flex-wrap items-center justify-between gap-4">
             <Link
-              href="/careers"
+              href="/career"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-pastel-purple text-primary-color font-bold text-xs hover:bg-purple-100 transition-colors"
             >
               <span>← Back to All Openings</span>
