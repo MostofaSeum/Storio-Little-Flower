@@ -182,9 +182,10 @@ export default async function CareerDetailPage({ params }: CareerDetailPageProps
             </h2>
 
             {job.description ? (
-              <div className="text-gray-700 leading-relaxed font-quicksand text-base whitespace-pre-line">
-                {job.description}
-              </div>
+              <div
+                className="text-gray-700 leading-relaxed font-quicksand text-base prose prose-purple max-w-none [&_p]:mb-4 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_span]:text-inherit"
+                dangerouslySetInnerHTML={{ __html: job.description }}
+              />
             ) : (
               <p className="text-gray-400 italic">No specific description provided for this opening.</p>
             )}
