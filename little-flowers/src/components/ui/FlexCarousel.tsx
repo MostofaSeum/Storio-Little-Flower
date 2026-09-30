@@ -610,14 +610,17 @@ export const FlexCarousel = ({
         dispose: () => {}
       };
       const image = new Image();
-      image.crossOrigin = 'anonymous';
+      // Only set crossOrigin for external URLs to avoid CORS tainting on local domain paths
+      if (item.src && (item.src.startsWith('http://') || item.src.startsWith('https://'))) {
+        image.crossOrigin = 'anonymous';
+      }
       image.decoding = 'async';
       image.onload = () => {
         if (!alive || !slots.includes(slot)) return;
         texture.image = image;
         texture.update();
         slot.image = [image.naturalWidth || 1, image.naturalHeight || 1];
-        slot.aspect = slot.image[0] / slot.image[1];
+        slot.aspect = slot.image[0] / Math.max(slot.image[1], 1);
         try {
           const probe = document.createElement('canvas');
           probe.width = 8;
@@ -648,6 +651,10 @@ export const FlexCarousel = ({
         start();
       };
       image.src = item.src;
+      // If image is already cached and loaded synchronously
+      if (image.complete && image.naturalWidth > 0) {
+        image.onload(new Event('load'));
+      }
       slot.dispose = () => {
         image.onload = null;
         image.onerror = null;
