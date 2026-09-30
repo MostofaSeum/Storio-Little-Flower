@@ -2,11 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import {
-  StorioAdmissionFormConfig,
-  StorioAdmissionOTPResponse,
-  StorioAdmissionApplicationResponse,
+  StorioAdmissionFormConfig
 } from '@/data/storioExtendedTypes';
-import { storio } from '@storio/template-sdk';
 import SplitText from '@/components/ui/SplitText';
 import PartyPopperExplosion from '@/components/ui/PartyPopperExplosion';
 
@@ -224,8 +221,7 @@ export default function AdmissionPortalClient({
         setOtpSuccessMsg('Demo OTP code sent! Use "123456" to verify in standalone preview mode.');
         setCurrentStep(3);
       } else {
-        const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://api.storio.cloud';
-        const res = await fetch(`${baseUrl}/api/v2/template/admission/send-otp/`, {
+        const res = await fetch('/api/admission/send-otp', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -275,8 +271,7 @@ export default function AdmissionPortalClient({
         setOtpSuccessMsg('New demo verification code dispatched! Use 123456 to verify.');
         setResendCountdown(60);
       } else {
-        const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://api.storio.cloud';
-        const res = await fetch(`${baseUrl}/api/v2/template/admission/send-otp/`, {
+        const res = await fetch('/api/admission/send-otp', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -359,12 +354,11 @@ export default function AdmissionPortalClient({
         };
 
         // 1. Verify OTP first with the backend verify-otp endpoint
-        const verifyOtpRes = await fetch(`${baseUrl}/api/v2/template/admission/verify-otp/`, {
+        const verifyOtpRes = await fetch('/api/admission/verify-otp', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'x-tenant-host': tenantHost,
-            'X-Tenant-Host': tenantHost,
           },
           body: JSON.stringify({
             email: email,
@@ -386,12 +380,11 @@ export default function AdmissionPortalClient({
         }
 
         // 2. Submit Application once OTP has been verified
-        const submitResponse = await fetch(`${baseUrl}/api/v2/template/admission/applications/`, {
+        const submitResponse = await fetch('/api/admission/applications', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'x-tenant-host': tenantHost,
-            'X-Tenant-Host': tenantHost,
           },
           body: JSON.stringify({
             form_data: submissionFormData,
