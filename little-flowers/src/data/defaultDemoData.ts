@@ -525,7 +525,7 @@ export const DEFAULT_DEMO_DATA: {
       },
       {
         id: "guardian_email",
-        label: "Guardian Email (For OTP Verification)",
+        label: "Guardian Email",
         type: "email",
         required: true,
         placeholder: "guardian@example.com",

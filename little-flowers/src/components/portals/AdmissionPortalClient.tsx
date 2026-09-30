@@ -168,24 +168,37 @@ export default function AdmissionPortalClient({
     }
   };
 
+  // Helper to reliably find email from form data
+  const getApplicantEmail = (): string => {
+    const emailField = formConfig.fields?.find(
+      (f) =>
+        (f.label.toLowerCase().includes('email') || f.id.toLowerCase().includes('email')) &&
+        !f.label.toLowerCase().includes('name')
+    );
+    if (emailField && formData[emailField.id]?.trim()) {
+      return formData[emailField.id].trim();
+    }
+    return (formData['guardian_email'] || formData['email'] || '').trim();
+  };
+
   const handleProceedToOTP = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateStep(step2Fields)) return;
 
-    // Detect email from form data or dedicated guardian_email field
-    const emailField = formConfig.fields?.find(
+    // Check if formConfig has a native email field in its fields
+    const hasConfiguredEmail = formConfig.fields?.some(
       (f) =>
-        f.label.toLowerCase().includes('email') ||
-        f.id.toLowerCase().includes('email') ||
-        (f.type === 'email' && !f.label.toLowerCase().includes('name'))
+        (f.label.toLowerCase().includes('email') || f.id.toLowerCase().includes('email')) &&
+        !f.label.toLowerCase().includes('name')
     );
-    const email = emailField ? formData[emailField.id] : formData['guardian_email'] || formData['email'];
+
+    const email = getApplicantEmail();
 
     if (!email) {
-      // If the school's configured form doesn't have an email field, provide a prompt or use placeholder
       setErrors((prev) => ({
         ...prev,
-        [emailField?.id || 'guardian_email']: 'Email address is required for application confirmation code',
+        [hasConfiguredEmail ? (formConfig.fields?.find(f => f.label.toLowerCase().includes('email'))?.id || 'email') : 'guardian_email']:
+          'Email address is required to receive your application verification code.',
       }));
       return;
     }
@@ -237,13 +250,7 @@ export default function AdmissionPortalClient({
   const handleResendOTP = async () => {
     if (resendCountdown > 0 || resending) return;
 
-    const emailField = formConfig.fields?.find(
-      (f) =>
-        f.label.toLowerCase().includes('email') ||
-        f.id.toLowerCase().includes('email') ||
-        (f.type === 'email' && !f.label.toLowerCase().includes('name'))
-    );
-    const email = emailField ? formData[emailField.id] : formData['guardian_email'] || formData['email'];
+    const email = getApplicantEmail();
 
     if (!email) return;
 
@@ -301,13 +308,7 @@ export default function AdmissionPortalClient({
         }
       } else {
         // 1. Verify OTP
-        const emailField = formConfig.fields?.find(
-          (f) =>
-            f.label.toLowerCase().includes('email') ||
-            f.id.toLowerCase().includes('email') ||
-            (f.type === 'email' && !f.label.toLowerCase().includes('name'))
-        );
-        const email = emailField ? formData[emailField.id] : formData['guardian_email'] || formData['email'];
+        const email = getApplicantEmail();
 
         const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://api.storio.cloud';
 
@@ -689,14 +690,17 @@ export default function AdmissionPortalClient({
 
               {/* Ensure an email input exists if tenant config didn't include one */}
               {!formConfig.fields?.some(
-                (f) => f.type === 'email' || `${f.id} ${f.label}`.toLowerCase().includes('email')
+                (f) =>
+                  (f.label.toLowerCase().includes('email') || f.id.toLowerCase().includes('email')) &&
+                  !f.label.toLowerCase().includes('name')
               ) && (
                 <div>
                   <label className="block text-xs font-bold text-gray-700 mb-1.5 uppercase tracking-wide">
-                    Guardian Email (for verification code) <span className="text-accent-pink">*</span>
+                    Guardian Email <span className="text-accent-pink">*</span>
                   </label>
                   <input
                     type="email"
+                    required
                     value={formData['guardian_email'] || ''}
                     onChange={(e) => handleInputChange('guardian_email', e.target.value)}
                     placeholder="e.g. parent@example.com"
@@ -756,7 +760,7 @@ export default function AdmissionPortalClient({
                 <p className="text-xs text-gray-600 font-medium leading-relaxed">
                   We sent a 6-digit confirmation code to{' '}
                   <strong className="text-gray-900 font-bold">
-                    {formData['guardian_email'] || formData['email']}
+                    {getApplicantEmail()}
                   </strong>.
                 </p>
                 <button
