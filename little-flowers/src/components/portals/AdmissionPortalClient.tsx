@@ -174,7 +174,10 @@ export default function AdmissionPortalClient({
 
     // Detect email from form data or dedicated guardian_email field
     const emailField = formConfig.fields?.find(
-      (f) => f.type === 'email' || `${f.id} ${f.label}`.toLowerCase().includes('email')
+      (f) =>
+        f.label.toLowerCase().includes('email') ||
+        f.id.toLowerCase().includes('email') ||
+        (f.type === 'email' && !f.label.toLowerCase().includes('name'))
     );
     const email = emailField ? formData[emailField.id] : formData['guardian_email'] || formData['email'];
 
@@ -235,7 +238,10 @@ export default function AdmissionPortalClient({
     if (resendCountdown > 0 || resending) return;
 
     const emailField = formConfig.fields?.find(
-      (f) => f.type === 'email' || `${f.id} ${f.label}`.toLowerCase().includes('email')
+      (f) =>
+        f.label.toLowerCase().includes('email') ||
+        f.id.toLowerCase().includes('email') ||
+        (f.type === 'email' && !f.label.toLowerCase().includes('name'))
     );
     const email = emailField ? formData[emailField.id] : formData['guardian_email'] || formData['email'];
 
@@ -296,7 +302,10 @@ export default function AdmissionPortalClient({
       } else {
         // 1. Verify OTP
         const emailField = formConfig.fields?.find(
-          (f) => f.type === 'email' || `${f.id} ${f.label}`.toLowerCase().includes('email')
+          (f) =>
+            f.label.toLowerCase().includes('email') ||
+            f.id.toLowerCase().includes('email') ||
+            (f.type === 'email' && !f.label.toLowerCase().includes('name'))
         );
         const email = emailField ? formData[emailField.id] : formData['guardian_email'] || formData['email'];
 
@@ -534,12 +543,20 @@ export default function AdmissionPortalClient({
                       inputMode="numeric"
                       value={formData[field.id] || ''}
                       onChange={(e) => handlePhoneChange(field.id, e.target.value)}
-                      placeholder={field.placeholder || `Enter ${field.label} (numbers only)`}
+                      placeholder={field.placeholder || `Enter ${field.label}`}
                       className="w-full px-4 py-3 bg-pastel-purple rounded-2xl border border-purple-100 focus:border-primary-color focus:bg-white focus:outline-none focus:ring-4 focus:ring-purple-100 text-sm font-semibold text-gray-800 transition-all"
                     />
                   ) : (
                     <input
-                      type={field.type || 'text'}
+                      type={
+                        field.label.toLowerCase().includes('email') || (field.type === 'email' && !field.label.toLowerCase().includes('name'))
+                          ? 'email'
+                          : field.type === 'number'
+                          ? 'number'
+                          : field.type === 'date'
+                          ? 'date'
+                          : 'text'
+                      }
                       value={formData[field.id] || ''}
                       onChange={(e) => handleInputChange(field.id, e.target.value)}
                       placeholder={field.placeholder || `Enter ${field.label}`}
@@ -641,12 +658,20 @@ export default function AdmissionPortalClient({
                       inputMode="numeric"
                       value={formData[field.id] || ''}
                       onChange={(e) => handlePhoneChange(field.id, e.target.value)}
-                      placeholder={field.placeholder || `Enter ${field.label} (numbers only)`}
+                      placeholder={field.placeholder || `Enter ${field.label}`}
                       className="w-full px-4 py-3 bg-pastel-purple rounded-2xl border border-purple-100 focus:border-primary-color focus:bg-white focus:outline-none focus:ring-4 focus:ring-purple-100 text-sm font-semibold text-gray-800 transition-all"
                     />
                   ) : (
                     <input
-                      type={field.type || 'text'}
+                      type={
+                        field.label.toLowerCase().includes('email') || (field.type === 'email' && !field.label.toLowerCase().includes('name'))
+                          ? 'email'
+                          : field.type === 'number'
+                          ? 'number'
+                          : field.type === 'date'
+                          ? 'date'
+                          : 'text'
+                      }
                       value={formData[field.id] || ''}
                       onChange={(e) => handleInputChange(field.id, e.target.value)}
                       placeholder={field.placeholder || `Enter ${field.label}`}
