@@ -33,38 +33,28 @@ export default function ContactFormClient({ settings, tenantHost }: ContactFormC
     setErrorMessage('');
 
     try {
-      const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://api.storio.cloud';
-      
-      // Submit to backend contact API
-      const res = await fetch(`${baseUrl}/api/v2/template/contact/`, {
+      const res = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-Tenant-Host': tenantHost,
+          'x-tenant-host': tenantHost,
         },
         body: JSON.stringify(formData),
       });
+
+      const data = await res.json().catch(() => null);
 
       if (res.ok) {
         setStatus('success');
         setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
       } else {
-        // Fallback for standalone/mock or custom endpoint
-        if (res.status === 404 || res.status === 405) {
-          // If server template endpoint is in transition, treat verified submission smoothly for the user
-          setStatus('success');
-          setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
-          return;
-        }
-        const data = await res.json().catch(() => null);
-        const err = data?.message || data?.detail || 'Failed to submit message. Please try again.';
+        const err = data?.error || data?.message || data?.detail || `Failed to submit message (${res.status}).`;
         setErrorMessage(err);
         setStatus('error');
       }
-    } catch {
-      // If network offline or dev mock, simulate smooth success
-      setStatus('success');
-      setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+    } catch (err: any) {
+      setErrorMessage(err?.message || 'Network error. Please check your connection and try again.');
+      setStatus('error');
     }
   };
 
