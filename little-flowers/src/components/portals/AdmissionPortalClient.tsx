@@ -94,19 +94,30 @@ export default function AdmissionPortalClient({
     }
   };
 
-  // Group fields dynamically:
+  // Group fields dynamically and ensure photo/image uploads are optional:
   // Step 1: Little Learner's profile (only learner's name, photo, birth date, gender, applied class)
   // Step 2: Parents & Contact details (Phone, Father's Name, Mother's Name, Email, Address, Notes)
-  const hasExplicitSteps = formConfig.fields?.some((f) => typeof f.step === 'number');
+  const normalizedFields = (formConfig.fields || []).map((f) => {
+    const isPhotoField =
+      f.type === 'image' ||
+      f.id.toLowerCase().includes('photo') ||
+      f.label.toLowerCase().includes('photo');
+    if (isPhotoField) {
+      return { ...f, required: false };
+    }
+    return f;
+  });
+
+  const hasExplicitSteps = normalizedFields.some((f) => typeof f.step === 'number');
 
   let step1Fields: typeof formConfig.fields = [];
   let step2Fields: typeof formConfig.fields = [];
 
   if (hasExplicitSteps) {
-    step1Fields = (formConfig.fields || []).filter((f) => f.step === 1);
-    step2Fields = (formConfig.fields || []).filter((f) => f.step === 2);
+    step1Fields = normalizedFields.filter((f) => f.step === 1);
+    step2Fields = normalizedFields.filter((f) => f.step === 2);
   } else {
-    const allFields = formConfig.fields || [];
+    const allFields = normalizedFields;
 
     // Filter Step 1 strictly to learner details (excluding phone, contact, father, mother, guardian)
     step1Fields = allFields.filter((f) => {
