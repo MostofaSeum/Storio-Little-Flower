@@ -2,7 +2,7 @@ import React from 'react';
 import { storio } from '@storio/template-sdk';
 import { StorioAdmissionFormConfig } from '@/types';
 import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
-import { getTenantContext, getTemplateLayout } from '@/lib/storio';
+import { getTenantContext, getTemplateLayout, getAdmissionFormConfig } from '@/lib/storio';
 import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
 import AdmissionPortalClient from '@/components/portals/AdmissionPortalClient';
@@ -24,10 +24,7 @@ export default async function AdmissionPage() {
   );
 
   // 3. Fetch admission form config
-  const rawFormConfig = await storio.apiFetch<StorioAdmissionFormConfig>(
-    '/api/v2/template/admission/form-config/current/',
-    { tenantHost }
-  );
+  const rawFormConfig = await getAdmissionFormConfig(tenantHost).catch(() => null);
 
   // 4. Apply Rule 1 fallback
   const formConfig: StorioAdmissionFormConfig =

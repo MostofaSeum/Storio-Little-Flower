@@ -82,3 +82,45 @@ export async function getTemplateLayout(tenantHost: string, isStandalone: boolea
 
 export * from './media';
 
+// --- Storio Admission & Contact API Helpers ---
+
+export async function getAdmissionFormConfig(tenantHost: string) {
+  return storio.apiFetch<any>('/api/v2/template/admission/form-config/current/', { tenantHost });
+}
+
+export async function sendAdmissionOTP(email: string, tenantHost: string) {
+  return storio.apiFetch<any>('/api/v2/template/admission/send-otp/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email }),
+    tenantHost,
+  });
+}
+
+export async function verifyAdmissionOTP(email: string, otpCode: string, tenantHost: string) {
+  return storio.apiFetch<any>('/api/v2/template/admission/verify-otp/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, otp_code: otpCode }),
+    tenantHost,
+  });
+}
+
+export async function submitAdmissionApplication(formData: Record<string, any>, otpCode: string, tenantHost: string) {
+  return storio.apiFetch<any>('/api/v2/template/admission/applications/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ form_data: formData, otp_code: otpCode }),
+    tenantHost,
+  });
+}
+
+export async function submitContactMessage(formData: Record<string, any>, tenantHost?: string) {
+  return storio.apiFetch<any>('/api/v2/template/contact/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(formData),
+    tenantHost,
+  });
+}
+
