@@ -1,12 +1,12 @@
 'use client';
 
 import React, { useState } from 'react';
-import { StorioStaffMember } from '@storio/template-sdk';
+import { StorioStaffMember, StorioTeamMember } from '@/types';
 import { getStaffMemberPhoto } from '@/lib/media';
 
 interface StaffClientViewProps {
   staffList: StorioStaffMember[];
-  teamList: StorioStaffMember[];
+  teamList: (StorioStaffMember | StorioTeamMember)[];
   initialTab?: 'all' | 'teachers' | 'leadership';
 }
 
@@ -43,12 +43,12 @@ export default function StaffClientView({
 
   const leadership = teamList.map((t) => {
     const raw = t as unknown as Record<string, unknown>;
-    const name = String(t.name || raw.fullname || raw.title || 'Board Member');
-    const role = String(t.designation || raw.role || raw.position || '');
-    const dept = String(raw.section_name || raw.department_name || (isNaN(Number(t.department)) ? t.department : '') || 'Governing Body');
-    const bio = String(t.bio || raw.experience || '');
-    const email = String(t.email || '');
-    const phone = String(t.phone_number || raw.phone || '');
+    const name = String(raw.fullname || raw.name || raw.title || 'Board Member');
+    const role = String(raw.designation || raw.role || raw.position || '');
+    const dept = String(raw.section_name || raw.department_name || (isNaN(Number(raw.department)) ? raw.department : '') || 'Governing Body');
+    const bio = String(raw.experience || raw.bio || '');
+    const email = String(raw.email || '');
+    const phone = String(raw.phone || raw.phone_number || '');
 
     return {
       ...t,

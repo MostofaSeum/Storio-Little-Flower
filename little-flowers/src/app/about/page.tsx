@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { storio, StorioStaffMember } from '@storio/template-sdk';
+import { StorioTeamMember } from '@/types';
 import { getTenantContext, getTemplateLayout } from '@/lib/storio';
 import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
 import { getStaffMemberPhoto } from '@/lib/media';
@@ -58,7 +59,7 @@ export default async function AboutPage() {
         ? DEFAULT_DEMO_DATA.staff || []
         : [];
 
-  const teamList: StorioStaffMember[] =
+  const teamList: (StorioStaffMember | StorioTeamMember)[] =
     Array.isArray(rawTeam) && rawTeam.length > 0
       ? rawTeam
       : isStandalone
@@ -169,10 +170,10 @@ export default async function AboutPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {teamList.map((member, idx) => {
                   const raw = member as unknown as Record<string, unknown>;
-                  const name = String(member.name || raw.fullname || 'Board Member');
-                  const role = String(member.designation || raw.role || 'Executive Member');
+                  const name = String(raw.fullname || raw.name || 'Board Member');
+                  const role = String(raw.designation || raw.role || 'Executive Member');
                   const section = String(raw.section_name || 'Governing Body');
-                  const bio = String(member.bio || raw.experience || '');
+                  const bio = String(raw.experience || raw.bio || '');
                   const photo = getStaffMemberPhoto(member);
 
                   return (

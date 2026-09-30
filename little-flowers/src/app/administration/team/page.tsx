@@ -1,5 +1,6 @@
 import React from 'react';
 import { storio, StorioStaffMember } from '@storio/template-sdk';
+import { StorioTeamMember } from '@/types';
 import { getTenantContext, getTemplateLayout } from '@/lib/storio';
 import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
 import InteractiveHeader from '@/components/layout/InteractiveHeader';
@@ -29,7 +30,7 @@ export default async function CommitteeMembersPage() {
         ? DEFAULT_DEMO_DATA.staff || []
         : [];
 
-  const teamList: StorioStaffMember[] =
+  const teamList: (StorioStaffMember | StorioTeamMember)[] =
     Array.isArray(rawTeam) && rawTeam.length > 0
       ? rawTeam
       : isStandalone
