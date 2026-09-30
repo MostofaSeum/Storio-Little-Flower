@@ -132,4 +132,118 @@ export async function getPageBySlug(slug: string, tenantHost: string) {
   return storio.getPageBySlug(slug, tenantHost);
 }
 
+// --- Direct Storio SDK Method Wrappers & Named Helpers ---
+
+export async function getSettings(tenantHost: string) {
+  return storio.getSettings(tenantHost);
+}
+
+export async function getCustomization(tenantHost: string) {
+  return storio.getCustomization(tenantHost);
+}
+
+export async function getNavigation(tenantHost: string) {
+  return storio.getNavigation(tenantHost);
+}
+
+export async function getLayout(tenantHost: string) {
+  return storio.getLayout(tenantHost);
+}
+
+export async function getInstitutionProfile(tenantHost: string) {
+  return storio.apiFetch<any>('/api/v2/template/institution-profile/', { tenantHost });
+}
+
+export async function getHeroSlides(tenantHost: string) {
+  return storio.getHeroSlides(tenantHost);
+}
+
+export async function getNotices(tenantHost: string) {
+  return storio.getNotices(tenantHost);
+}
+
+export async function getNoticeDetail(id: number | string, tenantHost: string) {
+  return storio.getNoticeDetail(id, tenantHost);
+}
+
+export async function getBlogs(tenantHost: string) {
+  return storio.getBlogs(tenantHost);
+}
+
+export async function getBlogDetail(slug: string, tenantHost: string) {
+  return storio.getBlogDetail(slug, tenantHost);
+}
+
+export async function getStaff(tenantHost: string) {
+  return storio.getStaff(tenantHost);
+}
+
+export async function getTeam(tenantHost: string) {
+  return storio.getTeam(tenantHost);
+}
+
+export async function getGallery(tenantHost: string) {
+  return storio.getGallery(tenantHost);
+}
+
+export async function getAlbums(tenantHost: string) {
+  return storio.getAlbums(tenantHost);
+}
+
+export async function getActivities(tenantHost: string) {
+  return storio.apiFetch<any[]>('/api/v2/template/activities/', { tenantHost });
+}
+
+export async function getActivityDetail(slug: string, tenantHost: string) {
+  return storio.apiFetch<any>(`/api/v2/template/activities/${slug}/`, { tenantHost });
+}
+
+export async function getEvents(tenantHost: string) {
+  return storio.apiFetch<any[]>('/api/events/', { tenantHost });
+}
+
+export async function getEventDetail(slugOrId: string | number, tenantHost: string) {
+  return storio.apiFetch<any>(`/api/events/${slugOrId}/`, { tenantHost });
+}
+
+export async function getTestimonials(tenantHost: string) {
+  return storio.apiFetch<any[]>('/api/v2/template/testimonials/', { tenantHost });
+}
+
+export async function getLeadershipMessages(tenantHost: string) {
+  return storio.apiFetch<any[]>('/api/v2/template/leadership-messages/', { tenantHost });
+}
+
+export async function getPromotions(tenantHost: string) {
+  return storio.apiFetch<any[]>('/api/v2/template/promotions/', { tenantHost });
+}
+
+export async function getImportantLinks(tenantHost: string) {
+  return storio.apiFetch<any[]>('/api/v2/template/important-links/', { tenantHost });
+}
+
+export async function getFaqs(tenantHost: string) {
+  return storio.apiFetch<any[]>('/api/v2/template/faqs/', { tenantHost });
+}
+
+export async function getVideos(tenantHost: string) {
+  return storio.apiFetch<any[]>('/api/v2/template/reels/', { tenantHost });
+}
+
+export async function getCalendarEvents(tenantHost: string) {
+  return storio.apiFetch<any[]>('/api/v2/template/calendar/', { tenantHost });
+}
+
+export async function getExamResults(tenantHost: string) {
+  return storio.apiFetch<any[]>('/api/v2/template/exam-results/', { tenantHost });
+}
+
+export async function getCareers(tenantHost: string) {
+  return storio.apiFetch<any[]>('/api/v2/template/careers/jobs/', { tenantHost });
+}
+
+export async function getJobDetail(slug: string, tenantHost: string) {
+  return storio.apiFetch<any>(`/api/v2/template/careers/jobs/${slug}/`, { tenantHost });
+}
+
 

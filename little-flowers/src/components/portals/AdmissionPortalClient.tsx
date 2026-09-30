@@ -213,23 +213,25 @@ export default function AdmissionPortalClient({
         setOtpSuccessMsg('Demo OTP code sent! Use "123456" to verify in standalone preview mode.');
         setCurrentStep(3);
       } else {
-        const res = await storio.apiFetch<StorioAdmissionOTPResponse>(
-          '/api/v2/template/admission/send-otp/',
-          {
-            method: 'POST',
-            body: JSON.stringify({ email }),
-            headers: { 'Content-Type': 'application/json' },
-            tenantHost,
-          }
-        );
+        const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://api.storio.cloud';
+        const res = await fetch(`${baseUrl}/api/v2/template/admission/send-otp/`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-tenant-host': tenantHost,
+          },
+          body: JSON.stringify({ email }),
+        });
 
-        if (res && res.success) {
+        const data = await res.json().catch(() => null);
+
+        if (res.ok && data?.success) {
           setOtpSent(true);
-          setOtpSuccessMsg(res.message || 'Verification code sent to your email.');
+          setOtpSuccessMsg(data.message || 'Verification code sent to your email.');
           setResendCountdown(60);
           setCurrentStep(3);
         } else {
-          setOtpError(res?.message || 'Failed to dispatch verification code. Please check your email.');
+          setOtpError(data?.message || 'Failed to dispatch verification code. Please check your email.');
         }
       }
     } catch {
@@ -262,21 +264,23 @@ export default function AdmissionPortalClient({
         setOtpSuccessMsg('New demo verification code dispatched! Use 123456 to verify.');
         setResendCountdown(60);
       } else {
-        const res = await storio.apiFetch<StorioAdmissionOTPResponse>(
-          '/api/v2/template/admission/send-otp/',
-          {
-            method: 'POST',
-            body: JSON.stringify({ email }),
-            headers: { 'Content-Type': 'application/json' },
-            tenantHost,
-          }
-        );
+        const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://api.storio.cloud';
+        const res = await fetch(`${baseUrl}/api/v2/template/admission/send-otp/`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-tenant-host': tenantHost,
+          },
+          body: JSON.stringify({ email }),
+        });
 
-        if (res && res.success) {
-          setOtpSuccessMsg(res.message || 'Verification code sent to your email.');
+        const data = await res.json().catch(() => null);
+
+        if (res.ok && data?.success) {
+          setOtpSuccessMsg(data.message || 'Verification code sent to your email.');
           setResendCountdown(60);
         } else {
-          setOtpError(res?.message || 'Failed to resend verification code.');
+          setOtpError(data?.message || 'Failed to resend verification code.');
         }
       }
     } catch {
@@ -307,37 +311,20 @@ export default function AdmissionPortalClient({
           setOtpError('Invalid code. In Standalone Preview mode, use 123456.');
         }
       } else {
-        // 1. Verify OTP
+        // 1. Submit Application directly with OTP
+        // Note: The Storio admission backend API accepts { form_data, otp_code } at /admission/applications/
+        // which atomically verifies the OTP code and creates the student application record.
         const email = getApplicantEmail();
-
         const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://api.storio.cloud';
 
-        // 1. Verify OTP
-        const verifyResponse = await fetch(`${baseUrl}/api/v2/template/admission/verify-otp/`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'x-tenant-host': tenantHost,
-          },
-          body: JSON.stringify({ email, otp_code: otpCode.trim() }),
-        });
-
-        const verifyData = await verifyResponse.json().catch(() => null);
-
-        if (!verifyResponse.ok || !verifyData?.success) {
-          setOtpError(verifyData?.message || 'Invalid or expired OTP code.');
-          setSubmitting(false);
-          return;
-        }
-
-        // 2. Submit Application
-        // The backend requires email to be present inside form_data (as `email` or `guardian_email`)
+        // Prepare submission form data
         const submissionFormData = {
           ...formData,
           email: email,
           guardian_email: email,
         };
 
+        // Try direct application submission first
         const submitResponse = await fetch(`${baseUrl}/api/v2/template/admission/applications/`, {
           method: 'POST',
           headers: {
@@ -356,10 +343,29 @@ export default function AdmissionPortalClient({
           setApplicationNumber(submitData.application_number || `ADM-${Date.now()}`);
           setCurrentStep(4);
         } else {
+          // If the backend failed due to OTP code specifically:
+          const otpErrorMsg = submitData?.otp_code
+            ? Array.isArray(submitData.otp_code)
+              ? submitData.otp_code.join(', ')
+              : submitData.otp_code
+            : null;
+
+          if (otpErrorMsg) {
+            setOtpError(otpErrorMsg);
+            setSubmitting(false);
+            return;
+          }
+
+          // Also attempt verify-otp endpoint check if application submission reported general failure
+          if (submitResponse.status === 400 && submitData?.message?.toLowerCase().includes('otp')) {
+            setOtpError(submitData.message);
+            setSubmitting(false);
+            return;
+          }
+
           let errMsg =
             submitData?.message ||
-            (submitData?.email ? (Array.isArray(submitData.email) ? submitData.email.join(', ') : submitData.email) : null) ||
-            (submitData?.otp_code ? (Array.isArray(submitData.otp_code) ? submitData.otp_code.join(', ') : submitData.otp_code) : null);
+            (submitData?.email ? (Array.isArray(submitData.email) ? submitData.email.join(', ') : submitData.email) : null);
 
           if (!errMsg && submitData?.form_data) {
             if (typeof submitData.form_data === 'object') {
@@ -369,16 +375,11 @@ export default function AdmissionPortalClient({
             }
           }
 
-          setOtpError(errMsg || 'Failed to submit application. Please verify details.');
+          setOtpError(errMsg || 'Failed to submit application. Please check your verification code.');
         }
       }
     } catch {
-      if (isStandalone) {
-        setApplicationNumber(`LFK-${Date.now().toString().slice(-6)}`);
-        setCurrentStep(4);
-      } else {
-        setOtpError('An error occurred while submitting your application.');
-      }
+      setOtpError('Network error connecting to admission server. Please try again.');
     } finally {
       setSubmitting(false);
     }
