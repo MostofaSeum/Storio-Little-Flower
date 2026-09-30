@@ -89,55 +89,59 @@ export default function ContactFormClient({ settings, tenantHost }: ContactFormC
 
           <div className="space-y-4 pt-2">
             {/* Address */}
-            <div className="flex items-start gap-4 p-5 rounded-3xl bg-pastel-purple/50 border border-purple-100">
-              <div className="w-12 h-12 rounded-2xl bg-white shadow-2xs flex items-center justify-center text-xl shrink-0 text-primary-color">
-                📍
+            {settings?.mailing_address && (
+              <div className="flex items-start gap-4 p-5 rounded-3xl bg-pastel-purple/50 border border-purple-100">
+                <div className="w-12 h-12 rounded-2xl bg-white shadow-2xs flex items-center justify-center text-xl shrink-0 text-primary-color">
+                  📍
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold font-fredoka text-gray-900">Campus Location</h3>
+                  <p className="text-xs text-gray-600 font-quicksand mt-0.5 leading-relaxed">
+                    {settings.mailing_address}
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-sm font-bold font-fredoka text-gray-900">Campus Location</h3>
-                <p className="text-xs text-gray-600 font-quicksand mt-0.5 leading-relaxed">
-                  {settings?.mailing_address || '74 Blossom Street, Sunshine Valley'}
-                </p>
-              </div>
-            </div>
+            )}
 
             {/* Phone */}
-            <div className="flex items-start gap-4 p-5 rounded-3xl bg-pastel-purple/50 border border-purple-100">
-              <div className="w-12 h-12 rounded-2xl bg-white shadow-2xs flex items-center justify-center text-xl shrink-0 text-accent-pink">
-                📞
+            {settings?.phone_number && (
+              <div className="flex items-start gap-4 p-5 rounded-3xl bg-pastel-purple/50 border border-purple-100">
+                <div className="w-12 h-12 rounded-2xl bg-white shadow-2xs flex items-center justify-center text-xl shrink-0 text-accent-pink">
+                  📞
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold font-fredoka text-gray-900">Phone</h3>
+                  <p className="text-xs text-gray-600 font-quicksand mt-0.5">
+                    <a
+                      href={`tel:${settings.phone_number}`}
+                      className="hover:text-primary-color transition-colors font-medium"
+                    >
+                      {settings.phone_number}
+                    </a>
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-sm font-bold font-fredoka text-gray-900">Direct Phone Line</h3>
-                <p className="text-xs text-gray-600 font-quicksand mt-0.5">
-                  <a
-                    href={`tel:${settings?.phone_number || '+18888567890'}`}
-                    className="hover:text-primary-color transition-colors font-medium"
-                  >
-                    {settings?.phone_number || '+1 8 888 567.890.03'}
-                  </a>
-                </p>
-                <span className="text-[11px] text-gray-400 block mt-0.5">Mon – Fri, 8:00 AM – 3:00 PM</span>
-              </div>
-            </div>
+            )}
 
             {/* Email */}
-            <div className="flex items-start gap-4 p-5 rounded-3xl bg-pastel-purple/50 border border-purple-100">
-              <div className="w-12 h-12 rounded-2xl bg-white shadow-2xs flex items-center justify-center text-xl shrink-0 text-secondary-color">
-                ✉️
+            {settings?.contact_email && (
+              <div className="flex items-start gap-4 p-5 rounded-3xl bg-pastel-purple/50 border border-purple-100">
+                <div className="w-12 h-12 rounded-2xl bg-white shadow-2xs flex items-center justify-center text-xl shrink-0 text-secondary-color">
+                  ✉️
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold font-fredoka text-gray-900">Email</h3>
+                  <p className="text-xs text-gray-600 font-quicksand mt-0.5">
+                    <a
+                      href={`mailto:${settings.contact_email}`}
+                      className="hover:text-primary-color transition-colors font-medium"
+                    >
+                      {settings.contact_email}
+                    </a>
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-sm font-bold font-fredoka text-gray-900">Email Inquiries</h3>
-                <p className="text-xs text-gray-600 font-quicksand mt-0.5">
-                  <a
-                    href={`mailto:${settings?.contact_email || 'info@littleflowers.edu'}`}
-                    className="hover:text-primary-color transition-colors font-medium"
-                  >
-                    {settings?.contact_email || 'info@littleflowers.edu'}
-                  </a>
-                </p>
-                <span className="text-[11px] text-gray-400 block mt-0.5">We respond within 24 business hours</span>
-              </div>
-            </div>
+            )}
           </div>
         </div>
 
@@ -227,21 +231,16 @@ export default function ContactFormClient({ settings, tenantHost }: ContactFormC
 
                 <div>
                   <label className="block text-xs font-bold text-gray-700 mb-1.5">
-                    Inquiry Topic
+                    Subject / Topic
                   </label>
-                  <select
+                  <input
+                    type="text"
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
+                    placeholder="Subject of your message"
                     className="w-full px-4 py-3 rounded-2xl bg-purple-50/50 border border-purple-100 focus:outline-none focus:border-primary-color text-sm text-gray-900 transition-colors"
-                  >
-                    <option value="">Select Topic...</option>
-                    <option value="Admission & Enrollment">Admission & Enrollment</option>
-                    <option value="Tuition & Fee Structure">Tuition & Fee Structure</option>
-                    <option value="Campus Tour Request">Campus Tour Request</option>
-                    <option value="Academic Curriculum">Academic Curriculum</option>
-                    <option value="General Inquiry">General Inquiry</option>
-                  </select>
+                  />
                 </div>
               </div>
 
