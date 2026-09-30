@@ -3,6 +3,7 @@ import { getTenantContext, getTemplateLayout } from '@/lib/storio';
 import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
+import SplitText from '@/components/ui/SplitText';
 import ContactFormClient from '@/components/sections/ContactFormClient';
 
 export const metadata = {
@@ -29,9 +30,12 @@ export default async function ContactPage() {
             </span>
 
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight">
-              <span className="inline-block text-primary-color">
-                Contact Our Campus
-              </span>
+              <SplitText
+                text="Contact Our Campus"
+                className="inline-block text-primary-color"
+                tag="span"
+                triggerOnMount={true}
+              />
             </h1>
 
             <p className="mt-3 text-sm sm:text-base text-gray-600 leading-relaxed font-quicksand max-w-2xl mx-auto">
