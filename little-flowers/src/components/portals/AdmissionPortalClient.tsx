@@ -471,8 +471,8 @@ export default function AdmissionPortalClient({
       </div>
 
       {/* 2. Visual Stepper Bar */}
-      <div className="mb-12 bg-white rounded-3xl p-4 sm:p-6 border border-purple-100 shadow-sm print:hidden">
-        <div className="grid grid-cols-4 gap-2 sm:gap-4 relative">
+      <div className="mb-8 sm:mb-12 bg-white rounded-3xl p-3 sm:p-6 border border-purple-100 shadow-sm print:hidden">
+        <div className="grid grid-cols-4 gap-1.5 sm:gap-4 relative">
           {steps.map((st) => {
             const isCompleted = currentStep > st.num;
             const isCurrent = currentStep === st.num;
@@ -480,18 +480,18 @@ export default function AdmissionPortalClient({
             return (
               <div key={st.num} className="flex flex-col items-center text-center relative z-10">
                 <div
-                  className={`w-10 h-10 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center font-bold text-sm sm:text-base transition-all duration-300 shadow-xs ${
+                  className={`w-8 h-8 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center font-bold text-xs sm:text-base transition-all duration-300 shadow-xs ${
                     isCompleted
                       ? 'bg-accent-green text-white scale-95'
                       : isCurrent
-                        ? 'bg-primary-color text-white scale-105 shadow-md ring-4 ring-purple-100'
+                        ? 'bg-primary-color text-white scale-105 shadow-md ring-2 sm:ring-4 ring-purple-100'
                         : 'bg-pastel-purple text-gray-400'
                   }`}
                 >
                   {isCompleted ? '✓' : st.num}
                 </div>
                 <span
-                  className={`text-[11px] sm:text-xs font-bold mt-2 truncate w-full ${
+                  className={`text-[10px] sm:text-xs font-bold mt-1.5 sm:mt-2 truncate w-full ${
                     isCurrent
                       ? 'text-primary-color font-black'
                       : isCompleted
@@ -633,7 +633,7 @@ export default function AdmissionPortalClient({
             <div className="pt-6 flex justify-end">
               <button
                 type="submit"
-                className="px-8 py-3.5 bg-primary-color hover:opacity-95 text-white font-extrabold text-sm rounded-full shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 inline-flex items-center gap-2 cursor-pointer"
+                className="w-full sm:w-auto px-8 py-3.5 bg-primary-color hover:opacity-95 text-white font-extrabold text-sm rounded-full shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 inline-flex items-center justify-center gap-2 cursor-pointer"
               >
                 <span>Continue to Parent Details</span>
               </button>
@@ -777,11 +777,11 @@ export default function AdmissionPortalClient({
               </div>
             )}
 
-            <div className="pt-6 flex items-center justify-between">
+            <div className="pt-6 flex flex-col-reverse sm:flex-row items-center justify-between gap-3 sm:gap-4">
               <button
                 type="button"
                 onClick={() => setCurrentStep(1)}
-                className="px-6 py-3 border border-purple-200 text-gray-600 hover:bg-purple-50 font-bold text-xs rounded-full transition-all cursor-pointer"
+                className="w-full sm:w-auto px-6 py-3 border border-purple-200 text-gray-600 hover:bg-purple-50 font-bold text-xs rounded-full transition-all cursor-pointer text-center"
               >
                 Back
               </button>
@@ -789,7 +789,7 @@ export default function AdmissionPortalClient({
               <button
                 type="submit"
                 disabled={otpLoading}
-                className="px-8 py-3.5 bg-secondary-color hover:opacity-95 text-white font-extrabold text-sm rounded-full shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 inline-flex items-center gap-2 cursor-pointer disabled:opacity-50"
+                className="w-full sm:w-auto px-8 py-3.5 bg-secondary-color hover:opacity-95 text-white font-extrabold text-sm rounded-full shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 inline-flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 text-center"
               >
                 {otpLoading ? (
                   <span>Sending Verification Code...</span>
@@ -915,26 +915,26 @@ export default function AdmissionPortalClient({
             </div>
 
             {/* Printable Tracking Card */}
-            <div className="p-6 rounded-3xl bg-pastel-purple border-2 border-purple-200/80 text-left space-y-3 shadow-inner print:border print:border-gray-300 print:bg-white print:shadow-none">
-              <div className="flex items-center justify-between border-b border-purple-100 pb-3">
+            <div className="p-4 sm:p-6 rounded-3xl bg-pastel-purple border-2 border-purple-200/80 text-left space-y-3 shadow-inner print:border print:border-gray-300 print:bg-white print:shadow-none">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-purple-100 pb-3">
                 <span className="text-xs font-bold text-gray-500 uppercase tracking-wide">
                   Application Tracking ID
                 </span>
-                <span className="text-sm font-black text-primary-color font-mono bg-white px-3 py-1 rounded-xl shadow-xs border border-purple-100">
+                <span className="text-xs sm:text-sm font-black text-primary-color font-mono bg-white px-2.5 sm:px-3 py-1 rounded-xl shadow-xs border border-purple-100">
                   {applicationNumber}
                 </span>
               </div>
-              <div className="flex justify-between text-xs text-gray-600">
+              <div className="flex flex-wrap justify-between gap-1 text-xs text-gray-600">
                 <span>Student Name:</span>
-                <strong className="text-gray-900">{formData['student_name']}</strong>
+                <strong className="text-gray-900 break-words">{formData['student_name']}</strong>
               </div>
-              <div className="flex justify-between text-xs text-gray-600">
+              <div className="flex flex-wrap justify-between gap-1 text-xs text-gray-600">
                 <span>Enrolled Grade:</span>
                 <strong className="text-secondary-color">{formData['applied_class']}</strong>
               </div>
-              <div className="flex justify-between text-xs text-gray-600">
+              <div className="flex flex-wrap justify-between gap-1 text-xs text-gray-600">
                 <span>Contact Email:</span>
-                <strong className="text-gray-900">{formData['guardian_email']}</strong>
+                <strong className="text-gray-900 break-all">{formData['guardian_email']}</strong>
               </div>
             </div>
 

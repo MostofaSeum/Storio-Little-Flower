@@ -41,11 +41,11 @@ export default function ExamResultsClientView({ results }: ExamResultsClientView
     <div className="space-y-5">
       {/* 3 Interactive Category Tabs (School, Public, Admission) */}
       <div className="flex justify-center">
-        <div className="inline-flex items-center p-1 bg-pastel-purple border border-purple-100 rounded-full shadow-xs gap-1">
+        <div className="flex flex-wrap items-center justify-center p-1 bg-pastel-purple border border-purple-100 rounded-2xl sm:rounded-full shadow-xs gap-1 max-w-full">
           <button
             type="button"
             onClick={() => setActiveTab('school')}
-            className={`px-4 py-2 rounded-full text-xs sm:text-sm font-bold tracking-wide uppercase transition-all duration-300 flex items-center gap-1.5 ${
+            className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-bold tracking-wide uppercase transition-all duration-300 flex items-center gap-1.5 ${
               activeTab === 'school'
                 ? 'bg-primary-color text-white shadow-md'
                 : 'text-gray-600 hover:text-primary-color hover:bg-white/80'
@@ -53,7 +53,7 @@ export default function ExamResultsClientView({ results }: ExamResultsClientView
           >
             <span>School</span>
             <span
-              className={`text-[11px] px-2 py-0.5 rounded-full ${
+              className={`text-[10px] sm:text-[11px] px-1.5 sm:px-2 py-0.5 rounded-full ${
                 activeTab === 'school'
                   ? 'bg-white/20 text-white'
                   : 'bg-purple-100 text-primary-color'
@@ -66,7 +66,7 @@ export default function ExamResultsClientView({ results }: ExamResultsClientView
           <button
             type="button"
             onClick={() => setActiveTab('public')}
-            className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold tracking-wide uppercase transition-all duration-300 flex items-center gap-2 ${
+            className={`px-3 sm:px-5 py-1.5 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold tracking-wide uppercase transition-all duration-300 flex items-center gap-1.5 sm:gap-2 ${
               activeTab === 'public'
                 ? 'bg-secondary-color text-white shadow-md'
                 : 'text-gray-600 hover:text-secondary-color hover:bg-white/80'
@@ -74,7 +74,7 @@ export default function ExamResultsClientView({ results }: ExamResultsClientView
           >
             <span>Public</span>
             <span
-              className={`text-[11px] px-2 py-0.5 rounded-full ${
+              className={`text-[10px] sm:text-[11px] px-1.5 sm:px-2 py-0.5 rounded-full ${
                 activeTab === 'public'
                   ? 'bg-white/20 text-white'
                   : 'bg-amber-100 text-secondary-color'
@@ -87,7 +87,7 @@ export default function ExamResultsClientView({ results }: ExamResultsClientView
           <button
             type="button"
             onClick={() => setActiveTab('admission')}
-            className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold tracking-wide uppercase transition-all duration-300 flex items-center gap-2 ${
+            className={`px-3 sm:px-5 py-1.5 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold tracking-wide uppercase transition-all duration-300 flex items-center gap-1.5 sm:gap-2 ${
               activeTab === 'admission'
                 ? 'bg-accent-pink text-white shadow-md'
                 : 'text-gray-600 hover:text-accent-pink hover:bg-white/80'
@@ -95,7 +95,7 @@ export default function ExamResultsClientView({ results }: ExamResultsClientView
           >
             <span>Admission</span>
             <span
-              className={`text-[11px] px-2 py-0.5 rounded-full ${
+              className={`text-[10px] sm:text-[11px] px-1.5 sm:px-2 py-0.5 rounded-full ${
                 activeTab === 'admission'
                   ? 'bg-white/20 text-white'
                   : 'bg-pink-100 text-accent-pink'

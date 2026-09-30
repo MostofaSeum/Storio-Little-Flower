@@ -131,24 +131,24 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
           </div>
 
           {/* Modern Floating Stat Badge 1: Top Right */}
-          <div className="absolute top-8 -right-4 sm:-right-6 bg-white/95 backdrop-blur-md p-3 sm:p-3.5 rounded-2xl shadow-xl border border-pink-100 flex items-center space-x-3 transform animate-float z-20 hover:scale-105 transition-transform cursor-pointer">
-            <div className="w-10 h-10 rounded-xl bg-pink-100 text-accent-pink flex items-center justify-center text-xl shadow-xs">
+          <div className="absolute top-6 sm:top-8 -right-2 sm:-right-6 bg-white/95 backdrop-blur-md p-2 sm:p-3.5 rounded-2xl shadow-xl border border-pink-100 flex items-center space-x-2 sm:space-x-3 transform animate-float z-20 hover:scale-105 transition-transform cursor-pointer max-w-[150px] sm:max-w-none">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-pink-100 text-accent-pink flex items-center justify-center text-base sm:text-xl shadow-xs shrink-0">
               🎨
             </div>
             <div>
-              <span className="text-xs font-extrabold text-gray-900 block">Creative Arts</span>
-              <span className="text-[10px] font-semibold text-accent-pink">Joyful Learning</span>
+              <span className="text-[11px] sm:text-xs font-extrabold text-gray-900 block truncate">Creative Arts</span>
+              <span className="text-[9px] sm:text-[10px] font-semibold text-accent-pink block truncate">Joyful Learning</span>
             </div>
           </div>
 
           {/* Modern Floating Stat Badge 2: Bottom Left */}
-          <div className="absolute bottom-16 -left-4 sm:-left-8 bg-white/95 backdrop-blur-md p-3 sm:p-3.5 rounded-2xl shadow-xl border border-amber-100 flex items-center space-x-3 transform animate-float-reverse z-20 hover:scale-105 transition-transform cursor-pointer">
-            <div className="w-10 h-10 rounded-xl bg-amber-100 text-secondary-color flex items-center justify-center text-xl shadow-xs">
+          <div className="absolute bottom-12 sm:bottom-16 -left-2 sm:-left-8 bg-white/95 backdrop-blur-md p-2 sm:p-3.5 rounded-2xl shadow-xl border border-amber-100 flex items-center space-x-2 sm:space-x-3 transform animate-float-reverse z-20 hover:scale-105 transition-transform cursor-pointer max-w-[150px] sm:max-w-none">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-amber-100 text-secondary-color flex items-center justify-center text-base sm:text-xl shadow-xs shrink-0">
               ⭐
             </div>
             <div>
-              <span className="text-xs font-extrabold text-gray-900 block">4.9 / 5 Rating</span>
-              <span className="text-[10px] font-semibold text-secondary-color">From 250+ Parents</span>
+              <span className="text-[11px] sm:text-xs font-extrabold text-gray-900 block truncate">4.9 / 5 Rating</span>
+              <span className="text-[9px] sm:text-[10px] font-semibold text-secondary-color block truncate">250+ Parents</span>
             </div>
           </div>
 
@@ -198,16 +198,16 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
           </p>
 
           {/* CTA Actions */}
-          <div className="pt-6 flex flex-wrap items-center gap-4">
+          <div className="pt-6 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
             <a
               href={slideButtonUrl}
-              className="inline-flex items-center justify-center px-8 py-4 bg-button-dark hover:bg-gray-800 text-white font-bold text-sm rounded-full shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-1 hover:scale-102"
+              className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 sm:py-4 bg-button-dark hover:bg-gray-800 text-white font-bold text-sm rounded-full shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-1 hover:scale-102 text-center"
             >
               {slideButtonText}
             </a>
             <a
               href="/admission"
-              className="inline-flex items-center justify-center px-7 py-4 bg-white hover:bg-pink-50 text-accent-pink font-bold text-sm rounded-full border-2 border-accent-pink shadow-sm hover:shadow-md transition-all transform hover:-translate-y-0.5"
+              className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 sm:py-4 bg-white hover:bg-pink-50 text-accent-pink font-bold text-sm rounded-full border-2 border-accent-pink shadow-sm hover:shadow-md transition-all transform hover:-translate-y-0.5 text-center"
             >
               <span>Book Campus Tour</span>
             </a>

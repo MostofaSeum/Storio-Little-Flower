@@ -89,10 +89,10 @@ export default function EventsAndCalendarClient({
     <div className="max-w-7xl mx-auto px-4 sm:px-8 py-6 sm:py-8">
       {/* Top Tab Switcher */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 mb-6 border-b border-purple-100">
-        <div className="inline-flex p-1.5 rounded-2xl bg-purple-50 border border-purple-200/80 shadow-2xs self-start">
+        <div className="flex flex-col sm:inline-flex sm:flex-row p-1.5 rounded-2xl bg-purple-50 border border-purple-200/80 shadow-2xs w-full sm:w-auto gap-1 sm:gap-0">
           <button
             onClick={() => setActiveTab("events")}
-            className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all cursor-pointer flex items-center gap-2 ${
+            className={`w-full sm:w-auto px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center justify-between sm:justify-start gap-2 ${
               activeTab === "events"
                 ? "bg-primary-color text-white shadow-sm"
                 : "text-gray-600 hover:text-primary-color"
@@ -112,13 +112,13 @@ export default function EventsAndCalendarClient({
 
           <button
             onClick={() => setActiveTab("calendar")}
-            className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all cursor-pointer flex items-center gap-2 ${
+            className={`w-full sm:w-auto px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center justify-between sm:justify-start gap-2 ${
               activeTab === "calendar"
                 ? "bg-primary-color text-white shadow-sm"
                 : "text-gray-600 hover:text-primary-color"
             }`}
           >
-            <span>📅 Academic Calendar & Holidays</span>
+            <span>📅 Calendar & Holidays</span>
             <span
               className={`text-xs px-2 py-0.5 rounded-full font-extrabold ${
                 activeTab === "calendar"

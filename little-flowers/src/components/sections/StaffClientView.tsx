@@ -86,11 +86,11 @@ export default function StaffClientView({
       {/* Filter and Search Bar */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-white p-4 sm:p-5 rounded-3xl border border-purple-50 shadow-sm">
         {/* Category Tabs */}
-        <div className="flex items-center gap-2 p-1.5 bg-gray-50 rounded-2xl w-full sm:w-auto">
+        <div className="flex items-center gap-1 sm:gap-2 p-1 sm:p-1.5 bg-gray-50 rounded-2xl w-full sm:w-auto overflow-x-auto">
           <button
             type="button"
             onClick={() => setActiveTab('all')}
-            className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+            className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all ${
               activeTab === 'all'
                 ? 'bg-primary-color text-white shadow-sm'
                 : 'text-gray-600 hover:text-gray-900'
@@ -101,7 +101,7 @@ export default function StaffClientView({
           <button
             type="button"
             onClick={() => setActiveTab('teachers')}
-            className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+            className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all ${
               activeTab === 'teachers'
                 ? 'bg-primary-color text-white shadow-sm'
                 : 'text-gray-600 hover:text-gray-900'
@@ -112,7 +112,7 @@ export default function StaffClientView({
           <button
             type="button"
             onClick={() => setActiveTab('leadership')}
-            className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+            className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all ${
               activeTab === 'leadership'
                 ? 'bg-primary-color text-white shadow-sm'
                 : 'text-gray-600 hover:text-gray-900'

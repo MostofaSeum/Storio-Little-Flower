@@ -260,7 +260,7 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
 
       {/* Mobile Dropdown Menu with Pill items & Nested Sub-links */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white/98 backdrop-blur-lg border-b border-gray-200 px-6 py-4 animate-fadeIn">
+        <div className="lg:hidden bg-white/98 backdrop-blur-lg border-b border-gray-200 px-4 sm:px-6 py-4 animate-fadeIn max-h-[calc(100vh-80px)] overflow-y-auto">
           <nav className="flex flex-col space-y-2 font-semibold text-sm">
             {navLinks.map((item) => {
               const isCurrent = activeTab === item.label;

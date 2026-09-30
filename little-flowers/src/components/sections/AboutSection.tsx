@@ -25,11 +25,11 @@ export default function AboutSection({ profile }: AboutSectionProps) {
               className="w-full h-[400px] object-cover"
             />
           </div>
-          <div className="absolute -bottom-6 -right-4 bg-blob-yellow p-4 rounded-2xl shadow-md border-2 border-white transform rotate-3 animate-float">
-            <span className="text-2xl font-extrabold text-primary-color">
+          <div className="absolute -bottom-4 right-0 sm:-bottom-6 sm:-right-4 bg-blob-yellow p-3 sm:p-4 rounded-2xl shadow-md border-2 border-white transform rotate-3 animate-float">
+            <span className="text-xl sm:text-2xl font-extrabold text-primary-color">
               10+ Years
             </span>
-            <p className="text-xs font-bold text-gray-700">
+            <p className="text-[11px] sm:text-xs font-bold text-gray-700">
               Of Joyful Learning
             </p>
           </div>

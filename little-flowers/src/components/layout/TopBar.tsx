@@ -10,26 +10,26 @@ export default function TopBar({ contactEmail = 'info@example.com', phoneNumber 
     <div className="bg-topbar text-gray-300 text-xs sm:text-sm py-2 px-4 sm:px-8 border-b border-gray-800">
       <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
         {/* Left: Email & Phone */}
-        <div className="flex items-center space-x-6">
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 sm:space-x-6">
           <a
             href={`mailto:${contactEmail}`}
-            className="flex items-center space-x-2 hover:text-accent-pink transition-colors group"
+            className="flex items-center space-x-1.5 sm:space-x-2 hover:text-accent-pink transition-colors group"
           >
             <img
               src="/icons/mail.png"
               alt="Email"
-              className="w-4 h-4 object-contain brightness-0 invert opacity-80 group-hover:opacity-100"
+              className="w-3.5 h-3.5 sm:w-4 sm:h-4 object-contain brightness-0 invert opacity-80 group-hover:opacity-100"
             />
-            <span>{contactEmail}</span>
+            <span className="truncate max-w-[170px] sm:max-w-none">{contactEmail}</span>
           </a>
           <a
             href={`tel:${phoneNumber}`}
-            className="flex items-center space-x-2 hover:text-secondary-color transition-colors group"
+            className="flex items-center space-x-1.5 sm:space-x-2 hover:text-secondary-color transition-colors group"
           >
             <img
               src="/icons/telephone.png"
               alt="Phone"
-              className="w-4 h-4 object-contain brightness-0 invert opacity-80 group-hover:opacity-100"
+              className="w-3.5 h-3.5 sm:w-4 sm:h-4 object-contain brightness-0 invert opacity-80 group-hover:opacity-100"
             />
             <span>{phoneNumber}</span>
           </a>

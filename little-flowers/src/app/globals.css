@@ -218,11 +218,17 @@ html {
 /* Directional scroll reveals: from Left and from Right */
 .reveal-from-left {
   opacity: 0;
-  transform: translateX(-120px);
+  transform: translateX(-24px);
   transition:
     opacity 1.3s cubic-bezier(0.22, 1, 0.36, 1),
     transform 1.3s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
+}
+
+@media (min-width: 768px) {
+  .reveal-from-left {
+    transform: translateX(-120px);
+  }
 }
 
 .reveal-from-left.is-revealed {
@@ -232,11 +238,17 @@ html {
 
 .reveal-from-right {
   opacity: 0;
-  transform: translateX(120px);
+  transform: translateX(24px);
   transition:
     opacity 1.3s cubic-bezier(0.22, 1, 0.36, 1),
     transform 1.3s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
+}
+
+@media (min-width: 768px) {
+  .reveal-from-right {
+    transform: translateX(120px);
+  }
 }
 
 .reveal-from-right.is-revealed {
