@@ -47,7 +47,7 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
     { name: 'Events', href: '#events' },
     { name: 'Admission', href: '/admission' },
     { name: 'Notices', href: '#notices' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Contact', href: '/contact' },
   ];
 
   const rawLinks = Array.isArray(navigation) && navigation.length > 0 ? navigation : defaultNavLinks;

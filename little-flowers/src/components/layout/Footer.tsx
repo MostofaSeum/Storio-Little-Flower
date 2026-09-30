@@ -87,6 +87,11 @@ export default function Footer({ settings, importantLinks = [] }: FooterProps) {
               </a>
             </li>
             <li>
+              <a href="/contact" className="hover:text-accent-green transition-colors">
+                Contact Us
+              </a>
+            </li>
+            <li>
               <a href="/login" className="hover:text-secondary-color transition-colors">
                 Parent & Staff Portal
               </a>
