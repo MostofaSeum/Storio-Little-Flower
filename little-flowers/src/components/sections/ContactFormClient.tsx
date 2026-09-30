@@ -69,7 +69,7 @@ export default function ContactFormClient({ settings, tenantHost }: ContactFormC
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-8 py-12 sm:py-16">
+    <div className="max-w-7xl mx-auto px-4 sm:px-8 py-6 sm:py-8">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         {/* Contact Info Cards */}
         <div className="lg:col-span-5 space-y-6">

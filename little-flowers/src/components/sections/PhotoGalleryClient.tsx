@@ -76,7 +76,7 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-8 py-10 sm:py-16">
+    <div className="max-w-7xl mx-auto px-4 sm:px-8 py-6 sm:py-8">
       {/* VIEW 1: ALBUM CARDS GRID (When no album is selected) */}
       {selectedAlbumId === null ? (
         <div>

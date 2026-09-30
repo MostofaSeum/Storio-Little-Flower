@@ -78,10 +78,10 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
           : 'py-3.5 bg-white border-b border-gray-100'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between gap-4">
+      <div className="max-w-[1536px] mx-auto px-3 sm:px-6 flex items-center justify-between gap-2 sm:gap-4">
         {/* Logo with playful wiggle hover */}
-        <a href="/" className="flex items-center space-x-3 group shrink-0">
-          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-amber-300 via-pink-400 to-sky-400 p-1.5 flex items-center justify-center shadow-md transform group-hover:rotate-12 group-hover:scale-105 transition-all duration-300 overflow-hidden">
+        <a href="/" className="flex items-center space-x-2.5 group shrink-0">
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-amber-300 via-pink-400 to-sky-400 p-1 flex items-center justify-center shadow-md transform group-hover:rotate-12 group-hover:scale-105 transition-all duration-300 overflow-hidden">
             {settings?.logo_url ? (
               <img
                 src={settings.logo_url}
@@ -102,9 +102,9 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
             />
           </div>
           <div>
-            <span className="text-xl sm:text-2xl font-bold tracking-tight text-gray-900 font-fredoka flex items-center gap-1.5">
+            <span className="text-lg sm:text-xl xl:text-2xl font-bold tracking-tight text-gray-900 font-fredoka flex items-center gap-1.5 whitespace-nowrap">
               {settings?.site_title || 'Little Flowers'}
-              <span className="w-2 h-2 rounded-full bg-accent-pink animate-pulse"></span>
+              <span className="w-2 h-2 rounded-full bg-accent-pink animate-pulse shrink-0"></span>
             </span>
           </div>
         </a>
@@ -112,9 +112,9 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
         {/* Dynamic Interactive PillNav (Desktop) */}
         <nav
           aria-label="Primary navigation"
-          className="hidden lg:flex items-center rounded-full p-1 bg-pastel-purple border border-purple-100 shadow-xs"
+          className="hidden lg:flex items-center rounded-full p-1 bg-pastel-purple border border-purple-100 shadow-xs shrink"
         >
-          <ul role="menubar" className="list-none flex items-center m-0 p-0 gap-1.5">
+          <ul role="menubar" className="list-none flex items-center m-0 p-0 gap-1 xl:gap-1.5 flex-nowrap">
             {navLinks.map((item, i) => {
               const isActive = activeTab === item.label;
               const isHovered = hoveredIdx === i;
@@ -124,7 +124,7 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
                 <li
                   key={item.id || item.label}
                   role="none"
-                  className="relative flex items-center"
+                  className="relative flex items-center shrink-0"
                   onMouseEnter={() => {
                     setHoveredIdx(i);
                     if (item.hasDropdown) setOpenDropdownIdx(i);
@@ -138,7 +138,7 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
                     role="menuitem"
                     href={item.href}
                     onClick={() => setActiveTab(item.label)}
-                    className="relative overflow-hidden inline-flex items-center justify-center h-9 px-4 rounded-full font-bold text-xs tracking-wide uppercase transition-all duration-300 group cursor-pointer select-none bg-white border border-gray-100/80 shadow-xs hover:shadow-md gap-1"
+                    className="relative overflow-hidden inline-flex items-center justify-center h-8.5 px-2.5 xl:px-3.5 rounded-full font-bold text-[11px] xl:text-xs tracking-wide uppercase transition-all duration-300 group cursor-pointer select-none bg-white border border-gray-100/80 shadow-xs hover:shadow-md gap-0.5"
                     style={{
                       borderColor: isActive ? item.color : undefined,
                     }}
