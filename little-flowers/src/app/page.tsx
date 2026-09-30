@@ -204,10 +204,10 @@ export default async function Home() {
       {/* 6. ABOUT US & INSTITUTION PROFILE */}
       <AboutSection profile={profile} />
 
-      {/* 7. LEADERSHIP MESSAGES - REACT BITS FLEX CAROUSEL */}
-      {leadershipMessages.length > 0 && (
+      {/* 7. LEADERSHIP MESSAGES - REACT BITS FLEX CAROUSEL (Commented out) */}
+      {/* {leadershipMessages.length > 0 && (
         <LeadershipFlexCarousel messages={leadershipMessages} />
-      )}
+      )} */}
 
       {/* 8. LEARNING PROGRAMS & ACTIVITIES */}
       <ActivitiesSection activities={activities} />
