@@ -142,10 +142,10 @@ export default async function VideosGalleryPage() {
                           )}
                         </div>
 
-                        {vid.url && !isDirectVideo && !isYouTube && (
+                        {vid.url && (
                           <div className="mt-4 pt-3 border-t border-purple-50 flex items-center justify-end">
                             <a
-                              href={vid.url}
+                              href={resolveMediaUrl(vid.url)}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="inline-flex items-center gap-1.5 text-xs font-bold text-primary-color hover:underline"
