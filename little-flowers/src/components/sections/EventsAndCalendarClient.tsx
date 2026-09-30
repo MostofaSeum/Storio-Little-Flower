@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { resolveMediaUrl } from '@/lib/media';
-import { StorioEvent, StorioCalendarEvent } from '@/types';
+import React, { useState } from "react";
+import Link from "next/link";
+import { resolveMediaUrl } from "@/lib/media";
+import { StorioEvent, StorioCalendarEvent } from "@/types";
 
 interface EventsAndCalendarClientProps {
   events: StorioEvent[];
@@ -14,23 +14,36 @@ export default function EventsAndCalendarClient({
   events,
   calendarEvents,
 }: EventsAndCalendarClientProps) {
-  const [activeTab, setActiveTab] = useState<'events' | 'calendar'>('events');
-  const [calendarFilter, setCalendarFilter] = useState<'all' | 'holiday' | 'exam' | 'event'>('all');
+  const [activeTab, setActiveTab] = useState<"events" | "calendar">("events");
+  const [calendarFilter, setCalendarFilter] = useState<
+    "all" | "holiday" | "exam" | "event"
+  >("all");
 
   const formatEventDate = (dateStr?: string) => {
-    if (!dateStr) return { day: '15', month: 'OCT', year: '2026', time: '9:00 AM' };
+    if (!dateStr)
+      return { day: "15", month: "OCT", year: "2026", time: "9:00 AM" };
     const date = new Date(dateStr);
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = date.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = date
+      .toLocaleDateString("en-US", { month: "short" })
+      .toUpperCase();
     const year = date.getFullYear();
-    const time = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+    const time = date.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    });
     return { day, month, year, time };
   };
 
   const formatCalendarRange = (startStr: string, endStr?: string) => {
     const startDate = new Date(startStr);
-    const options: Intl.DateTimeFormatOptions = { month: 'short', day: 'numeric', year: 'numeric' };
-    const startFormatted = startDate.toLocaleDateString('en-US', options);
+    const options: Intl.DateTimeFormatOptions = {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    };
+    const startFormatted = startDate.toLocaleDateString("en-US", options);
 
     if (!endStr) return startFormatted;
 
@@ -39,36 +52,36 @@ export default function EventsAndCalendarClient({
     if (startDate.toDateString() === endDate.toDateString()) {
       return startFormatted;
     }
-    const endFormatted = endDate.toLocaleDateString('en-US', options);
+    const endFormatted = endDate.toLocaleDateString("en-US", options);
     return `${startFormatted} – ${endFormatted}`;
   };
 
   const getCategoryBadge = (category?: string) => {
-    const cat = (category || 'event').toLowerCase();
+    const cat = (category || "event").toLowerCase();
     switch (cat) {
-      case 'holiday':
+      case "holiday":
         return {
-          bg: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-          dot: 'bg-emerald-500',
-          label: 'School Holiday',
+          bg: "bg-emerald-50 text-emerald-700 border-emerald-200",
+          dot: "bg-emerald-500",
+          label: "School Holiday",
         };
-      case 'exam':
+      case "exam":
         return {
-          bg: 'bg-amber-50 text-amber-700 border-amber-200',
-          dot: 'bg-amber-500',
-          label: 'Exam Schedule',
+          bg: "bg-amber-50 text-amber-700 border-amber-200",
+          dot: "bg-amber-500",
+          label: "Exam Schedule",
         };
       default:
         return {
-          bg: 'bg-purple-50 text-purple-700 border-purple-200',
-          dot: 'bg-purple-500',
-          label: 'Academic Event',
+          bg: "bg-purple-50 text-purple-700 border-purple-200",
+          dot: "bg-purple-500",
+          label: "Academic Event",
         };
     }
   };
 
   const filteredCalendar = calendarEvents.filter((item) => {
-    if (calendarFilter === 'all') return true;
+    if (calendarFilter === "all") return true;
     return item.category?.toLowerCase() === calendarFilter;
   });
 
@@ -78,55 +91,65 @@ export default function EventsAndCalendarClient({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-8 border-b border-purple-100">
         <div className="inline-flex p-1.5 rounded-2xl bg-purple-50 border border-purple-200/80 shadow-2xs self-start">
           <button
-            onClick={() => setActiveTab('events')}
+            onClick={() => setActiveTab("events")}
             className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all cursor-pointer flex items-center gap-2 ${
-              activeTab === 'events'
-                ? 'bg-primary-color text-white shadow-sm'
-                : 'text-gray-600 hover:text-primary-color'
+              activeTab === "events"
+                ? "bg-primary-color text-white shadow-sm"
+                : "text-gray-600 hover:text-primary-color"
             }`}
           >
             <span>🎉 School Events</span>
-            <span className={`text-xs px-2 py-0.5 rounded-full font-extrabold ${
-              activeTab === 'events' ? 'bg-white/20 text-white' : 'bg-purple-100 text-purple-700'
-            }`}>
+            <span
+              className={`text-xs px-2 py-0.5 rounded-full font-extrabold ${
+                activeTab === "events"
+                  ? "bg-white/20 text-white"
+                  : "bg-purple-100 text-purple-700"
+              }`}
+            >
               {events.length}
             </span>
           </button>
 
           <button
-            onClick={() => setActiveTab('calendar')}
+            onClick={() => setActiveTab("calendar")}
             className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all cursor-pointer flex items-center gap-2 ${
-              activeTab === 'calendar'
-                ? 'bg-primary-color text-white shadow-sm'
-                : 'text-gray-600 hover:text-primary-color'
+              activeTab === "calendar"
+                ? "bg-primary-color text-white shadow-sm"
+                : "text-gray-600 hover:text-primary-color"
             }`}
           >
             <span>📅 Academic Calendar & Holidays</span>
-            <span className={`text-xs px-2 py-0.5 rounded-full font-extrabold ${
-              activeTab === 'calendar' ? 'bg-white/20 text-white' : 'bg-purple-100 text-purple-700'
-            }`}>
+            <span
+              className={`text-xs px-2 py-0.5 rounded-full font-extrabold ${
+                activeTab === "calendar"
+                  ? "bg-white/20 text-white"
+                  : "bg-purple-100 text-purple-700"
+              }`}
+            >
               {calendarEvents.length}
             </span>
           </button>
         </div>
 
         {/* Filter Pills for Calendar */}
-        {activeTab === 'calendar' && (
+        {activeTab === "calendar" && (
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-xs font-bold text-gray-500 mr-1">Filter:</span>
+            <span className="text-xs font-bold text-gray-500 mr-1">
+              Filter:
+            </span>
             {[
-              { id: 'all', label: 'All Items' },
-              { id: 'holiday', label: 'Holidays' },
-              { id: 'exam', label: 'Exams' },
-              { id: 'event', label: 'Events' },
+              { id: "all", label: "All Items" },
+              { id: "holiday", label: "Holidays" },
+              { id: "exam", label: "Exams" },
+              { id: "event", label: "Events" },
             ].map((f) => (
               <button
                 key={f.id}
                 onClick={() => setCalendarFilter(f.id as typeof calendarFilter)}
                 className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer border ${
                   calendarFilter === f.id
-                    ? 'bg-primary-color text-white border-primary-color shadow-2xs'
-                    : 'bg-white text-gray-600 border-purple-200 hover:bg-purple-50'
+                    ? "bg-primary-color text-white border-primary-color shadow-2xs"
+                    : "bg-white text-gray-600 border-purple-200 hover:bg-purple-50"
                 }`}
               >
                 {f.label}
@@ -137,24 +160,33 @@ export default function EventsAndCalendarClient({
       </div>
 
       {/* TAB 1: SCHOOL EVENTS GRID */}
-      {activeTab === 'events' && (
+      {activeTab === "events" && (
         <>
           {events.length === 0 ? (
             <div className="text-center py-16 px-4 bg-pastel-purple rounded-3xl border border-purple-100">
               <span className="text-4xl block mb-3">📅</span>
-              <h3 className="text-xl font-bold font-fredoka text-gray-800 mb-2">No Upcoming Events</h3>
+              <h3 className="text-xl font-bold font-fredoka text-gray-800 mb-2">
+                No Upcoming Events
+              </h3>
               <p className="text-sm text-gray-500 max-w-md mx-auto">
-                New campus events and celebration announcements will appear here soon.
+                New campus events and celebration announcements will appear here
+                soon.
               </p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {events.map((event) => {
-                const { day, month, year, time } = formatEventDate(event.start_date);
+                const { day, month, year, time } = formatEventDate(
+                  event.start_date,
+                );
                 const rawImg =
                   event.featured_image_detail?.file ||
-                  (typeof event.featured_image === 'string' ? event.featured_image : null);
-                const imageUrl = resolveMediaUrl(rawImg) || '/homepage/Happy Memories/Trial 1.jpg';
+                  (typeof event.featured_image === "string"
+                    ? event.featured_image
+                    : null);
+                const imageUrl =
+                  resolveMediaUrl(rawImg) ||
+                  "/homepage/Happy Memories/Trial 1.jpg";
 
                 return (
                   <article
@@ -231,14 +263,17 @@ export default function EventsAndCalendarClient({
       )}
 
       {/* TAB 2: ACADEMIC CALENDAR & HOLIDAYS */}
-      {activeTab === 'calendar' && (
+      {activeTab === "calendar" && (
         <div>
           {filteredCalendar.length === 0 ? (
             <div className="text-center py-16 px-4 bg-pastel-purple rounded-3xl border border-purple-100">
               <span className="text-4xl block mb-3">📅</span>
-              <h3 className="text-xl font-bold font-fredoka text-gray-800 mb-2">No Calendar Items Found</h3>
+              <h3 className="text-xl font-bold font-fredoka text-gray-800 mb-2">
+                No Calendar Items Found
+              </h3>
               <p className="text-sm text-gray-500 max-w-md mx-auto">
-                No scheduled holidays or academic dates matched the current filter.
+                No scheduled holidays or academic dates matched the current
+                filter.
               </p>
             </div>
           ) : (
@@ -246,9 +281,14 @@ export default function EventsAndCalendarClient({
               {filteredCalendar.map((item) => {
                 const badge = getCategoryBadge(item.category);
                 const startDate = new Date(item.start_date);
-                const day = startDate.getDate().toString().padStart(2, '0');
-                const month = startDate.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
-                const dateRange = formatCalendarRange(item.start_date, item.end_date);
+                const day = startDate.getDate().toString().padStart(2, "0");
+                const month = startDate
+                  .toLocaleDateString("en-US", { month: "short" })
+                  .toUpperCase();
+                const dateRange = formatCalendarRange(
+                  item.start_date,
+                  item.end_date,
+                );
 
                 return (
                   <div
@@ -258,8 +298,12 @@ export default function EventsAndCalendarClient({
                     <div>
                       {/* Category and Level Badges */}
                       <div className="flex items-center justify-between gap-2 mb-4">
-                        <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${badge.bg}`}>
-                          <span className={`w-2 h-2 rounded-full ${badge.dot}`} />
+                        <span
+                          className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${badge.bg}`}
+                        >
+                          <span
+                            className={`w-2 h-2 rounded-full ${badge.dot}`}
+                          />
                           {badge.label}
                         </span>
 
@@ -306,7 +350,9 @@ export default function EventsAndCalendarClient({
 
                     <div className="mt-5 pt-3 border-t border-purple-50 flex items-center justify-between text-xs text-gray-400">
                       <span>Status: Scheduled</span>
-                      <span className="font-semibold text-primary-color">Little Flowers</span>
+                      <span className="font-semibold text-primary-color">
+                        Little Flowers
+                      </span>
                     </div>
                   </div>
                 );

@@ -46,11 +46,9 @@ export default async function EventsPage() {
             </span>
 
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight">
-              <SplitText
-                text="Events & Academic Calendar"
-                className="inline-block text-primary-color"
-                tag="span"
-              />
+              <span className="inline-block text-primary-color">
+                Events & Academic Calendar
+              </span>
             </h1>
 
             <p className="mt-2 text-sm sm:text-base text-gray-600 leading-relaxed font-quicksand max-w-2xl mx-auto">

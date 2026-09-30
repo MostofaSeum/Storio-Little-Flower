@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: EventDetailPageProps) {
 export default async function EventDetailPage({ params }: EventDetailPageProps) {
   const { id } = await params;
   const { tenantHost, isStandalone } = await getTenantContext();
-  const { settings, customization, navigation } = await getTemplateLayout(tenantHost, isStandalone);
+  const { settings, customization, navigation, importantLinks } = await getTemplateLayout(tenantHost, isStandalone);
 
   let event: StorioEvent | null = null;
 
@@ -230,7 +230,7 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
         </article>
       </main>
 
-      <Footer settings={settings} />
+      <Footer settings={settings} importantLinks={importantLinks} />
     </div>
   );
 }

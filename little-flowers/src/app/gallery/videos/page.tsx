@@ -1,12 +1,12 @@
-import React from 'react';
-import Link from 'next/link';
-import { storio } from '@storio/template-sdk';
-import { getTenantContext, getTemplateLayout } from '@/lib/storio';
-import { resolveMediaUrl } from '@/lib/media';
-import InteractiveHeader from '@/components/layout/InteractiveHeader';
-import Footer from '@/components/layout/Footer';
-import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
-import SplitText from '@/components/ui/SplitText';
+import React from "react";
+import Link from "next/link";
+import { storio } from "@storio/template-sdk";
+import { getTenantContext, getTemplateLayout } from "@/lib/storio";
+import { resolveMediaUrl } from "@/lib/media";
+import InteractiveHeader from "@/components/layout/InteractiveHeader";
+import Footer from "@/components/layout/Footer";
+import DynamicThemeStyles from "@/components/layout/DynamicThemeStyles";
+import SplitText from "@/components/ui/SplitText";
 
 interface StorioReelItem {
   id: number;
@@ -22,17 +22,19 @@ interface StorioReelItem {
 }
 
 export const metadata = {
-  title: 'Video Gallery — Little Flowers',
-  description: 'Watch video highlights, performances, and fun campus activities.',
+  title: "Video Gallery — Little Flowers",
+  description:
+    "Watch video highlights, performances, and fun campus activities.",
 };
 
 export default async function VideosGalleryPage() {
   const { tenantHost, isStandalone } = await getTenantContext();
-  const { settings, customization, navigation, importantLinks } = await getTemplateLayout(tenantHost, isStandalone);
+  const { settings, customization, navigation, importantLinks } =
+    await getTemplateLayout(tenantHost, isStandalone);
 
   const rawReels = await storio.apiFetch<StorioReelItem[]>(
-    '/api/v2/template/reels/',
-    { tenantHost }
+    "/api/v2/template/reels/",
+    { tenantHost },
   );
 
   const videos: StorioReelItem[] = Array.isArray(rawReels) ? rawReels : [];
@@ -60,7 +62,8 @@ export default async function VideosGalleryPage() {
             </h1>
 
             <p className="mt-4 text-base sm:text-lg text-gray-600 leading-relaxed font-quicksand max-w-2xl mx-auto">
-              Engaging reels, student performances, and recorded highlights from our vibrant community.
+              Engaging reels, student performances, and recorded highlights from
+              our vibrant community.
             </p>
           </div>
         </section>
@@ -71,17 +74,26 @@ export default async function VideosGalleryPage() {
             {videos.length === 0 ? (
               <div className="text-center py-16 px-4 bg-pastel-purple rounded-3xl border border-purple-100">
                 <span className="text-4xl block mb-3">🎬</span>
-                <h3 className="text-xl font-bold font-fredoka text-gray-800 mb-2">No Videos Found</h3>
+                <h3 className="text-xl font-bold font-fredoka text-gray-800 mb-2">
+                  No Videos Found
+                </h3>
                 <p className="text-sm text-gray-500 max-w-md mx-auto">
-                  Videos and reels will be displayed here as soon as they are added in the media library.
+                  Videos and reels will be displayed here as soon as they are
+                  added in the media library.
                 </p>
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {videos.map((vid) => {
-                  const thumb = vid.thumbnail_url ? resolveMediaUrl(vid.thumbnail_url) : null;
-                  const isDirectVideo = vid.url && (vid.url.endsWith('.mp4') || vid.url.endsWith('.webm'));
-                  const isYouTube = vid.platform === 'youtube' || (vid.url && vid.url.includes('youtube.com'));
+                  const thumb = vid.thumbnail_url
+                    ? resolveMediaUrl(vid.thumbnail_url)
+                    : null;
+                  const isDirectVideo =
+                    vid.url &&
+                    (vid.url.endsWith(".mp4") || vid.url.endsWith(".webm"));
+                  const isYouTube =
+                    vid.platform === "youtube" ||
+                    (vid.url && vid.url.includes("youtube.com"));
 
                   return (
                     <div
@@ -96,12 +108,15 @@ export default async function VideosGalleryPage() {
                             className="w-full h-full object-cover"
                             preload="metadata"
                           >
-                            <source src={resolveMediaUrl(vid.url)} type="video/mp4" />
+                            <source
+                              src={resolveMediaUrl(vid.url)}
+                              type="video/mp4"
+                            />
                             Your browser does not support the video tag.
                           </video>
                         ) : isYouTube && vid.url ? (
                           <iframe
-                            src={vid.url.replace('watch?v=', 'embed/')}
+                            src={vid.url.replace("watch?v=", "embed/")}
                             title={vid.title}
                             className="w-full h-full border-0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -109,7 +124,7 @@ export default async function VideosGalleryPage() {
                           />
                         ) : thumb ? (
                           <a
-                            href={vid.url || '#'}
+                            href={vid.url || "#"}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="w-full h-full relative group block"
