@@ -1,6 +1,6 @@
-import React from 'react';
 import { storio, StorioNotice } from '@storio/template-sdk';
-import { getTenantContext, getTemplateLayout } from '@/lib/storio';
+import { getTenantContext, getTemplateLayout, getBoardNotices } from '@/lib/storio';
+import { StorioBoardNotice } from '@/types';
 import { resolveMediaUrl } from '@/lib/media';
 import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
 import InteractiveHeader from '@/components/layout/InteractiveHeader';
@@ -17,7 +17,10 @@ export default async function NoticePage() {
   const { tenantHost, isStandalone } = await getTenantContext();
   const { settings, customization, navigation } = await getTemplateLayout(tenantHost, isStandalone);
 
-  const rawNotices = await storio.getNotices(tenantHost);
+  const [rawNotices, rawBoardNotices] = await Promise.all([
+    storio.getNotices(tenantHost).catch(() => null),
+    getBoardNotices(tenantHost).catch(() => null),
+  ]);
 
   const notices: StorioNotice[] =
     Array.isArray(rawNotices) && rawNotices.length > 0
@@ -25,6 +28,8 @@ export default async function NoticePage() {
       : isStandalone
         ? DEFAULT_DEMO_DATA.notices || []
         : [];
+
+  const boardNotices: StorioBoardNotice[] = Array.isArray(rawBoardNotices) ? rawBoardNotices : [];
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-gray-900 selection:bg-pink-100 selection:text-pink-700">
@@ -114,6 +119,57 @@ export default async function NoticePage() {
             )}
           </div>
         </section>
+
+        {/* Board Notices Section */}
+        {boardNotices.length > 0 && (
+          <section className="py-6 sm:py-8 bg-pastel-purple/40 border-t border-purple-100">
+            <div className="max-w-6xl mx-auto px-4 sm:px-8">
+              <div className="mb-6 flex items-center justify-between">
+                <div>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase bg-white text-secondary-color border border-amber-200 shadow-2xs mb-2">
+                    Official Board Notifications
+                  </span>
+                  <h2 className="text-2xl font-bold font-fredoka text-gray-900">
+                    Education Board Circulars
+                  </h2>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {boardNotices.map((bn, idx) => (
+                  <a
+                    key={idx}
+                    href={bn.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-5 rounded-2xl bg-white border border-purple-100 hover:border-pink-300 hover:shadow-md transition-all flex items-start justify-between gap-4 group"
+                  >
+                    <div className="space-y-1.5">
+                      <div className="flex items-center gap-2">
+                        {bn.board_name && (
+                          <span className="text-[10px] font-bold uppercase tracking-wider bg-purple-100 text-primary-color px-2 py-0.5 rounded-full">
+                            {bn.board_name} Board
+                          </span>
+                        )}
+                        {bn.publish_date && (
+                          <span className="text-xs text-gray-500 font-medium">
+                            {bn.publish_date}
+                          </span>
+                        )}
+                      </div>
+                      <h3 className="text-sm font-bold text-gray-900 group-hover:text-primary-color transition-colors leading-snug">
+                        {bn.title}
+                      </h3>
+                    </div>
+                    <span className="text-primary-color text-sm shrink-0 mt-1 font-bold group-hover:translate-x-0.5 transition-transform">
+                      ↗
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
       </main>
 
       <Footer settings={settings} />

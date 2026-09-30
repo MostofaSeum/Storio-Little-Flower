@@ -124,3 +124,12 @@ export async function submitContactMessage(formData: Record<string, any>, tenant
   });
 }
 
+export async function getBoardNotices(tenantHost: string) {
+  return storio.apiFetch<any[]>('/api/v2/template/board-notices/', { tenantHost });
+}
+
+export async function getPageBySlug(slug: string, tenantHost: string) {
+  return storio.getPageBySlug(slug, tenantHost);
+}
+
+

@@ -251,3 +251,10 @@ export interface StorioCalendarEvent {
   level?: string;
   is_all_day?: boolean;
 }
+
+export interface StorioBoardNotice {
+  title: string;
+  url: string;
+  publish_date?: string;
+  board_name?: string;
+}
