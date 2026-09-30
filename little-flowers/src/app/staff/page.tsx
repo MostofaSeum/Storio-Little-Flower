@@ -67,18 +67,18 @@ export default async function StaffPage() {
       <InteractiveHeader settings={settings} navigation={navigation} />
 
       {/* 2. Main Page Content */}
-      <main className="flex-1 py-12 md:py-16">
+      <main className="flex-1 py-8 md:py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header Banner */}
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white shadow-sm border border-purple-100 text-xs font-semibold text-primary-color mb-4">
+          <div className="text-center max-w-3xl mx-auto mb-8">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white shadow-sm border border-purple-100 text-xs font-semibold text-primary-color mb-2.5">
               <span>🌟</span>
               <span>Our Educators &amp; Leadership</span>
             </div>
-            <h1 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tight mb-4">
+            <h1 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tight mb-2.5 font-fredoka">
               Faculty &amp; Governing Body
             </h1>
-            <p className="text-gray-600 text-base md:text-lg">
+            <p className="text-gray-600 text-sm md:text-base leading-relaxed">
               Dedicated mentors, early childhood specialists, and visionary leaders cultivating a joyful space for every child to bloom.
             </p>
           </div>
