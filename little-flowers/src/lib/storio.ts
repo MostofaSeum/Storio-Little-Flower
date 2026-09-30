@@ -32,14 +32,18 @@ export interface ResolvedTemplateLayout {
   settings: typeof DEFAULT_DEMO_DATA.settings;
   customization: LittleFlowersCustomizationConfig;
   navigation: StorioDynamicNavItem[];
+  importantLinks: { id: number; title: string; url: string; order?: number }[];
 }
 
 /**
- * Resolves layout, settings, customization configs, and navigation menu
+ * Resolves layout, settings, customization configs, navigation menu, and important links
  * from the Storio CMS API with safe standalone fallback.
  */
 export async function getTemplateLayout(tenantHost: string, isStandalone: boolean): Promise<ResolvedTemplateLayout> {
-  const rawLayout = await storio.getLayout(tenantHost);
+  const [rawLayout, rawImportantLinks] = await Promise.all([
+    storio.getLayout(tenantHost).catch(() => null),
+    storio.apiFetch<{ id: number; title: string; url: string; order?: number }[]>('/api/v2/template/important-links/', { tenantHost }).catch(() => null),
+  ]);
 
   const layout: StorioLayoutResponse | null =
     rawLayout ||
@@ -69,7 +73,11 @@ export async function getTemplateLayout(tenantHost: string, isStandalone: boolea
         ? DEFAULT_DEMO_DATA.navigation
         : [];
 
-  return { layout, settings, customization, navigation };
+  const importantLinks = Array.isArray(rawImportantLinks)
+    ? rawImportantLinks.sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+    : [];
+
+  return { layout, settings, customization, navigation, importantLinks };
 }
 
 export * from './media';

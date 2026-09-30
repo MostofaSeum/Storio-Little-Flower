@@ -28,7 +28,7 @@ export const metadata = {
 
 export default async function VideosGalleryPage() {
   const { tenantHost, isStandalone } = await getTenantContext();
-  const { settings, customization, navigation } = await getTemplateLayout(tenantHost, isStandalone);
+  const { settings, customization, navigation, importantLinks } = await getTemplateLayout(tenantHost, isStandalone);
 
   const rawReels = await storio.apiFetch<StorioReelItem[]>(
     '/api/v2/template/reels/',
@@ -165,7 +165,7 @@ export default async function VideosGalleryPage() {
         </section>
       </main>
 
-      <Footer settings={settings} />
+      <Footer settings={settings} importantLinks={importantLinks} />
     </div>
   );
 }

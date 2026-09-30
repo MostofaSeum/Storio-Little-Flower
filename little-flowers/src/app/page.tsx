@@ -41,8 +41,8 @@ export default async function Home() {
   // 1. Resolve host and tenant context following Storio Rule 1
   const { tenantHost, isStandalone } = await getTenantContext();
 
-  // 2. Fetch layout, customization, and dynamic navigation
-  const { settings, customization, navigation } = await getTemplateLayout(
+  // 2. Fetch layout, customization, dynamic navigation, and important links
+  const { settings, customization, navigation, importantLinks } = await getTemplateLayout(
     tenantHost,
     isStandalone
   );
@@ -213,7 +213,7 @@ export default async function Home() {
       <FaqSection faqs={faqs} />
 
       {/* 14. PLAYFUL COLORFUL FOOTER */}
-      <Footer settings={settings} />
+      <Footer settings={settings} importantLinks={importantLinks} />
 
       {/* 15. FLOATING QUICK ENROLLMENT ACTION */}
       <FloatingEnrollButton />

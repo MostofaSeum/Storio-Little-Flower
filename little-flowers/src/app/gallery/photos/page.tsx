@@ -14,7 +14,7 @@ export const metadata = {
 
 export default async function PhotosGalleryPage() {
   const { tenantHost, isStandalone } = await getTenantContext();
-  const { settings, customization, navigation } = await getTemplateLayout(tenantHost, isStandalone);
+  const { settings, customization, navigation, importantLinks } = await getTemplateLayout(tenantHost, isStandalone);
 
   // Fetch both albums and gallery items in parallel
   const [rawAlbums, rawGallery] = await Promise.all([
@@ -57,7 +57,7 @@ export default async function PhotosGalleryPage() {
         <PhotoGalleryClient albums={albums} photos={photos} />
       </main>
 
-      <Footer settings={settings} />
+      <Footer settings={settings} importantLinks={importantLinks} />
     </div>
   );
 }

@@ -5,15 +5,18 @@ import { StorioSettingsResponse } from "@storio/template-sdk";
 
 interface FooterProps {
   settings?: StorioSettingsResponse | null;
+  importantLinks?: { id: number; title: string; url: string; order?: number }[];
 }
 
-export default function Footer({ settings }: FooterProps) {
+export default function Footer({ settings, importantLinks = [] }: FooterProps) {
+  const hasLinks = importantLinks && importantLinks.length > 0;
+
   return (
     <footer
       id="contact"
       className="bg-topbar text-gray-300 pt-16 pb-8 px-4 sm:px-8 mt-auto border-t-4 border-accent-pink print:hidden"
     >
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-gray-800">
+      <div className={`max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 ${hasLinks ? 'lg:grid-cols-5' : 'lg:grid-cols-4'} gap-10 pb-12 border-b border-gray-800`}>
         {/* Col 1: Branding & Mission */}
         <div className="space-y-4">
           <a href="/" className="flex items-center space-x-3 group">
@@ -69,8 +72,13 @@ export default function Footer({ settings }: FooterProps) {
               </a>
             </li>
             <li>
-              <a href="/#gallery" className="hover:text-accent-green transition-colors">
+              <a href="/gallery/photos" className="hover:text-accent-green transition-colors">
                 Photo Gallery
+              </a>
+            </li>
+            <li>
+              <a href="/gallery/videos" className="hover:text-accent-pink transition-colors">
+                Video Gallery
               </a>
             </li>
             <li>
@@ -86,7 +94,32 @@ export default function Footer({ settings }: FooterProps) {
           </ul>
         </div>
 
-        {/* Col 3: School Hours */}
+        {/* Col 3: Important Links (from API) */}
+        {hasLinks && (
+          <div className="space-y-3">
+            <h4 className="text-white font-bold text-sm tracking-wide flex items-center gap-1.5">
+              <span>Important Links</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-accent-pink animate-pulse" />
+            </h4>
+            <ul className="space-y-2 text-xs text-gray-400">
+              {importantLinks.map((item) => (
+                <li key={item.id}>
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white transition-colors flex items-center gap-1 group"
+                  >
+                    <span>{item.title}</span>
+                    <span className="text-[10px] text-gray-500 group-hover:text-accent-pink transition-colors">↗</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* Col 4: School Hours */}
         <div className="space-y-3">
           <h4 className="text-white font-bold text-sm tracking-wide">
             School Timing
@@ -102,7 +135,7 @@ export default function Footer({ settings }: FooterProps) {
           </p>
         </div>
 
-        {/* Col 4: Campus Contact Info */}
+        {/* Col 5: Campus Contact Info */}
         <div className="space-y-3">
           <h4 className="text-white font-bold text-sm tracking-wide">
             Contact Us

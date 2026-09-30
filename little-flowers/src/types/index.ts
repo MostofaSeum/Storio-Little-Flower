@@ -233,3 +233,21 @@ export interface StorioUserSession {
   role: 'parent' | 'staff';
   token: string;
 }
+
+export interface StorioImportantLink {
+  id: number;
+  title: string;
+  url: string;
+  order?: number;
+}
+
+export interface StorioCalendarEvent {
+  id: number;
+  title: string;
+  description?: string;
+  start_date: string;
+  end_date?: string;
+  category?: 'holiday' | 'exam' | 'event' | string;
+  level?: string;
+  is_all_day?: boolean;
+}
