@@ -1,4 +1,5 @@
 import React from 'react';
+import ThemeIcon from '../ui/ThemeIcon';
 
 interface TopBarProps {
   contactEmail?: string;
@@ -37,8 +38,9 @@ export default function TopBar({ contactEmail = 'info@example.com', phoneNumber 
 
         {/* Right: Quick School Badge & Socials */}
         <div className="flex items-center space-x-4">
-          <span className="hidden sm:inline-block text-[11px] font-bold text-amber-300 bg-amber-950/60 px-2.5 py-0.5 rounded-full border border-amber-500/30">
-            🌱 Admissions Open 2026-27
+          <span className="hidden sm:inline-flex items-center gap-1.5 text-[11px] font-bold text-amber-300 bg-amber-950/60 px-2.5 py-0.5 rounded-full border border-amber-500/30">
+            <ThemeIcon name="sprout-admissions" size={14} />
+            <span>Admissions Open 2026-27</span>
           </span>
           <div className="flex items-center space-x-3 text-gray-400">
             <a

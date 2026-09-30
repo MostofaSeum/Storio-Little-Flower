@@ -7,6 +7,7 @@ import InteractiveHeader from "@/components/layout/InteractiveHeader";
 import Footer from "@/components/layout/Footer";
 import DynamicThemeStyles from "@/components/layout/DynamicThemeStyles";
 import SplitText from "@/components/ui/SplitText";
+import ThemeIcon from "@/components/ui/ThemeIcon";
 
 interface StorioReelItem {
   id: number;
@@ -74,7 +75,7 @@ export default async function VideosGalleryPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-8">
             {videos.length === 0 ? (
               <div className="text-center py-16 px-4 bg-pastel-purple rounded-3xl border border-purple-100">
-                <span className="text-4xl block mb-3">🎬</span>
+                <ThemeIcon name="video-clapper" size={48} className="mx-auto mb-3" />
                 <h3 className="text-xl font-bold font-fredoka text-gray-800 mb-2">
                   No Videos Found
                 </h3>
@@ -142,7 +143,9 @@ export default async function VideosGalleryPage() {
                             </div>
                           </a>
                         ) : (
-                          <div className="text-white text-3xl">🎥</div>
+                          <div className="flex items-center justify-center">
+                            <ThemeIcon name="play-video" size={40} />
+                          </div>
                         )}
                       </div>
 

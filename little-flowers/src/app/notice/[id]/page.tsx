@@ -7,6 +7,7 @@ import { getTenantContext, getTemplateLayout } from '@/lib/storio';
 import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
+import ThemeIcon from '@/components/ui/ThemeIcon';
 
 interface NoticeDetailPageProps {
   params: Promise<{ id: string }>;
@@ -73,8 +74,8 @@ export default async function NoticeDetailPage({ params }: NoticeDetailPageProps
           {/* Top Metadata Header */}
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-gray-100 pb-5 mb-6">
             <div className="flex items-center gap-2.5">
-              <span className="text-xs font-bold text-secondary-color bg-amber-50 px-3 py-1 rounded-full">
-                📅 {notice.published_date || 'Recent Notice'}
+              <span className="inline-flex items-center gap-1.5 text-xs font-bold text-secondary-color bg-amber-50 px-3 py-1 rounded-full">
+                <ThemeIcon name="calendar-badge" size={14} /> {notice.published_date || 'Recent Notice'}
               </span>
               {notice.is_urgent && (
                 <span className="text-[11px] font-extrabold uppercase tracking-wider bg-rose-500 text-white px-3 py-1 rounded-full shadow-2xs animate-pulse">
@@ -112,8 +113,8 @@ export default async function NoticeDetailPage({ params }: NoticeDetailPageProps
           {notice.attachment_url && (
             <div className="mt-10 pt-6 border-t border-gray-100 flex flex-wrap items-center justify-between gap-4 bg-purple-50/60 p-5 rounded-2xl">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-purple-200/80 flex items-center justify-center text-primary-color">
-                  📄
+                <div className="w-10 h-10 rounded-xl bg-white shadow-2xs flex items-center justify-center">
+                  <ThemeIcon name="document-paper" size={20} />
                 </div>
                 <div>
                   <h4 className="font-bold text-xs sm:text-sm text-gray-900">Official Notice Document</h4>

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import ThemeIcon from '@/components/ui/ThemeIcon';
 import { resolveMediaUrl } from '@/lib/media';
 
 export interface StorioExamResult {
@@ -110,7 +111,7 @@ export default function ExamResultsClientView({ results }: ExamResultsClientView
       {/* Results Content Table / Empty State */}
       {filteredResults.length === 0 ? (
         <div className="text-center py-16 px-4 bg-pastel-purple rounded-3xl border border-purple-100">
-          <span className="text-4xl block mb-3">📊</span>
+          <ThemeIcon name="exam-report" size={48} className="mx-auto mb-3" />
           <h3 className="text-xl font-bold font-fredoka text-gray-800 mb-2 capitalize">
             No {activeTab} Results Published
           </h3>
@@ -176,7 +177,7 @@ export default function ExamResultsClientView({ results }: ExamResultsClientView
                           className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold text-primary-color border border-purple-200 hover:bg-pastel-purple transition-all"
                         >
                           <span>Download</span>
-                          <span>📥</span>
+                          <ThemeIcon name="download-card" size={14} />
                         </a>
                       ) : (
                         <span className="text-xs text-gray-400 italic">No File</span>

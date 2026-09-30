@@ -12,6 +12,7 @@ import {
   StorioTestimonial,
   StorioEvent,
   StorioFaq,
+  StorioLeadershipMessage,
 } from "@/types";
 import { DEFAULT_DEMO_DATA } from "@/data/defaultDemoData";
 import { getTenantContext, getTemplateLayout } from "@/lib/storio";
@@ -29,6 +30,7 @@ import HeroCarousel from "@/components/sections/HeroCarousel";
 import WaveBadgesSection from "@/components/sections/WaveBadgesSection";
 import NoticeSection from "@/components/sections/NoticeSection";
 import AboutSection from "@/components/sections/AboutSection";
+import LeadershipFlexCarousel from "@/components/sections/LeadershipFlexCarousel";
 import ActivitiesSection from "@/components/sections/ActivitiesSection";
 import StaffSection from "@/components/sections/StaffSection";
 import PromoCtaSection from "@/components/sections/PromoCtaSection";
@@ -59,6 +61,7 @@ export default async function Home() {
     rawTestimonials,
     rawEvents,
     rawFaqs,
+    rawLeadershipMessages,
   ] = await Promise.all([
     storio.getHeroSlides(tenantHost),
     storio.getNotices(tenantHost),
@@ -79,6 +82,9 @@ export default async function Home() {
     }),
     storio.apiFetch<StorioEvent[]>("/api/events/", { tenantHost }),
     storio.apiFetch<StorioFaq[]>("/api/v2/template/faqs/", { tenantHost }),
+    storio.apiFetch<StorioLeadershipMessage[]>("/api/v2/template/leadership-messages/", {
+      tenantHost,
+    }).catch(() => null),
   ]);
 
   // 4. Apply Rule 1: Fallback to demo data ONLY in standalone preview mode
@@ -154,6 +160,13 @@ export default async function Home() {
         ? DEFAULT_DEMO_DATA.faqs
         : [];
 
+  const leadershipMessages: StorioLeadershipMessage[] =
+    Array.isArray(rawLeadershipMessages) && rawLeadershipMessages.length > 0
+      ? rawLeadershipMessages
+      : isStandalone
+        ? DEFAULT_DEMO_DATA.leadershipMessages
+        : [];
+
   const activePromo = promotions[0] || (isStandalone ? DEFAULT_DEMO_DATA.promotions[0] : null);
   const showTopBar = customization.showTopBar !== false;
 
@@ -191,10 +204,15 @@ export default async function Home() {
       {/* 6. ABOUT US & INSTITUTION PROFILE */}
       <AboutSection profile={profile} />
 
-      {/* 7. LEARNING PROGRAMS & ACTIVITIES */}
+      {/* 7. LEADERSHIP MESSAGES - REACT BITS FLEX CAROUSEL */}
+      {leadershipMessages.length > 0 && (
+        <LeadershipFlexCarousel messages={leadershipMessages} />
+      )}
+
+      {/* 8. LEARNING PROGRAMS & ACTIVITIES */}
       <ActivitiesSection activities={activities} />
 
-      {/* 8. TEACHERS & MENTORS */}
+      {/* 9. TEACHERS & MENTORS */}
       <StaffSection staffList={staffList} />
 
       {/* 9. ADMISSIONS CALL-TO-ACTION PROMOTION */}

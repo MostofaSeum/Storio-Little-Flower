@@ -7,6 +7,7 @@ import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 import SplitText from '@/components/ui/SplitText';
+import ThemeIcon from '@/components/ui/ThemeIcon';
 
 export const metadata = {
   title: 'Notice Board — Little Flowers',
@@ -65,7 +66,7 @@ export default async function NoticePage() {
           <div className="max-w-6xl mx-auto px-4 sm:px-8">
             {notices.length === 0 ? (
               <div className="text-center py-16 px-4 bg-pastel-purple rounded-3xl border border-purple-100">
-                <span className="text-4xl block mb-3">📢</span>
+                <ThemeIcon name="megaphone-notice" size={48} className="mx-auto mb-3" />
                 <h3 className="text-xl font-bold font-fredoka text-gray-800 mb-2">No Active Notices</h3>
                 <p className="text-sm text-gray-500 max-w-md mx-auto">
                   There are no circulars published right now. Please check back later.
@@ -109,7 +110,7 @@ export default async function NoticePage() {
                           className="inline-flex items-center gap-1.5 text-xs font-bold text-primary-color hover:underline"
                         >
                           <span>Attachment PDF</span>
-                          <span>📄</span>
+                          <ThemeIcon name="document-paper" size={14} />
                         </a>
                       </div>
                     )}

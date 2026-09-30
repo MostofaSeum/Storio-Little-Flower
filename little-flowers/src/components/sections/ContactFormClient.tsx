@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import ThemeIcon from '@/components/ui/ThemeIcon';
 import { StorioSettingsResponse } from '@storio/template-sdk';
 
 interface ContactFormClientProps {
@@ -81,8 +82,8 @@ export default function ContactFormClient({ settings, tenantHost }: ContactFormC
             {/* Address */}
             {settings?.mailing_address && (
               <div className="flex items-start gap-4 p-5 rounded-3xl bg-pastel-purple/50 border border-purple-100">
-                <div className="w-12 h-12 rounded-2xl bg-white shadow-2xs flex items-center justify-center text-xl shrink-0 text-primary-color">
-                  📍
+                <div className="w-12 h-12 rounded-2xl bg-white shadow-2xs flex items-center justify-center shrink-0">
+                  <ThemeIcon name="location-pin" size={24} />
                 </div>
                 <div>
                   <h3 className="text-sm font-bold font-fredoka text-gray-900">Campus Location</h3>
@@ -96,8 +97,8 @@ export default function ContactFormClient({ settings, tenantHost }: ContactFormC
             {/* Phone */}
             {settings?.phone_number && (
               <div className="flex items-start gap-4 p-5 rounded-3xl bg-pastel-purple/50 border border-purple-100">
-                <div className="w-12 h-12 rounded-2xl bg-white shadow-2xs flex items-center justify-center text-xl shrink-0 text-accent-pink">
-                  📞
+                <div className="w-12 h-12 rounded-2xl bg-white shadow-2xs flex items-center justify-center shrink-0">
+                  <ThemeIcon name="phone-call" size={24} />
                 </div>
                 <div>
                   <h3 className="text-sm font-bold font-fredoka text-gray-900">Phone</h3>
@@ -116,8 +117,8 @@ export default function ContactFormClient({ settings, tenantHost }: ContactFormC
             {/* Email */}
             {settings?.contact_email && (
               <div className="flex items-start gap-4 p-5 rounded-3xl bg-pastel-purple/50 border border-purple-100">
-                <div className="w-12 h-12 rounded-2xl bg-white shadow-2xs flex items-center justify-center text-xl shrink-0 text-secondary-color">
-                  ✉️
+                <div className="w-12 h-12 rounded-2xl bg-white shadow-2xs flex items-center justify-center shrink-0">
+                  <ThemeIcon name="mail-envelope" size={24} />
                 </div>
                 <div>
                   <h3 className="text-sm font-bold font-fredoka text-gray-900">Email</h3>
@@ -139,8 +140,8 @@ export default function ContactFormClient({ settings, tenantHost }: ContactFormC
         <div className="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-10 border border-purple-100 shadow-xl relative overflow-hidden">
           {status === 'success' ? (
             <div className="py-12 text-center space-y-4">
-              <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-3xl mx-auto shadow-inner">
-                ✓
+              <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto shadow-inner">
+                <ThemeIcon name="success-check" size={32} />
               </div>
               <h3 className="text-2xl font-bold font-fredoka text-gray-900">
                 Message Sent Successfully!

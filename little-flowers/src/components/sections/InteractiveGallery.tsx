@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import ThemeIcon from '../ui/ThemeIcon';
 import { StorioGalleryItem } from '@storio/template-sdk';
 
 interface InteractiveGalleryProps {
@@ -75,8 +76,8 @@ export default function InteractiveGallery({ items }: InteractiveGalleryProps) {
 
             {/* Soft corner sparkle badge */}
             <div className="absolute top-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-white/95 text-primary-color shadow-sm backdrop-blur-sm">
-                🌸 Moments
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-white/95 text-primary-color shadow-sm backdrop-blur-sm">
+                <ThemeIcon name="flower-blossom" size={12} /> Moments
               </span>
             </div>
           </div>

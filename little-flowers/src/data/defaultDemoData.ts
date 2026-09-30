@@ -16,6 +16,7 @@ import {
   StorioAdmissionFormConfig,
   LittleFlowersCustomizationConfig,
   StorioDynamicNavItem,
+  StorioLeadershipMessage,
 } from '@/data/storioExtendedTypes';
 
 /**
@@ -46,6 +47,7 @@ export const DEFAULT_DEMO_DATA: {
   faqs: StorioFaq[];
   admissionFormConfig: StorioAdmissionFormConfig;
   navigation: StorioDynamicNavItem[];
+  leadershipMessages: StorioLeadershipMessage[];
 } = {
   navigation: [
     { id: "1", name: "Home", href: "/" },
@@ -549,4 +551,45 @@ export const DEFAULT_DEMO_DATA: {
       },
     ],
   },
+  leadershipMessages: [
+    {
+      id: 1,
+      section_title: "Chairman's Perspective",
+      name: "Dr. Evelyn Montgomery",
+      role: "Founder & Chairman of Governing Body",
+      company: "Little Flowers Educational Trust",
+      message:
+        "Every child is born with an innate sense of wonder and extraordinary imagination. Our mission at Little Flowers is to safeguard that spark by providing a safe, joyful sanctuary where young minds flourish with curiosity, empathy, and unconditional love.",
+      image: "/homepage/Teachers/Teacher.jpg",
+      image_data: {
+        file: "/homepage/Teachers/Teacher.jpg",
+      },
+    },
+    {
+      id: 2,
+      section_title: "Principal's Welcome",
+      name: "Mrs. Clara Higgins",
+      role: "Headmistress & Early Childhood Director",
+      company: "Little Flowers Kindergarten",
+      message:
+        "Early childhood education is not about rushing children into academia; it is about building deep roots of confidence, social harmony, and sensory agility through play and purposeful exploration. We cherish every tiny milestone our students achieve.",
+      image: "/homepage/Teachers/Teacher2.jpg",
+      image_data: {
+        file: "/homepage/Teachers/Teacher2.jpg",
+      },
+    },
+    {
+      id: 3,
+      section_title: "Academic Dean's Vision",
+      name: "Prof. Arthur Pendelton",
+      role: "Director of Child Pedagogy & Curriculum",
+      company: "Sunshine Valley Academy",
+      message:
+        "By weaving storytelling, physical rhythm, artistic expression, and scientific inquiry into daily classroom routines, we empower little learners to embrace learning with laughter and resilient self-confidence.",
+      image: "/homepage/Teachers/Teacher3.jpg",
+      image_data: {
+        file: "/homepage/Teachers/Teacher3.jpg",
+      },
+    },
+  ],
 };

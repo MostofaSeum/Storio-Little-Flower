@@ -258,3 +258,26 @@ export interface StorioBoardNotice {
   publish_date?: string;
   board_name?: string;
 }
+
+export interface StorioLeadershipMessage {
+  id: number;
+  section_title?: string;
+  name: string;
+  role?: string;
+  company?: string;
+  message: string;
+  image?: number | string;
+  image_data?: {
+    id?: number;
+    file_url?: string;
+    file?: string;
+    alt_text?: string | null;
+  };
+  signature?: number | string;
+  signature_data?: {
+    id?: number;
+    file_url?: string;
+    file?: string;
+    alt_text?: string | null;
+  };
+}

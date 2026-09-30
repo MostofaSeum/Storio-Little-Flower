@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import ThemeIcon from "@/components/ui/ThemeIcon";
 import { resolveMediaUrl } from "@/lib/media";
 import { StorioEvent, StorioCalendarEvent } from "@/types";
 
@@ -98,7 +99,10 @@ export default function EventsAndCalendarClient({
                 : "text-gray-600 hover:text-primary-color"
             }`}
           >
-            <span>🎉 School Events</span>
+            <span className="inline-flex items-center gap-1.5">
+              <ThemeIcon name="event-celebration" size={16} />
+              <span>School Events</span>
+            </span>
             <span
               className={`text-xs px-2 py-0.5 rounded-full font-extrabold ${
                 activeTab === "events"
@@ -118,7 +122,10 @@ export default function EventsAndCalendarClient({
                 : "text-gray-600 hover:text-primary-color"
             }`}
           >
-            <span>📅 Calendar & Holidays</span>
+            <span className="inline-flex items-center gap-1.5">
+              <ThemeIcon name="calendar-badge" size={16} />
+              <span>Calendar & Holidays</span>
+            </span>
             <span
               className={`text-xs px-2 py-0.5 rounded-full font-extrabold ${
                 activeTab === "calendar"
@@ -164,7 +171,7 @@ export default function EventsAndCalendarClient({
         <>
           {events.length === 0 ? (
             <div className="text-center py-16 px-4 bg-pastel-purple rounded-3xl border border-purple-100">
-              <span className="text-4xl block mb-3">📅</span>
+              <ThemeIcon name="calendar-badge" size={48} className="mx-auto mb-3" />
               <h3 className="text-xl font-bold font-fredoka text-gray-800 mb-2">
                 No Upcoming Events
               </h3>
@@ -221,11 +228,11 @@ export default function EventsAndCalendarClient({
                       <div className="space-y-2">
                         <div className="flex flex-wrap items-center gap-2 text-xs font-bold text-gray-500">
                           <span className="inline-flex items-center gap-1 text-primary-color">
-                            ⏰ {time}
+                            <ThemeIcon name="calendar-badge" size={14} /> {time}
                           </span>
                           {event.location && (
                             <span className="inline-flex items-center gap-1 text-gray-600">
-                              • 📍 {event.location}
+                              • <ThemeIcon name="location-pin" size={14} /> {event.location}
                             </span>
                           )}
                         </div>
@@ -267,7 +274,7 @@ export default function EventsAndCalendarClient({
         <div>
           {filteredCalendar.length === 0 ? (
             <div className="text-center py-16 px-4 bg-pastel-purple rounded-3xl border border-purple-100">
-              <span className="text-4xl block mb-3">📅</span>
+              <ThemeIcon name="calendar-badge" size={48} className="mx-auto mb-3" />
               <h3 className="text-xl font-bold font-fredoka text-gray-800 mb-2">
                 No Calendar Items Found
               </h3>

@@ -9,6 +9,7 @@ import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 import SplitText from '@/components/ui/SplitText';
+import ThemeIcon from '@/components/ui/ThemeIcon';
 
 interface EventDetailPageProps {
   params: Promise<{ id: string }>;
@@ -139,8 +140,8 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
           <div className="bg-pastel-purple rounded-3xl p-6 sm:p-8 border border-purple-100 shadow-sm mb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Start Date & Time */}
             <div className="flex items-start gap-3.5">
-              <div className="w-10 h-10 rounded-2xl bg-primary-color text-white flex items-center justify-center text-lg shrink-0">
-                📅
+              <div className="w-10 h-10 rounded-2xl bg-white shadow-2xs flex items-center justify-center shrink-0">
+                <ThemeIcon name="calendar-badge" size={20} />
               </div>
               <div>
                 <span className="block text-xs font-bold uppercase text-gray-400">Date & Start Time</span>
@@ -154,8 +155,8 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
             {/* End Date if present */}
             {endInfo && (
               <div className="flex items-start gap-3.5">
-                <div className="w-10 h-10 rounded-2xl bg-secondary-color text-white flex items-center justify-center text-lg shrink-0">
-                  ⏳
+                <div className="w-10 h-10 rounded-2xl bg-white shadow-2xs flex items-center justify-center shrink-0">
+                  <ThemeIcon name="calendar-badge" size={20} />
                 </div>
                 <div>
                   <span className="block text-xs font-bold uppercase text-gray-400">Conclusion</span>
@@ -170,8 +171,8 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
             {/* Location */}
             {event.location && (
               <div className="flex items-start gap-3.5">
-                <div className="w-10 h-10 rounded-2xl bg-accent-pink text-white flex items-center justify-center text-lg shrink-0">
-                  📍
+                <div className="w-10 h-10 rounded-2xl bg-white shadow-2xs flex items-center justify-center shrink-0">
+                  <ThemeIcon name="location-pin" size={20} />
                 </div>
                 <div>
                   <span className="block text-xs font-bold uppercase text-gray-400">Location & Venue</span>

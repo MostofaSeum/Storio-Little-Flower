@@ -6,6 +6,7 @@ import {
 } from '@/data/storioExtendedTypes';
 import SplitText from '@/components/ui/SplitText';
 import PartyPopperExplosion from '@/components/ui/PartyPopperExplosion';
+import ThemeIcon from '@/components/ui/ThemeIcon';
 
 interface AdmissionPortalClientProps {
   formConfig: StorioAdmissionFormConfig;
@@ -488,7 +489,7 @@ export default function AdmissionPortalClient({
                         : 'bg-pastel-purple text-gray-400'
                   }`}
                 >
-                  {isCompleted ? '✓' : st.num}
+                  {isCompleted ? <ThemeIcon name="success-check" size={18} /> : st.num}
                 </div>
                 <span
                   className={`text-[10px] sm:text-xs font-bold mt-1.5 sm:mt-2 truncate w-full ${
@@ -580,8 +581,8 @@ export default function AdmissionPortalClient({
                             className="w-16 h-16 object-cover rounded-xl border border-purple-100 shadow-inner"
                           />
                           <div className="flex-1 min-w-0">
-                            <span className="text-[11px] font-bold text-accent-green block">
-                              ✓ Photo Selected
+                            <span className="text-[11px] font-bold text-accent-green inline-flex items-center gap-1">
+                              <ThemeIcon name="success-check" size={12} /> Photo Selected
                             </span>
                             <span className="text-xs text-gray-500 truncate block">
                               {formData[field.id]}
@@ -589,8 +590,8 @@ export default function AdmissionPortalClient({
                           </div>
                         </div>
                       ) : formData[field.id] ? (
-                        <span className="text-[11px] text-accent-green font-bold block mt-1">
-                          ✓ Selected: {formData[field.id]}
+                        <span className="text-[11px] text-accent-green font-bold mt-1 inline-flex items-center gap-1">
+                          <ThemeIcon name="success-check" size={12} /> Selected: {formData[field.id]}
                         </span>
                       ) : null}
                     </div>
@@ -622,8 +623,8 @@ export default function AdmissionPortalClient({
                   )}
 
                   {errors[field.id] && (
-                    <p className="text-[11px] font-bold text-accent-pink mt-1 animate-fadeIn">
-                      ⚠️ {errors[field.id]}
+                    <p className="text-[11px] font-bold text-accent-pink mt-1 animate-fadeIn inline-flex items-center gap-1">
+                      <ThemeIcon name="warning-alert" size={12} /> {errors[field.id]}
                     </p>
                   )}
                 </div>
@@ -695,8 +696,8 @@ export default function AdmissionPortalClient({
                             className="w-16 h-16 object-cover rounded-xl border border-purple-100 shadow-inner"
                           />
                           <div className="flex-1 min-w-0">
-                            <span className="text-[11px] font-bold text-accent-green block">
-                              ✓ Photo Selected
+                            <span className="text-[11px] font-bold text-accent-green inline-flex items-center gap-1">
+                              <ThemeIcon name="success-check" size={12} /> Photo Selected
                             </span>
                             <span className="text-xs text-gray-500 truncate block">
                               {formData[field.id]}
@@ -704,8 +705,8 @@ export default function AdmissionPortalClient({
                           </div>
                         </div>
                       ) : formData[field.id] ? (
-                        <span className="text-[11px] text-accent-green font-bold block mt-1">
-                          ✓ Selected: {formData[field.id]}
+                        <span className="text-[11px] text-accent-green font-bold mt-1 inline-flex items-center gap-1">
+                          <ThemeIcon name="success-check" size={12} /> Selected: {formData[field.id]}
                         </span>
                       ) : null}
                     </div>
@@ -737,8 +738,8 @@ export default function AdmissionPortalClient({
                   )}
 
                   {errors[field.id] && (
-                    <p className="text-[11px] font-bold text-accent-pink mt-1 animate-fadeIn">
-                      ⚠️ {errors[field.id]}
+                    <p className="text-[11px] font-bold text-accent-pink mt-1 animate-fadeIn inline-flex items-center gap-1">
+                      <ThemeIcon name="warning-alert" size={12} /> {errors[field.id]}
                     </p>
                   )}
                 </div>
@@ -763,8 +764,8 @@ export default function AdmissionPortalClient({
                     className="w-full px-4 py-3 bg-pastel-purple rounded-2xl border border-purple-100 focus:border-primary-color focus:bg-white focus:outline-none focus:ring-4 focus:ring-purple-100 text-sm font-semibold text-gray-800 transition-all"
                   />
                   {errors['guardian_email'] && (
-                    <p className="text-[11px] font-bold text-accent-pink mt-1 animate-fadeIn">
-                      ⚠️ {errors['guardian_email']}
+                    <p className="text-[11px] font-bold text-accent-pink mt-1 animate-fadeIn inline-flex items-center gap-1">
+                      <ThemeIcon name="warning-alert" size={12} /> {errors['guardian_email']}
                     </p>
                   )}
                 </div>
@@ -772,8 +773,8 @@ export default function AdmissionPortalClient({
             </div>
 
             {otpError && (
-              <div className="p-4 rounded-2xl bg-pink-50 border border-pink-200 text-accent-pink text-xs font-bold animate-fadeIn">
-                ⚠️ {otpError}
+              <div className="p-4 rounded-2xl bg-pink-50 border border-pink-200 text-accent-pink text-xs font-bold animate-fadeIn inline-flex items-center gap-2 w-full">
+                <ThemeIcon name="warning-alert" size={16} /> {otpError}
               </div>
             )}
 
@@ -804,8 +805,8 @@ export default function AdmissionPortalClient({
         {/* STEP 3: OTP Verification */}
         {currentStep === 3 && (
           <form onSubmit={handleVerifyAndSubmit} className="relative z-10 max-w-lg mx-auto py-6 text-center space-y-6 animate-fadeIn">
-            <div className="w-16 h-16 mx-auto rounded-3xl bg-pastel-purple text-primary-color flex items-center justify-center text-3xl shadow-inner border border-purple-100">
-              ✉️
+            <div className="w-16 h-16 mx-auto rounded-3xl bg-pastel-purple text-primary-color flex items-center justify-center shadow-inner border border-purple-100">
+              <ThemeIcon name="mail-envelope" size={32} />
             </div>
 
             <div>
@@ -830,8 +831,8 @@ export default function AdmissionPortalClient({
             </div>
 
             {otpSuccessMsg && (
-              <div className="p-3.5 rounded-2xl bg-amber-50 border border-amber-200 text-secondary-color text-xs font-bold animate-fadeIn transition-opacity duration-500">
-                ✓ {otpSuccessMsg}
+              <div className="p-3.5 rounded-2xl bg-amber-50 border border-amber-200 text-secondary-color text-xs font-bold animate-fadeIn transition-opacity duration-500 inline-flex items-center justify-center gap-1.5 w-full">
+                <ThemeIcon name="success-check" size={14} /> <span>{otpSuccessMsg}</span>
               </div>
             )}
 
@@ -869,8 +870,8 @@ export default function AdmissionPortalClient({
             </div>
 
             {otpError && (
-              <p className="text-xs font-bold text-accent-pink animate-fadeIn">
-                ⚠️ {otpError}
+              <p className="text-xs font-bold text-accent-pink animate-fadeIn inline-flex items-center justify-center gap-1.5">
+                <ThemeIcon name="warning-alert" size={14} /> <span>{otpError}</span>
               </p>
             )}
 

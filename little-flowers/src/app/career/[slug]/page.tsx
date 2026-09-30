@@ -8,6 +8,7 @@ import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 import SplitText from '@/components/ui/SplitText';
+import ThemeIcon from '@/components/ui/ThemeIcon';
 
 interface StorioJobDetail {
   id: number;
@@ -126,12 +127,14 @@ export default async function CareerDetailPage({ params }: CareerDetailPageProps
           {/* Company / Department and Location */}
           {(job.company_name || job.location) && (
             <p className="text-base sm:text-lg font-semibold text-gray-600 mb-8 flex items-center gap-2">
-              <span>🏢</span>
+              <ThemeIcon name="school-building" size={20} />
               <span>{job.company_name || 'Little Flowers Academy'}</span>
               {job.location && (
                 <>
                   <span className="text-gray-300">•</span>
-                  <span>📍 {job.location}</span>
+                  <span className="inline-flex items-center gap-1">
+                    <ThemeIcon name="location-pin" size={16} /> {job.location}
+                  </span>
                 </>
               )}
             </p>
@@ -140,8 +143,8 @@ export default async function CareerDetailPage({ params }: CareerDetailPageProps
           {/* Quick Overview Meta Cards */}
           <div className="bg-pastel-purple rounded-3xl p-6 sm:p-8 border border-purple-100 shadow-sm mb-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             <div className="flex items-start gap-3.5">
-              <div className="w-10 h-10 rounded-2xl bg-primary-color text-white flex items-center justify-center text-lg shrink-0">
-                💼
+              <div className="w-10 h-10 rounded-2xl bg-white shadow-2xs flex items-center justify-center shrink-0">
+                <ThemeIcon name="briefcase-career" size={20} />
               </div>
               <div>
                 <span className="block text-xs font-bold uppercase text-gray-400">Employment Type</span>
@@ -150,8 +153,8 @@ export default async function CareerDetailPage({ params }: CareerDetailPageProps
             </div>
 
             <div className="flex items-start gap-3.5">
-              <div className="w-10 h-10 rounded-2xl bg-secondary-color text-white flex items-center justify-center text-lg shrink-0">
-                👥
+              <div className="w-10 h-10 rounded-2xl bg-white shadow-2xs flex items-center justify-center shrink-0">
+                <ThemeIcon name="people-group" size={20} />
               </div>
               <div>
                 <span className="block text-xs font-bold uppercase text-gray-400">Available Openings</span>
@@ -163,8 +166,8 @@ export default async function CareerDetailPage({ params }: CareerDetailPageProps
 
             {job.deadline && (
               <div className="flex items-start gap-3.5">
-                <div className="w-10 h-10 rounded-2xl bg-accent-pink text-white flex items-center justify-center text-lg shrink-0">
-                  📅
+                <div className="w-10 h-10 rounded-2xl bg-white shadow-2xs flex items-center justify-center shrink-0">
+                  <ThemeIcon name="calendar-badge" size={20} />
                 </div>
                 <div>
                   <span className="block text-xs font-bold uppercase text-gray-400">Application Deadline</span>
@@ -207,7 +210,7 @@ export default async function CareerDetailPage({ params }: CareerDetailPageProps
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-pastel-purple hover:bg-purple-100 text-xs font-bold text-primary-color transition-colors"
                         >
-                          <span>📄</span>
+                          <ThemeIcon name="document-paper" size={14} />
                           <span>{att.title || att.file_name || 'Download Attachment'}</span>
                           <span>↗</span>
                         </a>

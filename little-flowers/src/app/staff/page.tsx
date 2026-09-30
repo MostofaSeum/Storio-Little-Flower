@@ -6,6 +6,7 @@ import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 import StaffClientView from '@/components/sections/StaffClientView';
+import ThemeIcon from '@/components/ui/ThemeIcon';
 
 export const metadata = {
   title: 'Faculty & Governing Body — Little Flowers Kindergarten',
@@ -72,7 +73,7 @@ export default async function StaffPage() {
           {/* Header Banner */}
           <div className="text-center max-w-3xl mx-auto mb-8">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white shadow-sm border border-purple-100 text-xs font-semibold text-primary-color mb-2.5">
-              <span>🌟</span>
+              <ThemeIcon name="sparkle-star" size={16} />
               <span>Our Educators &amp; Leadership</span>
             </div>
             <h1 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tight mb-2.5 font-fredoka">

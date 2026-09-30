@@ -8,6 +8,7 @@ import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 import SplitText from '@/components/ui/SplitText';
+import ThemeIcon from '@/components/ui/ThemeIcon';
 
 export const metadata = {
   title: 'Blog & Educational Stories — Little Flowers Kindergarten',
@@ -63,7 +64,7 @@ export default async function BlogPage() {
           {/* Breadcrumb & Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-8">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white shadow-sm border border-purple-100 text-xs font-semibold text-primary-color mb-3">
-              <span>🌸</span>
+              <ThemeIcon name="flower-blossom" size={16} />
               <span>Our Stories & Insights</span>
             </div>
             <h1 className="text-3xl md:text-5xl font-extrabold text-primary-color tracking-tight mb-3 font-fredoka">
@@ -116,8 +117,8 @@ export default async function BlogPage() {
                         )}
                       </div>
                     ) : (
-                      <div className="w-full h-44 bg-gradient-to-br from-purple-100 via-pink-50 to-amber-50 flex items-center justify-center text-4xl">
-                        🎨
+                      <div className="w-full h-44 bg-gradient-to-br from-purple-100 via-pink-50 to-amber-50 flex items-center justify-center">
+                        <ThemeIcon name="palette-art" size={36} />
                       </div>
                     )}
 
@@ -165,8 +166,8 @@ export default async function BlogPage() {
             </div>
           ) : (
             <div className="max-w-md mx-auto text-center py-16 px-6 bg-white rounded-3xl border border-gray-100 shadow-sm">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-purple-50 text-primary-color flex items-center justify-center text-3xl">
-                📖
+              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-purple-50 text-primary-color flex items-center justify-center">
+                <ThemeIcon name="open-book" size={32} />
               </div>
               <h3 className="text-lg font-bold text-gray-900 mb-2">No Articles Published Yet</h3>
               <p className="text-sm text-gray-500 mb-6">

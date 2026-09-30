@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
+import ThemeIcon from '../ui/ThemeIcon';
 import { StorioHeroSlide } from '@storio/template-sdk';
 
 interface HeroCarouselProps {
@@ -132,8 +133,8 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
 
           {/* Modern Floating Stat Badge 1: Top Right */}
           <div className="absolute top-6 sm:top-8 -right-2 sm:-right-6 bg-white/95 backdrop-blur-md p-2 sm:p-3.5 rounded-2xl shadow-xl border border-pink-100 flex items-center space-x-2 sm:space-x-3 transform animate-float z-20 hover:scale-105 transition-transform cursor-pointer max-w-[150px] sm:max-w-none">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-pink-100 text-accent-pink flex items-center justify-center text-base sm:text-xl shadow-xs shrink-0">
-              🎨
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-pink-100 flex items-center justify-center shadow-xs shrink-0">
+              <ThemeIcon name="palette-art" size={20} />
             </div>
             <div>
               <span className="text-[11px] sm:text-xs font-extrabold text-gray-900 block truncate">Creative Arts</span>
@@ -143,8 +144,8 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
 
           {/* Modern Floating Stat Badge 2: Bottom Left */}
           <div className="absolute bottom-12 sm:bottom-16 -left-2 sm:-left-8 bg-white/95 backdrop-blur-md p-2 sm:p-3.5 rounded-2xl shadow-xl border border-amber-100 flex items-center space-x-2 sm:space-x-3 transform animate-float-reverse z-20 hover:scale-105 transition-transform cursor-pointer max-w-[150px] sm:max-w-none">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-amber-100 text-secondary-color flex items-center justify-center text-base sm:text-xl shadow-xs shrink-0">
-              ⭐
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-amber-100 flex items-center justify-center shadow-xs shrink-0">
+              <ThemeIcon name="sparkle-star" size={20} />
             </div>
             <div>
               <span className="text-[11px] sm:text-xs font-extrabold text-gray-900 block truncate">4.9 / 5 Rating</span>
@@ -181,7 +182,8 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
 
         {/* Dynamic Category Pill */}
         <div className="inline-flex items-center space-x-2 bg-purple-100 text-primary-color font-bold text-xs uppercase px-4 py-1.5 rounded-full mb-4 shadow-xs">
-          <span>✨ Welcome to Little Flowers</span>
+          <ThemeIcon name="sparkle-star" size={14} />
+          <span>Welcome to Little Flowers</span>
           <span className="w-1.5 h-1.5 rounded-full bg-primary-color"></span>
           <span>Admissions 2026-27</span>
         </div>

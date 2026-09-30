@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import ThemeIcon from '@/components/ui/ThemeIcon';
 import { StorioEvent } from '@/data/storioExtendedTypes';
 
 interface AccordionGalleryProps {
@@ -133,8 +134,8 @@ export default function AccordionGallery({ events }: AccordionGalleryProps) {
                       ⏰ {time}
                     </span>
                     {event.location && (
-                      <span className="text-xs font-bold text-sky-200 bg-sky-950/60 backdrop-blur-xs px-2.5 py-0.5 rounded-full border border-sky-400/30">
-                        📍 {event.location}
+                      <span className="inline-flex items-center gap-1 text-xs font-bold text-sky-200 bg-sky-950/60 backdrop-blur-xs px-2.5 py-0.5 rounded-full border border-sky-400/30">
+                        <ThemeIcon name="location-pin" size={13} /> {event.location}
                       </span>
                     )}
                   </div>
@@ -226,7 +227,9 @@ export default function AccordionGallery({ events }: AccordionGalleryProps) {
                 <div className="p-4 bg-white space-y-2 text-xs text-gray-600 animate-fadeIn">
                   <div className="flex items-center gap-2 text-primary-color font-bold">
                     <span>⏰ {time}</span>
-                    {event.location && <span>• 📍 {event.location}</span>}
+                    {event.location && (
+                      <span className="inline-flex items-center gap-1">• <ThemeIcon name="location-pin" size={13} /> {event.location}</span>
+                    )}
                   </div>
                   <p className="leading-relaxed">{event.content || event.excerpt}</p>
                 </div>
