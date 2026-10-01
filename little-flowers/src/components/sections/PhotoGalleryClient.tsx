@@ -36,6 +36,8 @@ interface PhotoGalleryClientProps {
 export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClientProps) {
   const [selectedAlbumId, setSelectedAlbumId] = useState<number | 'all' | null>(null);
   const [lightboxPhoto, setLightboxPhoto] = useState<BackendPhotoItem | null>(null);
+  // Store detected aspect ratios: key is photo id or img url, value is 'wide' | 'tall' | 'standard'
+  const [aspectRatios, setAspectRatios] = useState<Record<string | number, 'wide' | 'tall' | 'standard'>>({});
 
   // Map each album to its cover image (from album.cover_image_url or first photo inside that album)
   const albumsWithDetails = useMemo(() => {
@@ -93,6 +95,21 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
       return null;
     }
     return trimmed;
+  };
+
+  const handleImageLoad = (id: number | string, e: React.SyntheticEvent<HTMLImageElement>) => {
+    const img = e.currentTarget;
+    if (img.naturalWidth && img.naturalHeight) {
+      const ratio = img.naturalWidth / img.naturalHeight;
+      // If width is at least 1.45x height, it's a wide/landscape photo
+      if (ratio >= 1.45) {
+        setAspectRatios((prev) => (prev[id] === 'wide' ? prev : { ...prev, [id]: 'wide' as const }));
+      } else if (ratio < 0.75) {
+        setAspectRatios((prev) => (prev[id] === 'tall' ? prev : { ...prev, [id]: 'tall' as const }));
+      } else {
+        setAspectRatios((prev) => (prev[id] === 'standard' ? prev : { ...prev, [id]: 'standard' as const }));
+      }
+    }
   };
 
   return (
@@ -307,33 +324,39 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
               </button>
             </div>
           ) : (
-            <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 auto-rows-[280px] grid-flow-dense">
               {displayedPhotos.map((item, idx) => {
                 const imgUrl = getPhotoUrl(item);
                 const rawTitle = item.caption || item.image_title || item.alt_text;
                 const cleanTitle = formatDisplayTitle(rawTitle);
-                const staggerDelay = (idx % 4) * 100;
+                const staggerDelay = (idx % 4) * 80;
+                const detectedType = aspectRatios[item.id] || 'standard';
+                const isWide = detectedType === 'wide';
+                const isTall = detectedType === 'tall';
 
                 return (
                   <div
                     key={item.id}
                     onClick={() => setLightboxPhoto(item)}
-                    className="break-inside-avoid group rounded-3xl overflow-hidden bg-white border border-purple-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col cursor-pointer transform hover:-translate-y-1.5 animate-fadeIn"
+                    className={`group rounded-3xl overflow-hidden bg-white border border-purple-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col cursor-pointer transform hover:-translate-y-1.5 animate-fadeIn ${
+                      isWide ? 'sm:col-span-2 row-span-1' : isTall ? 'col-span-1 sm:row-span-2' : 'col-span-1 row-span-1'
+                    }`}
                     style={{
                       borderRadius: 'var(--site-card-radius, 1.5rem)',
                       animationDelay: `${staggerDelay}ms`,
                     }}
                   >
-                    <div className="relative overflow-hidden bg-purple-50">
+                    <div className="relative w-full h-full min-h-[220px] flex-1 overflow-hidden bg-purple-50">
                       {imgUrl ? (
                         <img
                           src={imgUrl}
                           alt={cleanTitle || 'Campus Moment'}
-                          className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700 ease-out block"
+                          onLoad={(e) => handleImageLoad(item.id, e)}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out block"
                           loading="lazy"
                         />
                       ) : (
-                        <div className="w-full aspect-4/3 flex items-center justify-center text-purple-300">
+                        <div className="w-full h-full flex items-center justify-center text-purple-300">
                           <svg className="w-10 h-10" fill="none" stroke="currentColor" strokeWidth="1.75" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                           </svg>
@@ -341,7 +364,7 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
                       )}
 
                       {/* Hover Overlay with soft zoom indicator */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-gray-950/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4">
+                      <div className="absolute inset-0 bg-gradient-to-t from-gray-950/75 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4">
                         <div className="self-end">
                           <span className="w-9 h-9 rounded-full bg-white/90 text-gray-900 flex items-center justify-center shadow-md transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                             <svg className="w-4 h-4 text-gray-800" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
@@ -365,8 +388,8 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
 
                     {/* Card bottom text (only rendered when there is a real, non-filename caption) */}
                     {cleanTitle && (
-                      <div className="p-4 flex-1 flex flex-col justify-between bg-white">
-                        <h4 className="font-bold text-sm text-gray-900 line-clamp-2">
+                      <div className="p-3.5 bg-white shrink-0 border-t border-purple-50">
+                        <h4 className="font-bold text-sm text-gray-900 line-clamp-1">
                           {cleanTitle}
                         </h4>
                       </div>
