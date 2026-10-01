@@ -681,11 +681,16 @@ export const FlexCarousel = ({
         image.crossOrigin = "anonymous";
       }
       image.decoding = "async";
-      image.onload = () => {
+
+      const handleImageReady = () => {
         if (!alive || !slots.includes(slot)) return;
-        texture.image = image;
-        texture.update();
-        slot.image = [image.naturalWidth || 1, image.naturalHeight || 1];
+        try {
+          texture.image = image;
+          texture.update();
+        } catch (err) {
+          console.warn("Failed to upload texture image to GPU:", err);
+        }
+        slot.image = [image.naturalWidth || 400, image.naturalHeight || 400];
         slot.aspect = slot.image[0] / Math.max(slot.image[1], 1);
         try {
           const probe = document.createElement("canvas");
@@ -710,16 +715,34 @@ export const FlexCarousel = ({
         dirty = true;
         start();
       };
+
+      image.onload = () => {
+        handleImageReady();
+      };
+
       image.onerror = () => {
         if (!alive) return;
+        // If primary src fails and it wasn't the default fallback, attempt fallback
+        const fallbackSrc = "/homepage/Teachers/Teacher.jpg";
+        if (image.src && !image.src.includes(fallbackSrc)) {
+          image.onerror = () => {
+            slot.failed = true;
+            dirty = true;
+            start();
+          };
+          image.removeAttribute("crossorigin");
+          image.src = fallbackSrc;
+          return;
+        }
         slot.failed = true;
         dirty = true;
         start();
       };
+
       image.src = item.src;
       // If image is already cached and loaded synchronously
       if (image.complete && image.naturalWidth > 0) {
-        image.onload(new Event("load"));
+        handleImageReady();
       }
       slot.dispose = () => {
         image.onload = null;

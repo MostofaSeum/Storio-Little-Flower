@@ -25,7 +25,15 @@ export default function LeadershipFlexCarousel({ messages }: LeadershipFlexCarou
         msg.image_data?.file ||
         (typeof msg.image === 'string' ? msg.image : null);
 
-      const src = rawUrl ? resolveMediaUrl(rawUrl) : '/homepage/Teachers/Teacher.jpg';
+      // Prefer same-origin relative path for /media/ so WebGL canvas textures load cleanly without cross-origin blocking
+      let src = '/homepage/Teachers/Teacher.jpg';
+      if (rawUrl) {
+        if (rawUrl.startsWith('/media/')) {
+          src = rawUrl;
+        } else {
+          src = resolveMediaUrl(rawUrl);
+        }
+      }
 
       return {
         src,

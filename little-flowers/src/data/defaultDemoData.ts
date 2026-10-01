@@ -573,9 +573,9 @@ export const DEFAULT_DEMO_DATA: {
       company: "Little Flowers Kindergarten",
       message:
         "Early childhood education is not about rushing children into academia; it is about building deep roots of confidence, social harmony, and sensory agility through play and purposeful exploration. We cherish every tiny milestone our students achieve.",
-      image: "/homepage/Teachers/Teacher2.jpg",
+      image: "/homepage/Teachers/Teacher.jpg",
       image_data: {
-        file: "/homepage/Teachers/Teacher2.jpg",
+        file: "/homepage/Teachers/Teacher.jpg",
       },
     },
     {
@@ -586,9 +586,9 @@ export const DEFAULT_DEMO_DATA: {
       company: "Sunshine Valley Academy",
       message:
         "By weaving storytelling, physical rhythm, artistic expression, and scientific inquiry into daily classroom routines, we empower little learners to embrace learning with laughter and resilient self-confidence.",
-      image: "/homepage/Teachers/Teacher3.jpg",
+      image: "/homepage/Teachers/Teacher.jpg",
       image_data: {
-        file: "/homepage/Teachers/Teacher3.jpg",
+        file: "/homepage/Teachers/Teacher.jpg",
       },
     },
   ],
