@@ -181,12 +181,18 @@ export default function HeroCarousel({ slides, siteTitle }: HeroCarouselProps) {
           }}
         ></div>
 
-        {/* Dynamic Category Pill */}
-        <div className="inline-flex items-center space-x-2 bg-purple-100 text-primary-color font-bold text-xs uppercase px-4 py-1.5 rounded-full mb-4 shadow-xs">
-          <ThemeIcon name="sparkle-star" size={14} />
-          <span>{`Welcome to ${siteTitle || 'Our School'}`}</span>
-          <span className="w-1.5 h-1.5 rounded-full bg-primary-color"></span>
-          <span>Admissions 2026-27</span>
+        {/* Dynamic Category Pill (resilient to long school names) */}
+        <div className="inline-flex flex-wrap items-center gap-x-2 gap-y-1 bg-purple-100/90 text-primary-color font-bold text-xs uppercase px-3.5 py-1.5 rounded-2xl sm:rounded-full mb-4 shadow-xs max-w-full">
+          <div className="inline-flex items-center gap-1.5 shrink min-w-0">
+            <ThemeIcon name="sparkle-star" size={14} className="shrink-0" />
+            <span className="leading-snug">{`Welcome to ${siteTitle || 'Our School'}`}</span>
+          </div>
+          <div className="inline-flex items-center gap-1.5 shrink-0 whitespace-nowrap">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary-color shrink-0 hidden sm:inline-block"></span>
+            <span className="bg-white/80 text-primary-color px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-extrabold tracking-wide">
+              Admissions 2026-27
+            </span>
+          </div>
         </div>
 
         {/* Dynamic Slide Title and Information */}

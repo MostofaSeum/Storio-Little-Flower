@@ -119,11 +119,11 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
               className={`w-full h-full object-contain brightness-0 invert drop-shadow-xs ${settings?.logo_url ? 'hidden' : 'block'}`}
             />
           </div>
-          {/* Responsive title wrapper preventing navbar breakage for long school names */}
-          <div className="min-w-0 max-w-[150px] sm:max-w-[220px] md:max-w-[280px] lg:max-w-[240px] xl:max-w-[340px]">
-            <span className="text-base sm:text-lg xl:text-xl font-bold tracking-tight text-gray-900 font-fredoka flex items-center gap-1.5 leading-tight">
-              <span className="truncate">{settings?.site_title || 'Little Flowers'}</span>
-              <span className="w-2 h-2 rounded-full bg-accent-pink animate-pulse shrink-0"></span>
+          {/* Responsive title wrapper that wraps long school names into multiple lines */}
+          <div className="min-w-0 max-w-[160px] sm:max-w-[220px] md:max-w-[280px] lg:max-w-[240px] xl:max-w-[320px]">
+            <span className="text-sm sm:text-base xl:text-lg font-bold tracking-tight text-gray-900 font-fredoka flex items-center gap-1.5 leading-snug break-words">
+              <span>{settings?.site_title || 'Little Flowers'}</span>
+              <span className="w-2 h-2 rounded-full bg-accent-pink animate-pulse shrink-0 inline-block"></span>
             </span>
           </div>
         </a>
