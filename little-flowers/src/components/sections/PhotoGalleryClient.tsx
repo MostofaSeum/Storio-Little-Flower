@@ -150,10 +150,10 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
                 <div
                   key={album.id}
                   onClick={() => setSelectedAlbumId(album.id)}
-                  className="group bg-white rounded-3xl overflow-hidden border border-purple-100 shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer flex flex-col transform hover:-translate-y-1.5 reveal-on-scroll"
+                  className="group bg-white rounded-3xl overflow-hidden border border-purple-100 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col transform hover:-translate-y-1.5 animate-fadeIn"
                   style={{
                     borderRadius: 'var(--site-card-radius, 1.5rem)',
-                    transitionDelay: `${(idx % 3) * 120}ms`,
+                    animationDelay: `${(idx % 3) * 100}ms`,
                   }}
                 >
                   {/* Cover Image Container */}
@@ -318,10 +318,10 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
                   <div
                     key={item.id}
                     onClick={() => setLightboxPhoto(item)}
-                    className="break-inside-avoid group rounded-3xl overflow-hidden bg-white border border-purple-100 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col cursor-pointer transform hover:-translate-y-1.5 reveal-on-scroll"
+                    className="break-inside-avoid group rounded-3xl overflow-hidden bg-white border border-purple-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col cursor-pointer transform hover:-translate-y-1.5 animate-fadeIn"
                     style={{
                       borderRadius: 'var(--site-card-radius, 1.5rem)',
-                      transitionDelay: `${staggerDelay}ms`,
+                      animationDelay: `${staggerDelay}ms`,
                     }}
                   >
                     <div className="relative overflow-hidden bg-purple-50">
