@@ -46,7 +46,7 @@ export async function generateMetadata() {
 
   return {
     title: `${schoolName} — Kindergarten & School`,
-    description: settings?.site_description || "Practical teaching & social development for kids",
+    description: settings?.site_tagline || "Practical teaching & social development for kids",
   };
 }
 
