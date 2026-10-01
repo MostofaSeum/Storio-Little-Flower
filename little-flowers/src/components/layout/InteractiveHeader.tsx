@@ -72,11 +72,14 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
 
   return (
     <header
-      className={`sticky top-0 z-40 transition-all duration-300 print:hidden ${
+      className={`sticky top-0 z-50 transition-all duration-300 print:hidden ${
         isScrolled
-          ? 'py-2.5 bg-white/95 backdrop-blur-md shadow-md border-b border-gray-100'
-          : 'py-3.5 bg-white border-b border-gray-100'
+          ? 'py-2.5 bg-white/75 backdrop-blur-xl shadow-lg shadow-purple-500/5 border-b border-white/40'
+          : 'py-3.5 bg-white/95 backdrop-blur-sm border-b border-gray-100'
       }`}
+      style={{
+        WebkitBackdropFilter: isScrolled ? 'blur(16px)' : 'blur(4px)',
+      }}
     >
       <div className="max-w-[1536px] mx-auto px-3 sm:px-6 flex items-center justify-between gap-2 sm:gap-4">
         {/* Logo with playful wiggle hover */}

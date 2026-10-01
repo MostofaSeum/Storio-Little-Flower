@@ -171,7 +171,7 @@ export default async function Home() {
   const showTopBar = customization.showTopBar !== false;
 
   return (
-    <div className="min-h-screen bg-white text-gray-800 flex flex-col overflow-x-hidden selection:bg-pink-100 selection:text-pink-700">
+    <div className="min-h-screen bg-white text-gray-800 flex flex-col selection:bg-pink-100 selection:text-pink-700">
       {/* Dynamic CSS Variables injected from Storio CMS Customization Config */}
       <DynamicThemeStyles customization={customization} />
 

@@ -28,6 +28,7 @@
 body {
   font-family: var(--font-quicksand);
   color: var(--text-dark);
+  overflow-x: clip;
 }
 
 ::selection {
