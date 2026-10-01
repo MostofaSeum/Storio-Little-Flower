@@ -5,6 +5,7 @@ import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 import SplitText from '@/components/ui/SplitText';
+import ScrollObserver from '@/components/ui/ScrollObserver';
 import PhotoGalleryClient, { BackendAlbum, BackendPhotoItem } from '@/components/sections/PhotoGalleryClient';
 
 export async function generateMetadata() {
@@ -63,6 +64,7 @@ export default async function PhotosGalleryPage() {
         <PhotoGalleryClient albums={albums} photos={photos} />
       </main>
 
+      <ScrollObserver />
       <Footer settings={settings} importantLinks={importantLinks} />
     </div>
   );

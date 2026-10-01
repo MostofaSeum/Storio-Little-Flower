@@ -75,6 +75,26 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
     return resolveMediaUrl(rawFile);
   };
 
+  /**
+   * Smart caption cleaner:
+   * 1. Detects raw file extensions (.webp, .jpg, .png, etc.) and ignores them.
+   * 2. Cleans raw hash suffixes if any.
+   * 3. Returns null if there is no real title/caption so cards remain clean.
+   */
+  const formatDisplayTitle = (rawTitle?: string | null): string | null => {
+    if (!rawTitle) return null;
+    const trimmed = rawTitle.trim();
+    // If it looks like a filename, don't show it as a caption
+    if (/\.(webp|jpg|jpeg|png|gif|svg|avif)$/i.test(trimmed)) {
+      return null;
+    }
+    // Filter out common automated upload names like "images_2", "img8_NaWptjY"
+    if (/^(image|images|img|photo|dsc)[\-_0-9a-zA-Z]*$/i.test(trimmed)) {
+      return null;
+    }
+    return trimmed;
+  };
+
   return (
     <div className="site-container px-4 sm:px-8 py-6 sm:py-8">
       {/* VIEW 1: ALBUM CARDS GRID (When no album is selected) */}
@@ -126,12 +146,15 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {albumsWithDetails.map((album) => (
+              {albumsWithDetails.map((album, idx) => (
                 <div
                   key={album.id}
                   onClick={() => setSelectedAlbumId(album.id)}
-                  className="group bg-white rounded-3xl overflow-hidden border border-purple-100 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col transform hover:-translate-y-1"
-                  style={{ borderRadius: 'var(--site-card-radius, 1.5rem)' }}
+                  className="group bg-white rounded-3xl overflow-hidden border border-purple-100 shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer flex flex-col transform hover:-translate-y-1.5 reveal-on-scroll"
+                  style={{
+                    borderRadius: 'var(--site-card-radius, 1.5rem)',
+                    transitionDelay: `${(idx % 3) * 120}ms`,
+                  }}
                 >
                   {/* Cover Image Container */}
                   <div className="relative aspect-16/10 bg-purple-50 overflow-hidden">
@@ -285,23 +308,28 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
             </div>
           ) : (
             <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6">
-              {displayedPhotos.map((item) => {
+              {displayedPhotos.map((item, idx) => {
                 const imgUrl = getPhotoUrl(item);
-                const title = item.caption || item.image_title || item.alt_text || 'Photo';
+                const rawTitle = item.caption || item.image_title || item.alt_text;
+                const cleanTitle = formatDisplayTitle(rawTitle);
+                const staggerDelay = (idx % 4) * 100;
 
                 return (
                   <div
                     key={item.id}
                     onClick={() => setLightboxPhoto(item)}
-                    className="break-inside-avoid group rounded-3xl overflow-hidden bg-white border border-purple-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col cursor-pointer transform hover:-translate-y-1"
-                    style={{ borderRadius: 'var(--site-card-radius, 1.5rem)' }}
+                    className="break-inside-avoid group rounded-3xl overflow-hidden bg-white border border-purple-100 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col cursor-pointer transform hover:-translate-y-1.5 reveal-on-scroll"
+                    style={{
+                      borderRadius: 'var(--site-card-radius, 1.5rem)',
+                      transitionDelay: `${staggerDelay}ms`,
+                    }}
                   >
                     <div className="relative overflow-hidden bg-purple-50">
                       {imgUrl ? (
                         <img
                           src={imgUrl}
-                          alt={item.alt_text || title}
-                          className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500 block"
+                          alt={cleanTitle || 'Campus Moment'}
+                          className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700 ease-out block"
                           loading="lazy"
                         />
                       ) : (
@@ -312,13 +340,20 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
                         </div>
                       )}
 
-                      {/* Hover Overlay */}
-                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <span className="w-10 h-10 rounded-full bg-white/90 text-gray-900 flex items-center justify-center shadow-md">
-                          <svg className="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                          </svg>
-                        </span>
+                      {/* Hover Overlay with soft zoom indicator */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-gray-950/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4">
+                        <div className="self-end">
+                          <span className="w-9 h-9 rounded-full bg-white/90 text-gray-900 flex items-center justify-center shadow-md transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                            <svg className="w-4 h-4 text-gray-800" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                            </svg>
+                          </span>
+                        </div>
+                        {cleanTitle && (
+                          <p className="text-white text-xs font-bold line-clamp-2 drop-shadow-sm transform translate-y-1 group-hover:translate-y-0 transition-transform duration-300">
+                            {cleanTitle}
+                          </p>
+                        )}
                       </div>
 
                       {item.album_name && selectedAlbumId === 'all' && (
@@ -328,10 +363,11 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
                       )}
                     </div>
 
-                    {(item.caption || item.image_title) && (
+                    {/* Card bottom text (only rendered when there is a real, non-filename caption) */}
+                    {cleanTitle && (
                       <div className="p-4 flex-1 flex flex-col justify-between bg-white">
                         <h4 className="font-bold text-sm text-gray-900 line-clamp-2">
-                          {item.caption || item.image_title}
+                          {cleanTitle}
                         </h4>
                       </div>
                     )}
@@ -370,10 +406,10 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
               alt={lightboxPhoto.caption || lightboxPhoto.image_title || 'Photo Preview'}
               className="max-w-full max-h-[80vh] object-contain rounded-2xl shadow-2xl"
             />
-            {(lightboxPhoto.caption || lightboxPhoto.image_title) && (
+            {formatDisplayTitle(lightboxPhoto.caption || lightboxPhoto.image_title) && (
               <div className="mt-4 text-center px-4">
                 <p className="text-white text-base sm:text-lg font-bold font-fredoka">
-                  {lightboxPhoto.caption || lightboxPhoto.image_title}
+                  {formatDisplayTitle(lightboxPhoto.caption || lightboxPhoto.image_title)}
                 </p>
                 {lightboxPhoto.album_name && (
                   <span className="inline-block mt-1 text-xs text-pink-300 font-semibold uppercase tracking-wider">
