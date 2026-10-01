@@ -52,16 +52,17 @@ interface ActivityDetailPageProps {
 
 export async function generateMetadata({ params }: ActivityDetailPageProps) {
   const { slug } = await params;
-  const { tenantHost } = await getTenantContext();
+  const { tenantHost, isStandalone } = await getTenantContext();
+  const [{ settings }, activity] = await Promise.all([
+    getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null })),
+    storio.apiFetch<StorioActivityDetail>(`/api/v2/template/activities/${slug}/`, { tenantHost }).catch(() => null),
+  ]);
 
-  const activity = await storio.apiFetch<StorioActivityDetail>(
-    `/api/v2/template/activities/${slug}/`,
-    { tenantHost }
-  );
+  const schoolName = settings?.site_title || 'Learning Programs';
 
   if (!activity) {
     return {
-      title: 'Program Details — Little Flowers',
+      title: `Program Details — ${schoolName}`,
     };
   }
 

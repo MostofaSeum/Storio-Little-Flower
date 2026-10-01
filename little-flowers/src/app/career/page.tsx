@@ -22,10 +22,16 @@ interface StorioJobOpening {
   status?: string;
 }
 
-export const metadata = {
-  title: 'Careers & Opportunities — Little Flowers',
-  description: 'Join our dedicated team of educators, caregivers, and administrative professionals.',
-};
+export async function generateMetadata() {
+  const { tenantHost, isStandalone } = await getTenantContext();
+  const { settings } = await getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null }));
+  const schoolName = settings?.site_title || 'Careers';
+
+  return {
+    title: `Careers & Opportunities — ${schoolName}`,
+    description: 'Join our dedicated team of educators, caregivers, and administrative professionals.',
+  };
+}
 
 export default async function CareersPage() {
   const { tenantHost, isStandalone } = await getTenantContext();

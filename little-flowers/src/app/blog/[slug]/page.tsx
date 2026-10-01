@@ -15,18 +15,22 @@ interface BlogPostPageProps {
 export async function generateMetadata({ params }: BlogPostPageProps) {
   const { slug } = await params;
   const { tenantHost, isStandalone } = await getTenantContext();
-  const rawPost: StorioBlogPost | null = await storio.getBlogDetail(slug, tenantHost);
+  const [{ settings }, rawPost] = await Promise.all([
+    getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null })),
+    storio.getBlogDetail(slug, tenantHost),
+  ]);
   const post = rawPost || (isStandalone ? DEFAULT_DEMO_DATA.blogs?.find((b) => b.slug === slug) : null);
+  const schoolName = settings?.site_title || 'Kindergarten';
 
   if (!post) {
     return {
-      title: 'Article Not Found — Little Flowers Kindergarten',
+      title: `Article Not Found — ${schoolName}`,
     };
   }
 
   return {
-    title: `${post.title} — Little Flowers Kindergarten`,
-    description: post.summary || `Read ${post.title} on Little Flowers Kindergarten blog.`,
+    title: `${post.title} — ${schoolName}`,
+    description: post.summary || `Read ${post.title} on ${schoolName} blog.`,
   };
 }
 

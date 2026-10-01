@@ -32,10 +32,16 @@ interface InstitutionProfileData {
   total_teachers_label?: string;
 }
 
-export const metadata = {
-  title: 'Institution Profile — Little Flowers',
-  description: 'Official institutional details, accreditation metrics, and administrative information.',
-};
+export async function generateMetadata() {
+  const { tenantHost, isStandalone } = await getTenantContext();
+  const { settings } = await getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null }));
+  const schoolName = settings?.site_title || 'Institution Profile';
+
+  return {
+    title: `Institution Profile — ${schoolName}`,
+    description: 'Official institutional details, accreditation metrics, and administrative information.',
+  };
+}
 
 export default async function InstitutionProfilePage() {
   const { tenantHost, isStandalone } = await getTenantContext();

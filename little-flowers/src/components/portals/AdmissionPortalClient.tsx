@@ -12,12 +12,14 @@ interface AdmissionPortalClientProps {
   formConfig: StorioAdmissionFormConfig;
   tenantHost: string;
   isStandalone: boolean;
+  siteTitle?: string;
 }
 
 export default function AdmissionPortalClient({
   formConfig,
   tenantHost,
   isStandalone,
+  siteTitle,
 }: AdmissionPortalClientProps) {
   // Stepper state: 1 = Student Info, 2 = Guardian Info, 3 = OTP Verification, 4 = Success
   const [currentStep, setCurrentStep] = useState<number>(1);
@@ -457,7 +459,7 @@ export default function AdmissionPortalClient({
         </span>
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-primary-color font-fredoka leading-tight">
           <SplitText
-            text="Join the Little Flowers Family"
+            text={siteTitle ? `Join the ${siteTitle} Family` : 'Join Our School Family'}
             tag="span"
             splitType="words, chars"
             delay={30}
@@ -906,7 +908,7 @@ export default function AdmissionPortalClient({
                 Application Received Successfully!
               </span>
               <h2 className="text-3xl font-black text-primary-color mt-3 font-fredoka">
-                Welcome to Little Flowers!
+                {`Welcome to ${siteTitle || 'Our School'}!`}
               </h2>
               <p className="text-gray-600 text-xs sm:text-sm mt-2 leading-relaxed font-medium">
                 Thank you, <strong>{formData['father_name'] || formData['mother_name'] || 'Guardian'}</strong>. We have

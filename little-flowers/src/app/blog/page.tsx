@@ -10,10 +10,16 @@ import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 import SplitText from '@/components/ui/SplitText';
 import ThemeIcon from '@/components/ui/ThemeIcon';
 
-export const metadata = {
-  title: 'Blog & Educational Stories — Little Flowers Kindergarten',
-  description: 'Read the latest articles, updates, and educational stories from Little Flowers Kindergarten.',
-};
+export async function generateMetadata() {
+  const { tenantHost, isStandalone } = await getTenantContext();
+  const { settings } = await getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null }));
+  const schoolName = settings?.site_title || 'Kindergarten';
+
+  return {
+    title: `Blog & Educational Stories — ${schoolName}`,
+    description: `Read the latest articles, updates, and educational stories from ${schoolName}.`,
+  };
+}
 
 /**
  * ============================================================================

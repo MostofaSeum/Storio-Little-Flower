@@ -8,10 +8,16 @@ import Footer from '@/components/layout/Footer';
 import AdmissionPortalClient from '@/components/portals/AdmissionPortalClient';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 
-export const metadata = {
-  title: 'Online Admission Portal — Little Flowers Kindergarten',
-  description: 'Apply online for Playgroup, Nursery, and Kindergarten admissions at Little Flowers.',
-};
+export async function generateMetadata() {
+  const { tenantHost, isStandalone } = await getTenantContext();
+  const { settings } = await getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null }));
+  const schoolName = settings?.site_title || 'Kindergarten';
+
+  return {
+    title: `Online Admission Portal — ${schoolName}`,
+    description: `Apply online for admissions at ${schoolName}.`,
+  };
+}
 
 export default async function AdmissionPage() {
   // 1. Resolve host and tenant context
@@ -54,6 +60,7 @@ export default async function AdmissionPage() {
             formConfig={formConfig}
             tenantHost={tenantHost}
             isStandalone={isStandalone}
+            siteTitle={settings?.site_title}
           />
         ) : (
           <div className="max-w-2xl mx-auto px-4 py-20 text-center">

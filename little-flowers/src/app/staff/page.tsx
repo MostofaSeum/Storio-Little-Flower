@@ -9,10 +9,16 @@ import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 import StaffClientView from '@/components/sections/StaffClientView';
 import ThemeIcon from '@/components/ui/ThemeIcon';
 
-export const metadata = {
-  title: 'Faculty & Governing Body — Little Flowers Kindergarten',
-  description: 'Meet our loving educators, teachers, and leadership board at Little Flowers Kindergarten.',
-};
+export async function generateMetadata() {
+  const { tenantHost, isStandalone } = await getTenantContext();
+  const { settings } = await getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null }));
+  const schoolName = settings?.site_title || 'Kindergarten';
+
+  return {
+    title: `Faculty & Governing Body — ${schoolName}`,
+    description: `Meet our loving educators, teachers, and leadership board at ${schoolName}.`,
+  };
+}
 
 /**
  * ============================================================================

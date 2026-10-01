@@ -10,10 +10,16 @@ import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 import SplitText from '@/components/ui/SplitText';
 
-export const metadata = {
-  title: 'About Us — Little Flowers Kindergarten',
-  description: 'Learn about our educational philosophy, mission, loving mentors, and governing leadership.',
-};
+export async function generateMetadata() {
+  const { tenantHost, isStandalone } = await getTenantContext();
+  const { settings } = await getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null }));
+  const schoolName = settings?.site_title || 'Kindergarten';
+
+  return {
+    title: `About Us — ${schoolName}`,
+    description: 'Learn about our educational philosophy, mission, loving mentors, and governing leadership.',
+  };
+}
 
 /**
  * ============================================================================
@@ -84,7 +90,7 @@ export default async function AboutPage() {
               <div className="relative mx-auto max-w-[420px] rounded-3xl overflow-hidden border-8 border-white shadow-xl transform -rotate-1 hover:rotate-0 transition-all duration-500">
                 <img
                   src={profile?.institution_image_url || "/homepage/About Our Academy/Trial 1.jpg"}
-                  alt="Little Flowers Academy"
+                  alt={settings?.site_title || "School Academy"}
                   className="w-full h-[400px] object-cover"
                 />
               </div>
@@ -116,7 +122,7 @@ export default async function AboutPage() {
               </h1>
               <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
                 {profile?.school_details ||
-                  "Little Flowers Kindergarten provides experiential early childhood education centered on play, sensory exploration, creativity, and foundational social skills."}
+                  "Our school provides experiential early childhood education centered on play, sensory exploration, creativity, and foundational social skills."}
               </p>
 
               {/* Mission & Vision Cards */}

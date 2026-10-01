@@ -8,10 +8,16 @@ import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 import SplitText from '@/components/ui/SplitText';
 import ExamResultsClientView, { StorioExamResult } from '@/components/sections/ExamResultsClientView';
 
-export const metadata = {
-  title: 'Exam Results — Little Flowers',
-  description: 'View academic performance summaries, class results, and official marks sheets.',
-};
+export async function generateMetadata() {
+  const { tenantHost, isStandalone } = await getTenantContext();
+  const { settings } = await getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null }));
+  const schoolName = settings?.site_title || 'Exam Results';
+
+  return {
+    title: `Exam Results — ${schoolName}`,
+    description: 'View academic performance summaries, class results, and official marks sheets.',
+  };
+}
 
 export default async function ExamResultsPage() {
   const { tenantHost, isStandalone } = await getTenantContext();

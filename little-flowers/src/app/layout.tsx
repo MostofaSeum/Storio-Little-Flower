@@ -16,7 +16,10 @@ const fredoka = Fredoka({
 });
 
 export const metadata: Metadata = {
-  title: "Little Flowers — Kindergarten & School",
+  title: {
+    template: "%s",
+    default: "Kindergarten & School",
+  },
   description: "Practical teaching & social development for kids",
 };
 

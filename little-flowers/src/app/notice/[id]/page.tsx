@@ -15,8 +15,11 @@ interface NoticeDetailPageProps {
 
 export async function generateMetadata({ params }: NoticeDetailPageProps) {
   const { id } = await params;
+  const { tenantHost, isStandalone } = await getTenantContext();
+  const { settings } = await getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null }));
+  const schoolName = settings?.site_title || 'Kindergarten';
   return {
-    title: `Notice #${id} — Little Flowers Kindergarten`,
+    title: `Notice #${id} — ${schoolName}`,
     description: `Official school announcement and circular details.`,
   };
 }
@@ -138,7 +141,7 @@ export default async function NoticeDetailPage({ params }: NoticeDetailPageProps
 
           {/* Stamp / Authorization Footer */}
           <div className="mt-12 pt-6 border-t border-dashed border-gray-200 flex flex-wrap items-center justify-between text-xs text-gray-500">
-            <span>Issued by Administration &bull; {settings?.site_title || 'Little Flowers Kindergarten'}</span>
+            <span>Issued by Administration &bull; {settings?.site_title || 'School Administration'}</span>
             <span className="font-semibold text-gray-400">Notice Authority Verification &bull; Active</span>
           </div>
         </article>

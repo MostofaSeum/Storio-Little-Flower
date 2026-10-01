@@ -160,7 +160,7 @@ export default function AccordionGallery({ events }: AccordionGalleryProps) {
                       <span>→</span>
                     </a>
                     <span className="text-[11px] text-gray-300 font-semibold">
-                      Little Flowers Campus
+                      School Campus
                     </span>
                   </div>
                 </div>

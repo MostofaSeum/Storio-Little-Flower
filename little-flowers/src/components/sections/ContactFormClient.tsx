@@ -147,7 +147,7 @@ export default function ContactFormClient({ settings, tenantHost }: ContactFormC
                 Message Sent Successfully!
               </h3>
               <p className="text-sm text-gray-600 font-quicksand max-w-md mx-auto leading-relaxed">
-                Thank you for contacting Little Flowers School. Our administration team has received your message and will get back to you shortly.
+                Thank you for contacting {settings?.site_title || 'our school'}. Our administration team has received your message and will get back to you shortly.
               </p>
               <button
                 onClick={() => setStatus('idle')}
@@ -245,7 +245,7 @@ export default function ContactFormClient({ settings, tenantHost }: ContactFormC
                   rows={4}
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="How can we help your child flourish at Little Flowers?"
+                  placeholder={`How can we help your child flourish with us?`}
                   className="w-full px-4 py-3 rounded-2xl bg-purple-50/50 border border-purple-100 focus:outline-none focus:border-primary-color text-sm text-gray-900 transition-colors resize-none"
                 />
               </div>

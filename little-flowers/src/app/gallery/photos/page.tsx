@@ -7,10 +7,16 @@ import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 import SplitText from '@/components/ui/SplitText';
 import PhotoGalleryClient, { BackendAlbum, BackendPhotoItem } from '@/components/sections/PhotoGalleryClient';
 
-export const metadata = {
-  title: 'Photo Gallery & Albums — Little Flowers',
-  description: 'Moments of discovery, friendship, learning, and celebration captured in pictures.',
-};
+export async function generateMetadata() {
+  const { tenantHost, isStandalone } = await getTenantContext();
+  const { settings } = await getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null }));
+  const schoolName = settings?.site_title || 'Photos';
+
+  return {
+    title: `Photo Gallery & Albums — ${schoolName}`,
+    description: 'Moments of discovery, friendship, learning, and celebration captured in pictures.',
+  };
+}
 
 export default async function PhotosGalleryPage() {
   const { tenantHost, isStandalone } = await getTenantContext();

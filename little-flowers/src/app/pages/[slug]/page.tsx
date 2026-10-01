@@ -13,18 +13,23 @@ interface CustomPageProps {
 
 export async function generateMetadata({ params }: CustomPageProps) {
   const { slug } = await params;
-  const { tenantHost } = await getTenantContext();
-  const page = await getPageBySlug(slug, tenantHost).catch(() => null);
+  const { tenantHost, isStandalone } = await getTenantContext();
+  const [{ settings }, page] = await Promise.all([
+    getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null })),
+    getPageBySlug(slug, tenantHost).catch(() => null),
+  ]);
+
+  const schoolName = settings?.site_title || 'Kindergarten & School';
 
   if (!page) {
     return {
-      title: 'Page Not Found — Little Flowers',
+      title: `Page Not Found — ${schoolName}`,
     };
   }
 
   return {
-    title: `${page.meta_title || page.title} — Little Flowers`,
-    description: page.meta_description || `Read ${page.title} at Little Flowers Kindergarten.`,
+    title: `${page.meta_title || page.title} — ${schoolName}`,
+    description: page.meta_description || `Read ${page.title} at ${schoolName}.`,
   };
 }
 

@@ -22,11 +22,16 @@ interface StorioReelItem {
   is_featured?: boolean;
 }
 
-export const metadata = {
-  title: "Video Gallery — Little Flowers",
-  description:
-    "Watch video highlights, performances, and fun campus activities.",
-};
+export async function generateMetadata() {
+  const { tenantHost, isStandalone } = await getTenantContext();
+  const { settings } = await getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null }));
+  const schoolName = settings?.site_title || 'Videos';
+
+  return {
+    title: `Video Gallery — ${schoolName}`,
+    description: "Watch video highlights, performances, and fun campus activities.",
+  };
+}
 
 export default async function VideosGalleryPage() {
   const { tenantHost, isStandalone } = await getTenantContext();

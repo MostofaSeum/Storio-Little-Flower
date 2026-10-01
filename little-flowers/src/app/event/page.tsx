@@ -8,10 +8,16 @@ import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 import SplitText from '@/components/ui/SplitText';
 import EventsAndCalendarClient from '@/components/sections/EventsAndCalendarClient';
 
-export const metadata = {
-  title: 'School Events & Academic Calendar — Little Flowers',
-  description: 'Upcoming campus gatherings, annual festivals, academic schedule, exams, and school holidays.',
-};
+export async function generateMetadata() {
+  const { tenantHost, isStandalone } = await getTenantContext();
+  const { settings } = await getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null }));
+  const schoolName = settings?.site_title || 'Events';
+
+  return {
+    title: `School Events & Academic Calendar — ${schoolName}`,
+    description: 'Upcoming campus gatherings, annual festivals, academic schedule, exams, and school holidays.',
+  };
+}
 
 export default async function EventsPage() {
   const { tenantHost, isStandalone } = await getTenantContext();
@@ -61,7 +67,11 @@ export default async function EventsPage() {
         </section>
 
         {/* Client Component with Events & Calendar Tabs */}
-        <EventsAndCalendarClient events={events} calendarEvents={calendarEvents} />
+        <EventsAndCalendarClient
+          events={events}
+          calendarEvents={calendarEvents}
+          siteTitle={settings?.site_title}
+        />
       </main>
 
       <Footer settings={settings} importantLinks={importantLinks} />

@@ -17,19 +17,22 @@ interface EventDetailPageProps {
 
 export async function generateMetadata({ params }: EventDetailPageProps) {
   const { id } = await params;
-  const { tenantHost } = await getTenantContext();
+  const { tenantHost, isStandalone } = await getTenantContext();
+  const [{ settings }, event] = await Promise.all([
+    getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null })),
+    storio.apiFetch<StorioEvent>(`/api/events/${id}/`, { tenantHost }).catch(() => null),
+  ]);
 
-  // Try fetching by ID first
-  const event = await storio.apiFetch<StorioEvent>(`/api/events/${id}/`, { tenantHost });
+  const schoolName = settings?.site_title || 'Events';
 
   if (!event) {
     return {
-      title: 'Event Details — Little Flowers',
+      title: `Event Details — ${schoolName}`,
     };
   }
 
   return {
-    title: `${event.title} — Little Flowers Event`,
+    title: `${event.title} — ${schoolName}`,
     description: event.excerpt || event.content?.slice(0, 160) || 'School event details',
   };
 }

@@ -9,10 +9,16 @@ import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 import SplitText from '@/components/ui/SplitText';
 import ThemeIcon from '@/components/ui/ThemeIcon';
 
-export const metadata = {
-  title: 'Notice Board — Little Flowers',
-  description: 'Official academic notices, parent circulars, holidays, and announcements.',
-};
+export async function generateMetadata() {
+  const { tenantHost, isStandalone } = await getTenantContext();
+  const { settings } = await getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null }));
+  const schoolName = settings?.site_title || 'Notices';
+
+  return {
+    title: `Notice Board — ${schoolName}`,
+    description: 'Official academic notices, parent circulars, holidays, and announcements.',
+  };
+}
 
 export default async function NoticePage() {
   const { tenantHost, isStandalone } = await getTenantContext();

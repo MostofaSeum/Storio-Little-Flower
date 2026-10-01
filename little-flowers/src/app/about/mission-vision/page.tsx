@@ -23,10 +23,16 @@ interface InstitutionProfileData {
   additional_info?: Array<{ label: string; value: string }>;
 }
 
-export const metadata = {
-  title: 'Mission & Vision — Little Flowers',
-  description: 'Our educational vision, foundational mission, and pedagogical values.',
-};
+export async function generateMetadata() {
+  const { tenantHost, isStandalone } = await getTenantContext();
+  const { settings } = await getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null }));
+  const schoolName = settings?.site_title || 'Mission & Vision';
+
+  return {
+    title: `Mission & Vision — ${schoolName}`,
+    description: 'Our educational vision, foundational mission, and pedagogical values.',
+  };
+}
 
 export default async function MissionVisionPage() {
   const { tenantHost, isStandalone } = await getTenantContext();

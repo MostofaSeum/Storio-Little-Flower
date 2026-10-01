@@ -5,10 +5,16 @@ import Footer from '@/components/layout/Footer';
 import LoginPortalClient from '@/components/portals/LoginPortalClient';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 
-export const metadata = {
-  title: 'Portal Login — Little Flowers Kindergarten',
-  description: 'Secure Parent & Staff Gateway for Little Flowers Kindergarten.',
-};
+export async function generateMetadata() {
+  const { tenantHost, isStandalone } = await getTenantContext();
+  const { settings } = await getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null }));
+  const schoolName = settings?.site_title || 'Portal Login';
+
+  return {
+    title: `Portal Login — ${schoolName}`,
+    description: `Secure Parent & Staff Gateway for ${schoolName}.`,
+  };
+}
 
 export default async function LoginPage() {
   // 1. Resolve tenant context

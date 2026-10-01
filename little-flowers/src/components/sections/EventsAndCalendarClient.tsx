@@ -9,11 +9,13 @@ import { StorioEvent, StorioCalendarEvent } from "@/types";
 interface EventsAndCalendarClientProps {
   events: StorioEvent[];
   calendarEvents: StorioCalendarEvent[];
+  siteTitle?: string;
 }
 
 export default function EventsAndCalendarClient({
   events,
   calendarEvents,
+  siteTitle,
 }: EventsAndCalendarClientProps) {
   const [activeTab, setActiveTab] = useState<"events" | "calendar">("events");
   const [calendarFilter, setCalendarFilter] = useState<
@@ -358,7 +360,7 @@ export default function EventsAndCalendarClient({
                     <div className="mt-5 pt-3 border-t border-purple-50 flex items-center justify-between text-xs text-gray-400">
                       <span>Status: Scheduled</span>
                       <span className="font-semibold text-primary-color">
-                        Little Flowers
+                        {siteTitle || 'Campus Event'}
                       </span>
                     </div>
                   </div>

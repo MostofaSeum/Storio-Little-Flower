@@ -9,10 +9,16 @@ import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 import StaffClientView from '@/components/sections/StaffClientView';
 import SplitText from '@/components/ui/SplitText';
 
-export const metadata = {
-  title: 'Teachers & Faculty — Little Flowers',
-  description: 'Meet our passionate, trained teachers and educators dedicated to early childhood excellence.',
-};
+export async function generateMetadata() {
+  const { tenantHost, isStandalone } = await getTenantContext();
+  const { settings } = await getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null }));
+  const schoolName = settings?.site_title || 'Faculty';
+
+  return {
+    title: `Teachers & Faculty — ${schoolName}`,
+    description: 'Meet our passionate, trained teachers and educators dedicated to early childhood excellence.',
+  };
+}
 
 export default async function TeachersPage() {
   const { tenantHost, isStandalone } = await getTenantContext();

@@ -52,7 +52,7 @@ export default function InteractiveGallery({ items }: InteractiveGalleryProps) {
               {/* Image */}
               <img
                 src={imgUrl}
-                alt={item.title || item.caption || 'Little Flowers Campus Moment'}
+                alt={item.title || item.caption || 'Campus Moment'}
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                 loading="lazy"
               />
@@ -109,7 +109,7 @@ export default function InteractiveGallery({ items }: InteractiveGalleryProps) {
             <div className="relative max-h-[75vh] bg-gray-950 flex items-center justify-center overflow-hidden">
               <img
                 src={resolveImageUrl(selectedItem)}
-                alt={selectedItem.title || 'Little Flowers'}
+                alt={selectedItem.title || 'Campus Moment'}
                 className="max-h-[75vh] w-auto object-contain"
               />
             </div>
@@ -117,14 +117,14 @@ export default function InteractiveGallery({ items }: InteractiveGalleryProps) {
             <div className="p-6 bg-white flex items-center justify-between">
               <div>
                 <h3 className="text-lg font-extrabold text-primary-color">
-                  {selectedItem.title || 'Little Flowers Campus Experience'}
+                  {selectedItem.title || 'Campus Experience'}
                 </h3>
                 {selectedItem.caption && (
                   <p className="text-xs text-gray-500 mt-1">{selectedItem.caption}</p>
                 )}
               </div>
               <span className="text-xs font-bold text-accent-pink bg-pink-50 px-3 py-1.5 rounded-full">
-                Little Flowers Gallery
+                Photo Gallery
               </span>
             </div>
           </div>

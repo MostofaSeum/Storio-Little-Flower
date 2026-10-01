@@ -45,14 +45,18 @@ export async function generateMetadata({ params }: CareerDetailPageProps) {
     { tenantHost }
   );
 
+  const { isStandalone } = await getTenantContext();
+  const { settings } = await getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null }));
+  const schoolName = settings?.site_title || 'Careers';
+
   if (!job) {
     return {
-      title: 'Career Opportunity — Little Flowers',
+      title: `Career Opportunity — ${schoolName}`,
     };
   }
 
   return {
-    title: `${job.title} — Careers at Little Flowers`,
+    title: `${job.title} — Careers at ${schoolName}`,
     description: job.description?.slice(0, 160) || `Apply for ${job.title}`,
   };
 }
@@ -128,7 +132,7 @@ export default async function CareerDetailPage({ params }: CareerDetailPageProps
           {(job.company_name || job.location) && (
             <p className="text-base sm:text-lg font-semibold text-gray-600 mb-8 flex items-center gap-2">
               <ThemeIcon name="school-building" size={20} />
-              <span>{job.company_name || 'Little Flowers Academy'}</span>
+              <span>{job.company_name || settings?.site_title || 'School Administration'}</span>
               {job.location && (
                 <>
                   <span className="text-gray-300">•</span>

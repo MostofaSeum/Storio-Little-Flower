@@ -9,10 +9,16 @@ import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 import StaffClientView from '@/components/sections/StaffClientView';
 import SplitText from '@/components/ui/SplitText';
 
-export const metadata = {
-  title: 'Committee Members & Governing Body — Little Flowers',
-  description: 'Our governing committee, trustees, and management board members.',
-};
+export async function generateMetadata() {
+  const { tenantHost, isStandalone } = await getTenantContext();
+  const { settings } = await getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null }));
+  const schoolName = settings?.site_title || 'Administration';
+
+  return {
+    title: `Committee Members & Governing Body — ${schoolName}`,
+    description: 'Our governing committee, trustees, and management board members.',
+  };
+}
 
 export default async function CommitteeMembersPage() {
   const { tenantHost, isStandalone } = await getTenantContext();

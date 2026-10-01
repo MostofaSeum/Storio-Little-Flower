@@ -39,6 +39,17 @@ import EventsSection from "@/components/sections/EventsSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import FaqSection from "@/components/sections/FaqSection";
 
+export async function generateMetadata() {
+  const { tenantHost, isStandalone } = await getTenantContext();
+  const { settings } = await getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null }));
+  const schoolName = settings?.site_title || "Kindergarten & School";
+
+  return {
+    title: `${schoolName} — Kindergarten & School`,
+    description: settings?.site_description || "Practical teaching & social development for kids",
+  };
+}
+
 export default async function Home() {
   // 1. Resolve host and tenant context following Storio Rule 1
   const { tenantHost, isStandalone } = await getTenantContext();

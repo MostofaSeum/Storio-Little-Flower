@@ -32,10 +32,16 @@ interface LeadershipMessageItem {
   };
 }
 
-export const metadata = {
-  title: 'Leadership Messages — Little Flowers',
-  description: 'Messages and guidance from school administration and leaders.',
-};
+export async function generateMetadata() {
+  const { tenantHost, isStandalone } = await getTenantContext();
+  const { settings } = await getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null }));
+  const schoolName = settings?.site_title || 'Leadership';
+
+  return {
+    title: `Leadership Messages — ${schoolName}`,
+    description: 'Messages and guidance from school administration and leaders.',
+  };
+}
 
 export default async function LeadershipMessagePage() {
   const { tenantHost, isStandalone } = await getTenantContext();

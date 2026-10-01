@@ -6,10 +6,16 @@ import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 import SplitText from '@/components/ui/SplitText';
 import ContactFormClient from '@/components/sections/ContactFormClient';
 
-export const metadata = {
-  title: 'Contact Us — Little Flowers',
-  description: 'Reach out to Little Flowers campus administration for admissions, inquiries, tuition fees, and campus tour requests.',
-};
+export async function generateMetadata() {
+  const { tenantHost, isStandalone } = await getTenantContext();
+  const { settings } = await getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null }));
+  const schoolName = settings?.site_title || 'Contact Us';
+
+  return {
+    title: `Contact Us — ${schoolName}`,
+    description: `Reach out to ${schoolName} campus administration for admissions, inquiries, tuition fees, and campus tour requests.`,
+  };
+}
 
 export default async function ContactPage() {
   const { tenantHost, isStandalone } = await getTenantContext();

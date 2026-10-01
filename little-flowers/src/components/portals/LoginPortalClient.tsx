@@ -338,7 +338,7 @@ export default function LoginPortalClient({
                 </label>
                 <button
                   type="button"
-                  onClick={() => alert('Please contact the administration office at Little Flowers to reset your portal password.')}
+                  onClick={() => alert(`Please contact the administration office at ${siteTitle || 'our school'} to reset your portal password.`)}
                   className="text-[11px] font-bold text-secondary-color hover:underline cursor-pointer"
                 >
                   Forgot password?
