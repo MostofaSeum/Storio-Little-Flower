@@ -98,8 +98,8 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
     >
       <div className="site-header-container px-3 sm:px-6 flex items-center justify-between gap-2 sm:gap-4">
         {/* Logo with playful wiggle hover */}
-        <a href="/" className="flex items-center space-x-2.5 group shrink-0">
-          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-amber-300 via-pink-400 to-sky-400 p-1 flex items-center justify-center shadow-md transform group-hover:rotate-12 group-hover:scale-105 transition-all duration-300 overflow-hidden">
+        <a href="/" className="flex items-center space-x-2.5 group shrink min-w-0" title={settings?.site_title || 'Little Flowers'}>
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-amber-300 via-pink-400 to-sky-400 p-1 flex items-center justify-center shadow-md transform group-hover:rotate-12 group-hover:scale-105 transition-all duration-300 overflow-hidden shrink-0">
             {settings?.logo_url ? (
               <img
                 src={settings.logo_url}
@@ -119,9 +119,10 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
               className={`w-full h-full object-contain brightness-0 invert drop-shadow-xs ${settings?.logo_url ? 'hidden' : 'block'}`}
             />
           </div>
-          <div>
-            <span className="text-lg sm:text-xl xl:text-2xl font-bold tracking-tight text-gray-900 font-fredoka flex items-center gap-1.5 whitespace-nowrap">
-              {settings?.site_title || 'Little Flowers'}
+          {/* Responsive title wrapper preventing navbar breakage for long school names */}
+          <div className="min-w-0 max-w-[150px] sm:max-w-[220px] md:max-w-[280px] lg:max-w-[240px] xl:max-w-[340px]">
+            <span className="text-base sm:text-lg xl:text-xl font-bold tracking-tight text-gray-900 font-fredoka flex items-center gap-1.5 leading-tight">
+              <span className="truncate">{settings?.site_title || 'Little Flowers'}</span>
               <span className="w-2 h-2 rounded-full bg-accent-pink animate-pulse shrink-0"></span>
             </span>
           </div>
