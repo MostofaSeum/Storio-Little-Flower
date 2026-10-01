@@ -107,19 +107,30 @@ export default async function LeadershipMessagePage() {
                       ? resolveMediaUrl(item.signature_data?.file_url || item.signature_data?.file)
                       : null;
 
+                  const cleanMessageText = (() => {
+                    const raw = item.message || '';
+                    if (!raw.includes('<')) return raw.trim();
+                    return raw
+                      .replace(/<!--[\s\S]*?-->/g, '')
+                      .replace(/<style[\s\S]*?<\/style>/gi, '')
+                      .replace(/<script[\s\S]*?<\/script>/gi, '')
+                      .replace(/<br\s*[\/]?>/gi, '\n')
+                      .replace(/<\/p>/gi, '\n\n')
+                      .replace(/<[^>]+>/g, '')
+                      .replace(/&nbsp;/gi, ' ')
+                      .replace(/&amp;/gi, '&')
+                      .replace(/&lt;/gi, '<')
+                      .replace(/&gt;/gi, '>')
+                      .replace(/&quot;/gi, '"')
+                      .replace(/&#39;/gi, "'")
+                      .trim();
+                  })();
+
                   return (
                     <article
                       key={item.id}
                       className="bg-white rounded-3xl p-6 sm:p-10 border border-purple-100 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden"
                     >
-                      {item.section_title && (
-                        <div className="mb-6 pb-4 border-b border-purple-100">
-                          <span className="text-xs font-bold uppercase tracking-wider text-accent-pink">
-                            {item.section_title}
-                          </span>
-                        </div>
-                      )}
-
                       <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
                         {/* Leader Photo & Profile */}
                         <div className="md:col-span-4 flex flex-col items-center text-center p-4 rounded-2xl bg-pastel-purple border border-purple-100/60">
@@ -161,7 +172,7 @@ export default async function LeadershipMessagePage() {
                               “
                             </span>
                             <div className="text-gray-700 leading-relaxed font-quicksand whitespace-pre-line text-base relative z-10 pl-4">
-                              {item.message}
+                              {cleanMessageText}
                             </div>
                           </div>
 

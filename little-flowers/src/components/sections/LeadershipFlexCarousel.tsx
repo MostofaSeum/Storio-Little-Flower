@@ -69,6 +69,29 @@ export default function LeadershipFlexCarousel({ messages }: LeadershipFlexCarou
   const currentMsg = messages[activeIndex] || messages[0];
   const currentPhotoSrc = carouselItems[activeIndex]?.src || '/homepage/Teachers/Teacher.jpg';
 
+  // Helper to sanitize rich-text / pasted HTML content (e.g., <!--StartFragment-->, <span>, etc.) into clean plain text
+  const cleanMessage = useMemo(() => {
+    if (!currentMsg?.message) return '';
+    const raw = currentMsg.message;
+    // Fast path: if not containing HTML or comments
+    if (!raw.includes('<')) return raw.trim();
+
+    return raw
+      .replace(/<!--[\s\S]*?-->/g, '') // strip HTML comments like <!--StartFragment-->
+      .replace(/<style[\s\S]*?<\/style>/gi, '') // strip styles
+      .replace(/<script[\s\S]*?<\/script>/gi, '') // strip scripts
+      .replace(/<br\s*[\/]?>/gi, '\n') // convert breaks to newlines
+      .replace(/<\/p>/gi, '\n\n') // convert paragraph ends to double newline
+      .replace(/<[^>]+>/g, '') // strip all remaining tags
+      .replace(/&nbsp;/gi, ' ')
+      .replace(/&amp;/gi, '&')
+      .replace(/&lt;/gi, '<')
+      .replace(/&gt;/gi, '>')
+      .replace(/&quot;/gi, '"')
+      .replace(/&#39;/gi, "'")
+      .trim();
+  }, [currentMsg?.message]);
+
   const signatureUrl =
     currentMsg?.signature_data?.file_url || currentMsg?.signature_data?.file
       ? resolveMediaUrl(currentMsg.signature_data?.file_url || currentMsg.signature_data?.file)
@@ -305,7 +328,7 @@ export default function LeadershipFlexCarousel({ messages }: LeadershipFlexCarou
                       </span>
                       <div className="pl-6 sm:pl-7 text-gray-700 font-quicksand font-medium text-sm sm:text-base md:text-lg leading-relaxed italic">
                         <SplitText
-                          text={currentMsg.message}
+                          text={cleanMessage}
                           tag="p"
                           splitType="words"
                           delay={15}
