@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import ThemeIcon from '../ui/ThemeIcon';
+import DriftWall from '../ui/DriftWall';
 import { StorioGalleryItem } from '@storio/template-sdk';
 
 interface InteractiveGalleryProps {
@@ -38,52 +39,56 @@ export default function InteractiveGallery({ items }: InteractiveGalleryProps) {
     return '/homepage/gal1.png';
   };
 
+  // Prepare items for DriftWall
+  const driftItems = useMemo(() => {
+    return items.map((item) => ({
+      image: resolveImageUrl(item),
+      title: item.title || item.caption || 'Campus Moment',
+      originalItem: item,
+    }));
+  }, [items]);
+
   return (
     <>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-        {displayedItems.map((item, idx) => {
-          const imgUrl = resolveImageUrl(item);
-          return (
-            <div
-              key={item.id || idx}
-              onClick={() => setSelectedItem(item)}
-              className={`group relative rounded-3xl overflow-hidden cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500 aspect-4/3 reveal-on-scroll delay-${(idx % 3) * 100 + 100} border-2 border-transparent hover:border-pink-300 transform hover:-translate-y-1.5`}
-            >
-              {/* Image */}
-              <img
-                src={imgUrl}
-                alt={item.title || item.caption || 'Campus Moment'}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-                loading="lazy"
-              />
+      <div className="relative w-full h-[540px] sm:h-[620px] rounded-3xl overflow-hidden border border-purple-100/70 shadow-sm bg-linear-to-b from-purple-50/50 via-white to-pink-50/30">
+        <DriftWall
+          items={driftItems}
+          columns={5}
+          tileWidth={230}
+          tileHeight={160}
+          gap={20}
+          radius={20}
+          tilt={14}
+          turn={-12}
+          roll={0}
+          perspective={1100}
+          depth={100}
+          speed={36}
+          direction="up"
+          variance={0.4}
+          parallax={0.5}
+          pauseOnHover={true}
+          lift={56}
+          fade={0.65}
+          dim={0.7}
+          grayscale={false}
+          overlayColor="#4a154b"
+          onTileClick={(tile) => {
+            const raw = (tile as unknown as { originalItem?: StorioGalleryItem })?.originalItem;
+            if (raw) {
+              setSelectedItem(raw);
+            }
+          }}
+        />
 
-            {/* Gradient Overlay & Hover Floating Action */}
-            <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4 sm:p-5">
-              <div className="self-end">
-                <span className="w-9 h-9 rounded-full bg-white/90 text-primary-color backdrop-blur-md flex items-center justify-center shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                  </svg>
-                </span>
-              </div>
-              <div>
-                <span className="text-white text-xs sm:text-sm font-bold block transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 drop-shadow">
-                  {item.title || item.caption || 'Campus Exploration'}
-                </span>
-                <span className="text-[11px] text-pink-200 font-medium">Click to view full photo</span>
-              </div>
-            </div>
-
-            {/* Soft corner sparkle badge */}
-            <div className="absolute top-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-white/95 text-primary-color shadow-sm backdrop-blur-sm">
-                <ThemeIcon name="flower-blossom" size={12} /> Moments
-              </span>
-            </div>
-          </div>
-        );
-      })}
-    </div>
+        {/* Ambient Floating Help Hint */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 pointer-events-none z-20">
+          <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-xs font-bold text-primary-color shadow-md border border-purple-100">
+            <span className="w-2 h-2 rounded-full bg-accent-pink animate-ping" />
+            Hover to explore &bull; Click any photo to zoom
+          </span>
+        </div>
+      </div>
 
       {/* Lightbox Modal */}
       {selectedItem && (
