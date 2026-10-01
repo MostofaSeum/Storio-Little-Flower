@@ -69,10 +69,10 @@ export default function InteractiveGallery({ items }: InteractiveGalleryProps) {
           parallax={0.5}
           pauseOnHover={true}
           lift={56}
-          fade={0.65}
-          dim={0.7}
+          fade={0.35}
+          dim={0.95}
           grayscale={false}
-          overlayColor="#4a154b"
+          overlayColor="transparent"
           onTileClick={(tile) => {
             const raw = (tile as unknown as { originalItem?: StorioGalleryItem })?.originalItem;
             if (raw) {
