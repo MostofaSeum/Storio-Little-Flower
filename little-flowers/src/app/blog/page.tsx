@@ -66,7 +66,7 @@ export default async function BlogPage() {
 
       {/* 2. Main Blog Page Content */}
       <main className="flex-1 py-8 md:py-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="site-container px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb & Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-8">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white shadow-sm border border-purple-100 text-xs font-semibold text-primary-color mb-3">

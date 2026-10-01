@@ -23,6 +23,16 @@
   --bg-pastel-purple: #faf9ff;
   --bg-soft-amber: #fffbf0;
   --bg-soft-pink: #fdf2f8;
+
+  /* Centralized Sizing Tokens (Adjust layout & sizes from here)*/
+  --site-container-max-width: 80rem; /* 1280px / 7xl */
+  --site-header-max-width: 96rem;    /* 1536px */
+  --site-section-py: 5rem;           /* 80px / py-20 */
+  --site-section-px-mobile: 1rem;    /* 16px / px-4 */
+  --site-section-px-desktop: 2rem;   /* 32px / sm:px-8 */
+  --site-hero-carousel-height: 480px;
+  --site-card-radius: 1.5rem;        /* 24px / rounded-3xl */
+  --site-pill-radius: 9999px;        /* rounded-full */
 }
 
 body {
@@ -134,6 +144,38 @@ h6 {
 
 .border-accent-green {
   border-color: var(--accent-green);
+}
+
+/* Sizing Utilities bound to CSS Variables */
+.site-container {
+  max-width: var(--site-container-max-width);
+  margin-inline: auto;
+}
+
+.site-header-container {
+  max-width: var(--site-header-max-width);
+  margin-inline: auto;
+}
+
+.site-section-py {
+  padding-top: var(--site-section-py);
+  padding-bottom: var(--site-section-py);
+}
+
+.site-section-px {
+  padding-left: var(--site-section-px-mobile);
+  padding-right: var(--site-section-px-mobile);
+}
+
+@media (min-width: 640px) {
+  .site-section-px {
+    padding-left: var(--site-section-px-desktop);
+    padding-right: var(--site-section-px-desktop);
+  }
+}
+
+.site-hero-carousel-height {
+  height: var(--site-hero-carousel-height);
 }
 
 /* Wavy and organic animation helpers */

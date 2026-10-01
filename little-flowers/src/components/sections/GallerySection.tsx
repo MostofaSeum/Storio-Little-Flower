@@ -16,7 +16,7 @@ export default function GallerySection({ items, siteTitle }: GallerySectionProps
   return (
     <section
       id="gallery"
-      className="py-20 px-4 sm:px-8 max-w-7xl mx-auto w-full"
+      className="site-section-py site-section-px site-container w-full"
     >
       <div className="flex flex-wrap items-end justify-between gap-4 mb-12 reveal-on-scroll">
         <div>

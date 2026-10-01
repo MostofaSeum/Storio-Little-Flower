@@ -65,7 +65,7 @@ export default async function InstitutionProfilePage() {
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative overflow-hidden bg-pastel-purple pt-8 pb-6 sm:pt-10 sm:pb-8 border-b border-purple-100">
-          <div className="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
+          <div className="site-container px-4 sm:px-8 relative z-10">
             <div className="text-center max-w-3xl mx-auto">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase bg-white text-primary-color border border-purple-200 shadow-2xs mb-2.5">
                 <span className="w-2 h-2 rounded-full bg-accent-pink animate-pulse" />
@@ -92,7 +92,7 @@ export default async function InstitutionProfilePage() {
 
         {/* Profile Content Body */}
         <section className="py-6 sm:py-8">
-          <div className="max-w-7xl mx-auto px-4 sm:px-8">
+          <div className="site-container px-4 sm:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               
               {/* Left Column: Image & Quick Stats */}

@@ -53,7 +53,7 @@ export default async function VideosGalleryPage() {
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative overflow-hidden bg-pastel-purple pt-8 pb-6 sm:pt-10 sm:pb-8 border-b border-purple-100">
-          <div className="max-w-7xl mx-auto px-4 sm:px-8 relative z-10 text-center">
+          <div className="site-container px-4 sm:px-8 relative z-10 text-center">
             <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase bg-white text-primary-color border border-purple-200 shadow-2xs mb-2.5">
               <span className="w-2 h-2 rounded-full bg-accent-pink animate-pulse" />
               Video Highlights
@@ -77,7 +77,7 @@ export default async function VideosGalleryPage() {
 
         {/* Video Grid */}
         <section className="py-6 sm:py-8">
-          <div className="max-w-7xl mx-auto px-4 sm:px-8">
+          <div className="site-container px-4 sm:px-8">
             {videos.length === 0 ? (
               <div className="text-center py-16 px-4 bg-pastel-purple rounded-3xl border border-purple-100">
                 <ThemeIcon name="video-clapper" size={48} className="mx-auto mb-3" />

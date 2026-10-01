@@ -11,8 +11,8 @@ export default function EventsSection({ events }: EventsSectionProps) {
   if (!events || events.length === 0) return null;
 
   return (
-    <section id="events" className="py-20 px-4 sm:px-8 bg-white">
-      <div className="max-w-7xl mx-auto">
+    <section id="events" className="site-section-py site-section-px bg-white">
+      <div className="site-container">
         <div className="flex flex-wrap items-end justify-between gap-4 mb-12 reveal-on-scroll">
           <div>
             <span className="text-xs font-extrabold tracking-wider uppercase text-secondary-color bg-amber-100 px-3.5 py-1 rounded-full shadow-xs">

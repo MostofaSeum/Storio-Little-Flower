@@ -81,7 +81,7 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
         WebkitBackdropFilter: isScrolled ? 'blur(16px)' : 'blur(4px)',
       }}
     >
-      <div className="max-w-[1536px] mx-auto px-3 sm:px-6 flex items-center justify-between gap-2 sm:gap-4">
+      <div className="site-header-container px-3 sm:px-6 flex items-center justify-between gap-2 sm:gap-4">
         {/* Logo with playful wiggle hover */}
         <a href="/" className="flex items-center space-x-2.5 group shrink-0">
           <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-amber-300 via-pink-400 to-sky-400 p-1 flex items-center justify-center shadow-md transform group-hover:rotate-12 group-hover:scale-105 transition-all duration-300 overflow-hidden">

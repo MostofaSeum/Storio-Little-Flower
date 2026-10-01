@@ -14,7 +14,7 @@ export default function NoticeSection({ notices }: NoticeSectionProps) {
       id="notices"
       className="bg-pastel-purple py-16 px-4 sm:px-8 border-b border-purple-50"
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="site-container">
         <div className="flex flex-wrap items-end justify-between border-b-2 border-purple-100 pb-4 mb-8 gap-4 reveal-on-scroll">
           <div>
             <span className="text-xs font-extrabold tracking-wider uppercase text-accent-pink bg-pink-100 px-3 py-1 rounded-full">

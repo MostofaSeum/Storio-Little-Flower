@@ -89,7 +89,7 @@ export default function EventsAndCalendarClient({
   });
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-8 py-6 sm:py-8">
+    <div className="site-container px-4 sm:px-8 py-6 sm:py-8">
       {/* Top Tab Switcher */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 mb-6 border-b border-purple-100">
         <div className="flex flex-col sm:inline-flex sm:flex-row p-1.5 rounded-2xl bg-purple-50 border border-purple-200/80 shadow-2xs w-full sm:w-auto gap-1 sm:gap-0">

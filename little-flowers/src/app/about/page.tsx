@@ -81,7 +81,7 @@ export default async function AboutPage() {
       <InteractiveHeader settings={settings} navigation={navigation} />
 
       <main className="flex-1 py-12 md:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 sm:space-y-24">
+        <div className="site-container px-4 sm:px-6 lg:px-8 space-y-16 sm:space-y-24">
           
           {/* 1. Hero & Mission Section */}
           <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">

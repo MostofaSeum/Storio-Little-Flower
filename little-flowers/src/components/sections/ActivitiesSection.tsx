@@ -12,9 +12,9 @@ export default function ActivitiesSection({ activities }: ActivitiesSectionProps
   return (
     <section
       id="programs"
-      className="py-20 px-4 sm:px-8 bg-pastel-purple border-y border-purple-50"
+      className="site-section-py site-section-px bg-pastel-purple border-y border-purple-50"
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="site-container">
         <div className="text-center max-w-2xl mx-auto mb-14 reveal-on-scroll">
           <span className="text-xs font-extrabold tracking-wider uppercase text-accent-pink bg-pink-100 px-3 py-1 rounded-full">
             Early Exploration

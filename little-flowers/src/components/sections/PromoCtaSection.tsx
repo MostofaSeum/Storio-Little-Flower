@@ -22,7 +22,7 @@ export default function PromoCtaSection({ promo }: PromoCtaSectionProps) {
     : null;
 
   return (
-    <section className="px-4 sm:px-8 py-10 max-w-7xl mx-auto w-full">
+    <section className="site-section-px py-10 site-container w-full">
       <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-amber-300 via-amber-200 to-pink-200 p-8 sm:p-14 shadow-lg flex flex-col md:flex-row items-center justify-between gap-8 reveal-on-scroll">
         
         {/* Subtle Transparent Background Image from API */}

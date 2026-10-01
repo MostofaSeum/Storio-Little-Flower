@@ -13,7 +13,7 @@ export default function StaffSection({ staffList }: StaffSectionProps) {
   return (
     <section
       id="teachers"
-      className="py-20 px-4 sm:px-8 max-w-7xl mx-auto w-full"
+      className="site-section-py site-section-px site-container w-full"
     >
       <div className="text-center max-w-2xl mx-auto mb-14 reveal-on-scroll">
         <span className="text-xs font-extrabold tracking-wider uppercase text-secondary-color bg-amber-100 px-3 py-1 rounded-full">

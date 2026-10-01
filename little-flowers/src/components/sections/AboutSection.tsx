@@ -13,7 +13,7 @@ export default function AboutSection({ profile }: AboutSectionProps) {
   return (
     <section
       id="about"
-      className="py-20 px-4 sm:px-8 max-w-7xl mx-auto w-full relative"
+      className="site-section-py site-section-px site-container w-full relative"
     >
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         {/* Left: Playful Image Showcase */}

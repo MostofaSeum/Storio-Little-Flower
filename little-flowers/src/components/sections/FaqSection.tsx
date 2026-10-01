@@ -34,7 +34,7 @@ export default function FaqSection({ faqs }: FaqSectionProps) {
   ];
 
   return (
-    <section id="faqs" className="py-20 px-4 sm:px-8 bg-pastel-purple border-t border-purple-100/60 relative overflow-hidden">
+    <section id="faqs" className="site-section-py site-section-px bg-pastel-purple border-t border-purple-100/60 relative overflow-hidden">
       {/* Playful background decorative shapes */}
       <div className="absolute top-12 left-8 w-44 h-44 bg-soft-pink rounded-full blur-3xl opacity-60 pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-52 h-52 bg-soft-amber rounded-full blur-3xl opacity-60 pointer-events-none" />

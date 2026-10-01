@@ -9,7 +9,7 @@ interface TopBarProps {
 export default function TopBar({ contactEmail = 'info@example.com', phoneNumber = '+1 8 888 567.890.03' }: TopBarProps) {
   return (
     <div className="bg-topbar text-gray-300 text-xs sm:text-sm py-2 px-4 sm:px-8 border-b border-gray-800">
-      <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div className="site-container flex flex-wrap items-center justify-between gap-2">
         {/* Left: Email & Phone */}
         <div className="flex flex-wrap items-center gap-x-4 gap-y-1 sm:space-x-6">
           <a

@@ -200,7 +200,7 @@ export default async function Home() {
       <InteractiveHeader settings={settings} navigation={navigation} />
 
       {/* 3. HERO SECTION WITH PLAYFUL INTERACTIVE CAROUSEL */}
-      <section className="relative pt-1 sm:pt-2 pb-8 lg:pt-2 lg:pb-12 px-4 sm:px-8 max-w-7xl mx-auto w-full flex-1 flex flex-col justify-center">
+      <section className="relative pt-1 sm:pt-2 pb-8 lg:pt-2 lg:pb-12 px-4 sm:px-8 site-container w-full flex-1 flex flex-col justify-center">
         <div className="absolute top-4 right-16 w-16 h-16 bg-pink-100 rounded-full blur-xl -z-10 opacity-70 animate-float"></div>
         <div className="absolute bottom-10 left-10 w-24 h-24 bg-yellow-100 rounded-full blur-2xl -z-10 opacity-70 animate-float-reverse"></div>
         <HeroCarousel slides={heroSlides} siteTitle={settings?.site_title} />

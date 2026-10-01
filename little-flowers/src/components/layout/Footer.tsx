@@ -16,7 +16,7 @@ export default function Footer({ settings, importantLinks = [] }: FooterProps) {
       id="contact"
       className="bg-topbar text-gray-300 pt-16 pb-8 px-4 sm:px-8 mt-auto border-t-4 border-accent-pink print:hidden"
     >
-      <div className={`max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 ${hasLinks ? 'lg:grid-cols-5' : 'lg:grid-cols-4'} gap-10 pb-12 border-b border-gray-800`}>
+      <div className={`site-container grid grid-cols-1 md:grid-cols-2 ${hasLinks ? 'lg:grid-cols-5' : 'lg:grid-cols-4'} gap-10 pb-12 border-b border-gray-800`}>
         {/* Col 1: Branding & Mission */}
         <div className="space-y-4">
           <a href="/" className="flex items-center space-x-3 group">
@@ -155,7 +155,7 @@ export default function Footer({ settings, importantLinks = [] }: FooterProps) {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4">
+      <div className="site-container pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4">
         <p>
           © {new Date().getFullYear()} {settings?.site_title || "Little Flowers"}. Built for Storio CMS.
         </p>
