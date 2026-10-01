@@ -6,9 +6,10 @@ import { StorioHeroSlide } from '@storio/template-sdk';
 
 interface HeroCarouselProps {
   slides: StorioHeroSlide[];
+  siteTitle?: string;
 }
 
-export default function HeroCarousel({ slides }: HeroCarouselProps) {
+export default function HeroCarousel({ slides, siteTitle }: HeroCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -183,7 +184,7 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
         {/* Dynamic Category Pill */}
         <div className="inline-flex items-center space-x-2 bg-purple-100 text-primary-color font-bold text-xs uppercase px-4 py-1.5 rounded-full mb-4 shadow-xs">
           <ThemeIcon name="sparkle-star" size={14} />
-          <span>Welcome to Little Flowers</span>
+          <span>{`Welcome to ${siteTitle || 'Our School'}`}</span>
           <span className="w-1.5 h-1.5 rounded-full bg-primary-color"></span>
           <span>Admissions 2026-27</span>
         </div>

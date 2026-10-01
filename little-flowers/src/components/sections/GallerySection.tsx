@@ -5,10 +5,13 @@ import InteractiveGallery from '@/components/sections/InteractiveGallery';
 
 interface GallerySectionProps {
   items: StorioGalleryItem[];
+  siteTitle?: string;
 }
 
-export default function GallerySection({ items }: GallerySectionProps) {
+export default function GallerySection({ items, siteTitle }: GallerySectionProps) {
   if (!items || items.length === 0) return null;
+
+  const galleryHeading = siteTitle ? `Life at ${siteTitle}` : 'Life at Our School';
 
   return (
     <section
@@ -22,7 +25,7 @@ export default function GallerySection({ items }: GallerySectionProps) {
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-primary-color mt-3 font-fredoka">
             <SplitText
-              text="Life at Little Flowers"
+              text={galleryHeading}
               tag="span"
               splitType="chars"
               delay={30}

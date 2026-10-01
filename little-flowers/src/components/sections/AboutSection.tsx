@@ -54,7 +54,7 @@ export default function AboutSection({ profile }: AboutSectionProps) {
           </h2>
           <p className="text-gray-600 text-base leading-relaxed">
             {profile.school_details ||
-              "Little Flowers Kindergarten provides experiential early childhood education centered on play, sensory exploration, creativity, and foundational social skills."}
+              "Our school provides experiential early childhood education centered on play, sensory exploration, creativity, and foundational social skills."}
           </p>
 
           {/* Stats Highlights with Animated Counter */}

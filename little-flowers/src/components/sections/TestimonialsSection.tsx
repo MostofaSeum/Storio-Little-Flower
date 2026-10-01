@@ -5,9 +5,10 @@ import TestimonialSlider from '@/components/sections/TestimonialSlider';
 
 interface TestimonialsSectionProps {
   testimonials: StorioTestimonial[];
+  siteTitle?: string;
 }
 
-export default function TestimonialsSection({ testimonials }: TestimonialsSectionProps) {
+export default function TestimonialsSection({ testimonials, siteTitle }: TestimonialsSectionProps) {
   if (!testimonials || testimonials.length === 0) return null;
 
   return (
@@ -33,8 +34,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
             />
           </h2>
           <p className="text-gray-600 text-sm mt-2 font-medium">
-            Hear what parents say about their child’s joyful journey with
-            Little Flowers.
+            {`Hear what parents say about their child’s joyful journey with ${siteTitle || 'our school'}.`}
           </p>
         </div>
 
