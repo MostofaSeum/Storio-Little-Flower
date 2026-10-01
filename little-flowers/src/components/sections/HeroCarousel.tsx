@@ -123,11 +123,7 @@ export default function HeroCarousel({ slides, siteTitle }: HeroCarouselProps) {
                     target.src = '/homepage/H1.jpg';
                   }
                 }}
-                className={`w-full ${
-                  hasUploadedImage && !slideImageUrl.includes('/homepage/H1.jpg')
-                    ? 'h-[360px] sm:h-[440px] md:h-[480px] object-cover rounded-3xl'
-                    : 'h-auto max-h-[580px] sm:max-h-[620px] object-contain'
-                } transition-all duration-700 ease-out hover:scale-103 animate-fadeIn drop-shadow-xl`}
+                className="w-full h-[360px] sm:h-[440px] md:h-[480px] object-cover rounded-3xl transition-all duration-700 ease-out hover:scale-103 animate-fadeIn drop-shadow-xl"
               />
             )}
           </div>
