@@ -51,7 +51,7 @@ export default async function EventsPage() {
               School Calendar & Life
             </span>
 
-            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight">
+            <h1 className="page-hero-title font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight">
               <SplitText
                 text="Events & Academic Calendar"
                 className="inline-block text-primary-color"

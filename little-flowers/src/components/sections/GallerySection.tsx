@@ -39,7 +39,7 @@ export default function GallerySection({ items, siteTitle }: GallerySectionProps
           </p>
         </div>
         <a
-          href="/gallery"
+          href="/gallery/photos"
           className="text-xs sm:text-sm font-bold text-primary-color hover:text-accent-pink transition-colors inline-flex items-center gap-1 group"
         >
           <span>Explore Full Gallery</span>

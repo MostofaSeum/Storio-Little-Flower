@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { StorioSettingsResponse } from '@storio/template-sdk';
 import { StorioDynamicNavItem } from '@/data/storioExtendedTypes';
 
@@ -10,9 +11,9 @@ interface InteractiveHeaderProps {
 }
 
 export default function InteractiveHeader({ settings, navigation }: InteractiveHeaderProps) {
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState('Home');
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const [openDropdownIdx, setOpenDropdownIdx] = useState<number | null>(null);
 
@@ -57,16 +58,30 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
     .filter((item) => item.isVisible !== false)
     .map((item, index) => {
       const label = item.name || item.label || 'Link';
-      const href = item.href || item.url || '#';
+      const rawHref = item.href || item.url || '#';
       const color = colorPalette[index % colorPalette.length];
       const children = item.subLinks || item.children || [];
+      const hasDropdown = children.length > 0;
+
+      // When an item has multiple sub-buttons (e.g. Gallery, About, Personnel),
+      // clicking the parent button should navigate directly to the first child link
+      let effectiveHref = rawHref;
+      if (hasDropdown && children.length > 0) {
+        const firstChild = children[0];
+        const firstChildHref = firstChild.href || firstChild.url;
+        if (firstChildHref && firstChildHref !== '#' && firstChildHref !== '') {
+          effectiveHref = firstChildHref;
+        }
+      }
+
       return {
         ...item,
         label,
-        href,
+        href: effectiveHref,
+        originalHref: rawHref,
         color,
         children,
-        hasDropdown: children.length > 0,
+        hasDropdown,
       };
     });
 
@@ -119,7 +134,16 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
         >
           <ul role="menubar" className="list-none flex items-center m-0 p-0 gap-1 xl:gap-1.5 flex-nowrap">
             {navLinks.map((item, i) => {
-              const isActive = activeTab === item.label;
+              // Check if item or any of its sublinks matches the current pathname
+              const isRouteActive =
+                (item.originalHref && item.originalHref !== '#' && item.originalHref !== '/' && pathname.startsWith(item.originalHref)) ||
+                (item.href && item.href !== '#' && item.href !== '/' && pathname.startsWith(item.href)) ||
+                (item.children && item.children.some((child) => {
+                  const chHref = child.href || child.url;
+                  return chHref && chHref !== '#' && chHref !== '/' && pathname.startsWith(chHref);
+                })) ||
+                (pathname === '/' && (item.originalHref === '/' || item.href === '/'));
+
               const isHovered = hoveredIdx === i;
               const isDropdownOpen = openDropdownIdx === i;
 
@@ -140,52 +164,61 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
                   <a
                     role="menuitem"
                     href={item.href}
-                    onClick={() => setActiveTab(item.label)}
-                    className="relative overflow-hidden inline-flex items-center justify-center h-8.5 px-2.5 xl:px-3.5 rounded-full font-bold text-[11px] xl:text-xs tracking-wide uppercase transition-all duration-300 group cursor-pointer select-none bg-white border border-gray-100/80 shadow-xs hover:shadow-md gap-0.5"
+                    className={`relative overflow-hidden inline-flex items-center justify-center h-8.5 px-3 xl:px-4 rounded-full font-bold text-[11px] xl:text-xs tracking-wide uppercase transition-all duration-300 group cursor-pointer select-none gap-1 border shadow-xs hover:shadow-md ${
+                      isRouteActive
+                        ? 'shadow-sm text-white'
+                        : 'bg-white text-gray-700 border-gray-100/80 hover:text-gray-900'
+                    }`}
                     style={{
-                      borderColor: isActive ? item.color : undefined,
+                      backgroundColor: isRouteActive ? item.color : undefined,
+                      borderColor: isRouteActive ? item.color : undefined,
                     }}
                   >
-                    {/* Expanding circular background fill */}
-                    <span
-                      className="absolute inset-0 m-auto rounded-full pointer-events-none transition-transform duration-300 ease-out z-[1]"
-                      style={{
-                        backgroundColor: item.color,
-                        width: '240px',
-                        height: '240px',
-                        transform: isHovered ? 'scale(1.2)' : 'scale(0)',
-                        transformOrigin: 'center center',
-                      }}
-                      aria-hidden="true"
-                    />
+                    {/* Hover circular expanding fill for non-active links */}
+                    {!isRouteActive && (
+                      <span
+                        className="absolute inset-0 m-auto rounded-full pointer-events-none transition-transform duration-300 ease-out z-[1]"
+                        style={{
+                          backgroundColor: item.color,
+                          width: '240px',
+                          height: '240px',
+                          transform: isHovered ? 'scale(1.2)' : 'scale(0)',
+                          transformOrigin: 'center center',
+                        }}
+                        aria-hidden="true"
+                      />
+                    )}
 
                     {/* Dual Label Stack: Default translates UP, Hovered translates IN */}
                     <span className="relative inline-block h-4 overflow-hidden z-[2]">
                       <span
                         className="block transition-transform duration-300 ease-out"
                         style={{
-                          color: item.color,
-                          transform: isHovered ? 'translateY(-100%)' : 'translateY(0)',
+                          color: isRouteActive ? '#ffffff' : (isHovered ? '#ffffff' : item.color),
+                          fontWeight: isRouteActive ? 800 : 700,
+                          transform: !isRouteActive && isHovered ? 'translateY(-100%)' : 'translateY(0)',
                         }}
                       >
                         {item.label}
                       </span>
-                      <span
-                        className="absolute inset-0 block text-white font-extrabold transition-transform duration-300 ease-out"
-                        style={{
-                          transform: isHovered ? 'translateY(0)' : 'translateY(100%)',
-                        }}
-                        aria-hidden="true"
-                      >
-                        {item.label}
-                      </span>
+                      {!isRouteActive && (
+                        <span
+                          className="absolute inset-0 block text-white font-extrabold transition-transform duration-300 ease-out"
+                          style={{
+                            transform: isHovered ? 'translateY(0)' : 'translateY(100%)',
+                          }}
+                          aria-hidden="true"
+                        >
+                          {item.label}
+                        </span>
+                      )}
                     </span>
 
                     {/* Dropdown Chevron indicator if children exist */}
                     {item.hasDropdown && (
                       <svg
                         className={`w-3 h-3 z-[2] transition-transform duration-200 ${
-                          isHovered ? 'text-white' : 'text-gray-400'
+                          isRouteActive || isHovered ? 'text-white' : 'text-gray-400'
                         } ${isDropdownOpen ? 'rotate-180' : ''}`}
                         fill="none"
                         stroke="currentColor"
@@ -196,13 +229,10 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
                       </svg>
                     )}
 
-                    {/* Active Bottom Dot Pill Indicator */}
-                    {isActive && (
+                    {/* Active Selected Bottom White Indicator Dot */}
+                    {isRouteActive && (
                       <span
-                        className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full z-[3] transition-colors"
-                        style={{
-                          backgroundColor: isHovered ? '#ffffff' : item.color,
-                        }}
+                        className="w-1.5 h-1.5 rounded-full z-[3] bg-white ml-0.5 animate-pulse"
                         aria-hidden="true"
                       />
                     )}
@@ -214,13 +244,21 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
                       {item.children.map((subItem) => {
                         const subLabel = subItem.name || subItem.label || '';
                         const subHref = subItem.href || subItem.url || '#';
+                        const isSubActive = subHref !== '#' && subHref !== '/' && pathname.startsWith(subHref);
                         return (
                           <a
                             key={subItem.id || subLabel}
                             href={subHref}
-                            className="block px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-pastel-purple hover:text-primary-color transition-colors"
+                            className={`block px-4 py-2 text-xs font-semibold transition-colors flex items-center justify-between ${
+                              isSubActive
+                                ? 'bg-pastel-purple text-primary-color font-bold'
+                                : 'text-gray-700 hover:bg-pastel-purple hover:text-primary-color'
+                            }`}
                           >
-                            {subLabel}
+                            <span>{subLabel}</span>
+                            {isSubActive && (
+                              <span className="w-1.5 h-1.5 rounded-full bg-primary-color" />
+                            )}
                           </a>
                         );
                       })}
@@ -266,29 +304,36 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
         <div className="lg:hidden bg-white/98 backdrop-blur-lg border-b border-gray-200 px-4 sm:px-6 py-4 animate-fadeIn max-h-[calc(100vh-80px)] overflow-y-auto">
           <nav className="flex flex-col space-y-2 font-semibold text-sm">
             {navLinks.map((item) => {
-              const isCurrent = activeTab === item.label;
+              const isCurrent =
+                (item.originalHref && item.originalHref !== '#' && item.originalHref !== '/' && pathname.startsWith(item.originalHref)) ||
+                (item.href && item.href !== '#' && item.href !== '/' && pathname.startsWith(item.href)) ||
+                (item.children && item.children.some((child) => {
+                  const chHref = child.href || child.url;
+                  return chHref && chHref !== '#' && chHref !== '/' && pathname.startsWith(chHref);
+                })) ||
+                (pathname === '/' && (item.originalHref === '/' || item.href === '/'));
+
               return (
                 <div key={item.id || item.label} className="flex flex-col">
                   <a
                     href={item.href}
                     onClick={() => {
-                      setActiveTab(item.label);
                       if (!item.hasDropdown) setMobileMenuOpen(false);
                     }}
                     className={`py-2 px-4 rounded-full text-xs font-bold transition-all flex items-center justify-between ${
                       isCurrent
-                        ? 'bg-pastel-purple shadow-xs font-extrabold'
+                        ? 'text-white shadow-xs font-extrabold'
                         : 'text-gray-600 hover:bg-gray-50'
                     }`}
                     style={{
-                      color: item.color,
+                      backgroundColor: isCurrent ? item.color : undefined,
+                      color: isCurrent ? '#ffffff' : item.color,
                     }}
                   >
                     <span>{item.label}</span>
                     {isCurrent && (
                       <span
-                        className="w-2 h-2 rounded-full"
-                        style={{ backgroundColor: item.color }}
+                        className="w-2 h-2 rounded-full bg-white animate-pulse"
                       />
                     )}
                   </a>
@@ -296,16 +341,24 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
                   {/* Mobile sub-links */}
                   {item.hasDropdown && (
                     <div className="pl-6 py-1 space-y-1">
-                      {item.children.map((subItem) => (
-                        <a
-                          key={subItem.id || subItem.name || subItem.label}
-                          href={subItem.href || subItem.url || '#'}
-                          onClick={() => setMobileMenuOpen(false)}
-                          className="block py-1.5 px-3 rounded-lg text-xs font-medium text-gray-500 hover:text-primary-color hover:bg-gray-50"
-                        >
-                          • {subItem.name || subItem.label}
-                        </a>
-                      ))}
+                      {item.children.map((subItem) => {
+                        const subHref = subItem.href || subItem.url || '#';
+                        const isSubActive = subHref !== '#' && subHref !== '/' && pathname.startsWith(subHref);
+                        return (
+                          <a
+                            key={subItem.id || subItem.name || subItem.label}
+                            href={subHref}
+                            onClick={() => setMobileMenuOpen(false)}
+                            className={`block py-1.5 px-3 rounded-lg text-xs font-medium transition-colors ${
+                              isSubActive
+                                ? 'text-primary-color bg-purple-50 font-bold'
+                                : 'text-gray-500 hover:text-primary-color hover:bg-gray-50'
+                            }`}
+                          >
+                            • {subItem.name || subItem.label}
+                          </a>
+                        );
+                      })}
                     </div>
                   )}
                 </div>

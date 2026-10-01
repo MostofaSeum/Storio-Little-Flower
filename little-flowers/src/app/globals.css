@@ -33,6 +33,7 @@
   --site-hero-carousel-height: 480px;
   --site-card-radius: 1.5rem;        /* 24px / rounded-3xl */
   --site-pill-radius: 9999px;        /* rounded-full */
+  --page-hero-title-size: clamp(2rem, 4vw + 0.5rem, 3rem); /* unified subpage hero title size: 32px to 48px */
 }
 
 body {
@@ -176,6 +177,10 @@ h6 {
 
 .site-hero-carousel-height {
   height: var(--site-hero-carousel-height);
+}
+
+.page-hero-title {
+  font-size: var(--page-hero-title-size);
 }
 
 /* Wavy and organic animation helpers */

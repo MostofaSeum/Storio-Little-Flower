@@ -44,11 +44,12 @@ export default async function ExamResultsPage() {
               Academic Performance
             </span>
 
-            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight">
+            <h1 className="page-hero-title font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight">
               <SplitText
                 text="Exam Results"
                 className="inline-block text-primary-color"
                 tag="span"
+                triggerOnMount={true}
               />
             </h1>
 
