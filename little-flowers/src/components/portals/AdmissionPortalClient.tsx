@@ -356,33 +356,8 @@ export default function AdmissionPortalClient({
           guardian_email: email,
         };
 
-        // Step 1: Verify OTP first
-        const verifyOtpRes = await fetch('/api/admission/verify-otp', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'x-tenant-host': tenantHost,
-          },
-          body: JSON.stringify({
-            email: email,
-            otp_code: otpCode.trim(),
-          }),
-        });
-
-        const verifyOtpData = await verifyOtpRes.json().catch(() => null);
-
-        if (!verifyOtpRes.ok || (verifyOtpData && verifyOtpData.success === false)) {
-          const otpFailMessage =
-            verifyOtpData?.message ||
-            verifyOtpData?.otp_code ||
-            verifyOtpData?.detail ||
-            'Invalid verification code. Please check and try again.';
-          setOtpError(Array.isArray(otpFailMessage) ? otpFailMessage.join(', ') : otpFailMessage);
-          setSubmitting(false);
-          return;
-        }
-
-        // Step 2: Submit application without OTP code (already verified)
+        // Submit application with OTP code — the /admission/applications endpoint
+        // requires otp_code field and verifies it atomically.
         const submitResponse = await fetch('/api/admission/applications', {
           method: 'POST',
           headers: {
@@ -391,6 +366,7 @@ export default function AdmissionPortalClient({
           },
           body: JSON.stringify({
             form_data: submissionFormData,
+            otp_code: otpCode.trim(),
           }),
         });
 
