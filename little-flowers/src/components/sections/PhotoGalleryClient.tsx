@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import { resolveMediaUrl } from '@/lib/media';
 
 export interface BackendAlbum {
@@ -111,6 +111,52 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
       }
     }
   };
+
+  // Keep track of which photo cards have entered the viewport so they smoothly animate from down to up
+  const [visiblePhotoIds, setVisiblePhotoIds] = useState<Set<number | string>>(new Set());
+  const observerRef = useRef<IntersectionObserver | null>(null);
+
+  const registerCardRef = useCallback((node: HTMLDivElement | null, id: number | string) => {
+    if (!node) return;
+
+    if (!observerRef.current) {
+      observerRef.current = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const targetId = entry.target.getAttribute('data-photo-id');
+              if (targetId) {
+                setVisiblePhotoIds((prev) => {
+                  if (prev.has(targetId)) return prev;
+                  const next = new Set(prev);
+                  next.add(targetId);
+                  return next;
+                });
+              }
+              // Once revealed, unobserve to keep DOM performant
+              observerRef.current?.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.08,
+          rootMargin: '0px 0px -40px 0px',
+        }
+      );
+    }
+
+    node.setAttribute('data-photo-id', String(id));
+    observerRef.current.observe(node);
+  }, []);
+
+  // Reset observed items when album filter changes
+  useEffect(() => {
+    setVisiblePhotoIds(new Set());
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+      observerRef.current = null;
+    }
+  }, [selectedAlbumId]);
 
   return (
     <div className="site-container px-4 sm:px-8 py-6 sm:py-8">
@@ -334,16 +380,23 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
                 const isWide = detectedType === 'wide';
                 const isTall = detectedType === 'tall';
 
+                const isVisible = visiblePhotoIds.has(String(item.id));
+
                 return (
                   <div
                     key={item.id}
+                    ref={(el) => registerCardRef(el, item.id)}
                     onClick={() => setLightboxPhoto(item)}
-                    className={`group rounded-3xl overflow-hidden bg-white border border-purple-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col cursor-pointer transform hover:-translate-y-1.5 animate-fadeIn ${
+                    className={`group rounded-3xl overflow-hidden bg-white border border-purple-100 shadow-sm hover:shadow-xl flex flex-col cursor-pointer transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] transform ${
                       isWide ? 'sm:col-span-2 row-span-1' : isTall ? 'col-span-1 sm:row-span-2' : 'col-span-1 row-span-1'
-                    }`}
+                    } ${
+                      isVisible
+                        ? 'opacity-100 translate-y-0 scale-100'
+                        : 'opacity-0 translate-y-12 scale-[0.96] pointer-events-none'
+                    } hover:-translate-y-1.5`}
                     style={{
                       borderRadius: 'var(--site-card-radius, 1.5rem)',
-                      animationDelay: `${staggerDelay}ms`,
+                      transitionDelay: isVisible ? `${staggerDelay}ms` : '0ms',
                     }}
                   >
                     <div className="relative w-full h-full min-h-[220px] flex-1 overflow-hidden bg-purple-50">
