@@ -94,17 +94,23 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
             {photos.length > 0 && (
               <button
                 onClick={() => setSelectedAlbumId('all')}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-purple-50 text-primary-color hover:bg-primary-color hover:text-white transition-all duration-300 border border-purple-200 shadow-2xs cursor-pointer self-start sm:self-auto"
+                className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-purple-50 text-primary-color hover:bg-primary-color hover:text-white transition-all duration-300 border border-purple-200 shadow-2xs cursor-pointer self-start sm:self-auto"
               >
                 <span>View All Photos ({photos.length})</span>
-                <span>→</span>
+                <svg className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
               </button>
             )}
           </div>
 
           {albumsWithDetails.length === 0 ? (
             <div className="text-center py-16 px-4 bg-pastel-purple rounded-3xl border border-purple-100">
-              <span className="text-4xl block mb-3">📁</span>
+              <div className="w-14 h-14 mx-auto mb-3 rounded-2xl bg-purple-100/70 text-primary-color flex items-center justify-center">
+                <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+                </svg>
+              </div>
               <h3 className="text-xl font-bold font-fredoka text-gray-800 mb-2">No Albums Found</h3>
               <p className="text-sm text-gray-500 max-w-md mx-auto mb-6">
                 No dedicated albums have been created yet. You can still browse all uploaded photos.
@@ -125,6 +131,7 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
                   key={album.id}
                   onClick={() => setSelectedAlbumId(album.id)}
                   className="group bg-white rounded-3xl overflow-hidden border border-purple-100 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col transform hover:-translate-y-1"
+                  style={{ borderRadius: 'var(--site-card-radius, 1.5rem)' }}
                 >
                   {/* Cover Image Container */}
                   <div className="relative aspect-16/10 bg-purple-50 overflow-hidden">
@@ -137,7 +144,9 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
                       />
                     ) : (
                       <div className="w-full h-full flex flex-col items-center justify-center text-purple-300 bg-linear-to-br from-purple-50 to-pink-50">
-                        <span className="text-4xl mb-1">🖼️</span>
+                        <svg className="w-10 h-10 mb-2 text-purple-300" fill="none" stroke="currentColor" strokeWidth="1.75" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
                         <span className="text-xs font-semibold text-purple-400">Empty Album</span>
                       </div>
                     )}
@@ -147,7 +156,10 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
                     {/* Badge: Photo count */}
                     <div className="absolute top-4 right-4">
                       <span className="px-3 py-1 rounded-full bg-white/95 backdrop-blur-md text-xs font-bold text-gray-800 shadow-sm flex items-center gap-1.5">
-                        <span>📷</span>
+                        <svg className="w-3.5 h-3.5 text-primary-color" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
                         <span>{album.computedCount} {album.computedCount === 1 ? 'photo' : 'photos'}</span>
                       </span>
                     </div>
@@ -169,7 +181,9 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
                     <div className="mt-4 pt-3 border-t border-purple-50 flex items-center justify-between">
                       <span className="text-xs font-bold text-primary-color group-hover:underline flex items-center gap-1">
                         <span>Open Album</span>
-                        <span className="group-hover:translate-x-0.5 transition-transform">→</span>
+                        <svg className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
                       </span>
                       <span className="text-xs text-gray-400 font-medium">Click to view</span>
                     </div>
@@ -187,10 +201,12 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setSelectedAlbumId(null)}
-                className="w-10 h-10 rounded-full bg-purple-50 text-primary-color hover:bg-primary-color hover:text-white flex items-center justify-center text-lg font-bold transition-all duration-200 cursor-pointer shadow-2xs shrink-0"
+                className="w-10 h-10 rounded-full bg-purple-50 text-primary-color hover:bg-primary-color hover:text-white flex items-center justify-center transition-all duration-200 cursor-pointer shadow-2xs shrink-0"
                 title="Back to Albums"
               >
-                ←
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
               </button>
               <div>
                 <div className="flex items-center gap-2">
@@ -248,20 +264,27 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
           {/* Photos Grid */}
           {displayedPhotos.length === 0 ? (
             <div className="text-center py-16 px-4 bg-pastel-purple rounded-3xl border border-purple-100">
-              <span className="text-4xl block mb-3">📷</span>
+              <div className="w-14 h-14 mx-auto mb-3 rounded-2xl bg-purple-100/70 text-primary-color flex items-center justify-center">
+                <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
               <h3 className="text-xl font-bold font-fredoka text-gray-800 mb-2">No Photos in this Album</h3>
               <p className="text-sm text-gray-500 max-w-md mx-auto mb-6">
                 Photos added to this album will appear right here.
               </p>
               <button
                 onClick={() => setSelectedAlbumId(null)}
-                className="px-6 py-2.5 rounded-full text-sm font-bold bg-primary-color text-white hover:bg-opacity-90 transition-all cursor-pointer"
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-bold bg-primary-color text-white hover:bg-opacity-90 transition-all cursor-pointer"
               >
-                ← Back to Albums
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <span>Back to Albums</span>
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6">
               {displayedPhotos.map((item) => {
                 const imgUrl = getPhotoUrl(item);
                 const title = item.caption || item.image_title || item.alt_text || 'Photo';
@@ -270,26 +293,31 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
                   <div
                     key={item.id}
                     onClick={() => setLightboxPhoto(item)}
-                    className="group rounded-3xl overflow-hidden bg-white border border-purple-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col cursor-pointer transform hover:-translate-y-1"
+                    className="break-inside-avoid group rounded-3xl overflow-hidden bg-white border border-purple-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col cursor-pointer transform hover:-translate-y-1"
+                    style={{ borderRadius: 'var(--site-card-radius, 1.5rem)' }}
                   >
-                    <div className="relative aspect-4/3 overflow-hidden bg-purple-50">
+                    <div className="relative overflow-hidden bg-purple-50">
                       {imgUrl ? (
                         <img
                           src={imgUrl}
                           alt={item.alt_text || title}
-                          className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+                          className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500 block"
                           loading="lazy"
                         />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center text-purple-300 text-3xl">
-                          📷
+                        <div className="w-full aspect-4/3 flex items-center justify-center text-purple-300">
+                          <svg className="w-10 h-10" fill="none" stroke="currentColor" strokeWidth="1.75" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          </svg>
                         </div>
                       )}
 
                       {/* Hover Overlay */}
                       <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <span className="w-10 h-10 rounded-full bg-white/90 text-gray-900 flex items-center justify-center text-base shadow-md font-bold">
-                          🔍
+                        <span className="w-10 h-10 rounded-full bg-white/90 text-gray-900 flex items-center justify-center shadow-md">
+                          <svg className="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                          </svg>
                         </span>
                       </div>
 
@@ -301,7 +329,7 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
                     </div>
 
                     {(item.caption || item.image_title) && (
-                      <div className="p-4 flex-1 flex flex-col justify-between">
+                      <div className="p-4 flex-1 flex flex-col justify-between bg-white">
                         <h4 className="font-bold text-sm text-gray-900 line-clamp-2">
                           {item.caption || item.image_title}
                         </h4>
@@ -325,10 +353,12 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
         >
           <button
             onClick={() => setLightboxPhoto(null)}
-            className="absolute top-6 right-6 w-11 h-11 rounded-full bg-white/20 text-white hover:bg-white/40 flex items-center justify-center text-2xl font-bold cursor-pointer transition-colors z-60"
+            className="absolute top-6 right-6 w-11 h-11 rounded-full bg-white/20 text-white hover:bg-white/40 flex items-center justify-center cursor-pointer transition-colors z-60"
             aria-label="Close"
           >
-            ✕
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
           </button>
 
           <div
