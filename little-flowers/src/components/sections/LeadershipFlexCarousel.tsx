@@ -15,6 +15,7 @@ interface LeadershipFlexCarouselProps {
 export default function LeadershipFlexCarousel({ messages }: LeadershipFlexCarouselProps) {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [isCardVisible, setIsCardVisible] = useState<boolean>(false);
   const inspectionModalRef = useRef<HTMLDivElement>(null);
 
   // Close focus view on Escape key or outside click
@@ -27,6 +28,14 @@ export default function LeadershipFlexCarousel({ messages }: LeadershipFlexCarou
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isFocused]);
+
+  // Fallback safety timeout: ensure the card appears within 1.6s if intro finishes or takes longer
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsCardVisible(true);
+    }, 1600);
+    return () => clearTimeout(timer);
+  }, []);
 
   if (!messages || messages.length === 0) return null;
 
@@ -162,25 +171,36 @@ export default function LeadershipFlexCarousel({ messages }: LeadershipFlexCarou
               setActiveIndex(idx);
               setIsFocused(true);
             }}
+            onRevealed={() => setIsCardVisible(true)}
             className="w-full h-full cursor-pointer"
           />
 
-          {/* Leader Details Card Floating Overlay */}
+          {/* Leader Details Card Floating Overlay - revealed ONLY after photos render */}
           {!isFocused && currentMsg && (
-            <div className="pointer-events-none absolute bottom-4 sm:bottom-6 inset-x-0 flex justify-center px-4 z-10 animate-fadeIn">
-              <button
-                type="button"
+            <div
+              className={`absolute bottom-4 sm:bottom-6 inset-x-0 flex justify-center px-4 z-20 transition-all duration-700 ease-out ${
+                isCardVisible
+                  ? 'opacity-100 translate-y-0 pointer-events-auto'
+                  : 'opacity-0 translate-y-6 pointer-events-none'
+              }`}
+              onPointerDown={(e) => e.stopPropagation()}
+              onMouseDown={(e) => e.stopPropagation()}
+            >
+              <div
                 onClick={() => setIsFocused(true)}
-                className="pointer-events-auto group max-w-md w-full bg-white/92 backdrop-blur-md rounded-2xl border-2 border-purple-200/90 shadow-lg hover:shadow-xl p-3 sm:p-4 flex items-center justify-between gap-3 text-left transition-all hover:scale-[1.02] hover:border-primary-color active:scale-95 cursor-pointer"
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setIsFocused(true);
+                  }
+                }}
+                className="group max-w-md w-full bg-white/95 backdrop-blur-md rounded-2xl border-2 border-purple-200/90 shadow-lg hover:shadow-2xl p-3 sm:p-4 flex items-center justify-between gap-3 text-left transition-all duration-300 hover:scale-[1.02] hover:border-primary-color active:scale-98 cursor-pointer select-none ring-0 hover:ring-4 hover:ring-purple-100"
               >
                 <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-2 mb-0.5">
-                    {currentMsg.section_title && (
-                      <span className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider ${activeTheme.badgeBg}`}>
-                        {currentMsg.section_title}
-                      </span>
-                    )}
-                    <span className="text-[11px] font-bold text-accent-pink">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-[11px] font-bold text-accent-pink group-hover:underline">
                       Click to read statement
                     </span>
                   </div>
@@ -193,12 +213,27 @@ export default function LeadershipFlexCarousel({ messages }: LeadershipFlexCarou
                   </p>
                 </div>
 
-                <div className="w-9 h-9 rounded-xl bg-purple-50 text-primary-color group-hover:bg-primary-color group-hover:text-white flex items-center justify-center shrink-0 transition-colors shadow-2xs">
-                  <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                {/* Right Arrow Button with dynamic hover effects */}
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setIsFocused(true);
+                  }}
+                  aria-label={`Open leadership statement of ${currentMsg.name}`}
+                  className="w-10 h-10 rounded-xl bg-purple-100/70 text-primary-color group-hover:bg-primary-color group-hover:text-white hover:!bg-primary-color hover:!text-white hover:scale-110 active:scale-95 flex items-center justify-center shrink-0 transition-all duration-300 shadow-sm border border-purple-200/60 group-hover:border-primary-color cursor-pointer"
+                >
+                  <svg
+                    className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    viewBox="0 0 24 24"
+                  >
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                   </svg>
-                </div>
-              </button>
+                </button>
+              </div>
             </div>
           )}
 
@@ -244,11 +279,6 @@ export default function LeadershipFlexCarousel({ messages }: LeadershipFlexCarou
                   </div>
 
                   <div className="mt-4 sm:mt-5 max-w-xs">
-                    {currentMsg.section_title && (
-                      <span className={`inline-block px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider mb-2 ${activeTheme.badgeBg}`}>
-                        {currentMsg.section_title}
-                      </span>
-                    )}
                     <h3 className="text-xl sm:text-2xl font-black font-fredoka text-gray-900 leading-snug">
                       {currentMsg.name}
                     </h3>

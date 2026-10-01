@@ -53,6 +53,8 @@ export interface FlexCarouselProps extends Partial<PresetValues> {
   captureWheel?: boolean;
   onChange?: (index: number, item: FlexCarouselItem) => void;
   onSelect?: (index: number, item: FlexCarouselItem) => void;
+  onReady?: () => void;
+  onRevealed?: () => void;
   className?: string;
   style?: CSSProperties;
 }
@@ -130,6 +132,8 @@ interface Engine {
 interface Callbacks {
   onChange?: (index: number, item: FlexCarouselItem) => void;
   onSelect?: (index: number, item: FlexCarouselItem) => void;
+  onReady?: () => void;
+  onRevealed?: () => void;
 }
 
 const photo = (id: string) =>
@@ -459,6 +463,8 @@ export const FlexCarousel = ({
   captureWheel = true,
   onChange,
   onSelect,
+  onReady,
+  onRevealed,
   className = "",
   style,
 }: FlexCarouselProps) => {
@@ -466,7 +472,7 @@ export const FlexCarousel = ({
   const settingsRef = useRef<Settings | null>(null);
   const itemsRef = useRef<FlexCarouselItem[]>(items);
   const engineRef = useRef<Engine | null>(null);
-  const callbacksRef = useRef<Callbacks>({ onChange, onSelect });
+  const callbacksRef = useRef<Callbacks>({ onChange, onSelect, onReady, onRevealed });
   const [active, setActive] = useState(0);
   const [revealed, setRevealed] = useState(false);
   const [focusOpen, setFocusOpen] = useState(false);
@@ -483,7 +489,7 @@ export const FlexCarousel = ({
 
   useEffect(() => {
     itemsRef.current = list;
-    callbacksRef.current = { onChange, onSelect };
+    callbacksRef.current = { onChange, onSelect, onReady, onRevealed };
     settingsRef.current = {
       intro,
       cardHeight,
@@ -978,6 +984,7 @@ export const FlexCarousel = ({
         if (allSettled || now - introState.readyAt > 3500) {
           goal = snapPoint(m, goal);
           pos = goal;
+          callbacksRef.current.onReady?.();
           beginIntro(s, m);
         }
       }
@@ -990,6 +997,7 @@ export const FlexCarousel = ({
           introState.running = false;
           introState.done = true;
           setRevealed(true);
+          callbacksRef.current.onRevealed?.();
         }
         animating = true;
       }
