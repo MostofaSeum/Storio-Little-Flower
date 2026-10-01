@@ -468,7 +468,13 @@ export default function AdmissionPortalClient({
                         : 'bg-pastel-purple text-gray-400'
                   }`}
                 >
-                  {isCompleted ? <ThemeIcon name="success-check" size={18} /> : st.num}
+                  {isCompleted ? (
+                    <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  ) : (
+                    st.num
+                  )}
                 </div>
                 <span
                   className={`text-[10px] sm:text-xs font-bold mt-1.5 sm:mt-2 truncate w-full ${
