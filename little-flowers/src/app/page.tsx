@@ -11,6 +11,7 @@ import {
   StorioTestimonial,
   StorioEvent,
   StorioFaq,
+  StorioLeadershipMessage,
 } from "@/types";
 import { DEFAULT_DEMO_DATA } from "@/data/defaultDemoData";
 import {
@@ -26,6 +27,7 @@ import {
   getTestimonials,
   getEvents,
   getFaqs,
+  getLeadershipMessages,
 } from "@/lib/storio";
 
 // Layout & Theme Components
@@ -41,6 +43,7 @@ import HeroCarousel from "@/components/sections/HeroCarousel";
 import WaveBadgesSection from "@/components/sections/WaveBadgesSection";
 import NoticeSection from "@/components/sections/NoticeSection";
 import AboutSection from "@/components/sections/AboutSection";
+import LeadershipSection from "@/components/sections/LeadershipSection";
 import ActivitiesSection from "@/components/sections/ActivitiesSection";
 import StaffSection from "@/components/sections/StaffSection";
 import PromoCtaSection from "@/components/sections/PromoCtaSection";
@@ -82,6 +85,7 @@ export default async function Home() {
     rawTestimonials,
     rawEvents,
     rawFaqs,
+    rawLeadershipMessages,
   ] = await Promise.all([
     getHeroSlides(tenantHost).catch(() => null),
     getNotices(tenantHost).catch(() => null),
@@ -93,6 +97,7 @@ export default async function Home() {
     getTestimonials(tenantHost).catch(() => null),
     getEvents(tenantHost).catch(() => null),
     getFaqs(tenantHost).catch(() => null),
+    getLeadershipMessages(tenantHost).catch(() => null),
   ]);
 
   // 4. Apply Rule 1: Fallback to demo data ONLY in standalone preview mode
@@ -168,6 +173,13 @@ export default async function Home() {
         ? DEFAULT_DEMO_DATA.faqs
         : [];
 
+  const leadershipMessages: StorioLeadershipMessage[] =
+    Array.isArray(rawLeadershipMessages) && rawLeadershipMessages.length > 0
+      ? rawLeadershipMessages
+      : isStandalone
+        ? DEFAULT_DEMO_DATA.leadershipMessages
+        : [];
+
   const activePromo = promotions[0] || (isStandalone ? DEFAULT_DEMO_DATA.promotions[0] : null);
   const showTopBar = customization.showTopBar !== false;
 
@@ -213,7 +225,12 @@ export default async function Home() {
       {/* 6. ABOUT US & INSTITUTION PROFILE */}
       <AboutSection profile={profile} />
 
-      {/* 7. LEARNING PROGRAMS & ACTIVITIES */}
+      {/* 7. LEADERSHIP MESSAGES (Max 2 shown with alternating layout & read more) */}
+      {leadershipMessages.length > 0 && (
+        <LeadershipSection messages={leadershipMessages} />
+      )}
+
+      {/* 8. LEARNING PROGRAMS & ACTIVITIES */}
       <ActivitiesSection activities={activities} />
 
       {/* 9. TEACHERS & MENTORS */}

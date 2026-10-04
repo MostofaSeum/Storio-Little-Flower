@@ -125,7 +125,8 @@ export default async function LeadershipMessagePage() {
                   return (
                     <article
                       key={item.id}
-                      className="bg-white rounded-3xl p-6 sm:p-10 border border-purple-100 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden"
+                      id={`message-${item.id}`}
+                      className="bg-white rounded-3xl p-6 sm:p-10 border border-purple-100 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden scroll-mt-24"
                     >
                       <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
                         {/* Leader Photo & Profile */}
