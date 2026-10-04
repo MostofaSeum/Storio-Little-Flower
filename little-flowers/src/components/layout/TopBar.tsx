@@ -1,42 +1,42 @@
 import React from 'react';
 import ThemeIcon from '../ui/ThemeIcon';
+import { StorioSocialLink } from '@storio/template-sdk';
 
 interface TopBarProps {
   contactEmail?: string;
   phoneNumber?: string;
   admissionBadgeText?: string;
-  importantLinks?: { id: number; title: string; url: string; order?: number }[];
+  socialLinks?: StorioSocialLink[];
 }
 
-function getLinkBadge(title: string, url: string): { label: string; iconClass: string } {
-  const lower = `${title} ${url}`.toLowerCase();
-  if (lower.includes('facebook') || lower.includes('fb.com')) {
+function getSocialBadge(platform: string, url: string): { label: string; iconClass: string } {
+  const lower = `${platform} ${url}`.toLowerCase();
+  if (lower.includes('facebook') || lower.includes('fb')) {
     return { label: 'f', iconClass: 'hover:text-accent-pink' };
   }
   if (lower.includes('twitter') || lower.includes('x.com')) {
     return { label: '𝕏', iconClass: 'hover:text-sky-400' };
   }
-  if (lower.includes('instagram')) {
+  if (lower.includes('instagram') || lower.includes('insta')) {
     return { label: 'IG', iconClass: 'hover:text-pink-400' };
   }
-  if (lower.includes('youtube')) {
+  if (lower.includes('youtube') || lower.includes('yt')) {
     return { label: 'YT', iconClass: 'hover:text-red-400' };
   }
   if (lower.includes('linkedin')) {
     return { label: 'in', iconClass: 'hover:text-indigo-400' };
   }
-  // Default: Return the first 2 letters or short title
-  const shortTitle = title.length > 10 ? `${title.slice(0, 8)}..` : title;
-  return { label: shortTitle, iconClass: 'hover:text-white' };
+  const cleanLabel = platform.length > 8 ? `${platform.slice(0, 6)}..` : platform;
+  return { label: cleanLabel, iconClass: 'hover:text-white' };
 }
 
 export default function TopBar({
   contactEmail = 'info@example.com',
   phoneNumber = '+1 8 888 567.890.03',
   admissionBadgeText,
-  importantLinks = [],
+  socialLinks = [],
 }: TopBarProps) {
-  const hasLinks = Array.isArray(importantLinks) && importantLinks.length > 0;
+  const hasSocial = Array.isArray(socialLinks) && socialLinks.length > 0;
 
   return (
     <div className="bg-topbar text-gray-300 text-xs sm:text-sm py-2 px-4 sm:px-8 border-b border-gray-800">
@@ -74,17 +74,17 @@ export default function TopBar({
             <span>{admissionBadgeText || 'Admissions Open 2026-27'}</span>
           </span>
 
-          {hasLinks && (
+          {hasSocial && (
             <div className="flex items-center space-x-3 text-gray-400">
-              {importantLinks.slice(0, 5).map((item) => {
-                const badge = getLinkBadge(item.title, item.url);
+              {socialLinks.map((item, idx) => {
+                const badge = getSocialBadge(item.platform, item.url);
                 return (
                   <a
-                    key={item.id}
+                    key={idx}
                     href={item.url}
                     target="_blank"
                     rel="noreferrer"
-                    title={item.title}
+                    title={item.platform}
                     className={`${badge.iconClass} transition-colors font-bold text-xs`}
                   >
                     {badge.label}

@@ -196,7 +196,7 @@ export default async function Home() {
           contactEmail={settings?.contact_email}
           phoneNumber={settings?.phone_number}
           admissionBadgeText={customization?.admission_badge_text as string}
-          importantLinks={importantLinks}
+          socialLinks={settings?.social_links}
         />
       )}
 
