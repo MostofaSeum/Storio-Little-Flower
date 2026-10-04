@@ -28,8 +28,8 @@ export default async function PhotosGalleryPage() {
     getGallery(tenantHost).catch(() => null),
   ]);
 
-  const albums: BackendAlbum[] = Array.isArray(rawAlbums) ? rawAlbums : [];
-  const photos: BackendPhotoItem[] = Array.isArray(rawGallery) ? rawGallery : [];
+  const albums: BackendAlbum[] = Array.isArray(rawAlbums) ? (rawAlbums as unknown as BackendAlbum[]) : [];
+  const photos: BackendPhotoItem[] = Array.isArray(rawGallery) ? (rawGallery as unknown as BackendPhotoItem[]) : [];
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-gray-900 selection:bg-pink-100 selection:text-pink-700">
