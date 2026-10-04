@@ -33,14 +33,14 @@ export default function LeadershipSection({ messages }: LeadershipSectionProps) 
   if (displayMessages.length === 0) return null;
 
   return (
-    <section className="py-12 sm:py-16 px-4 sm:px-8 bg-pastel-purple/50 border-y border-purple-100/60 relative overflow-hidden">
-      {/* Decorative background blobs */}
-      <div className="absolute top-0 right-10 w-72 h-72 bg-purple-100/60 rounded-full blur-3xl -z-10 pointer-events-none" />
-      <div className="absolute bottom-0 left-10 w-72 h-72 bg-pink-100/50 rounded-full blur-3xl -z-10 pointer-events-none" />
+    <section className="py-14 sm:py-20 px-4 sm:px-8 bg-gradient-to-b from-white via-pastel-purple/30 to-white relative overflow-hidden">
+      {/* Decorative ambient blurred blobs */}
+      <div className="absolute top-1/4 right-0 w-96 h-96 bg-purple-100/50 rounded-full blur-3xl -z-10 pointer-events-none" />
+      <div className="absolute bottom-10 left-0 w-96 h-96 bg-pink-100/40 rounded-full blur-3xl -z-10 pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto space-y-12 sm:space-y-16">
+      <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16">
         {displayMessages.map((item, index) => {
-          // Layout rule:
+          // Layout alternating rule:
           // index 0: Picture on Right, Message on Left
           // index 1: Picture on Left, Message on Right
           const isPictureOnRight = index % 2 === 0;
@@ -56,7 +56,7 @@ export default function LeadershipSection({ messages }: LeadershipSectionProps) 
               : null;
 
           const plainText = cleanHtmlToPlainText(item.message);
-          const charLimit = 320;
+          const charLimit = 360;
           const isLong = plainText.length > charLimit;
           const previewText = isLong
             ? `${plainText.slice(0, charLimit).trim()}...`
@@ -65,41 +65,67 @@ export default function LeadershipSection({ messages }: LeadershipSectionProps) 
           return (
             <div
               key={item.id}
-              className="bg-white rounded-3xl p-6 sm:p-10 lg:p-12 shadow-sm border border-purple-100 hover:shadow-md transition-shadow"
+              className="relative bg-gradient-to-br from-white via-white to-purple-50/40 rounded-[2.5rem] p-6 sm:p-10 lg:p-14 border border-purple-100/80 shadow-[0_12px_40px_rgba(108,66,152,0.06)] hover:shadow-[0_20px_50px_rgba(108,66,152,0.1)] transition-all duration-300 overflow-hidden"
             >
+              {/* Subtle map / tech decorative background grid overlay */}
               <div
-                className={`flex flex-col ${
-                  isPictureOnRight ? 'lg:flex-row' : 'lg:flex-row-reverse'
-                } items-center lg:items-stretch gap-8 lg:gap-12`}
+                className="absolute inset-0 opacity-[0.03] pointer-events-none -z-0"
+                style={{
+                  backgroundImage:
+                    'radial-gradient(var(--primary, #6c4298) 1px, transparent 1px)',
+                  backgroundSize: '24px 24px',
+                }}
+              />
+
+              <div
+                className={`relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center`}
               >
                 {/* Text Content Column */}
-                <div className="flex-1 flex flex-col justify-between order-2 lg:order-1 text-left">
-                  <div>
-                    {/* Header Pill & Role */}
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pastel-purple text-primary-color text-xs font-bold uppercase tracking-wider mb-3 border border-purple-200/60">
-                      <span className="w-1.5 h-1.5 rounded-full bg-accent-pink" />
-                      <span>{item.section_title || 'Leadership Message'}</span>
-                    </div>
-
-                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-primary-color font-fredoka leading-tight">
-                      {item.name}
-                    </h2>
-
+                <div
+                  className={`lg:col-span-6 flex flex-col justify-center text-left ${
+                    isPictureOnRight ? 'lg:order-1' : 'lg:order-2'
+                  }`}
+                >
+                  {/* Premium Tag Pill */}
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-primary-color border border-purple-200 shadow-2xs text-xs font-bold uppercase tracking-wider mb-5 self-start">
+                    <span className="w-2 h-2 rounded-full bg-accent-pink animate-pulse" />
+                    <span>{item.section_title || 'Leadership Desk'}</span>
                     {(item.role || item.company) && (
-                      <p className="text-xs sm:text-sm font-semibold text-gray-500 mt-1 mb-5">
-                        {item.role}
-                        {item.role && item.company && <span className="mx-2 text-gray-300">|</span>}
-                        {item.company}
-                      </p>
+                      <>
+                        <span className="text-gray-300">•</span>
+                        <span className="text-gray-600 font-semibold lowercase first-letter:uppercase">
+                          {item.role || item.company}
+                        </span>
+                      </>
                     )}
+                  </div>
 
-                    {/* Message Preview */}
-                    <p className="text-gray-600 font-quicksand text-sm sm:text-base leading-relaxed whitespace-pre-line">
+                  {/* Big Bold Headline */}
+                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 font-fredoka leading-[1.12] tracking-tight mb-4">
+                    <span>{item.name}</span>
+                  </h2>
+
+                  {/* Role subtitle tag */}
+                  {item.role && (
+                    <div className="flex items-center gap-2 text-sm sm:text-base font-bold text-primary-color mb-5">
+                      <span>{item.role}</span>
+                      {item.company && (
+                        <>
+                          <span className="text-gray-300">|</span>
+                          <span className="text-gray-600 font-medium">{item.company}</span>
+                        </>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Body message with stylish ellipsis and read more */}
+                  <div className="text-gray-600 font-quicksand text-base sm:text-lg leading-relaxed mb-8 font-medium">
+                    <p className="whitespace-pre-line">
                       {previewText}{' '}
                       {isLong && (
                         <Link
                           href={`/administration/leadership-message#message-${item.id}`}
-                          className="inline-flex items-center font-bold text-accent-pink hover:text-pink-700 underline underline-offset-4 ml-1 transition-colors cursor-pointer"
+                          className="inline-flex items-center font-extrabold text-accent-pink hover:text-pink-700 underline underline-offset-4 transition-colors cursor-pointer ml-1"
                         >
                           read more
                         </Link>
@@ -107,47 +133,79 @@ export default function LeadershipSection({ messages }: LeadershipSectionProps) 
                     </p>
                   </div>
 
-                  {/* Signature and Full Messages Link */}
-                  <div className="mt-6 pt-4 border-t border-purple-100/80 flex flex-wrap items-center justify-between gap-4">
+                  {/* Action Buttons & Signature Row (mirroring the reference screenshot) */}
+                  <div className="flex flex-wrap items-center gap-4 sm:gap-5 pt-2">
+                    {/* Primary Button */}
                     <Link
                       href={`/administration/leadership-message#message-${item.id}`}
-                      className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-primary-color hover:text-accent-pink transition-colors group"
+                      className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full bg-button-dark hover:bg-gray-800 text-white font-bold text-sm shadow-md hover:shadow-xl transition-all transform hover:-translate-y-0.5"
                     >
-                      <span>View Full Message & Bio</span>
-                      <span className="transform group-hover:translate-x-1 transition-transform">→</span>
+                      <span>Read Full Message</span>
+                      <span>→</span>
                     </Link>
 
+                    {/* Secondary Button */}
+                    <Link
+                      href="/administration/leadership-message"
+                      className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white text-gray-800 hover:text-primary-color font-bold text-sm border-2 border-gray-200 hover:border-primary-color shadow-2xs transition-all"
+                    >
+                      <span>All Leaders</span>
+                      <span>→</span>
+                    </Link>
+
+                    {/* Official Signature if provided */}
                     {signatureUrl && (
-                      <div className="flex items-center">
+                      <div className="ml-auto flex items-center pl-4 py-1">
                         <img
                           src={signatureUrl}
                           alt={`${item.name} Signature`}
-                          className="h-10 sm:h-12 max-w-[140px] object-contain opacity-90"
+                          className="h-10 sm:h-12 max-w-[140px] object-contain opacity-85 hover:opacity-100 transition-opacity"
                         />
                       </div>
                     )}
                   </div>
                 </div>
 
-                {/* Picture Column */}
-                <div className="w-full lg:w-[380px] shrink-0 flex flex-col items-center justify-center order-1 lg:order-2">
-                  <div className="relative w-full max-w-[320px] lg:max-w-none aspect-[4/3] sm:aspect-[16/11] rounded-2xl overflow-hidden shadow-md border-4 border-white bg-pastel-purple group">
-                    {photoUrl ? (
-                      <img
-                        src={photoUrl}
-                        alt={item.name}
-                        className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex flex-col items-center justify-center bg-purple-100 text-primary-color">
-                        <span className="text-5xl font-extrabold font-fredoka">
-                          {item.name ? item.name.charAt(0) : 'L'}
-                        </span>
-                        <span className="text-xs font-bold mt-2 text-gray-500">
-                          {item.role || 'Leadership'}
+                {/* Picture Showcase Column */}
+                <div
+                  className={`lg:col-span-6 flex justify-center ${
+                    isPictureOnRight ? 'lg:order-2' : 'lg:order-1'
+                  }`}
+                >
+                  <div className="relative w-full max-w-lg lg:max-w-none">
+                    {/* Background colorful glow */}
+                    <div className="absolute -inset-2 bg-gradient-to-r from-purple-200 via-pink-200 to-yellow-100 rounded-[2.5rem] blur-xl opacity-60 group-hover:opacity-100 transition duration-700 -z-10" />
+
+                    {/* The Main Image Container */}
+                    <div className="relative aspect-[4/3] sm:aspect-[16/11] lg:aspect-[5/4] rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-slate-50 group">
+                      {photoUrl ? (
+                        <img
+                          src={photoUrl}
+                          alt={item.name}
+                          className="w-full h-full object-cover group-hover:scale-104 transition-transform duration-700 ease-out"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex flex-col items-center justify-center bg-purple-100 text-primary-color p-8 text-center">
+                          <span className="text-7xl font-extrabold font-fredoka mb-2">
+                            {item.name ? item.name.charAt(0) : 'L'}
+                          </span>
+                          <span className="text-base font-bold text-primary-color">
+                            {item.name}
+                          </span>
+                          <span className="text-xs text-gray-500 font-semibold mt-1">
+                            {item.role || 'Leadership'}
+                          </span>
+                        </div>
+                      )}
+
+                      {/* Floating Badge on the image (mirroring the screenshot's floating pill / badge aesthetic) */}
+                      <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-md px-4 py-2 rounded-2xl shadow-lg border border-purple-100 flex items-center gap-2.5">
+                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping shrink-0" />
+                        <span className="text-xs font-extrabold text-gray-800 truncate max-w-[200px]">
+                          {item.role || 'Institutional Leader'}
                         </span>
                       </div>
-                    )}
+                    </div>
                   </div>
                 </div>
               </div>
