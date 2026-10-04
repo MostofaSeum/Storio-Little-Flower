@@ -5,13 +5,39 @@ interface TopBarProps {
   contactEmail?: string;
   phoneNumber?: string;
   admissionBadgeText?: string;
+  importantLinks?: { id: number; title: string; url: string; order?: number }[];
+}
+
+function getLinkBadge(title: string, url: string): { label: string; iconClass: string } {
+  const lower = `${title} ${url}`.toLowerCase();
+  if (lower.includes('facebook') || lower.includes('fb.com')) {
+    return { label: 'f', iconClass: 'hover:text-accent-pink' };
+  }
+  if (lower.includes('twitter') || lower.includes('x.com')) {
+    return { label: '𝕏', iconClass: 'hover:text-sky-400' };
+  }
+  if (lower.includes('instagram')) {
+    return { label: 'IG', iconClass: 'hover:text-pink-400' };
+  }
+  if (lower.includes('youtube')) {
+    return { label: 'YT', iconClass: 'hover:text-red-400' };
+  }
+  if (lower.includes('linkedin')) {
+    return { label: 'in', iconClass: 'hover:text-indigo-400' };
+  }
+  // Default: Return the first 2 letters or short title
+  const shortTitle = title.length > 10 ? `${title.slice(0, 8)}..` : title;
+  return { label: shortTitle, iconClass: 'hover:text-white' };
 }
 
 export default function TopBar({
   contactEmail = 'info@example.com',
   phoneNumber = '+1 8 888 567.890.03',
   admissionBadgeText,
+  importantLinks = [],
 }: TopBarProps) {
+  const hasLinks = Array.isArray(importantLinks) && importantLinks.length > 0;
+
   return (
     <div className="bg-topbar text-gray-300 text-xs sm:text-sm py-2 px-4 sm:px-8 border-b border-gray-800">
       <div className="site-container flex flex-wrap items-center justify-between gap-2">
@@ -41,46 +67,32 @@ export default function TopBar({
           </a>
         </div>
 
-        {/* Right: Quick School Badge & Socials */}
+        {/* Right: Quick School Badge & Dynamic Important / Social Links */}
         <div className="flex items-center space-x-4">
           <span className="hidden sm:inline-flex items-center gap-1.5 text-[11px] font-bold text-amber-300 bg-amber-950/60 px-2.5 py-0.5 rounded-full border border-amber-500/30">
             <ThemeIcon name="sprout-admissions" size={14} />
             <span>{admissionBadgeText || 'Admissions Open 2026-27'}</span>
           </span>
-          <div className="flex items-center space-x-3 text-gray-400">
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-accent-pink transition-colors font-bold text-xs"
-            >
-              f
-            </a>
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-sky-400 transition-colors font-bold text-xs"
-            >
-              𝕏
-            </a>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-pink-400 transition-colors font-bold text-xs"
-            >
-              IG
-            </a>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-indigo-400 transition-colors font-bold text-xs"
-            >
-              in
-            </a>
-          </div>
+
+          {hasLinks && (
+            <div className="flex items-center space-x-3 text-gray-400">
+              {importantLinks.slice(0, 5).map((item) => {
+                const badge = getLinkBadge(item.title, item.url);
+                return (
+                  <a
+                    key={item.id}
+                    href={item.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    title={item.title}
+                    className={`${badge.iconClass} transition-colors font-bold text-xs`}
+                  >
+                    {badge.label}
+                  </a>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
     </div>
