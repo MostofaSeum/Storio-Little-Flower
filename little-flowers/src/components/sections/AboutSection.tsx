@@ -1,14 +1,25 @@
 import React from 'react';
-import { StorioInstitutionProfile } from '@/types';
+import { StorioInstitutionProfile, LittleFlowersCustomizationConfig } from '@/types';
 import SplitText from '@/components/ui/SplitText';
 import AnimatedCounter from '@/components/ui/AnimatedCounter';
 
 interface AboutSectionProps {
   profile: StorioInstitutionProfile | null;
+  customization?: LittleFlowersCustomizationConfig | null;
 }
 
-export default function AboutSection({ profile }: AboutSectionProps) {
+export default function AboutSection({ profile, customization }: AboutSectionProps) {
   if (!profile) return null;
+
+  const showExperience = customization?.about_experience_show !== false;
+  const experienceYears = (customization?.about_experience_years as string) || "10+ Years";
+  const experienceLabel = (customization?.about_experience_label as string) || "Of Joyful Learning";
+
+  const buttonText = (customization?.about_btn_text as string) || "Schedule a Campus Visit";
+  const buttonUrl = (customization?.about_btn_link as string) || "/admission";
+
+  const metric3Number = Number(customization?.about_metric3_number) || 100;
+  const metric3Label = (customization?.about_metric3_label as string) || "Safe Campus & Care";
 
   return (
     <section

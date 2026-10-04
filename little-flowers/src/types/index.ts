@@ -93,6 +93,13 @@ export interface LittleFlowersCustomizationConfig {
   hero_card3_show?: boolean;
   hero_card3_title?: string;
   hero_card3_color?: string;
+  about_experience_show?: boolean;
+  about_experience_years?: string;
+  about_experience_label?: string;
+  about_btn_text?: string;
+  about_btn_link?: string;
+  about_metric3_number?: string;
+  about_metric3_label?: string;
   heroTitle1?: string;
   heroTitle2?: string;
   heroDescription?: string;

@@ -339,6 +339,48 @@
         "label": "Badge 4 Hyperlink URL",
         "type": "text",
         "default": "/admission"
+      },
+      {
+        "id": "about_experience_show",
+        "label": "Show About Experience Badge (Yellow)",
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "id": "about_experience_years",
+        "label": "About Experience Years",
+        "type": "text",
+        "default": "10+ Years"
+      },
+      {
+        "id": "about_experience_label",
+        "label": "About Experience Label",
+        "type": "text",
+        "default": "Of Joyful Learning"
+      },
+      {
+        "id": "about_btn_text",
+        "label": "About Button Text",
+        "type": "text",
+        "default": "Schedule a Campus Visit"
+      },
+      {
+        "id": "about_btn_link",
+        "label": "About Button Hyperlink URL",
+        "type": "text",
+        "default": "/admission"
+      },
+      {
+        "id": "about_metric3_number",
+        "label": "About Metric 3 (Percent Value)",
+        "type": "text",
+        "default": "100"
+      },
+      {
+        "id": "about_metric3_label",
+        "label": "About Metric 3 Label",
+        "type": "text",
+        "default": "Safe Campus & Care"
       }
     ]
   },

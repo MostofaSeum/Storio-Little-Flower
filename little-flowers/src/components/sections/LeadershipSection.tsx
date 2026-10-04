@@ -107,19 +107,21 @@ export default function LeadershipSection({ messages }: LeadershipSectionProps) 
                     isPictureOnRight ? 'lg:order-1' : 'lg:order-2'
                   }`}
                 >
-                  {/* Premium Tag Pill */}
-                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-primary-color border border-purple-200 shadow-2xs text-xs font-bold uppercase tracking-wider mb-5 self-start">
-                    <span className="w-2 h-2 rounded-full bg-accent-pink animate-pulse" />
-                    <span>{item.section_title || 'Leadership Desk'}</span>
-                    {(item.role || item.company) && (
-                      <>
-                        <span className="text-gray-300">•</span>
-                        <span className="text-gray-600 font-semibold lowercase first-letter:uppercase">
-                          {item.role || item.company}
-                        </span>
-                      </>
-                    )}
-                  </div>
+                  {/* Role / Leadership Pill */}
+                  {(item.role || item.company) && (
+                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-primary-color border border-purple-200 shadow-2xs text-xs font-bold uppercase tracking-wider mb-5 self-start">
+                      <span className="w-2 h-2 rounded-full bg-accent-pink shrink-0" />
+                      <span>{item.role || item.company}</span>
+                      {item.role && item.company && (
+                        <>
+                          <span className="text-gray-300">•</span>
+                          <span className="text-gray-600 font-semibold lowercase first-letter:uppercase">
+                            {item.company}
+                          </span>
+                        </>
+                      )}
+                    </div>
+                  )}
 
                   {/* Big Bold Headline */}
                   <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 font-fredoka leading-[1.12] tracking-tight mb-4">
