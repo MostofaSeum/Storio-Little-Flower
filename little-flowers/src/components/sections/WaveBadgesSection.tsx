@@ -33,46 +33,38 @@ const badgeColorPalette = [
 
 export default function WaveBadgesSection({
   customization,
-  activities = [],
   showWaveDivider = true,
 }: WaveBadgesSectionProps) {
   // Check if badges should be visible (default: true)
   const showBadges = customization?.showWaveBadges !== false;
 
-  // 1. If connected to real database with activities, build badges from real DB activities
-  const hasDbActivities = Array.isArray(activities) && activities.length > 0;
-
-  // 2. Fallback items from customization config or template defaults
-  const fallbackBadges = [
+  // Badges driven by Storio Admin customization (with joyful fallback defaults)
+  const badges = [
     {
       title: (customization?.badge1_text as string) || 'Creative Learning',
-      icon: '/icons/book.png',
-      href: '/activity',
+      color: (customization?.badge1_color as string) || '#ff9800',
+      icon: (customization?.badge1_icon as string) || '/icons/book.png',
+      href: (customization?.badge1_link as string) || '/activity',
     },
     {
       title: (customization?.badge2_text as string) || 'Caring Mentors',
-      icon: '/icons/user.png',
-      href: '/staff',
+      color: (customization?.badge2_color as string) || '#ff4081',
+      icon: (customization?.badge2_icon as string) || '/icons/user.png',
+      href: (customization?.badge2_link as string) || '/staff',
     },
     {
       title: (customization?.badge3_text as string) || 'Healthy Growth',
-      icon: '/icons/happiness.png',
-      href: '/about',
+      color: (customization?.badge3_color as string) || '#29b6f6',
+      icon: (customization?.badge3_icon as string) || '/icons/happiness.png',
+      href: (customization?.badge3_link as string) || '/about',
     },
     {
       title: (customization?.badge4_text as string) || 'Safe & Nurturing',
-      icon: '/icons/security.png',
-      href: '/admission',
+      color: (customization?.badge4_color as string) || '#8bc34a',
+      icon: (customization?.badge4_icon as string) || '/icons/security.png',
+      href: (customization?.badge4_link as string) || '/admission',
     },
   ];
-
-  const displayBadges = hasDbActivities
-    ? activities.slice(0, 4).map((act, idx) => ({
-        title: act.title,
-        icon: badgeColorPalette[idx % badgeColorPalette.length].defaultIcon,
-        href: `/activity/${act.slug || act.id}`,
-      }))
-    : fallbackBadges;
 
   return (
     <div className="relative mt-auto">
@@ -91,31 +83,34 @@ export default function WaveBadgesSection({
         </div>
       )}
 
-      {/* Pastel Sky Blue Strip with Colorful Feature Badges */}
+      {/* Pastel Sky Blue Strip with Customizable Feature Badges */}
       {showBadges && (
         <div className="bg-accent-soft-blue pb-16 pt-2 px-4 sm:px-8">
           <div className="max-w-5xl mx-auto flex flex-wrap items-center justify-around gap-6 sm:gap-8 reveal-on-scroll">
-            {displayBadges.map((badge, idx) => {
-              const colorInfo = badgeColorPalette[idx % badgeColorPalette.length];
-              return (
-                <Link
-                  key={idx}
-                  href={badge.href}
-                  className="flex flex-col items-center group cursor-pointer"
+            {badges.map((badge, idx) => (
+              <Link
+                key={idx}
+                href={badge.href}
+                className="flex flex-col items-center group cursor-pointer"
+              >
+                <div
+                  className="w-20 h-20 sm:w-24 sm:h-24 rounded-full text-white flex items-center justify-center shadow-md p-5 badge-interactive transition-transform hover:scale-105"
+                  style={{ backgroundColor: badge.color }}
                 >
-                  <div className={`w-20 h-20 sm:w-24 sm:h-24 rounded-full ${colorInfo.bg} text-white flex items-center justify-center shadow-md p-5 badge-interactive transition-transform hover:scale-105`}>
-                    <img
-                      src={badge.icon}
-                      alt={badge.title}
-                      className="w-full h-full object-contain brightness-0 invert"
-                    />
-                  </div>
-                  <span className={`mt-3 font-bold text-gray-700 text-sm ${colorInfo.textHover} transition-colors text-center max-w-[140px] truncate`}>
-                    {badge.title}
-                  </span>
-                </Link>
-              );
-            })}
+                  <img
+                    src={badge.icon}
+                    alt={badge.title}
+                    className="w-full h-full object-contain brightness-0 invert"
+                  />
+                </div>
+                <span
+                  className="mt-3 font-bold text-gray-700 text-sm transition-colors text-center max-w-[140px] truncate"
+                  style={{ color: 'var(--text-color, #374151)' }}
+                >
+                  {badge.title}
+                </span>
+              </Link>
+            ))}
           </div>
         </div>
       )}

@@ -162,27 +162,99 @@
       },
       {
         "id": "badge1_text",
-        "label": "Feature Badge 1 (Yellow) Label",
+        "label": "Badge 1 Label",
         "type": "text",
         "default": "Creative Learning"
       },
       {
+        "id": "badge1_color",
+        "label": "Badge 1 Color",
+        "type": "color",
+        "default": "#ff9800"
+      },
+      {
+        "id": "badge1_icon",
+        "label": "Badge 1 Icon Image URL",
+        "type": "image",
+        "default": "/icons/book.png"
+      },
+      {
+        "id": "badge1_link",
+        "label": "Badge 1 Hyperlink URL",
+        "type": "text",
+        "default": "/activity"
+      },
+      {
         "id": "badge2_text",
-        "label": "Feature Badge 2 (Pink) Label",
+        "label": "Badge 2 Label",
         "type": "text",
         "default": "Caring Mentors"
       },
       {
+        "id": "badge2_color",
+        "label": "Badge 2 Color",
+        "type": "color",
+        "default": "#ff4081"
+      },
+      {
+        "id": "badge2_icon",
+        "label": "Badge 2 Icon Image URL",
+        "type": "image",
+        "default": "/icons/user.png"
+      },
+      {
+        "id": "badge2_link",
+        "label": "Badge 2 Hyperlink URL",
+        "type": "text",
+        "default": "/staff"
+      },
+      {
         "id": "badge3_text",
-        "label": "Feature Badge 3 (Blue) Label",
+        "label": "Badge 3 Label",
         "type": "text",
         "default": "Healthy Growth"
       },
       {
+        "id": "badge3_color",
+        "label": "Badge 3 Color",
+        "type": "color",
+        "default": "#29b6f6"
+      },
+      {
+        "id": "badge3_icon",
+        "label": "Badge 3 Icon Image URL",
+        "type": "image",
+        "default": "/icons/happiness.png"
+      },
+      {
+        "id": "badge3_link",
+        "label": "Badge 3 Hyperlink URL",
+        "type": "text",
+        "default": "/about"
+      },
+      {
         "id": "badge4_text",
-        "label": "Feature Badge 4 (Green) Label",
+        "label": "Badge 4 Label",
         "type": "text",
         "default": "Safe & Nurturing"
+      },
+      {
+        "id": "badge4_color",
+        "label": "Badge 4 Color",
+        "type": "color",
+        "default": "#8bc34a"
+      },
+      {
+        "id": "badge4_icon",
+        "label": "Badge 4 Icon Image URL",
+        "type": "image",
+        "default": "/icons/security.png"
+      },
+      {
+        "id": "badge4_link",
+        "label": "Badge 4 Hyperlink URL",
+        "type": "text",
+        "default": "/admission"
       }
     ]
   },

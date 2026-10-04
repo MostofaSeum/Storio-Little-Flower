@@ -211,7 +211,6 @@ export default async function Home() {
       {/* 4. SOFT SKY BLUE WAVE BOTTOM SECTION WITH BADGES */}
       <WaveBadgesSection
         customization={customization}
-        activities={activities}
         showWaveDivider={customization.showWaveDivider !== false}
       />
 
