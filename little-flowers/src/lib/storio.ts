@@ -151,7 +151,7 @@ export async function getLayout(tenantHost: string) {
 }
 
 export async function getInstitutionProfile(tenantHost: string) {
-  return storio.apiFetch<any>('/api/v2/template/institution-profile/', { tenantHost });
+  return storio.apiFetch<StorioInstitutionProfile>('/api/v2/template/institution-profile/', { tenantHost });
 }
 
 export async function getHeroSlides(tenantHost: string) {
@@ -191,39 +191,39 @@ export async function getAlbums(tenantHost: string) {
 }
 
 export async function getActivities(tenantHost: string) {
-  return storio.apiFetch<any[]>('/api/v2/template/activities/', { tenantHost });
+  return storio.apiFetch<StorioActivityItem[]>('/api/v2/template/activities/', { tenantHost });
 }
 
 export async function getActivityDetail(slug: string, tenantHost: string) {
-  return storio.apiFetch<any>(`/api/v2/template/activities/${slug}/`, { tenantHost });
+  return storio.apiFetch<StorioActivityItem>(`/api/v2/template/activities/${slug}/`, { tenantHost });
 }
 
 export async function getEvents(tenantHost: string) {
-  return storio.apiFetch<any[]>('/api/events/', { tenantHost });
+  return storio.apiFetch<StorioEvent[]>('/api/events/', { tenantHost });
 }
 
 export async function getEventDetail(slugOrId: string | number, tenantHost: string) {
-  return storio.apiFetch<any>(`/api/events/${slugOrId}/`, { tenantHost });
+  return storio.apiFetch<StorioEvent>(`/api/events/${slugOrId}/`, { tenantHost });
 }
 
 export async function getTestimonials(tenantHost: string) {
-  return storio.apiFetch<any[]>('/api/v2/template/testimonials/', { tenantHost });
+  return storio.apiFetch<StorioTestimonial[]>('/api/v2/template/testimonials/', { tenantHost });
 }
 
 export async function getLeadershipMessages(tenantHost: string) {
-  return storio.apiFetch<any[]>('/api/v2/template/leadership-messages/', { tenantHost });
+  return storio.apiFetch<StorioLeadershipMessage[]>('/api/v2/template/leadership-messages/', { tenantHost });
 }
 
 export async function getPromotions(tenantHost: string) {
-  return storio.apiFetch<any[]>('/api/v2/template/promotions/', { tenantHost });
+  return storio.apiFetch<StorioPromotion[]>('/api/v2/template/promotions/', { tenantHost });
 }
 
 export async function getImportantLinks(tenantHost: string) {
-  return storio.apiFetch<any[]>('/api/v2/template/important-links/', { tenantHost });
+  return storio.apiFetch<StorioImportantLink[]>('/api/v2/template/important-links/', { tenantHost });
 }
 
 export async function getFaqs(tenantHost: string) {
-  return storio.apiFetch<any[]>('/api/v2/template/faqs/', { tenantHost });
+  return storio.apiFetch<StorioFaq[]>('/api/v2/template/faqs/', { tenantHost });
 }
 
 export async function getVideos(tenantHost: string) {
@@ -231,7 +231,7 @@ export async function getVideos(tenantHost: string) {
 }
 
 export async function getCalendarEvents(tenantHost: string) {
-  return storio.apiFetch<any[]>('/api/v2/template/calendar/', { tenantHost });
+  return storio.apiFetch<StorioCalendarEvent[]>('/api/v2/template/calendar/', { tenantHost });
 }
 
 export async function getExamResults(tenantHost: string) {

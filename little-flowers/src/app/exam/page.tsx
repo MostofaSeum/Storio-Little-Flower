@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { storio } from '@storio/template-sdk';
-import { getTenantContext, getTemplateLayout } from '@/lib/storio';
+import { getTenantContext, getTemplateLayout, getExamResults } from '@/lib/storio';
 import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
@@ -23,10 +22,7 @@ export default async function ExamResultsPage() {
   const { tenantHost, isStandalone } = await getTenantContext();
   const { settings, customization, navigation } = await getTemplateLayout(tenantHost, isStandalone);
 
-  const rawExams = await storio.apiFetch<StorioExamResult[]>(
-    '/api/v2/template/exam-results/',
-    { tenantHost }
-  );
+  const rawExams = await getExamResults(tenantHost).catch(() => null);
 
   const results: StorioExamResult[] = Array.isArray(rawExams) ? rawExams : [];
 

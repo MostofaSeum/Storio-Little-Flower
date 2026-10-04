@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { storio } from "@storio/template-sdk";
-import { getTenantContext, getTemplateLayout } from "@/lib/storio";
+import { getTenantContext, getTemplateLayout, getVideos } from "@/lib/storio";
 import { resolveMediaUrl } from "@/lib/media";
 import InteractiveHeader from "@/components/layout/InteractiveHeader";
 import Footer from "@/components/layout/Footer";
@@ -38,10 +37,7 @@ export default async function VideosGalleryPage() {
   const { settings, customization, navigation, importantLinks } =
     await getTemplateLayout(tenantHost, isStandalone);
 
-  const rawReels = await storio.apiFetch<StorioReelItem[]>(
-    "/api/v2/template/reels/",
-    { tenantHost },
-  );
+  const rawReels = await getVideos(tenantHost).catch(() => null);
 
   const videos: StorioReelItem[] = Array.isArray(rawReels) ? rawReels : [];
 

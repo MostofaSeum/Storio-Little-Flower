@@ -1,5 +1,4 @@
 import {
-  storio,
   StorioHeroSlide,
   StorioNotice,
   StorioStaffMember,
@@ -15,7 +14,21 @@ import {
   StorioLeadershipMessage,
 } from "@/types";
 import { DEFAULT_DEMO_DATA } from "@/data/defaultDemoData";
-import { getTenantContext, getTemplateLayout } from "@/lib/storio";
+import {
+  getTenantContext,
+  getTemplateLayout,
+  getHeroSlides,
+  getNotices,
+  getInstitutionProfile,
+  getActivities,
+  getStaff,
+  getGallery,
+  getPromotions,
+  getTestimonials,
+  getEvents,
+  getFaqs,
+  getLeadershipMessages,
+} from "@/lib/storio";
 
 // Layout & Theme Components
 import TopBar from "@/components/layout/TopBar";
@@ -74,28 +87,17 @@ export default async function Home() {
     rawFaqs,
     rawLeadershipMessages,
   ] = await Promise.all([
-    storio.getHeroSlides(tenantHost),
-    storio.getNotices(tenantHost),
-    storio.apiFetch<StorioInstitutionProfile>(
-      "/api/v2/template/institution-profile/",
-      { tenantHost }
-    ),
-    storio.apiFetch<StorioActivityItem[]>("/api/v2/template/activities/", {
-      tenantHost,
-    }),
-    storio.getStaff(tenantHost),
-    storio.getGallery(tenantHost),
-    storio.apiFetch<StorioPromotion[]>("/api/v2/template/promotions/", {
-      tenantHost,
-    }),
-    storio.apiFetch<StorioTestimonial[]>("/api/v2/template/testimonials/", {
-      tenantHost,
-    }),
-    storio.apiFetch<StorioEvent[]>("/api/events/", { tenantHost }),
-    storio.apiFetch<StorioFaq[]>("/api/v2/template/faqs/", { tenantHost }),
-    storio.apiFetch<StorioLeadershipMessage[]>("/api/v2/template/leadership-messages/", {
-      tenantHost,
-    }).catch(() => null),
+    getHeroSlides(tenantHost).catch(() => null),
+    getNotices(tenantHost).catch(() => null),
+    getInstitutionProfile(tenantHost).catch(() => null),
+    getActivities(tenantHost).catch(() => null),
+    getStaff(tenantHost).catch(() => null),
+    getGallery(tenantHost).catch(() => null),
+    getPromotions(tenantHost).catch(() => null),
+    getTestimonials(tenantHost).catch(() => null),
+    getEvents(tenantHost).catch(() => null),
+    getFaqs(tenantHost).catch(() => null),
+    getLeadershipMessages(tenantHost).catch(() => null),
   ]);
 
   // 4. Apply Rule 1: Fallback to demo data ONLY in standalone preview mode

@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { storio } from '@storio/template-sdk';
-import { getTenantContext, getTemplateLayout } from '@/lib/storio';
+import { getTenantContext, getTemplateLayout, getCareers } from '@/lib/storio';
 import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
@@ -37,10 +36,7 @@ export default async function CareersPage() {
   const { tenantHost, isStandalone } = await getTenantContext();
   const { settings, customization, navigation } = await getTemplateLayout(tenantHost, isStandalone);
 
-  const rawJobs = await storio.apiFetch<StorioJobOpening[]>(
-    '/api/v2/template/careers/jobs/',
-    { tenantHost }
-  );
+  const rawJobs = await getCareers(tenantHost).catch(() => null);
 
   const jobs: StorioJobOpening[] = Array.isArray(rawJobs) ? rawJobs : [];
 
