@@ -12,7 +12,7 @@ import { useEffect } from 'react';
 export default function ScrollObserver() {
   useEffect(() => {
     const elements = document.querySelectorAll(
-      '.reveal-on-scroll, .reveal-from-left, .reveal-from-right'
+      '.reveal-on-scroll, .reveal-from-left, .reveal-from-right, .reveal-pop'
     );
     if (!elements || elements.length === 0) return;
 
