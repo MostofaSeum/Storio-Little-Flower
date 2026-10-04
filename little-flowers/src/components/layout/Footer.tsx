@@ -1,14 +1,14 @@
-'use client';
-
 import React from "react";
 import { StorioSettingsResponse } from "@storio/template-sdk";
+import { StorioInstitutionProfile } from "@/types";
 
 interface FooterProps {
   settings?: StorioSettingsResponse | null;
+  profile?: StorioInstitutionProfile | null;
   importantLinks?: { id: number; title: string; url: string; order?: number }[];
 }
 
-export default function Footer({ settings, importantLinks = [] }: FooterProps) {
+export default function Footer({ settings, profile, importantLinks = [] }: FooterProps) {
   const hasLinks = importantLinks && importantLinks.length > 0;
 
   return (
@@ -124,20 +124,36 @@ export default function Footer({ settings, importantLinks = [] }: FooterProps) {
           </div>
         )}
 
-        {/* Col 4: School Hours */}
+        {/* Col 4: School Hours & Shifts */}
         <div className="space-y-3">
           <h4 className="text-white font-bold text-sm tracking-wide">
-            School Timing
+            {profile?.school_shift ? "Academic Shift & Hours" : "School Timing"}
           </h4>
-          <p className="text-xs text-gray-400 leading-relaxed">
-            Playgroup: 8:30 AM - 11:30 AM
-            <br />
-            Nursery & KG: 8:00 AM - 12:30 PM
-            <br />
-            Office Hours: Mon - Fri (8:00 AM - 3:00 PM)
-            <br />
-            Weekend: Closed (Family Time!)
-          </p>
+          {profile?.school_shift || (profile?.additional_info && profile.additional_info.length > 0) ? (
+            <div className="text-xs text-gray-400 space-y-1.5 leading-relaxed">
+              {profile.school_shift && (
+                <p className="font-semibold text-gray-300">
+                  <span className="text-accent-pink">Shift:</span> {profile.school_shift}
+                </p>
+              )}
+              {profile.additional_info?.map((info, idx) => (
+                <p key={idx}>
+                  {info.label && <span className="text-gray-300 font-medium">{info.label}: </span>}
+                  <span>{info.value}</span>
+                </p>
+              ))}
+            </div>
+          ) : (
+            <p className="text-xs text-gray-400 leading-relaxed">
+              Playgroup: 8:30 AM - 11:30 AM
+              <br />
+              Nursery & KG: 8:00 AM - 12:30 PM
+              <br />
+              Office Hours: Mon - Fri (8:00 AM - 3:00 PM)
+              <br />
+              Weekend: Closed (Family Time!)
+            </p>
+          )}
         </div>
 
         {/* Col 5: Campus Contact Info */}

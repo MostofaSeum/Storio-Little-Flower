@@ -136,6 +136,10 @@ export interface StorioInstitutionProfile {
   total_teachers_label?: string;
   mission?: string;
   vision?: string;
+  additional_info?: Array<{
+    label?: string;
+    value?: string;
+  }>;
 }
 
 export interface StorioActivityItem {

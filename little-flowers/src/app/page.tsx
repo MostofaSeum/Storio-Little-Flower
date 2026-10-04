@@ -253,7 +253,7 @@ export default async function Home() {
       <FaqSection faqs={faqs} />
 
       {/* 14. PLAYFUL COLORFUL FOOTER */}
-      <Footer settings={settings} importantLinks={importantLinks} />
+      <Footer settings={settings} profile={profile} importantLinks={importantLinks} />
 
       {/* 15. FLOATING QUICK ENROLLMENT ACTION */}
       <FloatingEnrollButton />
