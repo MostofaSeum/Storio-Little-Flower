@@ -1,8 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { storio } from '@storio/template-sdk';
-import { getTenantContext, getTemplateLayout } from '@/lib/storio';
+import { getTenantContext, getTemplateLayout, getEvents, getEventDetail } from '@/lib/storio';
 import { resolveMediaUrl } from '@/lib/media';
 import { StorioEvent } from '@/types';
 import InteractiveHeader from '@/components/layout/InteractiveHeader';
@@ -20,7 +19,7 @@ export async function generateMetadata({ params }: EventDetailPageProps) {
   const { tenantHost, isStandalone } = await getTenantContext();
   const [{ settings }, event] = await Promise.all([
     getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null })),
-    storio.apiFetch<StorioEvent>(`/api/events/${id}/`, { tenantHost }).catch(() => null),
+    getEventDetail(id, tenantHost).catch(() => null),
   ]);
 
   const schoolName = settings?.site_title || 'Events';
@@ -46,13 +45,13 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
 
   // 1. Try direct fetch by ID (/api/events/${id}/)
   if (!isNaN(Number(id))) {
-    event = await storio.apiFetch<StorioEvent>(`/api/events/${id}/`, { tenantHost });
+    event = await getEventDetail(id, tenantHost).catch(() => null);
   }
 
   // 2. If id was a slug or direct ID fetch returned null, search in list
   if (!event) {
-    const listRes = await storio.apiFetch<StorioEvent[] | { results: StorioEvent[] }>('/api/events/', { tenantHost });
-    const list = Array.isArray(listRes) ? listRes : listRes?.results || [];
+    const listRes = await getEvents(tenantHost).catch(() => null);
+    const list = Array.isArray(listRes) ? listRes : [];
     event = list.find((e) => String(e.id) === id || e.slug === id) || null;
   }
 

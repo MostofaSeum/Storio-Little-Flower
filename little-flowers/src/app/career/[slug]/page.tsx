@@ -39,10 +39,7 @@ export async function generateMetadata({ params }: CareerDetailPageProps) {
   const { slug } = await params;
   const { tenantHost } = await getTenantContext();
 
-  const job = await storio.apiFetch<StorioJobDetail>(
-    `/api/v2/template/careers/jobs/${slug}/`,
-    { tenantHost }
-  );
+  const job = (await getJobDetail(slug, tenantHost).catch(() => null)) as StorioJobDetail | null;
 
   const { isStandalone } = await getTenantContext();
   const { settings } = await getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null }));
@@ -65,11 +62,8 @@ export default async function CareerDetailPage({ params }: CareerDetailPageProps
   const { tenantHost, isStandalone } = await getTenantContext();
   const { settings, customization, navigation } = await getTemplateLayout(tenantHost, isStandalone);
 
-  // Fetch single job detail from GET /api/v2/template/careers/jobs/${slug}/
-  const job = await storio.apiFetch<StorioJobDetail>(
-    `/api/v2/template/careers/jobs/${slug}/`,
-    { tenantHost }
-  );
+  // Fetch single job detail via storio.ts helper
+  const job = (await getJobDetail(slug, tenantHost).catch(() => null)) as StorioJobDetail | null;
 
   if (!job) {
     notFound();

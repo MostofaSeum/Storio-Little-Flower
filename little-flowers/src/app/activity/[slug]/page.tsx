@@ -1,8 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { storio } from '@storio/template-sdk';
-import { getTenantContext, getTemplateLayout } from '@/lib/storio';
+import { getTenantContext, getTemplateLayout, getActivityDetail } from '@/lib/storio';
 import { resolveMediaUrl } from '@/lib/media';
 import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
@@ -55,7 +54,7 @@ export async function generateMetadata({ params }: ActivityDetailPageProps) {
   const { tenantHost, isStandalone } = await getTenantContext();
   const [{ settings }, activity] = await Promise.all([
     getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null })),
-    storio.apiFetch<StorioActivityDetail>(`/api/v2/template/activities/${slug}/`, { tenantHost }).catch(() => null),
+    getActivityDetail(slug, tenantHost).catch(() => null) as Promise<StorioActivityDetail | null>,
   ]);
 
   const schoolName = settings?.site_title || 'Learning Programs';
@@ -77,11 +76,8 @@ export default async function ActivityDetailPage({ params }: ActivityDetailPageP
   const { tenantHost, isStandalone } = await getTenantContext();
   const { settings, customization, navigation } = await getTemplateLayout(tenantHost, isStandalone);
 
-  // Fetch single activity details via /api/v2/template/activities/${slug}/
-  const activity = await storio.apiFetch<StorioActivityDetail>(
-    `/api/v2/template/activities/${slug}/`,
-    { tenantHost }
-  );
+  // Fetch single activity details via storio.ts helper
+  const activity = (await getActivityDetail(slug, tenantHost).catch(() => null)) as StorioActivityDetail | null;
 
   if (!activity) {
     notFound();

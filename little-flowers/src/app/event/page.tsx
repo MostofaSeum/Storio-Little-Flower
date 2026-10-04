@@ -1,6 +1,5 @@
 import React from 'react';
-import { storio } from '@storio/template-sdk';
-import { getTenantContext, getTemplateLayout } from '@/lib/storio';
+import { getTenantContext, getTemplateLayout, getEvents, getCalendarEvents } from '@/lib/storio';
 import { StorioEvent, StorioCalendarEvent } from '@/types';
 import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
@@ -23,10 +22,10 @@ export default async function EventsPage() {
   const { tenantHost, isStandalone } = await getTenantContext();
   const { settings, customization, navigation, importantLinks } = await getTemplateLayout(tenantHost, isStandalone);
 
-  // Fetch events and calendar items in parallel
+  // Fetch events and calendar items in parallel via storio.ts helpers
   const [rawEvents, rawCalendar] = await Promise.all([
-    storio.apiFetch<StorioEvent[] | { results: StorioEvent[] }>('/api/events/', { tenantHost }).catch(() => null),
-    storio.apiFetch<StorioCalendarEvent[]>('/api/v2/template/calendar/', { tenantHost }).catch(() => null),
+    getEvents(tenantHost).catch(() => null),
+    getCalendarEvents(tenantHost).catch(() => null),
   ]);
 
   const events: StorioEvent[] = Array.isArray(rawEvents)
