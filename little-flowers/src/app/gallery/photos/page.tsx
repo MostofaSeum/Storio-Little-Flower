@@ -1,6 +1,5 @@
 import React from 'react';
-import { storio } from '@storio/template-sdk';
-import { getTenantContext, getTemplateLayout } from '@/lib/storio';
+import { getTenantContext, getTemplateLayout, getAlbums, getGallery } from '@/lib/storio';
 import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
@@ -23,10 +22,10 @@ export default async function PhotosGalleryPage() {
   const { tenantHost, isStandalone } = await getTenantContext();
   const { settings, customization, navigation, importantLinks } = await getTemplateLayout(tenantHost, isStandalone);
 
-  // Fetch both albums and gallery items in parallel
+  // Fetch both albums and gallery items in parallel via storio.ts helpers
   const [rawAlbums, rawGallery] = await Promise.all([
-    storio.apiFetch<BackendAlbum[]>('/api/v2/template/albums/', { tenantHost }).catch(() => null),
-    storio.apiFetch<BackendPhotoItem[]>('/api/v2/template/gallery/', { tenantHost }).catch(() => null),
+    getAlbums(tenantHost).catch(() => null),
+    getGallery(tenantHost).catch(() => null),
   ]);
 
   const albums: BackendAlbum[] = Array.isArray(rawAlbums) ? rawAlbums : [];

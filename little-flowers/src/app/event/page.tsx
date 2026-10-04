@@ -30,8 +30,8 @@ export default async function EventsPage() {
 
   const events: StorioEvent[] = Array.isArray(rawEvents)
     ? rawEvents
-    : Array.isArray((rawEvents as { results?: StorioEvent[] })?.results)
-      ? (rawEvents as { results: StorioEvent[] }).results
+    : Array.isArray((rawEvents as unknown as { results?: StorioEvent[] })?.results)
+      ? ((rawEvents as unknown as { results: StorioEvent[] }).results)
       : [];
 
   const calendarEvents: StorioCalendarEvent[] = Array.isArray(rawCalendar) ? rawCalendar : [];

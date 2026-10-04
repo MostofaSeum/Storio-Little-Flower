@@ -1,6 +1,18 @@
 import { headers } from 'next/headers';
 import { storio, StorioLayoutResponse } from '@storio/template-sdk';
-import { LittleFlowersCustomizationConfig, StorioDynamicNavItem } from '@/types';
+import {
+  LittleFlowersCustomizationConfig,
+  StorioDynamicNavItem,
+  StorioInstitutionProfile,
+  StorioActivityItem,
+  StorioEvent,
+  StorioTestimonial,
+  StorioLeadershipMessage,
+  StorioPromotion,
+  StorioImportantLink,
+  StorioFaq,
+  StorioCalendarEvent,
+} from '@/types';
 import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
 
 export interface TenantContext {

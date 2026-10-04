@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-import { storio, StorioStaffMember } from '@storio/template-sdk';
+import { StorioStaffMember } from '@storio/template-sdk';
 import { StorioTeamMember } from '@/types';
-import { getTenantContext, getTemplateLayout } from '@/lib/storio';
+import { getTenantContext, getTemplateLayout, getInstitutionProfile, getStaff, getTeam } from '@/lib/storio';
 import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
 import { getStaffMemberPhoto } from '@/lib/media';
 import InteractiveHeader from '@/components/layout/InteractiveHeader';
@@ -45,14 +45,11 @@ export default async function AboutPage() {
     isStandalone
   );
 
-  // 3. Fetch Institution Profile, Staff, and Team in parallel via SDK
+  // 3. Fetch Institution Profile, Staff, and Team in parallel via storio.ts helpers
   const [rawProfile, rawStaff, rawTeam] = await Promise.all([
-    storio.apiFetch<typeof DEFAULT_DEMO_DATA.institutionProfile>(
-      '/api/v2/template/institution-profile/',
-      { tenantHost }
-    ),
-    storio.getStaff(tenantHost),
-    storio.getTeam(tenantHost),
+    getInstitutionProfile(tenantHost).catch(() => null),
+    getStaff(tenantHost).catch(() => null),
+    getTeam(tenantHost).catch(() => null),
   ]);
 
   // 4. Apply Storio Rule 1 Fallbacks

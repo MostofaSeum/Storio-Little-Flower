@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { storio } from '@storio/template-sdk';
-import { getTenantContext, getTemplateLayout } from '@/lib/storio';
+import { getTenantContext, getTemplateLayout, getLeadershipMessages } from '@/lib/storio';
 import { resolveMediaUrl } from '@/lib/media';
 import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
@@ -47,10 +46,7 @@ export default async function LeadershipMessagePage() {
   const { tenantHost, isStandalone } = await getTenantContext();
   const { settings, customization, navigation } = await getTemplateLayout(tenantHost, isStandalone);
 
-  const rawMessages = await storio.apiFetch<LeadershipMessageItem[]>(
-    '/api/v2/template/leadership-messages/',
-    { tenantHost }
-  );
+  const rawMessages = await getLeadershipMessages(tenantHost).catch(() => null);
 
   const messages: LeadershipMessageItem[] = Array.isArray(rawMessages) ? rawMessages : [];
 

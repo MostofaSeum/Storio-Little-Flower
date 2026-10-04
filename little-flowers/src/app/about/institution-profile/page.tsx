@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { storio } from '@storio/template-sdk';
-import { getTenantContext, getTemplateLayout } from '@/lib/storio';
+import { getTenantContext, getTemplateLayout, getInstitutionProfile } from '@/lib/storio';
 import { resolveMediaUrl } from '@/lib/media';
 import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
@@ -47,10 +46,7 @@ export default async function InstitutionProfilePage() {
   const { tenantHost, isStandalone } = await getTenantContext();
   const { settings, customization, navigation } = await getTemplateLayout(tenantHost, isStandalone);
 
-  const rawProfile = await storio.apiFetch<InstitutionProfileData>(
-    '/api/v2/template/institution-profile/',
-    { tenantHost }
-  );
+  const rawProfile = (await getInstitutionProfile(tenantHost).catch(() => null)) as InstitutionProfileData | null;
 
   const profile = rawProfile || null;
   const heroImage = profile?.institution_image_url
