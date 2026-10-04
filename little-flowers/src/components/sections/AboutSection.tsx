@@ -36,14 +36,16 @@ export default function AboutSection({ profile, customization }: AboutSectionPro
               className="w-full h-[400px] object-cover"
             />
           </div>
-          <div className="absolute -bottom-4 right-0 sm:-bottom-6 sm:-right-4 bg-blob-yellow p-3 sm:p-4 rounded-2xl shadow-md border-2 border-white transform rotate-3 animate-float">
-            <span className="text-xl sm:text-2xl font-extrabold text-primary-color">
-              10+ Years
-            </span>
-            <p className="text-[11px] sm:text-xs font-bold text-gray-700">
-              Of Joyful Learning
-            </p>
-          </div>
+          {showExperience && (
+            <div className="absolute -bottom-4 right-0 sm:-bottom-6 sm:-right-4 bg-blob-yellow p-3 sm:p-4 rounded-2xl shadow-md border-2 border-white transform rotate-3 animate-float">
+              <span className="text-xl sm:text-2xl font-extrabold text-primary-color">
+                {experienceYears}
+              </span>
+              <p className="text-[11px] sm:text-xs font-bold text-gray-700">
+                {experienceLabel}
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Right: Mission, Details, and Key Metrics */}
@@ -94,20 +96,20 @@ export default function AboutSection({ profile, customization }: AboutSectionPro
             </div>
             <div className="p-4 rounded-2xl bg-accent-soft-blue border border-sky-200 col-span-2 sm:col-span-1 card-interactive">
               <div className="text-3xl font-extrabold text-primary-color flex items-center">
-                <AnimatedCounter end={100} suffix="%" />
+                <AnimatedCounter end={metric3Number} suffix="%" />
               </div>
               <div className="text-xs font-bold text-gray-600 mt-1">
-                Safe Campus & Care
+                {metric3Label}
               </div>
             </div>
           </div>
 
           <div className="pt-2 flex items-center space-x-4">
             <a
-              href="/admission"
+              href={buttonUrl}
               className="px-6 py-3 bg-secondary-color hover:opacity-90 text-white font-bold text-sm rounded-full shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5"
             >
-              Schedule a Campus Visit
+              {buttonText}
             </a>
           </div>
         </div>
