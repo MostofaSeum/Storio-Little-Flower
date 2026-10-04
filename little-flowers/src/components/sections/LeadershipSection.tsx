@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { StorioLeadershipMessage } from '@/types';
 import { resolveMediaUrl } from '@/lib/media';
+import SplitText from '@/components/ui/SplitText';
 
 interface LeadershipSectionProps {
   messages: StorioLeadershipMessage[];
@@ -39,6 +40,26 @@ export default function LeadershipSection({ messages }: LeadershipSectionProps) 
       <div className="absolute bottom-10 left-0 w-96 h-96 bg-pink-100/40 rounded-full blur-3xl -z-10 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16">
+        {/* Section Header with Animated Title */}
+        <div className="text-center max-w-2xl mx-auto mb-2 reveal-on-scroll">
+          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase bg-white text-primary-color border border-purple-200/80 shadow-2xs mb-3">
+            <span className="w-2 h-2 rounded-full bg-accent-pink" />
+            Leadership Desk
+          </span>
+
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-fredoka text-gray-900 leading-tight">
+            <SplitText
+              text="Words from Our Leadership"
+              className="inline-block text-primary-color"
+              tag="span"
+              threshold={0.15}
+            />
+          </h2>
+
+          <p className="mt-2 text-sm sm:text-base text-gray-600 font-quicksand font-medium">
+            Guiding principles and vision from the leaders shaping our students&apos; future.
+          </p>
+        </div>
         {displayMessages.map((item, index) => {
           // Layout alternating rule:
           // index 0: Picture on Right, Message on Left
@@ -199,9 +220,9 @@ export default function LeadershipSection({ messages }: LeadershipSectionProps) 
                       )}
 
                       {/* Floating Badge on the image (mirroring the screenshot's floating pill / badge aesthetic) */}
-                      <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-md px-4 py-2 rounded-2xl shadow-lg border border-purple-100 flex items-center gap-2.5">
-                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping shrink-0" />
-                        <span className="text-xs font-extrabold text-gray-800 truncate max-w-[200px]">
+                      <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full shadow-lg border border-purple-100 flex items-center gap-2">
+                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 shrink-0" />
+                        <span className="text-xs font-bold text-gray-800 truncate max-w-[200px]">
                           {item.role || 'Institutional Leader'}
                         </span>
                       </div>
