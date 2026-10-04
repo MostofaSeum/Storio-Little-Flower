@@ -1,5 +1,3 @@
-import React from 'react';
-import Link from 'next/link';
 import { getTenantContext, getTemplateLayout, getInstitutionProfile } from '@/lib/storio';
 import { resolveMediaUrl } from '@/lib/media';
 import InteractiveHeader from '@/components/layout/InteractiveHeader';
