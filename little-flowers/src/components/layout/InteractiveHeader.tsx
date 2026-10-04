@@ -167,12 +167,13 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
                     href={item.href}
                     className={`relative overflow-hidden inline-flex items-center justify-center h-8.5 px-3 xl:px-4 rounded-full font-bold text-[11px] xl:text-xs tracking-wide uppercase transition-all duration-300 group cursor-pointer select-none gap-1 border shadow-xs hover:shadow-md ${
                       isRouteActive
-                        ? 'shadow-sm text-white'
+                        ? 'shadow-sm'
                         : 'bg-white text-gray-700 border-gray-100/80 hover:text-gray-900'
                     }`}
                     style={{
-                      backgroundColor: isRouteActive ? item.color : undefined,
-                      borderColor: isRouteActive ? item.color : undefined,
+                      backgroundColor: isRouteActive ? 'var(--active-nav-bg)' : undefined,
+                      borderColor: isRouteActive ? 'var(--active-nav-bg)' : undefined,
+                      color: isRouteActive ? 'var(--active-nav-text)' : undefined,
                     }}
                   >
                     {/* Hover circular expanding fill for non-active links */}
@@ -195,7 +196,7 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
                       <span
                         className="block transition-transform duration-300 ease-out"
                         style={{
-                          color: isRouteActive ? '#ffffff' : (isHovered ? '#ffffff' : item.color),
+                          color: isRouteActive ? 'var(--active-nav-text)' : (isHovered ? '#ffffff' : item.color),
                           fontWeight: isRouteActive ? 800 : 700,
                           transform: !isRouteActive && isHovered ? 'translateY(-100%)' : 'translateY(0)',
                         }}
@@ -219,7 +220,7 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
                     {item.hasDropdown && (
                       <svg
                         className={`w-3 h-3 z-[2] transition-transform duration-200 ${
-                          isRouteActive || isHovered ? 'text-white' : 'text-gray-400'
+                          isRouteActive ? 'text-current' : (isHovered ? 'text-white' : 'text-gray-400')
                         } ${isDropdownOpen ? 'rotate-180' : ''}`}
                         fill="none"
                         stroke="currentColor"
@@ -230,10 +231,10 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
                       </svg>
                     )}
 
-                    {/* Active Selected Bottom White Indicator Dot */}
+                    {/* Active Selected Bottom Indicator Dot */}
                     {isRouteActive && (
                       <span
-                        className="w-1.5 h-1.5 rounded-full z-[3] bg-white ml-0.5 animate-pulse"
+                        className="w-1.5 h-1.5 rounded-full z-[3] bg-current ml-0.5 animate-pulse"
                         aria-hidden="true"
                       />
                     )}
@@ -327,14 +328,14 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
                         : 'text-gray-600 hover:bg-gray-50'
                     }`}
                     style={{
-                      backgroundColor: isCurrent ? item.color : undefined,
-                      color: isCurrent ? '#ffffff' : item.color,
+                      backgroundColor: isCurrent ? 'var(--active-nav-bg)' : undefined,
+                      color: isCurrent ? 'var(--active-nav-text)' : item.color,
                     }}
                   >
                     <span>{item.label}</span>
                     {isCurrent && (
                       <span
-                        className="w-2 h-2 rounded-full bg-white animate-pulse"
+                        className="w-2 h-2 rounded-full bg-current animate-pulse"
                       />
                     )}
                   </a>

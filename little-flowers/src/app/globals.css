@@ -19,7 +19,8 @@
   --button-text: #ffffff;
   --blob-yellow: #fde68a;
   --text-dark: #2d2b56;
-  --text-muted: #4b5563;
+  --active-nav-bg: var(--accent-green);
+  --active-nav-text: #ffffff;
   --bg-pastel-purple: #faf9ff;
   --bg-soft-amber: #fffbf0;
   --bg-soft-pink: #fdf2f8;
