@@ -3,13 +3,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import ThemeIcon from '../ui/ThemeIcon';
 import { StorioHeroSlide } from '@storio/template-sdk';
+import { LittleFlowersCustomizationConfig } from '@/types';
 
 interface HeroCarouselProps {
   slides: StorioHeroSlide[];
   siteTitle?: string;
+  customization?: LittleFlowersCustomizationConfig | null;
 }
 
-export default function HeroCarousel({ slides, siteTitle }: HeroCarouselProps) {
+export default function HeroCarousel({ slides, siteTitle, customization }: HeroCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -129,32 +131,79 @@ export default function HeroCarousel({ slides, siteTitle }: HeroCarouselProps) {
           </div>
 
           {/* Modern Floating Stat Badge 1: Top Right */}
-          <div className="absolute top-6 sm:top-8 -right-2 sm:-right-6 bg-white/95 backdrop-blur-md p-2 sm:p-3.5 rounded-2xl shadow-xl border border-pink-100 flex items-center space-x-2 sm:space-x-3 transform animate-float z-20 hover:scale-105 transition-transform cursor-pointer max-w-[150px] sm:max-w-none">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-pink-100 flex items-center justify-center shadow-xs shrink-0">
-              <ThemeIcon name="palette-art" size={20} />
+          {customization?.hero_card1_show !== false && (
+            <div className="absolute top-6 sm:top-8 -right-2 sm:-right-6 bg-white/95 backdrop-blur-md p-2 sm:p-3.5 rounded-2xl shadow-xl border border-pink-100 flex items-center space-x-2 sm:space-x-3 transform animate-float z-20 hover:scale-105 transition-transform cursor-pointer max-w-[150px] sm:max-w-none">
+              <div
+                className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center shadow-xs shrink-0 p-1.5"
+                style={{ backgroundColor: `${customization?.hero_card1_color || '#ff4081'}20` }}
+              >
+                {customization?.hero_card1_icon ? (
+                  <img
+                    src={customization.hero_card1_icon}
+                    alt=""
+                    className="w-full h-full object-contain"
+                  />
+                ) : (
+                  <ThemeIcon name="palette-art" size={20} />
+                )}
+              </div>
+              <div>
+                <span className="text-[11px] sm:text-xs font-extrabold text-gray-900 block truncate">
+                  {customization?.hero_card1_title || 'Creative Arts'}
+                </span>
+                <span
+                  className="text-[9px] sm:text-[10px] font-semibold block truncate"
+                  style={{ color: customization?.hero_card1_color || 'var(--accent-pink)' }}
+                >
+                  {customization?.hero_card1_subtitle || 'Joyful Learning'}
+                </span>
+              </div>
             </div>
-            <div>
-              <span className="text-[11px] sm:text-xs font-extrabold text-gray-900 block truncate">Creative Arts</span>
-              <span className="text-[9px] sm:text-[10px] font-semibold text-accent-pink block truncate">Joyful Learning</span>
-            </div>
-          </div>
+          )}
 
           {/* Modern Floating Stat Badge 2: Bottom Left */}
-          <div className="absolute bottom-12 sm:bottom-16 -left-2 sm:-left-8 bg-white/95 backdrop-blur-md p-2 sm:p-3.5 rounded-2xl shadow-xl border border-amber-100 flex items-center space-x-2 sm:space-x-3 transform animate-float-reverse z-20 hover:scale-105 transition-transform cursor-pointer max-w-[150px] sm:max-w-none">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-amber-100 flex items-center justify-center shadow-xs shrink-0">
-              <ThemeIcon name="sparkle-star" size={20} />
+          {customization?.hero_card2_show !== false && (
+            <div className="absolute bottom-12 sm:bottom-16 -left-2 sm:-left-8 bg-white/95 backdrop-blur-md p-2 sm:p-3.5 rounded-2xl shadow-xl border border-amber-100 flex items-center space-x-2 sm:space-x-3 transform animate-float-reverse z-20 hover:scale-105 transition-transform cursor-pointer max-w-[150px] sm:max-w-none">
+              <div
+                className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center shadow-xs shrink-0 p-1.5"
+                style={{ backgroundColor: `${customization?.hero_card2_color || '#ff9800'}20` }}
+              >
+                {customization?.hero_card2_icon ? (
+                  <img
+                    src={customization.hero_card2_icon}
+                    alt=""
+                    className="w-full h-full object-contain"
+                  />
+                ) : (
+                  <ThemeIcon name="sparkle-star" size={20} />
+                )}
+              </div>
+              <div>
+                <span className="text-[11px] sm:text-xs font-extrabold text-gray-900 block truncate">
+                  {customization?.hero_card2_title || '4.9 / 5 Rating'}
+                </span>
+                <span
+                  className="text-[9px] sm:text-[10px] font-semibold block truncate"
+                  style={{ color: customization?.hero_card2_color || 'var(--secondary-color)' }}
+                >
+                  {customization?.hero_card2_subtitle || '250+ Parents'}
+                </span>
+              </div>
             </div>
-            <div>
-              <span className="text-[11px] sm:text-xs font-extrabold text-gray-900 block truncate">4.9 / 5 Rating</span>
-              <span className="text-[9px] sm:text-[10px] font-semibold text-secondary-color block truncate">250+ Parents</span>
-            </div>
-          </div>
+          )}
 
           {/* Modern Floating Stat Badge 3: Bottom Right */}
-          <div className="absolute bottom-4 right-6 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-full shadow-lg border border-sky-100 hidden sm:flex items-center space-x-2 animate-pulse-glow z-20">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
-            <span className="text-[11px] font-bold text-gray-800">100% Safe Campus</span>
-          </div>
+          {customization?.hero_card3_show !== false && (
+            <div className="absolute bottom-4 right-6 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-full shadow-lg border border-sky-100 hidden sm:flex items-center space-x-2 animate-pulse-glow z-20">
+              <span
+                className="w-2.5 h-2.5 rounded-full animate-ping"
+                style={{ backgroundColor: customization?.hero_card3_color || '#10b981' }}
+              ></span>
+              <span className="text-[11px] font-bold text-gray-800">
+                {customization?.hero_card3_title || '100% Safe Campus'}
+              </span>
+            </div>
+          )}
 
           {/* Playful colored floating pins/dots around tall image */}
           <div className="absolute -top-3 left-6 w-6 h-6 bg-accent-pink rounded-full border-2 border-white shadow-md animate-pulse"></div>
@@ -186,7 +235,7 @@ export default function HeroCarousel({ slides, siteTitle }: HeroCarouselProps) {
           <div className="inline-flex items-center gap-1.5 shrink-0 whitespace-nowrap">
             <span className="w-1.5 h-1.5 rounded-full bg-primary-color shrink-0 hidden sm:inline-block"></span>
             <span className="bg-white/80 text-primary-color px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-extrabold tracking-wide">
-              Admissions 2026-27
+              {customization?.admission_badge_text || 'Admissions Open 2026-27'}
             </span>
           </div>
         </div>

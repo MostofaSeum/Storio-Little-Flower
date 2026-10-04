@@ -155,6 +155,90 @@
         "default": "We aim at success by creating skills necessary for kids to enrich & empower in studies & sports."
       },
       {
+        "id": "admission_badge_text",
+        "label": "Admissions Session Badge Text",
+        "type": "text",
+        "default": "Admissions Open 2026-27"
+      },
+      {
+        "id": "hero_card1_show",
+        "label": "Show Floating Card 1 (Top-Right)",
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "id": "hero_card1_title",
+        "label": "Floating Card 1 Title",
+        "type": "text",
+        "default": "Creative Arts"
+      },
+      {
+        "id": "hero_card1_subtitle",
+        "label": "Floating Card 1 Subtitle",
+        "type": "text",
+        "default": "Joyful Learning"
+      },
+      {
+        "id": "hero_card1_color",
+        "label": "Floating Card 1 Accent Color",
+        "type": "color",
+        "default": "#ff4081"
+      },
+      {
+        "id": "hero_card1_icon",
+        "label": "Floating Card 1 Icon URL",
+        "type": "image",
+        "default": "/icons/palette.png"
+      },
+      {
+        "id": "hero_card2_show",
+        "label": "Show Floating Card 2 (Bottom-Left)",
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "id": "hero_card2_title",
+        "label": "Floating Card 2 Title",
+        "type": "text",
+        "default": "4.9 / 5 Rating"
+      },
+      {
+        "id": "hero_card2_subtitle",
+        "label": "Floating Card 2 Subtitle",
+        "type": "text",
+        "default": "250+ Parents"
+      },
+      {
+        "id": "hero_card2_color",
+        "label": "Floating Card 2 Accent Color",
+        "type": "color",
+        "default": "#ff9800"
+      },
+      {
+        "id": "hero_card2_icon",
+        "label": "Floating Card 2 Icon URL",
+        "type": "image",
+        "default": "/icons/star.png"
+      },
+      {
+        "id": "hero_card3_show",
+        "label": "Show Floating Card 3 (Bottom-Right)",
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "id": "hero_card3_title",
+        "label": "Floating Card 3 Title",
+        "type": "text",
+        "default": "100% Safe Campus"
+      },
+      {
+        "id": "hero_card3_color",
+        "label": "Floating Card 3 Dot Color",
+        "type": "color",
+        "default": "#10b981"
+      },
+      {
         "id": "showWaveBadges",
         "label": "Show Feature Badges Strip",
         "type": "boolean",

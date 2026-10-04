@@ -195,6 +195,7 @@ export default async function Home() {
         <TopBar
           contactEmail={settings?.contact_email}
           phoneNumber={settings?.phone_number}
+          admissionBadgeText={customization?.admission_badge_text as string}
         />
       )}
 
@@ -205,7 +206,11 @@ export default async function Home() {
       <section className="relative pt-1 sm:pt-2 pb-8 lg:pt-2 lg:pb-12 px-4 sm:px-8 site-container w-full flex-1 flex flex-col justify-center">
         <div className="absolute top-4 right-16 w-16 h-16 bg-pink-100 rounded-full blur-xl -z-10 opacity-70 animate-float"></div>
         <div className="absolute bottom-10 left-10 w-24 h-24 bg-yellow-100 rounded-full blur-2xl -z-10 opacity-70 animate-float-reverse"></div>
-        <HeroCarousel slides={heroSlides} siteTitle={settings?.site_title} />
+        <HeroCarousel
+          slides={heroSlides}
+          siteTitle={settings?.site_title}
+          customization={customization}
+        />
       </section>
 
       {/* 4. SOFT SKY BLUE WAVE BOTTOM SECTION WITH BADGES */}
