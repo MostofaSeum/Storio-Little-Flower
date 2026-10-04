@@ -153,6 +153,36 @@
         "label": "Hero Description",
         "type": "text",
         "default": "We aim at success by creating skills necessary for kids to enrich & empower in studies & sports."
+      },
+      {
+        "id": "showWaveBadges",
+        "label": "Show Feature Badges Strip",
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "id": "badge1_text",
+        "label": "Feature Badge 1 (Yellow) Label",
+        "type": "text",
+        "default": "Creative Learning"
+      },
+      {
+        "id": "badge2_text",
+        "label": "Feature Badge 2 (Pink) Label",
+        "type": "text",
+        "default": "Caring Mentors"
+      },
+      {
+        "id": "badge3_text",
+        "label": "Feature Badge 3 (Blue) Label",
+        "type": "text",
+        "default": "Healthy Growth"
+      },
+      {
+        "id": "badge4_text",
+        "label": "Feature Badge 4 (Green) Label",
+        "type": "text",
+        "default": "Safe & Nurturing"
       }
     ]
   },

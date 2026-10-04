@@ -209,7 +209,10 @@ export default async function Home() {
       </section>
 
       {/* 4. SOFT SKY BLUE WAVE BOTTOM SECTION WITH BADGES */}
-      <WaveBadgesSection showWaveDivider={customization.showWaveDivider !== false} />
+      <WaveBadgesSection
+        customization={customization}
+        showWaveDivider={customization.showWaveDivider !== false}
+      />
 
       {/* 5. NOTICE BOARD & ANNOUNCEMENTS */}
       <NoticeSection notices={notices} />

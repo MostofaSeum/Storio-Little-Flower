@@ -62,6 +62,11 @@ export interface LittleFlowersCustomizationConfig {
   borderRadius?: string;
   showTopBar?: boolean;
   showWaveDivider?: boolean;
+  showWaveBadges?: boolean;
+  badge1_text?: string;
+  badge2_text?: string;
+  badge3_text?: string;
+  badge4_text?: string;
   heroTitle1?: string;
   heroTitle2?: string;
   heroDescription?: string;
