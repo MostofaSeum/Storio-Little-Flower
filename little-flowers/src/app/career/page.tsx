@@ -21,6 +21,19 @@ interface StorioJobOpening {
   status?: string;
 }
 
+function stripHtml(html: string): string {
+  return html
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 export async function generateMetadata() {
   const { tenantHost, isStandalone } = await getTenantContext();
   const { settings } = await getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null }));
@@ -117,8 +130,8 @@ export default async function CareersPage() {
                       )}
 
                       {job.description && (
-                        <p className="text-sm text-gray-600 font-quicksand line-clamp-3">
-                          {job.description}
+                        <p className="text-sm text-gray-600 font-quicksand line-clamp-2 leading-relaxed">
+                          {stripHtml(job.description)}
                         </p>
                       )}
                     </div>
