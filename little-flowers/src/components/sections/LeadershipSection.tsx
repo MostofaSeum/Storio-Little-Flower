@@ -88,14 +88,14 @@ export default function LeadershipSection({ messages }: LeadershipSectionProps) 
               key={item.id}
               className={`reveal-pop ${
                 index === 1 ? 'delay-150' : ''
-              } relative bg-gradient-to-br from-white via-white to-purple-50/40 rounded-[2.5rem] p-6 sm:p-10 lg:p-14 border border-purple-100/80 shadow-[0_12px_40px_rgba(108,66,152,0.06)] hover:shadow-[0_20px_50px_rgba(108,66,152,0.1)] transition-all duration-300 overflow-hidden`}
+              } relative bg-gradient-to-br from-white via-white to-purple-50/40 rounded-[2.5rem] p-6 sm:p-10 lg:p-14 border border-purple-100/80 shadow-[0_12px_40px_color-mix(in_srgb,var(--primary)_6%,transparent)] hover:shadow-[0_20px_50px_color-mix(in_srgb,var(--primary)_10%,transparent)] transition-all duration-300 overflow-hidden`}
             >
               {/* Subtle map / tech decorative background grid overlay */}
               <div
                 className="absolute inset-0 opacity-[0.03] pointer-events-none -z-0"
                 style={{
                   backgroundImage:
-                    'radial-gradient(var(--primary, #6c4298) 1px, transparent 1px)',
+                    'radial-gradient(var(--primary) 1px, transparent 1px)',
                   backgroundSize: '24px 24px',
                 }}
               />

@@ -42,25 +42,25 @@ export default function WaveBadgesSection({
   const badges = [
     {
       title: (customization?.badge1_text as string) || 'Creative Learning',
-      color: (customization?.badge1_color as string) || '#ff9800',
+      color: (customization?.badge1_color as string) || 'var(--secondary)',
       icon: (customization?.badge1_icon as string) || '/icons/book.png',
       href: (customization?.badge1_link as string) || '/activity',
     },
     {
       title: (customization?.badge2_text as string) || 'Caring Mentors',
-      color: (customization?.badge2_color as string) || '#ff4081',
+      color: (customization?.badge2_color as string) || 'var(--accent-pink)',
       icon: (customization?.badge2_icon as string) || '/icons/user.png',
       href: (customization?.badge2_link as string) || '/staff',
     },
     {
       title: (customization?.badge3_text as string) || 'Healthy Growth',
-      color: (customization?.badge3_color as string) || '#29b6f6',
+      color: (customization?.badge3_color as string) || 'var(--accent-blue)',
       icon: (customization?.badge3_icon as string) || '/icons/happiness.png',
       href: (customization?.badge3_link as string) || '/about',
     },
     {
       title: (customization?.badge4_text as string) || 'Safe & Nurturing',
-      color: (customization?.badge4_color as string) || '#8bc34a',
+      color: (customization?.badge4_color as string) || 'var(--accent-green)',
       icon: (customization?.badge4_icon as string) || '/icons/security.png',
       href: (customization?.badge4_link as string) || '/admission',
     },
@@ -105,7 +105,7 @@ export default function WaveBadgesSection({
                 </div>
                 <span
                   className="mt-3 font-bold text-gray-700 text-sm transition-colors text-center max-w-[140px] truncate"
-                  style={{ color: 'var(--text-color, #374151)' }}
+                  style={{ color: 'var(--text-dark)' }}
                 >
                   {badge.title}
                 </span>

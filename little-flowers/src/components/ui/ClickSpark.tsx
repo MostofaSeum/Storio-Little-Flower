@@ -39,11 +39,11 @@ export default function ClickSpark({
 
     // Palette strictly from globals.css design system tokens
     const schoolColors = [
-      '#6c4298', // --primary
-      '#f39c12', // --secondary
-      '#ff4081', // --accent-pink
-      '#4fc3f7', // --accent-blue
-      '#8bc34a', // --accent-green
+      getComputedStyle(document.documentElement).getPropertyValue('--primary').trim(),
+      getComputedStyle(document.documentElement).getPropertyValue('--secondary').trim(),
+      getComputedStyle(document.documentElement).getPropertyValue('--accent-pink').trim(),
+      getComputedStyle(document.documentElement).getPropertyValue('--accent-blue').trim(),
+      getComputedStyle(document.documentElement).getPropertyValue('--accent-green').trim(),
     ];
 
     const resizeCanvas = () => {

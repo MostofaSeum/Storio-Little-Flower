@@ -135,7 +135,7 @@ export default function HeroCarousel({ slides, siteTitle, customization }: HeroC
             <div className="absolute top-6 sm:top-8 -right-2 sm:-right-6 bg-white/95 backdrop-blur-md p-2 sm:p-3.5 rounded-2xl shadow-xl border border-pink-100 flex items-center space-x-2 sm:space-x-3 transform animate-float z-20 hover:scale-105 transition-transform cursor-pointer max-w-[150px] sm:max-w-none">
               <div
                 className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center shadow-xs shrink-0 p-1.5"
-                style={{ backgroundColor: `${customization?.hero_card1_color || '#ff4081'}20` }}
+                style={{ backgroundColor: `${customization?.hero_card1_color || 'var(--accent-pink)'}20` }}
               >
                 {customization?.hero_card1_icon ? (
                   <img
@@ -166,7 +166,7 @@ export default function HeroCarousel({ slides, siteTitle, customization }: HeroC
             <div className="absolute bottom-12 sm:bottom-16 -left-2 sm:-left-8 bg-white/95 backdrop-blur-md p-2 sm:p-3.5 rounded-2xl shadow-xl border border-amber-100 flex items-center space-x-2 sm:space-x-3 transform animate-float-reverse z-20 hover:scale-105 transition-transform cursor-pointer max-w-[150px] sm:max-w-none">
               <div
                 className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center shadow-xs shrink-0 p-1.5"
-                style={{ backgroundColor: `${customization?.hero_card2_color || '#ff9800'}20` }}
+                style={{ backgroundColor: `${customization?.hero_card2_color || 'var(--secondary)'}20` }}
               >
                 {customization?.hero_card2_icon ? (
                   <img
@@ -197,7 +197,7 @@ export default function HeroCarousel({ slides, siteTitle, customization }: HeroC
             <div className="absolute bottom-4 right-6 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-full shadow-lg border border-sky-100 hidden sm:flex items-center space-x-2 animate-pulse-glow z-20">
               <span
                 className="w-2.5 h-2.5 rounded-full animate-ping"
-                style={{ backgroundColor: customization?.hero_card3_color || '#10b981' }}
+                style={{ backgroundColor: customization?.hero_card3_color || 'var(--accent-green)' }}
               ></span>
               <span className="text-[11px] font-bold text-gray-800">
                 {customization?.hero_card3_title || '100% Safe Campus'}

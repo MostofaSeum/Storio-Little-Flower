@@ -27,13 +27,13 @@ export default function PartyPopperExplosion() {
 
     let animationFrameId: number;
     const colors = [
-      '#FF6B8B', // Soft Coral Pink
-      '#FFA502', // Sunny Amber
-      '#2ED573', // Fresh Lime
-      '#1E90FF', // Sky Blue
-      '#9B59B6', // Warm Purple
-      '#FF4757', // Watermelon Red
-      '#ECCC68', // Golden Cream
+      getComputedStyle(document.documentElement).getPropertyValue('--accent-pink').trim(),
+      getComputedStyle(document.documentElement).getPropertyValue('--secondary').trim(),
+      getComputedStyle(document.documentElement).getPropertyValue('--accent-green').trim(),
+      getComputedStyle(document.documentElement).getPropertyValue('--accent-blue').trim(),
+      getComputedStyle(document.documentElement).getPropertyValue('--primary').trim(),
+      getComputedStyle(document.documentElement).getPropertyValue('--accent-pink-hover').trim(),
+      getComputedStyle(document.documentElement).getPropertyValue('--blob-yellow').trim(),
     ];
 
     const particles: Particle[] = [];
