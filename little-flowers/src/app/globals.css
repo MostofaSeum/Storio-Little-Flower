@@ -28,14 +28,18 @@
 
   /* Centralized Sizing Tokens (Adjust layout & sizes from here)*/
   --site-container-max-width: 80rem; /* 1280px / 7xl */
-  --site-header-max-width: 96rem;    /* 1536px */
-  --site-section-py: 5rem;           /* 80px / py-20 */
-  --site-section-px-mobile: 1rem;    /* 16px / px-4 */
-  --site-section-px-desktop: 2rem;   /* 32px / sm:px-8 */
+  --site-header-max-width: 96rem; /* 1536px */
+  --site-section-py: 5rem; /* 80px / py-20 */
+  --site-section-px-mobile: 1rem; /* 16px / px-4 */
+  --site-section-px-desktop: 2rem; /* 32px / sm:px-8 */
   --site-hero-carousel-height: 480px;
-  --site-card-radius: 1.5rem;        /* 24px / rounded-3xl */
-  --site-pill-radius: 9999px;        /* rounded-full */
-  --page-hero-title-size: clamp(2rem, 4vw + 0.5rem, 3rem); /* unified subpage hero title size: 32px to 48px */
+  --site-card-radius: 1.5rem; /* 24px / rounded-3xl */
+  --site-pill-radius: 9999px; /* rounded-full */
+  --page-hero-title-size: clamp(
+    2rem,
+    4vw + 0.5rem,
+    3rem
+  ); /* unified subpage hero title size: 32px to 48px */
 }
 
 body {
