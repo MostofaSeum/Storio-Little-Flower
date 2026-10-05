@@ -37,15 +37,23 @@ export default function DynamicThemeStyles({ customization }: DynamicThemeStyles
     borderRadius,
   } = customization;
 
-  const resolvedPrimary = primaryColor || (customization['primary_color'] as string) || headingColor;
-  const resolvedSecondary = secondaryColor || (customization['secondary_color'] as string);
-  const resolvedAccentPink = accentColor || (customization['accent_color'] as string) || accentPink;
-  const resolvedAccentBlue = accentBlue || (customization['accent_blue'] as string);
-  const resolvedTopbar = topbarBgColor || (customization['topbar_bg_color'] as string);
-  const resolvedButtonBg = buttonColor || (customization['button_color'] as string);
-  const resolvedButtonText = buttonTextColor || (customization['button_text_color'] as string);
-  const resolvedText = textColor || (customization['text_color'] as string);
-  const resolvedRadius = borderRadius || (customization['border_radius'] as string);
+  const resolvedPrimary = primaryColor || (customization['primary_color'] as string) || (customization['primaryColor'] as string);
+  const resolvedSecondary = secondaryColor || (customization['secondary_color'] as string) || (customization['secondaryColor'] as string);
+  const resolvedAccentPink = accentColor || (customization['accent_color'] as string) || (customization['accentColor'] as string) || accentPink || (customization['accent_pink'] as string);
+  const resolvedAccentBlue = accentBlue || (customization['accent_blue'] as string) || (customization['accentBlue'] as string);
+  const resolvedTopbar = topbarBgColor || (customization['topbar_bg_color'] as string) || (customization['topbarBgColor'] as string);
+  const resolvedButtonBg = buttonColor || (customization['button_color'] as string) || (customization['buttonColor'] as string);
+  const resolvedButtonText = buttonTextColor || (customization['button_text_color'] as string) || (customization['buttonTextColor'] as string);
+  const resolvedButtonHover = buttonHoverColor || (customization['button_hover_color'] as string) || (customization['buttonHoverColor'] as string);
+  const resolvedButtonTextHover = buttonTextHoverColor || (customization['button_text_hover_color'] as string) || (customization['buttonTextHoverColor'] as string);
+  const resolvedActiveNavBg = activeNavBgColor || (customization['active_nav_bg_color'] as string) || (customization['activeNavBgColor'] as string) || resolvedPrimary;
+  const resolvedActiveNavText = activeNavTextColor || (customization['active_nav_text_color'] as string) || (customization['activeNavTextColor'] as string);
+  const resolvedBg = backgroundColor || (customization['background_color'] as string) || (customization['backgroundColor'] as string);
+  const resolvedSurface = surfaceColor || (customization['surface_color'] as string) || (customization['surfaceColor'] as string);
+  const resolvedFooter = footerColor || (customization['footer_color'] as string) || (customization['footerColor'] as string);
+  const resolvedText = textColor || (customization['text_color'] as string) || (customization['textColor'] as string);
+  const resolvedHeading = headingColor || (customization['heading_color'] as string) || (customization['headingColor'] as string) || resolvedPrimary;
+  const resolvedRadius = borderRadius || (customization['border_radius'] as string) || (customization['borderRadius'] as string);
 
   const cssVariables: string[] = [];
 
@@ -61,20 +69,18 @@ export default function DynamicThemeStyles({ customization }: DynamicThemeStyles
   if (resolvedTopbar) cssVariables.push(`--topbar-bg: ${resolvedTopbar};`);
   if (resolvedButtonBg) cssVariables.push(`--button-bg: ${resolvedButtonBg};`);
   if (resolvedButtonText) cssVariables.push(`--button-text: ${resolvedButtonText};`);
-  if (buttonHoverColor) cssVariables.push(`--button-hover: ${buttonHoverColor};`);
-  if (buttonTextHoverColor) cssVariables.push(`--button-text-hover: ${buttonTextHoverColor};`);
-  const resolvedActiveNavBg = activeNavBgColor || (customization['active_nav_bg_color'] as string) || resolvedPrimary;
-  const resolvedActiveNavText = activeNavTextColor || (customization['active_nav_text_color'] as string);
-
+  if (resolvedButtonHover) cssVariables.push(`--button-hover: ${resolvedButtonHover};`);
+  if (resolvedButtonTextHover) cssVariables.push(`--button-text-hover: ${resolvedButtonTextHover};`);
   if (resolvedActiveNavBg) cssVariables.push(`--active-nav-bg: ${resolvedActiveNavBg};`);
   if (resolvedActiveNavText) cssVariables.push(`--active-nav-text: ${resolvedActiveNavText};`);
-  if (backgroundColor) cssVariables.push(`--bg-main: ${backgroundColor};`);
-  if (surfaceColor) cssVariables.push(`--bg-surface: ${surfaceColor};`);
+  if (resolvedBg) cssVariables.push(`--bg-main: ${resolvedBg};`);
+  if (resolvedSurface) cssVariables.push(`--bg-surface: ${resolvedSurface};`);
+  if (resolvedFooter) cssVariables.push(`--footer-bg: ${resolvedFooter};`);
   if (resolvedText) {
     cssVariables.push(`--text-dark: ${resolvedText};`);
     cssVariables.push(`--text-muted: ${resolvedText};`);
   }
-  if (headingColor || resolvedPrimary) cssVariables.push(`--heading-color: ${headingColor || resolvedPrimary};`);
+  if (resolvedHeading) cssVariables.push(`--heading-color: ${resolvedHeading};`);
   if (resolvedRadius) cssVariables.push(`--button-border-radius: ${resolvedRadius};`);
 
   if (cssVariables.length === 0) return null;
