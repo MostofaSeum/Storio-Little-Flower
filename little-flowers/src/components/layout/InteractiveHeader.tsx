@@ -25,17 +25,14 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Playful kindergarten palette mapped in order to navigation links
+  // Unified theme palette based on Primary, Secondary & Accent tokens
+  // Gives a clean, consistent, branded look across all navbar links
   const colorPalette = [
-    'var(--accent-green)',
-    'var(--accent-pink)',
-    'var(--accent-blue)',
-    'var(--secondary)',
     'var(--primary)',
-    'var(--accent-green)',
     'var(--secondary)',
     'var(--accent-pink)',
-    'var(--accent-blue)',
+    'var(--primary)',
+    'var(--secondary)',
   ];
 
   // Default fallback links if none returned
@@ -59,6 +56,7 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
     .map((item, index) => {
       const label = item.name || item.label || 'Link';
       const rawHref = item.href || item.url || '#';
+      // Default to the admin's theme colors: Primary for links, with hover fill
       const color = colorPalette[index % colorPalette.length];
       const children = item.subLinks || item.children || [];
       const hasDropdown = children.length > 0;
