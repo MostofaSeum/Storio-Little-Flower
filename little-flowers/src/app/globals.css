@@ -382,7 +382,6 @@ html {
 
 /* Neon Ambient Lighting & Color-matched Card Background Hover Effects using :root tokens */
 .course-card-amber:hover {
-  background-color: var(--bg-soft-amber) !important;
   border-color: var(--secondary) !important;
   box-shadow:
     0 14px 35px -4px color-mix(in srgb, var(--secondary) 35%, transparent),
@@ -390,7 +389,6 @@ html {
 }
 
 .course-card-pink:hover {
-  background-color: var(--bg-soft-pink) !important;
   border-color: var(--accent-pink) !important;
   box-shadow:
     0 14px 35px -4px color-mix(in srgb, var(--accent-pink) 35%, transparent),
@@ -398,7 +396,6 @@ html {
 }
 
 .course-card-sky:hover {
-  background-color: var(--accent-soft-blue) !important;
   border-color: var(--accent-blue) !important;
   box-shadow:
     0 14px 35px -4px color-mix(in srgb, var(--accent-blue) 35%, transparent),
@@ -406,11 +403,6 @@ html {
 }
 
 .course-card-lime:hover {
-  background-color: color-mix(
-    in srgb,
-    var(--accent-green) 12%,
-    white
-  ) !important;
   border-color: var(--accent-green) !important;
   box-shadow:
     0 14px 35px -4px color-mix(in srgb, var(--accent-green) 35%, transparent),

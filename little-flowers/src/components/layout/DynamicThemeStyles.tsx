@@ -64,7 +64,8 @@ export default function DynamicThemeStyles({ customization }: DynamicThemeStyles
     cssVariables.push(`--accent-pink-hover: ${resolvedAccentPink};`);
   }
   if (resolvedAccentBlue) {
-    cssVariables.push(`--accent-soft-blue: ${resolvedAccentBlue};`);
+    cssVariables.push(`--accent-blue: ${resolvedAccentBlue};`);
+    cssVariables.push(`--accent-soft-blue: color-mix(in srgb, ${resolvedAccentBlue} 14%, white);`);
   }
   if (resolvedTopbar) cssVariables.push(`--topbar-bg: ${resolvedTopbar};`);
   if (resolvedButtonBg) cssVariables.push(`--button-bg: ${resolvedButtonBg};`);
