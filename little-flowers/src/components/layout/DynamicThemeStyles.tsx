@@ -41,8 +41,8 @@ export default function DynamicThemeStyles({ customization }: DynamicThemeStyles
   const resolvedSecondary = secondaryColor || (customization['secondary_color'] as string);
   const resolvedAccentPink = accentPink || accentColor || (customization['accent_color'] as string);
   const resolvedAccentBlue = accentBlue || (customization['accent_blue'] as string);
-  const resolvedTopbar = topbarBgColor || footerColor || (customization['topbar_bg_color'] as string);
-  const resolvedButtonBg = buttonColor || resolvedPrimary || (customization['button_color'] as string);
+  const resolvedTopbar = topbarBgColor || (customization['topbar_bg_color'] as string);
+  const resolvedButtonBg = buttonColor || (customization['button_color'] as string);
   const resolvedButtonText = buttonTextColor || (customization['button_text_color'] as string);
   const resolvedText = textColor || (customization['text_color'] as string);
   const resolvedRadius = borderRadius || (customization['border_radius'] as string);

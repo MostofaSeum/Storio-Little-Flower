@@ -51,6 +51,61 @@ export interface ResolvedTemplateLayout {
  * Resolves layout, settings, customization configs, navigation menu, and important links
  * from the Storio CMS API with safe standalone fallback.
  */
+/**
+ * Maps API customization config (which may use snake_case or camelCase field names)
+ * to the LittleFlowersCustomizationConfig format expected by the template.
+ * Returns only the fields that are actually set in the API response.
+ */
+function mapApiCustomizationToConfig(
+  apiConfig: Record<string, unknown> | null | undefined
+): Partial<LittleFlowersCustomizationConfig> {
+  if (!apiConfig || typeof apiConfig !== 'object') return {};
+
+  const config: Record<string, unknown> = {};
+
+  // Map both camelCase and snake_case field names from the API
+  const fieldMappings: Record<string, string[]> = {
+    primaryColor: ['primaryColor', 'primary_color'],
+    secondaryColor: ['secondaryColor', 'secondary_color'],
+    accentColor: ['accentColor', 'accent_color'],
+    accentPink: ['accentPink', 'accent_pink'],
+    accentBlue: ['accentBlue', 'accent_blue'],
+    backgroundColor: ['backgroundColor', 'background_color'],
+    surfaceColor: ['surfaceColor', 'surface_color'],
+    textColor: ['textColor', 'text_color'],
+    headingColor: ['headingColor', 'heading_color'],
+    footerColor: ['footerColor', 'footer_color'],
+    buttonColor: ['buttonColor', 'button_color'],
+    buttonTextColor: ['buttonTextColor', 'button_text_color'],
+    buttonHoverColor: ['buttonHoverColor', 'button_hover_color'],
+    buttonTextHoverColor: ['buttonTextHoverColor', 'button_text_hover_color'],
+    activeNavBgColor: ['activeNavBgColor', 'active_nav_bg_color'],
+    activeNavTextColor: ['activeNavTextColor', 'active_nav_text_color'],
+    topbarBgColor: ['topbarBgColor', 'topbar_bg_color'],
+    fontFamily: ['fontFamily', 'font_family'],
+    borderRadius: ['borderRadius', 'border_radius'],
+    badge1_color: ['badge1_color', 'badge1Color'],
+    badge2_color: ['badge2_color', 'badge2Color'],
+    badge3_color: ['badge3_color', 'badge3Color'],
+    badge4_color: ['badge4_color', 'badge4Color'],
+    hero_card1_color: ['hero_card1_color', 'heroCard1Color'],
+    hero_card2_color: ['hero_card2_color', 'heroCard2Color'],
+    hero_card3_color: ['hero_card3_color', 'heroCard3Color'],
+  };
+
+  for (const [targetField, sourceFields] of Object.entries(fieldMappings)) {
+    for (const sourceField of sourceFields) {
+      const value = apiConfig[sourceField];
+      if (value !== undefined && value !== null && value !== '') {
+        config[targetField] = value;
+        break;
+      }
+    }
+  }
+
+  return config as Partial<LittleFlowersCustomizationConfig>;
+}
+
 export async function getTemplateLayout(tenantHost: string, isStandalone: boolean): Promise<ResolvedTemplateLayout> {
   const [rawLayout, rawImportantLinks] = await Promise.all([
     storio.getLayout(tenantHost).catch(() => null),
@@ -69,9 +124,15 @@ export async function getTemplateLayout(tenantHost: string, isStandalone: boolea
 
   const settings = layout?.settings || DEFAULT_DEMO_DATA.settings;
 
+  // Map API customization config to the expected format, then merge with defaults
+  // Admin panel colors (from API) override demo data colors (fallbacks)
+  const apiCustomization = mapApiCustomizationToConfig(
+    layout?.customization?.config as Record<string, unknown> | null | undefined
+  );
+
   const customization: LittleFlowersCustomizationConfig = {
     ...DEFAULT_DEMO_DATA.customization,
-    ...((layout?.customization?.config as LittleFlowersCustomizationConfig) || {}),
+    ...apiCustomization,
   };
 
   const cmsNavLinks =
