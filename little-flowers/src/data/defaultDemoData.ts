@@ -63,6 +63,7 @@ export const DEFAULT_DEMO_DATA: {
   customization: {
     primaryColor: '#6c4298',
     secondaryColor: '#f39c12',
+    accentColor: '#ff4081',
     accentPink: '#ff4081',
     accentBlue: '#4fc3f7',
     topbarBgColor: '#111111',

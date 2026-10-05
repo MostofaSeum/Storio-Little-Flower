@@ -37,9 +37,9 @@ export default function DynamicThemeStyles({ customization }: DynamicThemeStyles
     borderRadius,
   } = customization;
 
-  const resolvedPrimary = primaryColor || headingColor || (customization['primary_color'] as string);
+  const resolvedPrimary = primaryColor || (customization['primary_color'] as string) || headingColor;
   const resolvedSecondary = secondaryColor || (customization['secondary_color'] as string);
-  const resolvedAccentPink = accentPink || accentColor || (customization['accent_color'] as string);
+  const resolvedAccentPink = accentColor || (customization['accent_color'] as string) || accentPink;
   const resolvedAccentBlue = accentBlue || (customization['accent_blue'] as string);
   const resolvedTopbar = topbarBgColor || (customization['topbar_bg_color'] as string);
   const resolvedButtonBg = buttonColor || (customization['button_color'] as string);
