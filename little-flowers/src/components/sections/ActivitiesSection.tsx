@@ -12,7 +12,7 @@ export default function ActivitiesSection({ activities }: ActivitiesSectionProps
   return (
     <section
       id="programs"
-      className="site-section-py site-section-px bg-pastel-purple border-y border-purple-50"
+      className="site-section-py site-section-px border-y border-purple-50/50"
     >
       <div className="site-container">
         <div className="text-center max-w-2xl mx-auto mb-14 reveal-on-scroll">
@@ -76,7 +76,8 @@ export default function ActivitiesSection({ activities }: ActivitiesSectionProps
             return (
               <div
                 key={activity.id}
-                className={`bg-white rounded-3xl p-6 border-2 ${borderColors[idx % 4]} ${courseGlowClasses[idx % 4]} flex flex-col justify-between group card-interactive cursor-pointer ${directionClass} ${delayClass}`}
+                className={`rounded-3xl p-6 border-2 ${borderColors[idx % 4]} ${courseGlowClasses[idx % 4]} flex flex-col justify-between group card-interactive cursor-pointer ${directionClass} ${delayClass}`}
+                style={{ backgroundColor: 'var(--bg-surface, #ffffff)' }}
               >
                 <div>
                   {activityImage && (

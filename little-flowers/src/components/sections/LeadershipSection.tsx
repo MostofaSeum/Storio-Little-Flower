@@ -34,15 +34,18 @@ export default function LeadershipSection({ messages }: LeadershipSectionProps) 
   if (displayMessages.length === 0) return null;
 
   return (
-    <section className="py-14 sm:py-20 px-4 sm:px-8 bg-gradient-to-b from-white via-pastel-purple/30 to-white relative overflow-hidden">
+    <section className="py-14 sm:py-20 px-4 sm:px-8 relative overflow-hidden">
       {/* Decorative ambient blurred blobs */}
-      <div className="absolute top-1/4 right-0 w-96 h-96 bg-purple-100/50 rounded-full blur-3xl -z-10 pointer-events-none" />
-      <div className="absolute bottom-10 left-0 w-96 h-96 bg-pink-100/40 rounded-full blur-3xl -z-10 pointer-events-none" />
+      <div className="absolute top-1/4 right-0 w-96 h-96 bg-purple-100/30 rounded-full blur-3xl -z-10 pointer-events-none" />
+      <div className="absolute bottom-10 left-0 w-96 h-96 bg-pink-100/20 rounded-full blur-3xl -z-10 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16">
         {/* Section Header with Animated Title */}
         <div className="text-center max-w-2xl mx-auto mb-2 reveal-on-scroll">
-          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase bg-white text-primary-color border border-purple-200/80 shadow-2xs mb-3">
+          <span
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase text-primary-color border border-purple-200/80 shadow-2xs mb-3"
+            style={{ backgroundColor: 'var(--bg-surface, #ffffff)' }}
+          >
             <span className="w-2 h-2 rounded-full bg-accent-pink" />
             Leadership Desk
           </span>

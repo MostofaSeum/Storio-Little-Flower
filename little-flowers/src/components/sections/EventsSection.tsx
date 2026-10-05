@@ -11,7 +11,7 @@ export default function EventsSection({ events }: EventsSectionProps) {
   if (!events || events.length === 0) return null;
 
   return (
-    <section id="events" className="site-section-py site-section-px bg-white">
+    <section id="events" className="site-section-py site-section-px">
       <div className="site-container">
         <div className="flex flex-wrap items-end justify-between gap-4 mb-12 reveal-on-scroll">
           <div>
