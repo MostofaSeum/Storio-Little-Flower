@@ -39,6 +39,7 @@
 
 body {
   font-family: var(--font-quicksand);
+  background-color: var(--bg-main, #ffffff);
   color: var(--text-dark);
   overflow-x: clip;
 }

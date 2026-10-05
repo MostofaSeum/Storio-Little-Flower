@@ -101,66 +101,6 @@
     ],
     "content": [
       {
-        "id": "nav_home_color",
-        "label": "Navbar: Home Button Color",
-        "type": "color",
-        "default": "#8bc34a"
-      },
-      {
-        "id": "nav_about_color",
-        "label": "Navbar: About Button Color",
-        "type": "color",
-        "default": "#f39c12"
-      },
-      {
-        "id": "nav_programs_color",
-        "label": "Navbar: Programs / Facilities Button Color",
-        "type": "color",
-        "default": "#ff4081"
-      },
-      {
-        "id": "nav_teachers_color",
-        "label": "Navbar: Teachers / Faculty Button Color",
-        "type": "color",
-        "default": "#0e704b"
-      },
-      {
-        "id": "nav_gallery_color",
-        "label": "Navbar: Gallery Button Color",
-        "type": "color",
-        "default": "#f39c12"
-      },
-      {
-        "id": "nav_events_color",
-        "label": "Navbar: Events Button Color",
-        "type": "color",
-        "default": "#0e704b"
-      },
-      {
-        "id": "nav_admission_color",
-        "label": "Navbar: Admission Button Color",
-        "type": "color",
-        "default": "#b62309"
-      },
-      {
-        "id": "nav_notices_color",
-        "label": "Navbar: Notices Button Color",
-        "type": "color",
-        "default": "#ff4081"
-      },
-      {
-        "id": "nav_contact_color",
-        "label": "Navbar: Contact Button Color",
-        "type": "color",
-        "default": "#0e704b"
-      },
-      {
-        "id": "nav_blog_color",
-        "label": "Navbar: Blog Button Color",
-        "type": "color",
-        "default": "#f39c12"
-      },
-      {
         "id": "showTopBar",
         "label": "Show Dark Top Contact Bar",
         "type": "boolean",

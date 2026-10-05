@@ -33,7 +33,7 @@ export default function RootLayout({
       lang="en"
       className={`${quicksand.variable} ${fredoka.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans bg-white text-gray-800">
+      <body className="min-h-full flex flex-col font-sans text-gray-800">
         <ClickSpark />
         {children}
       </body>
