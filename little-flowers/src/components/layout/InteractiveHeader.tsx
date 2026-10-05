@@ -56,9 +56,34 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
     .map((item, index) => {
       const label = item.name || item.label || 'Link';
       const rawHref = item.href || item.url || '#';
-      // All colors come strictly from the Admin Panel's universal Colors section:
-      // --primary (Primary Color), --secondary (derived/Button Hover), --accent-pink (Accent Color)
-      const color = colorPalette[index % colorPalette.length];
+      // Read individual button color configured under Content section in Admin Panel:
+      // (with fallback to default colorful palette)
+      const lowerLabel = label.toLowerCase().trim();
+      let customVarColor: string | undefined;
+
+      if (lowerLabel.includes('home')) {
+        customVarColor = 'var(--nav-home-color, var(--primary))';
+      } else if (lowerLabel.includes('about')) {
+        customVarColor = 'var(--nav-about-color, var(--secondary))';
+      } else if (lowerLabel.includes('program') || lowerLabel.includes('facilit')) {
+        customVarColor = 'var(--nav-programs-color, var(--accent-pink))';
+      } else if (lowerLabel.includes('teacher') || lowerLabel.includes('faculty') || lowerLabel.includes('staff')) {
+        customVarColor = 'var(--nav-teachers-color, var(--primary))';
+      } else if (lowerLabel.includes('gallery')) {
+        customVarColor = 'var(--nav-gallery-color, var(--secondary))';
+      } else if (lowerLabel.includes('event')) {
+        customVarColor = 'var(--nav-events-color, var(--primary))';
+      } else if (lowerLabel.includes('admission')) {
+        customVarColor = 'var(--nav-admission-color, var(--secondary))';
+      } else if (lowerLabel.includes('notice')) {
+        customVarColor = 'var(--nav-notices-color, var(--accent-pink))';
+      } else if (lowerLabel.includes('contact')) {
+        customVarColor = 'var(--nav-contact-color, var(--primary))';
+      } else if (lowerLabel.includes('blog')) {
+        customVarColor = 'var(--nav-blog-color, var(--secondary))';
+      }
+
+      const color = customVarColor || colorPalette[index % colorPalette.length];
       const children = item.subLinks || item.children || [];
       const hasDropdown = children.length > 0;
 
