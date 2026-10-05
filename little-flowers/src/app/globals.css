@@ -64,6 +64,16 @@ h6 {
   color: var(--heading-color, var(--primary));
 }
 
+/* Ensure all subpage banners, hero titles and split texts inherit --heading-color */
+h1 span,
+h2 span,
+h3 span,
+h4 span,
+h5 span,
+h6 span {
+  color: inherit;
+}
+
 /* Global Reusable Color Utility Classes */
 .text-primary-color {
   color: var(--primary);

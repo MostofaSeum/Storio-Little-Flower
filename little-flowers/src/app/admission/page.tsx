@@ -67,7 +67,7 @@ export default async function AdmissionPage() {
             <div className="w-16 h-16 mx-auto mb-4 rounded-3xl bg-amber-100 text-secondary-color flex items-center justify-center text-2xl font-bold">
               ℹ️
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-primary-color font-fredoka">
+            <h1 className="text-2xl sm:text-3xl font-extrabold font-fredoka">
               Admissions Closed
             </h1>
             <p className="text-gray-500 text-sm mt-2 font-medium">

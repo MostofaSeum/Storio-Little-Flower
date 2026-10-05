@@ -73,7 +73,10 @@ export default function DynamicThemeStyles({ customization }: DynamicThemeStyles
   if (resolvedButtonTextHover) cssVariables.push(`--button-text-hover: ${resolvedButtonTextHover};`);
   if (resolvedActiveNavBg) cssVariables.push(`--active-nav-bg: ${resolvedActiveNavBg};`);
   if (resolvedActiveNavText) cssVariables.push(`--active-nav-text: ${resolvedActiveNavText};`);
-  if (resolvedBg) cssVariables.push(`--bg-main: ${resolvedBg};`);
+  if (resolvedBg) {
+    cssVariables.push(`--bg-main: ${resolvedBg};`);
+    cssVariables.push(`--bg-pastel-purple: ${resolvedBg};`);
+  }
   if (resolvedSurface) cssVariables.push(`--bg-surface: ${resolvedSurface};`);
   if (resolvedFooter) cssVariables.push(`--footer-bg: ${resolvedFooter};`);
   if (resolvedText) {

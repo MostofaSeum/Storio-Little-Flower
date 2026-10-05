@@ -432,7 +432,7 @@ export default function AdmissionPortalClient({
         <span className="inline-block text-xs font-extrabold tracking-wider uppercase text-secondary-color bg-amber-100 px-3.5 py-1 rounded-full shadow-xs mb-3">
           {formConfig.academic_session || '2026 - 2027'} Admissions Open
         </span>
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-primary-color font-fredoka leading-tight">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-fredoka leading-tight">
           <SplitText
             text={siteTitle ? `Join the ${siteTitle} Family` : 'Join Our School Family'}
             tag="span"
