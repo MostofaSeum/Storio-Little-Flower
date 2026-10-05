@@ -404,7 +404,7 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
               <a
                 href="/admission"
                 onClick={() => setMobileMenuOpen(false)}
-                className="inline-flex items-center justify-center py-2.5 bg-secondary-color text-white font-bold rounded-full shadow-md text-xs text-center"
+                className="inline-flex items-center justify-center py-2.5 bg-button-dark text-white font-bold rounded-full shadow-md text-xs text-center"
               >
                 Enroll Now
               </a>

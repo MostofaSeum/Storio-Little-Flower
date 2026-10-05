@@ -107,7 +107,7 @@ export default function AboutSection({ profile, customization }: AboutSectionPro
           <div className="pt-2 flex items-center space-x-4">
             <a
               href={buttonUrl}
-              className="px-6 py-3 bg-secondary-color hover:opacity-90 text-white font-bold text-sm rounded-full shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5"
+              className="px-6 py-3 bg-button-dark text-white font-bold text-sm rounded-full shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5"
             >
               {buttonText}
             </a>
