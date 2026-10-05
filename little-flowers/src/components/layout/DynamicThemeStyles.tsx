@@ -83,6 +83,29 @@ export default function DynamicThemeStyles({ customization }: DynamicThemeStyles
   if (resolvedHeading) cssVariables.push(`--heading-color: ${resolvedHeading};`);
   if (resolvedRadius) cssVariables.push(`--button-border-radius: ${resolvedRadius};`);
 
+  // Per-navbar link colors from admin panel (with fallback tokens)
+  const navHomeColor = (customization.nav_home_color || customization['navHomeColor']) as string;
+  const navAboutColor = (customization.nav_about_color || customization['navAboutColor']) as string;
+  const navProgramsColor = (customization.nav_programs_color || customization['navProgramsColor']) as string;
+  const navTeachersColor = (customization.nav_teachers_color || customization['navTeachersColor']) as string;
+  const navGalleryColor = (customization.nav_gallery_color || customization['navGalleryColor']) as string;
+  const navEventsColor = (customization.nav_events_color || customization['navEventsColor']) as string;
+  const navAdmissionColor = (customization.nav_admission_color || customization['navAdmissionColor']) as string;
+  const navNoticesColor = (customization.nav_notices_color || customization['navNoticesColor']) as string;
+  const navContactColor = (customization.nav_contact_color || customization['navContactColor']) as string;
+  const navBlogColor = (customization.nav_blog_color || customization['navBlogColor']) as string;
+
+  if (navHomeColor) cssVariables.push(`--nav-home-color: ${navHomeColor};`);
+  if (navAboutColor) cssVariables.push(`--nav-about-color: ${navAboutColor};`);
+  if (navProgramsColor) cssVariables.push(`--nav-programs-color: ${navProgramsColor};`);
+  if (navTeachersColor) cssVariables.push(`--nav-teachers-color: ${navTeachersColor};`);
+  if (navGalleryColor) cssVariables.push(`--nav-gallery-color: ${navGalleryColor};`);
+  if (navEventsColor) cssVariables.push(`--nav-events-color: ${navEventsColor};`);
+  if (navAdmissionColor) cssVariables.push(`--nav-admission-color: ${navAdmissionColor};`);
+  if (navNoticesColor) cssVariables.push(`--nav-notices-color: ${navNoticesColor};`);
+  if (navContactColor) cssVariables.push(`--nav-contact-color: ${navContactColor};`);
+  if (navBlogColor) cssVariables.push(`--nav-blog-color: ${navBlogColor};`);
+
   if (cssVariables.length === 0) return null;
 
   const styleContent = `:root {

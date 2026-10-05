@@ -8,103 +8,79 @@
         "id": "primaryColor",
         "label": "Primary Color",
         "type": "color",
-        "default": "#831c07"
-      },
-      {
-        "id": "secondaryColor",
-        "label": "Secondary Color",
-        "type": "color",
-        "default": "#b45309"
-      },
-      {
-        "id": "accentColor",
-        "label": "Tertiary / Accent Color",
-        "type": "color",
-        "default": "#d97706"
+        "default": "#0e704b"
       },
       {
         "id": "backgroundColor",
         "label": "Background Color",
         "type": "color",
-        "default": "#ffffff"
+        "default": "#f8f4e7"
       },
       {
         "id": "surfaceColor",
         "label": "Surface Color",
         "type": "color",
-        "default": "#f8fafc"
+        "default": "#ffffff"
       },
       {
         "id": "textColor",
         "label": "Text Color",
         "type": "color",
-        "default": "#1e293b"
+        "default": "#3a3a41"
       },
       {
         "id": "headingColor",
         "label": "Heading Color",
         "type": "color",
-        "default": "#831c07"
+        "default": "#3a3a41"
       },
       {
         "id": "footerColor",
-        "label": "Footer Background Color",
+        "label": "Footer Color",
         "type": "color",
-        "default": "#1e293b"
+        "default": "#101828"
+      },
+      {
+        "id": "accentColor",
+        "label": "Accent Color",
+        "type": "color",
+        "default": "#0e704b"
       },
       {
         "id": "buttonColor",
         "label": "Button Color",
         "type": "color",
-        "default": "#831c07"
+        "default": "#0e704b"
       },
       {
         "id": "buttonTextColor",
         "label": "Button Text Color",
         "type": "color",
-        "default": "#ffffff"
+        "default": "#f8f4e7"
       },
       {
         "id": "buttonHoverColor",
         "label": "Button Hover Color",
         "type": "color",
-        "default": "#b45309"
+        "default": "#b62309"
       },
       {
         "id": "buttonTextHoverColor",
         "label": "Button Text Hover Color",
         "type": "color",
-        "default": "#ffffff"
+        "default": "#f8f4e7"
       },
       {
         "id": "activeNavBgColor",
         "label": "Active Nav BG Color",
         "type": "color",
-        "default": "#fef3c7"
+        "default": "#f0f7ef"
       },
       {
         "id": "activeNavTextColor",
         "label": "Active Nav Text Color",
         "type": "color",
-        "default": "#831c07"
-      },
-      {
-        "id": "accentPink",
-        "label": "Accent Pink / Active Dot",
-        "type": "color",
-        "default": "#ff4081"
-      },
-      {
-        "id": "accentBlue",
-        "label": "Soft Wave Blue",
-        "type": "color",
-        "default": "#e3f2fd"
-      },
-      {
-        "id": "topbarBgColor",
-        "label": "Top Bar Background",
-        "type": "color",
-        "default": "#111111"
+        "default": "#0e704b"
       }
     ],
     "typography": [
@@ -124,6 +100,66 @@
       }
     ],
     "content": [
+      {
+        "id": "nav_home_color",
+        "label": "Navbar: Home Button Color",
+        "type": "color",
+        "default": "#8bc34a"
+      },
+      {
+        "id": "nav_about_color",
+        "label": "Navbar: About Button Color",
+        "type": "color",
+        "default": "#f39c12"
+      },
+      {
+        "id": "nav_programs_color",
+        "label": "Navbar: Programs / Facilities Button Color",
+        "type": "color",
+        "default": "#ff4081"
+      },
+      {
+        "id": "nav_teachers_color",
+        "label": "Navbar: Teachers / Faculty Button Color",
+        "type": "color",
+        "default": "#0e704b"
+      },
+      {
+        "id": "nav_gallery_color",
+        "label": "Navbar: Gallery Button Color",
+        "type": "color",
+        "default": "#f39c12"
+      },
+      {
+        "id": "nav_events_color",
+        "label": "Navbar: Events Button Color",
+        "type": "color",
+        "default": "#0e704b"
+      },
+      {
+        "id": "nav_admission_color",
+        "label": "Navbar: Admission Button Color",
+        "type": "color",
+        "default": "#b62309"
+      },
+      {
+        "id": "nav_notices_color",
+        "label": "Navbar: Notices Button Color",
+        "type": "color",
+        "default": "#ff4081"
+      },
+      {
+        "id": "nav_contact_color",
+        "label": "Navbar: Contact Button Color",
+        "type": "color",
+        "default": "#0e704b"
+      },
+      {
+        "id": "nav_blog_color",
+        "label": "Navbar: Blog Button Color",
+        "type": "color",
+        "default": "#f39c12"
+      },
       {
         "id": "showTopBar",
         "label": "Show Dark Top Contact Bar",

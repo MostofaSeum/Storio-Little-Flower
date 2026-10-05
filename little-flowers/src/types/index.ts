@@ -58,6 +58,16 @@ export interface LittleFlowersCustomizationConfig {
   accentPink?: string;
   accentBlue?: string;
   topbarBgColor?: string;
+  nav_home_color?: string;
+  nav_about_color?: string;
+  nav_programs_color?: string;
+  nav_teachers_color?: string;
+  nav_gallery_color?: string;
+  nav_events_color?: string;
+  nav_admission_color?: string;
+  nav_notices_color?: string;
+  nav_contact_color?: string;
+  nav_blog_color?: string;
   fontFamily?: string;
   borderRadius?: string;
   showTopBar?: boolean;
