@@ -73,7 +73,8 @@ export default function StaffSection({ staffList }: StaffSectionProps) {
           return (
             <div
               key={member.id}
-              className={`flex flex-col items-center text-center p-7 bg-white rounded-3xl border-2 border-gray-100 ${borderColors[idx % 4]} group mentor-card reveal-on-scroll delay-${(idx % 4) * 100 + 100} relative overflow-hidden`}
+              className={`flex flex-col items-center text-center p-7 rounded-3xl border-2 border-gray-100 ${borderColors[idx % 4]} group mentor-card reveal-on-scroll delay-${(idx % 4) * 100 + 100} relative overflow-hidden`}
+              style={{ backgroundColor: 'var(--bg-surface, #ffffff)' }}
             >
               {/* Mentor Avatar with animated gradient halo */}
               <div className="relative mb-5">

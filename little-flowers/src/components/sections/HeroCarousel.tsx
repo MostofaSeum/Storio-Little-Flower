@@ -255,7 +255,7 @@ export default function HeroCarousel({ slides, siteTitle, customization }: HeroC
           <div className="pt-6 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
             <a
               href={slideButtonUrl}
-              className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 sm:py-4 bg-button-dark hover:bg-gray-800 text-white font-bold text-sm rounded-full shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-1 hover:scale-102 text-center"
+              className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 sm:py-4 bg-button-dark text-white font-bold text-sm rounded-full shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-1 hover:scale-102 text-center"
             >
               {slideButtonText}
             </a>

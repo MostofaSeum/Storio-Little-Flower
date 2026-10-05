@@ -145,7 +145,10 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
           </div>
           {/* Responsive title wrapper that wraps long school names into multiple lines */}
           <div className="min-w-0 max-w-[160px] sm:max-w-[220px] md:max-w-[280px] lg:max-w-[240px] xl:max-w-[320px]">
-            <span className="text-sm sm:text-base xl:text-lg font-bold tracking-tight text-gray-900 font-fredoka flex items-center gap-1.5 leading-snug break-words">
+            <span
+              className="text-sm sm:text-base xl:text-lg font-bold tracking-tight font-fredoka flex items-center gap-1.5 leading-snug break-words"
+              style={{ color: 'var(--heading-color, #111827)' }}
+            >
               <span>{settings?.site_title || 'Little Flowers'}</span>
               <span className="w-2 h-2 rounded-full bg-accent-pink animate-pulse shrink-0 inline-block"></span>
             </span>

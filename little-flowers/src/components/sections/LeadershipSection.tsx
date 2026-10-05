@@ -50,10 +50,9 @@ export default function LeadershipSection({ messages }: LeadershipSectionProps) 
             Leadership Desk
           </span>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-fredoka text-gray-900 leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-fredoka leading-tight">
             <SplitText
               text="Words from Our Leadership"
-              className="inline-block text-primary-color"
               tag="span"
               threshold={0.15}
             />
@@ -91,7 +90,8 @@ export default function LeadershipSection({ messages }: LeadershipSectionProps) 
               key={item.id}
               className={`reveal-pop ${
                 index === 1 ? 'delay-150' : ''
-              } relative bg-gradient-to-br from-white via-white to-purple-50/40 rounded-[2.5rem] p-6 sm:p-10 lg:p-14 border border-purple-100/80 shadow-[0_12px_40px_color-mix(in_srgb,var(--primary)_6%,transparent)] hover:shadow-[0_20px_50px_color-mix(in_srgb,var(--primary)_10%,transparent)] transition-all duration-300 overflow-hidden`}
+              } relative rounded-[2.5rem] p-6 sm:p-10 lg:p-14 border border-purple-100/80 shadow-[0_12px_40px_color-mix(in_srgb,var(--primary)_6%,transparent)] hover:shadow-[0_20px_50px_color-mix(in_srgb,var(--primary)_10%,transparent)] transition-all duration-300 overflow-hidden`}
+              style={{ backgroundColor: 'var(--bg-surface, #ffffff)' }}
             >
               {/* Subtle map / tech decorative background grid overlay */}
               <div
@@ -129,7 +129,7 @@ export default function LeadershipSection({ messages }: LeadershipSectionProps) 
                   )}
 
                   {/* Big Bold Headline */}
-                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 font-fredoka leading-[1.12] tracking-tight mb-4">
+                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-fredoka leading-[1.12] tracking-tight mb-4">
                     <span>{item.name}</span>
                   </h2>
 
@@ -166,7 +166,7 @@ export default function LeadershipSection({ messages }: LeadershipSectionProps) 
                     {/* Primary Button */}
                     <Link
                       href={`/administration/leadership-message#message-${item.id}`}
-                      className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full bg-button-dark hover:bg-gray-800 text-white font-bold text-sm shadow-md hover:shadow-xl transition-all transform hover:-translate-y-0.5"
+                      className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full bg-button-dark text-white font-bold text-sm shadow-md hover:shadow-xl transition-all transform hover:-translate-y-0.5"
                     >
                       <span>Read Full Message</span>
                       <span>→</span>

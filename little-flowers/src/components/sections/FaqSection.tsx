@@ -73,9 +73,10 @@ export default function FaqSection({ faqs }: FaqSectionProps) {
             return (
               <div
                 key={faq.id}
-                className={`bg-white rounded-3xl border-2 ${borderCls} transition-all duration-300 shadow-xs overflow-hidden ${
+                className={`rounded-3xl border-2 ${borderCls} transition-all duration-300 shadow-xs overflow-hidden ${
                   isOpen ? 'shadow-md ring-2 ring-purple-100/60' : 'hover:shadow-sm'
                 }`}
+                style={{ backgroundColor: 'var(--bg-surface, #ffffff)' }}
               >
                 <button
                   onClick={() => toggleFaq(faq.id)}

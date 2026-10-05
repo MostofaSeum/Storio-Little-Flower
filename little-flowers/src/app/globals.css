@@ -41,7 +41,7 @@
 body {
   font-family: var(--font-quicksand);
   background-color: var(--bg-main, #ffffff);
-  color: var(--text-dark);
+  color: var(--text-dark, #2d2b56);
   overflow-x: clip;
 }
 
@@ -50,7 +50,6 @@ body {
   color: #be185d; /* clear dark pink text */
 }
 
-
 h1,
 h2,
 h3,
@@ -58,6 +57,7 @@ h4,
 h5,
 h6 {
   font-family: var(--font-fredoka);
+  color: var(--heading-color, var(--primary));
 }
 
 /* Global Reusable Color Utility Classes */
@@ -132,6 +132,13 @@ h6 {
 .bg-button-dark {
   background-color: var(--button-bg);
   color: var(--button-text);
+  border-radius: var(--button-border-radius, 9999px);
+  transition: all 0.2s ease;
+}
+
+.bg-button-dark:hover {
+  background-color: var(--button-hover, var(--button-bg));
+  color: var(--button-text-hover, var(--button-text));
 }
 
 .border-accent-pink {

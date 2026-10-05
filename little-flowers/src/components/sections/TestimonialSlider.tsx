@@ -36,11 +36,12 @@ export default function TestimonialSlider({ testimonials }: TestimonialSliderPro
             <div
               key={t.id || idx}
               onClick={() => setActiveIdx(idx)}
-              className={`p-8 rounded-3xl bg-white/90 backdrop-blur-md border-2 transition-all duration-500 flex flex-col justify-between cursor-pointer card-interactive relative ${
+              className={`p-8 rounded-3xl backdrop-blur-md border-2 transition-all duration-500 flex flex-col justify-between cursor-pointer card-interactive relative ${
                 isFeatured
                   ? 'border-accent-pink shadow-xl ring-4 ring-pink-100/50 -translate-y-2'
                   : `border-sky-100/80 opacity-90 ${bgAccents[idx % 3]}`
               }`}
+              style={{ backgroundColor: 'var(--bg-surface, #ffffff)' }}
             >
               {/* Cute Quote Icon Watermark */}
               <div className="absolute top-4 right-5 text-gray-200 text-5xl font-serif font-black select-none pointer-events-none opacity-40">
