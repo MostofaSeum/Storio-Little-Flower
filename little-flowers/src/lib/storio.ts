@@ -135,6 +135,12 @@ export async function getTemplateLayout(tenantHost: string, isStandalone: boolea
     ...apiCustomization,
   };
 
+  // Debug: Check what the API returns and how it's mapped
+  console.log('[Storio] Full layout response:', JSON.stringify(layout, null, 2));
+  console.log('[Storio] Raw API config:', layout?.customization?.config);
+  console.log('[Storio] Mapped config:', apiCustomization);
+  console.log('[Storio] Final customization:', customization);
+
   const cmsNavLinks =
     (layout?.customization?.config?.navbarLinks as StorioDynamicNavItem[] | undefined) ||
     layout?.navigation?.items;
