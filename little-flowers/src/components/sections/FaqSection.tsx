@@ -46,7 +46,7 @@ export default function FaqSection({ faqs }: FaqSectionProps) {
             Got Questions?
           </span>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-primary-color leading-tight font-fredoka">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight font-fredoka">
             <SplitText
               text="Frequently Asked Questions"
               tag="span"

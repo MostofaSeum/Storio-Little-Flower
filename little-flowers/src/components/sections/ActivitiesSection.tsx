@@ -19,7 +19,7 @@ export default function ActivitiesSection({ activities }: ActivitiesSectionProps
           <span className="text-xs font-extrabold tracking-wider uppercase text-accent-pink bg-pink-100 px-3 py-1 rounded-full">
             Early Exploration
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-primary-color mt-3 font-fredoka">
+          <h2 className="text-3xl sm:text-4xl font-extrabold mt-3 font-fredoka">
             <SplitText
               text="Our Learning Programs"
               tag="span"

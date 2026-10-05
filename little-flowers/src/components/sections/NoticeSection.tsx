@@ -20,7 +20,7 @@ export default function NoticeSection({ notices }: NoticeSectionProps) {
             <span className="text-xs font-extrabold tracking-wider uppercase text-accent-pink bg-pink-100/80 px-3 py-1 rounded-full">
               Important Circulars
             </span>
-            <h3 className="text-3xl font-extrabold text-primary-color mt-2 font-fredoka">
+            <h3 className="text-3xl font-extrabold mt-2 font-fredoka">
               <SplitText
                 text="Campus Announcements"
                 tag="span"

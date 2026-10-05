@@ -18,7 +18,7 @@ export default function EventsSection({ events }: EventsSectionProps) {
             <span className="text-xs font-extrabold tracking-wider uppercase text-secondary-color bg-amber-100 px-3.5 py-1 rounded-full shadow-xs">
               Campus Life & Gatherings
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-primary-color mt-3 font-fredoka">
+            <h2 className="text-3xl sm:text-4xl font-extrabold mt-3 font-fredoka">
               <SplitText
                 text="Upcoming Events & Celebrations"
                 tag="span"

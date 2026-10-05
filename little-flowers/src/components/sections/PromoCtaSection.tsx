@@ -43,7 +43,7 @@ export default function PromoCtaSection({ promo }: PromoCtaSectionProps) {
               {promo.badge_text}
             </span>
           )}
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-primary-color leading-tight min-h-[3rem] sm:min-h-[3.5rem] font-fredoka">
+          <h2 className="text-3xl sm:text-4xl font-extrabold leading-tight min-h-[3rem] sm:min-h-[3.5rem] font-fredoka">
             <TypewriterText
               text={promo.title || "Admissions Open"}
               speed={65}

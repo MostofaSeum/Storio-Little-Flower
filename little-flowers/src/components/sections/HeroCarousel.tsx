@@ -242,7 +242,7 @@ export default function HeroCarousel({ slides, siteTitle, customization }: HeroC
 
         {/* Dynamic Slide Title and Information */}
         <div className="space-y-1">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-primary-color leading-[1.15] tracking-tight font-fredoka">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.15] tracking-tight font-fredoka">
             {slideTitle}
           </h1>
 

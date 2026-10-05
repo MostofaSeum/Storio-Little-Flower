@@ -53,7 +53,7 @@ export default function AboutSection({ profile, customization }: AboutSectionPro
           <div className="inline-block bg-accent-soft-blue text-primary-color font-bold text-xs uppercase px-3.5 py-1 rounded-full">
             About Our Academy
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-primary-color leading-tight font-fredoka">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight font-fredoka">
             <SplitText
               text="A Loving Second Home for Your Little Ones"
               tag="span"
