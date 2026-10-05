@@ -52,7 +52,7 @@ export default function DynamicThemeStyles({ customization }: DynamicThemeStyles
   const resolvedSurface = surfaceColor || (customization['surface_color'] as string) || (customization['surfaceColor'] as string);
   const resolvedFooter = footerColor || (customization['footer_color'] as string) || (customization['footerColor'] as string);
   const resolvedText = textColor || (customization['text_color'] as string) || (customization['textColor'] as string);
-  const resolvedHeading = headingColor || (customization['heading_color'] as string) || (customization['headingColor'] as string) || resolvedPrimary;
+  const resolvedHeading = headingColor || (customization['heading_color'] as string) || (customization['headingColor'] as string);
   const resolvedRadius = borderRadius || (customization['border_radius'] as string) || (customization['borderRadius'] as string);
 
   const cssVariables: string[] = [];
