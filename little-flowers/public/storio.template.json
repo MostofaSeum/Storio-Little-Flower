@@ -101,6 +101,29 @@
     ],
     "content": [
       {
+        "id": "showHero",
+        "label": "Show Hero Section",
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "id": "heroHeadline",
+        "label": "Hero Headline",
+        "type": "text",
+        "default": "Welcome to Our Institution"
+      },
+      {
+        "id": "headerStyle",
+        "label": "Header Style",
+        "type": "select",
+        "options": [
+          { "label": "Classic", "value": "classic" },
+          { "label": "Modern", "value": "modern" },
+          { "label": "Minimal", "value": "minimal" }
+        ],
+        "default": "modern"
+      },
+      {
         "id": "nav_home_color",
         "label": "Navbar: Home Button Color",
         "type": "color",
@@ -447,7 +470,9 @@
     "admission",
     "exam_results",
     "calendar_events",
-    "events"
+    "events",
+    "academics",
+    "compliance"
   ],
   "navigation": [
     {
