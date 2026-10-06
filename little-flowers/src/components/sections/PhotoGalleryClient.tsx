@@ -6,7 +6,7 @@ import { resolveMediaUrl } from '@/lib/media';
 export interface BackendAlbum {
   id: number;
   name: string;
-  slug: string;
+  slug?: string;
   description?: string;
   parent?: number | null;
   total_images?: number;
@@ -376,9 +376,11 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
                 const rawTitle = item.caption || item.image_title || item.alt_text;
                 const cleanTitle = formatDisplayTitle(rawTitle);
                 const staggerDelay = (idx % 4) * 80;
-                const detectedType = aspectRatios[item.id] || 'standard';
-                const isWide = detectedType === 'wide';
-                const isTall = detectedType === 'tall';
+                const detectedType = aspectRatios[item.id];
+                const fallbackType = idx % 5 === 0 ? 'tall' : idx % 7 === 0 ? 'wide' : 'standard';
+                const effectiveType = detectedType && detectedType !== 'standard' ? detectedType : fallbackType;
+                const isWide = effectiveType === 'wide';
+                const isTall = effectiveType === 'tall';
 
                 const isVisible = visiblePhotoIds.has(String(item.id));
 
