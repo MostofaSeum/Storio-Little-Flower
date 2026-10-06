@@ -1,5 +1,6 @@
 import React from 'react';
 import { getTenantContext, getTemplateLayout, getEvents, getCalendarEvents } from '@/lib/storio';
+import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
 import { StorioEvent, StorioCalendarEvent } from '@/types';
 import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
