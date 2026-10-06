@@ -48,6 +48,31 @@ export const DEFAULT_DEMO_DATA: {
   admissionFormConfig: StorioAdmissionFormConfig;
   navigation: StorioDynamicNavItem[];
   leadershipMessages: StorioLeadershipMessage[];
+  examResults: Array<{
+    id: number;
+    exam_name: string;
+    class_name: string;
+    year: number;
+    total_examinees: number;
+    passed: number;
+    failed: number;
+    pass_rate: string;
+    exam_type: string;
+    file_url?: string;
+  }>;
+  careers: Array<{
+    id: number;
+    title: string;
+    slug: string;
+    summary?: string;
+    content?: string;
+    location?: string;
+    type?: string;
+    experience?: string;
+    salary_range?: string;
+    deadline?: string;
+    is_active: boolean;
+  }>;
 } = {
   navigation: [
     { id: "1", name: "Home", href: "/" },
@@ -172,6 +197,38 @@ export const DEFAULT_DEMO_DATA: {
       published_date: "2026-10-08",
       is_urgent: false,
     },
+    {
+      id: 7,
+      title: "Winter Concert & Annual Day Celebration",
+      slug: "winter-concert-annual-day",
+      content: "Save the date for our festive winter concert and annual day celebrations. More details coming soon.",
+      published_date: "2026-10-12",
+      is_urgent: false,
+    },
+    {
+      id: 8,
+      title: "Diwali & Cultural Heritage Week",
+      slug: "cultural-heritage-week",
+      content: "A week-long celebration of festivals, traditional attire, folk dances, and cultural storytelling.",
+      published_date: "2026-10-15",
+      is_urgent: false,
+    },
+    {
+      id: 9,
+      title: "Parent Workshop: Screen Time & Healthy Habits",
+      slug: "parent-workshop-screen-time",
+      content: "An interactive workshop for parents on managing screen time and building healthy routines at home.",
+      published_date: "2026-10-20",
+      is_urgent: false,
+    },
+    {
+      id: 10,
+      title: "Science Discovery Fair Registration Open",
+      slug: "science-fair-registration",
+      content: "Register your child for our annual Science Discovery Fair. Open for Junior and Senior KG students.",
+      published_date: "2026-10-25",
+      is_urgent: true,
+    },
   ],
   blogs: [
     {
@@ -204,16 +261,64 @@ export const DEFAULT_DEMO_DATA: {
       category_name: "Activities & Nature",
       published_at: "2026-09-27T14:15:00Z",
     },
+    {
+      id: 4,
+      title: "Building Early Literacy: Phonics, Stories & Language Play",
+      slug: "building-early-literacy",
+      summary: "How our phonics-rich environment and storytelling circles build strong reading foundations.",
+      content: "<p>Early literacy at Little Flowers is woven into every corner of the classroom. From phonics games and alphabet puzzles to interactive storytelling circles, children develop a love for language that lasts a lifetime.</p><p>Our trained educators use multisensory techniques—sand trays for letter formation, musical rhymes for phonemic awareness, and puppet narratives for comprehension—to make reading joyful and natural.</p>",
+      featured_image_url: "/homepage/H1.jpg",
+      category_name: "Teaching Methods",
+      published_at: "2026-10-01T10:00:00Z",
+    },
+    {
+      id: 5,
+      title: "Healthy Eating Habits for Growing Minds",
+      slug: "healthy-eating-habits",
+      summary: "Nutrition tips and simple recipes to fuel your child's brain, energy, and happiness.",
+      content: "<p>A balanced diet is the foundation of a child's ability to learn, play, and grow. At Little Flowers, we partner with parents to build healthy eating habits that support cognitive development and physical vitality.</p><p>From colorful fruit platters to whole-grain snacks, our campus nutrition program makes healthy food fun and exciting for little learners.</p>",
+      featured_image_url: "/homepage/H2.jpg",
+      category_name: "Health & Wellness",
+      published_at: "2026-10-05T14:30:00Z",
+    },
+    {
+      id: 6,
+      title: "The Power of Outdoor Play in Early Development",
+      slug: "power-of-outdoor-play",
+      summary: "Why unstructured outdoor play is essential for physical, social, and emotional growth.",
+      content: "<p>Outdoor play is not just fun—it is critical for healthy child development. Climbing, running, jumping, and exploring nature build gross motor skills, spatial awareness, and risk assessment abilities.</p><p>At Little Flowers, our Sunshine Playground and garden trails provide safe, stimulating environments where children develop confidence, resilience, and a lifelong love for the outdoors.</p>",
+      featured_image_url: "/homepage/H3.jpg",
+      category_name: "Child Development",
+      published_at: "2026-10-10T09:15:00Z",
+    },
   ],
   heroSlides: [
     {
       id: 1,
       title: "Practical teaching & Social Development",
-      subtitle: "Social Development",
+      subtitle: "Where Little Minds Blossom",
       image_url: "/homepage/H1.jpg",
       button_text: "Learn More",
       button_url: "/about",
       order: 1,
+    },
+    {
+      id: 2,
+      title: "Creative Arts & Music Exploration",
+      subtitle: "Imagination Without Boundaries",
+      image_url: "/homepage/H2.jpg",
+      button_text: "Explore Programs",
+      button_url: "/about",
+      order: 2,
+    },
+    {
+      id: 3,
+      title: "Outdoor Play & Nature Discovery",
+      subtitle: "Growing With the Earth",
+      image_url: "/homepage/H3.jpg",
+      button_text: "Visit Campus",
+      button_url: "/admission",
+      order: 3,
     },
   ],
   institutionProfile: {
@@ -264,6 +369,38 @@ export const DEFAULT_DEMO_DATA: {
       excerpt: "All Junior Grades",
       featured_image_url: "/homepage/Early Exploration/Trial 2.webp",
     },
+    {
+      id: 5,
+      title: "Little Farmers Gardening",
+      slug: "little-farmers",
+      summary: "Hands-on gardening, seed planting, and nature exploration in our campus garden.",
+      excerpt: "All Ages",
+      featured_image_url: "/homepage/Happy Memories/Trial 1.jpg",
+    },
+    {
+      id: 6,
+      title: "Storytelling & Drama Circle",
+      slug: "storytelling-drama",
+      summary: "Interactive storytelling, puppet shows, and creative drama for expressive development.",
+      excerpt: "All Ages",
+      featured_image_url: "/homepage/Happy Memories/Trial 2.webp",
+    },
+    {
+      id: 7,
+      title: "Mini Sports & Yoga",
+      slug: "mini-sports-yoga",
+      summary: "Fun physical activities, basic yoga, balance games, and cooperative sports.",
+      excerpt: "All Ages",
+      featured_image_url: "/homepage/Early Exploration/Trial 1.jpg",
+    },
+    {
+      id: 8,
+      title: "Cooking & Nutrition Lab",
+      slug: "cooking-nutrition",
+      summary: "Simple cooking activities, healthy eating habits, and food science exploration.",
+      excerpt: "Junior & Senior KG",
+      featured_image_url: "/homepage/Early Exploration/Trial 2.webp",
+    },
   ],
   staff: [
     {
@@ -298,6 +435,38 @@ export const DEFAULT_DEMO_DATA: {
       photo_url: "/homepage/Teachers/Teacher.jpg",
       bio: "Nurturing imaginative thinking through vibrant watercolor and sculpture.",
     },
+    {
+      id: 5,
+      name: "Ms. Rachel Kim",
+      designation: "Nursery & Phonics Teacher",
+      department: "Early Childhood",
+      photo_url: "/homepage/Teachers/Teacher.jpg",
+      bio: "Specializing in early literacy, phonics games, and storytelling circles.",
+    },
+    {
+      id: 6,
+      name: "Mr. James O'Brien",
+      designation: "Music & Rhythm Instructor",
+      department: "Creative Arts",
+      photo_url: "/homepage/Teachers/Teacher.jpg",
+      bio: "Bringing joy through xylophones, drums, and nursery rhyme melodies.",
+    },
+    {
+      id: 7,
+      name: "Ms. Priya Sharma",
+      designation: "Kindergarten Math & Science",
+      department: "Primary Education",
+      photo_url: "/homepage/Teachers/Teacher.jpg",
+      bio: "Making numbers fun with hands-on experiments and nature exploration.",
+    },
+    {
+      id: 8,
+      name: "Mr. Thomas Berg",
+      designation: "Language & Communication Coach",
+      department: "Primary Education",
+      photo_url: "/homepage/Teachers/Teacher.jpg",
+      bio: "Building vocabulary, confidence, and expressive communication skills.",
+    },
   ],
   team: [
     {
@@ -323,6 +492,30 @@ export const DEFAULT_DEMO_DATA: {
       department: "Academic Advisory",
       photo_url: "/homepage/Teachers/Teacher.jpg",
       bio: "Curriculum designer and consultant on playful childhood pedagogy.",
+    },
+    {
+      id: 4,
+      name: "Ms. Laura Bennett",
+      designation: "Head of Early Years",
+      department: "Academic Leadership",
+      photo_url: "/homepage/Teachers/Teacher.jpg",
+      bio: "Leading innovative play-based curriculum and teacher development programs.",
+    },
+    {
+      id: 5,
+      name: "Mr. Robert Hayes",
+      designation: "Facilities & Safety Director",
+      department: "Operations",
+      photo_url: "/homepage/Teachers/Teacher.jpg",
+      bio: "Ensuring a secure, hygienic, and stimulating environment for every child.",
+    },
+    {
+      id: 6,
+      name: "Ms. Nadia Ali",
+      designation: "Parent Relations Coordinator",
+      department: "Community Engagement",
+      photo_url: "/homepage/Teachers/Teacher.jpg",
+      bio: "Building strong home-school partnerships and community outreach initiatives.",
     },
   ],
   gallery: [
@@ -362,6 +555,42 @@ export const DEFAULT_DEMO_DATA: {
       image_url: "/homepage/Happy Memories/Trial 2.webp",
       caption: "Singing nursery rhymes with xylophones.",
     },
+    {
+      id: 7,
+      title: "Garden Planting Day",
+      image_url: "/homepage/Happy Memories/Trial 1.jpg",
+      caption: "Little farmers planting flower saplings.",
+    },
+    {
+      id: 8,
+      title: "Clay & Pottery Workshop",
+      image_url: "/homepage/Happy Memories/Trial 2.webp",
+      caption: "Creating colorful animal shapes with clay.",
+    },
+    {
+      id: 9,
+      title: "Annual Day Celebration",
+      image_url: "/homepage/Happy Memories/Trial 1.jpg",
+      caption: "Stage performances and cultural programs.",
+    },
+    {
+      id: 10,
+      title: "Parent-Child Craft Fair",
+      image_url: "/homepage/Happy Memories/Trial 2.webp",
+      caption: "Families creating art together.",
+    },
+    {
+      id: 11,
+      title: "Nature Walk & Leaf Collection",
+      image_url: "/homepage/Happy Memories/Trial 1.jpg",
+      caption: "Exploring the campus garden trail.",
+    },
+    {
+      id: 12,
+      title: "Birthday Celebrations",
+      image_url: "/homepage/Happy Memories/Trial 2.webp",
+      caption: "Monthly birthday star celebrations.",
+    },
   ],
   promotions: [
     {
@@ -372,6 +601,24 @@ export const DEFAULT_DEMO_DATA: {
       badge_text: "Admissions Open",
       cta_label: "Apply for Admission",
       cta_url: "/admission",
+    },
+    {
+      id: 2,
+      title: "Early Bird Scholarship Program",
+      subtitle: "20% off tuition fees for new enrollments",
+      description: "Limited seats available for Playgroup and Nursery programs. Register before October 31st to secure your child's spot.",
+      badge_text: "Limited Offer",
+      cta_label: "Claim Scholarship",
+      cta_url: "/admission",
+    },
+    {
+      id: 3,
+      title: "Sibling Discount Available",
+      subtitle: "15% off for second child enrollment",
+      description: "Families with multiple children receive special tuition discounts. Because every child deserves the best start in life.",
+      badge_text: "Family Offer",
+      cta_label: "Learn More",
+      cta_url: "/contact",
     },
   ],
   events: [
@@ -427,6 +674,32 @@ export const DEFAULT_DEMO_DATA: {
       is_featured: true,
       featured_image: "/homepage/Happy Memories/Trial 2.webp",
     },
+    {
+      id: 5,
+      title: "Winter Wonderland Concert",
+      slug: "winter-wonderland-concert",
+      content: "A festive musical celebration with carols, dance performances, and holiday crafts for all families.",
+      excerpt: "Holiday music & dance",
+      location: "School Auditorium",
+      start_date: "2026-12-10T09:00:00Z",
+      end_date: "2026-12-10T12:00:00Z",
+      status: "Upcoming",
+      is_featured: true,
+      featured_image: "/homepage/Happy Memories/Trial 1.jpg",
+    },
+    {
+      id: 6,
+      title: "Science Discovery Fair",
+      slug: "science-discovery-fair",
+      content: "Hands-on science experiments, volcano demonstrations, and space exploration activities for curious minds.",
+      excerpt: "Fun science experiments",
+      location: "Little Scientists Lab",
+      start_date: "2026-12-18T10:00:00Z",
+      end_date: "2026-12-18T13:00:00Z",
+      status: "Upcoming",
+      is_featured: false,
+      featured_image: "/homepage/Early Exploration/Trial 2.webp",
+    },
   ],
   testimonials: [
     {
@@ -448,6 +721,27 @@ export const DEFAULT_DEMO_DATA: {
       name: "Amina Rahman",
       role: "Mother of Aaryan (Senior KG)",
       quote: "Outstanding early childhood environment! The safety standards, loving atmosphere, and creative curriculum exceeded our highest expectations.",
+      rating: 5,
+    },
+    {
+      id: 4,
+      name: "David Chen",
+      role: "Father of Lily (Junior KG)",
+      quote: "Lily comes home every day sharing new stories and songs. The teachers genuinely care about each child's emotional and academic growth.",
+      rating: 5,
+    },
+    {
+      id: 5,
+      name: "Sarah Mitchell",
+      role: "Mother of Noah (Nursery)",
+      quote: "The campus is beautiful, safe, and always full of laughter. Noah has learned to share, count, and express himself with confidence.",
+      rating: 5,
+    },
+    {
+      id: 6,
+      name: "Raj Patel",
+      role: "Father of Ananya (Playgroup)",
+      quote: "We visited many kindergartens before choosing Little Flowers. The warmth of the staff and the joy on every child's face made our decision easy.",
       rating: 5,
     },
   ],
@@ -623,6 +917,136 @@ export const DEFAULT_DEMO_DATA: {
       image_data: {
         file: "/homepage/Teachers/Teacher.jpg",
       },
+    },
+  ],
+  examResults: [
+    {
+      id: 1,
+      exam_name: "Junior KG Annual Assessment",
+      class_name: "Junior KG",
+      year: 2026,
+      total_examinees: 45,
+      passed: 45,
+      failed: 0,
+      pass_rate: "100%",
+      exam_type: "Internal School Examination",
+      file_url: "/downloads/junior-kg-results-2026.pdf",
+    },
+    {
+      id: 2,
+      exam_name: "Senior KG Annual Assessment",
+      class_name: "Senior KG",
+      year: 2026,
+      total_examinees: 52,
+      passed: 52,
+      failed: 0,
+      pass_rate: "100%",
+      exam_type: "Internal School Examination",
+      file_url: "/downloads/senior-kg-results-2026.pdf",
+    },
+    {
+      id: 3,
+      exam_name: "Class 1 Primary Assessment",
+      class_name: "Class 1",
+      year: 2026,
+      total_examinees: 38,
+      passed: 38,
+      failed: 0,
+      pass_rate: "100%",
+      exam_type: "Internal School Examination",
+      file_url: "/downloads/class-1-results-2026.pdf",
+    },
+    {
+      id: 4,
+      exam_name: "Class 2 Primary Assessment",
+      class_name: "Class 2",
+      year: 2026,
+      total_examinees: 41,
+      passed: 41,
+      failed: 0,
+      pass_rate: "100%",
+      exam_type: "Internal School Examination",
+      file_url: "/downloads/class-2-results-2026.pdf",
+    },
+  ],
+  careers: [
+    {
+      id: 1,
+      title: "Early Childhood Educator",
+      slug: "early-childhood-educator",
+      summary: "Passionate about nurturing young minds through play-based learning and creative exploration.",
+      content: "We are seeking a dedicated Early Childhood Educator to join our team of caring mentors. The ideal candidate will have a background in early childhood education, a love for working with children aged 2-6, and the ability to create a joyful, safe, and stimulating classroom environment.",
+      location: "Sunshine Valley Campus",
+      type: "Full-time",
+      experience: "2+ years",
+      salary_range: "Competitive",
+      deadline: "2026-11-30",
+      is_active: true,
+    },
+    {
+      id: 2,
+      title: "Montessori Trained Teacher",
+      slug: "montessori-trained-teacher",
+      summary: "Certified Montessori guide to lead our sensory and practical life skills program.",
+      content: "We are looking for a certified Montessori teacher to lead our sensory exploration and practical life skills program. The ideal candidate will have AMI or AMS certification, experience with children aged 3-6, and a deep understanding of the Montessori philosophy.",
+      location: "Sunshine Valley Campus",
+      type: "Full-time",
+      experience: "3+ years",
+      salary_range: "Competitive",
+      deadline: "2026-11-30",
+      is_active: true,
+    },
+    {
+      id: 3,
+      title: "Art & Craft Instructor",
+      slug: "art-craft-instructor",
+      summary: "Creative mentor to guide little artists through painting, pottery, and mixed media.",
+      content: "We are seeking a creative Art & Craft Instructor to guide our little artists through painting, pottery, and mixed media projects. The ideal candidate will have a background in fine arts, experience working with young children, and a passion for nurturing creativity.",
+      location: "Sunshine Valley Campus",
+      type: "Full-time",
+      experience: "2+ years",
+      salary_range: "Competitive",
+      deadline: "2026-12-15",
+      is_active: true,
+    },
+    {
+      id: 4,
+      title: "Music & Movement Teacher",
+      slug: "music-movement-teacher",
+      summary: "Energetic music educator to lead rhythm, songs, and movement activities.",
+      content: "We are looking for an energetic Music & Movement Teacher to lead rhythm, songs, and movement activities for our young learners. The ideal candidate will have a background in music education, experience with early childhood groups, and a love for making music fun.",
+      location: "Sunshine Valley Campus",
+      type: "Full-time",
+      experience: "2+ years",
+      salary_range: "Competitive",
+      deadline: "2026-12-15",
+      is_active: true,
+    },
+    {
+      id: 5,
+      title: "Physical Education Coach",
+      slug: "physical-education-coach",
+      summary: "Sports and wellness coach to build motor skills and teamwork through play.",
+      content: "We are seeking a Physical Education Coach to build motor skills, balance, and teamwork through fun sports and wellness activities. The ideal candidate will have a background in physical education, experience with young children, and a passion for active play.",
+      location: "Sunshine Valley Campus",
+      type: "Full-time",
+      experience: "2+ years",
+      salary_range: "Competitive",
+      deadline: "2026-12-31",
+      is_active: true,
+    },
+    {
+      id: 6,
+      title: "Administrative Coordinator",
+      slug: "administrative-coordinator",
+      summary: "Organized professional to support school operations and parent communications.",
+      content: "We are looking for an Administrative Coordinator to support school operations, parent communications, and event planning. The ideal candidate will have strong organizational skills, experience in an educational setting, and excellent communication abilities.",
+      location: "Sunshine Valley Campus",
+      type: "Full-time",
+      experience: "3+ years",
+      salary_range: "Competitive",
+      deadline: "2026-12-31",
+      is_active: true,
     },
   ],
 };
