@@ -237,10 +237,11 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
                       </div>
                     )}
 
-                    <div className="absolute inset-0 bg-linear-to-t from-gray-950/80 via-gray-950/40 to-transparent opacity-90 group-hover:opacity-95 transition-opacity" />
+                    {/* Solid dark-to-transparent gradient backing for perfect contrast */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-transparent pointer-events-none" />
 
                     {/* Badge: Photo count */}
-                    <div className="absolute top-4 right-4">
+                    <div className="absolute top-4 right-4 z-10">
                       <span className="px-3 py-1 rounded-full bg-white/95 backdrop-blur-md text-xs font-bold text-gray-800 shadow-sm flex items-center gap-1.5">
                         <svg className="w-3.5 h-3.5 text-primary-color" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
@@ -250,9 +251,9 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
                       </span>
                     </div>
 
-                    {/* Album Title overlay */}
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <h3 className="text-xl font-bold font-fredoka leading-snug text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] group-hover:text-amber-300 transition-colors">
+                    {/* Album Title overlay with bright, high-contrast styling */}
+                    <div className="absolute bottom-4 left-4 right-4 z-10">
+                      <h3 className="text-xl font-extrabold font-fredoka leading-snug text-amber-300 drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)] group-hover:text-yellow-200 transition-colors">
                         {album.name}
                       </h3>
                     </div>
