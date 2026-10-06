@@ -85,7 +85,7 @@ export default function StaffSection({ staffList }: StaffSectionProps) {
                     <img
                       src={staffPhoto}
                       alt={member.name}
-                      className="w-full h-full object-cover rounded-full group-hover:scale-105 transition-transform duration-500 ease-out"
+                      className="w-full h-full object-cover object-top rounded-full group-hover:scale-105 transition-transform duration-500 ease-out"
                     />
                   </div>
                 </div>

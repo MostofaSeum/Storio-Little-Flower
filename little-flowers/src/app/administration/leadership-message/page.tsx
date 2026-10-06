@@ -140,7 +140,7 @@ export default async function LeadershipMessagePage() {
                               <img
                                 src={photoUrl}
                                 alt={item.name}
-                                className="w-full h-full object-cover"
+                                className="w-full h-full object-cover object-top"
                               />
                             ) : (
                               <div className="w-full h-full flex items-center justify-center bg-purple-100 text-primary-color font-bold text-3xl font-fredoka">

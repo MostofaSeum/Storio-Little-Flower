@@ -210,7 +210,7 @@ export default function LeadershipSection({ messages }: LeadershipSectionProps) 
                         <img
                           src={photoUrl}
                           alt={item.name}
-                          className="w-full h-full object-cover group-hover:scale-104 transition-transform duration-700 ease-out"
+                          className="w-full h-full object-cover object-top group-hover:scale-104 transition-transform duration-700 ease-out"
                         />
                       ) : (
                         <div className="w-full h-full flex flex-col items-center justify-center bg-purple-100 text-primary-color p-8 text-center">
