@@ -41,6 +41,13 @@ export const DEFAULT_DEMO_DATA: {
   staff: StorioStaffMember[];
   team: StorioStaffMember[];
   gallery: StorioGalleryItem[];
+  albums: Array<{
+    id: number;
+    name: string;
+    description?: string;
+    cover_image_url?: string;
+    total_images?: number;
+  }>;
   videos: Array<{
     id: number;
     title: string;
@@ -624,6 +631,36 @@ export const DEFAULT_DEMO_DATA: {
       title: "Classroom Learning Time",
       image_url: "/homepage/Early Exploration/Trial 2.webp",
       caption: "Engaged in fun learning activities.",
+    },
+  ],
+  albums: [
+    {
+      id: 1,
+      name: "Campus Life",
+      description: "Daily moments, activities, and joyful interactions across our beautiful campus.",
+      cover_image_url: "/homepage/Happy Memories/Trial 1.jpg",
+      total_images: 4,
+    },
+    {
+      id: 2,
+      name: "Events & Celebrations",
+      description: "Annual days, cultural festivals, sports days, and special celebrations.",
+      cover_image_url: "/homepage/Happy Memories/Trial 2.webp",
+      total_images: 4,
+    },
+    {
+      id: 3,
+      name: "Classroom Learning",
+      description: "Engaging lessons, hands-on activities, and creative learning moments.",
+      cover_image_url: "/homepage/Early Exploration/Trial 1.jpg",
+      total_images: 4,
+    },
+    {
+      id: 4,
+      name: "Outdoor Adventures",
+      description: "Playground fun, nature walks, gardening, and outdoor exploration.",
+      cover_image_url: "/homepage/Early Exploration/Trial 2.webp",
+      total_images: 4,
     },
   ],
   videos: [

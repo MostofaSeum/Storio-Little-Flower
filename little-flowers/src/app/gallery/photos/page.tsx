@@ -30,12 +30,37 @@ export default async function PhotosGalleryPage() {
   ]);
 
   // Fall back to demo data in standalone mode when API returns null
+  const demoPhotos = Array.isArray(rawGallery) && rawGallery.length > 0
+    ? (rawGallery as unknown as BackendPhotoItem[])
+    : (isStandalone ? DEFAULT_DEMO_DATA.gallery.map((g, i) => ({
+        id: g.id,
+        image_title: g.title,
+        caption: g.caption,
+        media_data: { file: g.image_url },
+      })) : []);
+
+  // Create albums with photos distributed across them
+  const demoAlbums: BackendAlbum[] = isStandalone && DEFAULT_DEMO_DATA.albums.length > 0
+    ? DEFAULT_DEMO_DATA.albums.map((album, albumIdx) => {
+        const photosForAlbum = demoPhotos.filter((_, photoIdx) => photoIdx % 4 === albumIdx);
+        return {
+          id: album.id,
+          name: album.name,
+          description: album.description,
+          cover_image_url: album.cover_image_url || photosForAlbum[0]?.media_data?.file || '',
+          total_images: album.total_images || photosForAlbum.length,
+        };
+      })
+    : [];
+
   const albums: BackendAlbum[] = Array.isArray(rawAlbums) && rawAlbums.length > 0
     ? (rawAlbums as unknown as BackendAlbum[])
-    : (isStandalone ? DEFAULT_DEMO_DATA.gallery.map((g, i) => ({ id: i + 1, title: g.title, cover_image_url: g.image_url, images: [] })) : []);
-  const photos: BackendPhotoItem[] = Array.isArray(rawGallery) && rawGallery.length > 0
-    ? (rawGallery as unknown as BackendPhotoItem[])
-    : (isStandalone ? DEFAULT_DEMO_DATA.gallery : []);
+    : demoAlbums;
+
+  const photos: BackendPhotoItem[] = demoPhotos.map((photo, idx) => ({
+    ...photo,
+    album: (idx % 4) + 1, // Distribute photos across 4 albums
+  }));
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-gray-900 selection:bg-pink-100 selection:text-pink-700">

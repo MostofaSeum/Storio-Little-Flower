@@ -237,7 +237,7 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
                       </div>
                     )}
 
-                    <div className="absolute inset-0 bg-linear-to-t from-gray-950/70 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+                    <div className="absolute inset-0 bg-linear-to-t from-gray-950/80 via-gray-950/40 to-transparent opacity-90 group-hover:opacity-95 transition-opacity" />
 
                     {/* Badge: Photo count */}
                     <div className="absolute top-4 right-4">
@@ -251,8 +251,8 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
                     </div>
 
                     {/* Album Title overlay */}
-                    <div className="absolute bottom-4 left-4 right-4 text-white">
-                      <h3 className="text-xl font-bold font-fredoka leading-snug drop-shadow-sm group-hover:text-pink-200 transition-colors">
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <h3 className="text-xl font-bold font-fredoka leading-snug text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] group-hover:text-amber-300 transition-colors">
                         {album.name}
                       </h3>
                     </div>
