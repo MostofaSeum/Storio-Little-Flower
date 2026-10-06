@@ -30,7 +30,7 @@ export default function AccordionGallery({ events }: AccordionGalleryProps) {
     <div className="w-full">
       {/* Desktop & Tablet: Horizontal expanding accordion gallery */}
       <div className="hidden md:flex gap-3 lg:gap-4 h-[440px] w-full">
-        {events.map((event, idx) => {
+        {displayedEvents.map((event, idx) => {
           const isActive = activeIndex === idx;
           const { day, month, time } = formatDate(event.start_date);
           const borderAccents = [
@@ -175,7 +175,7 @@ export default function AccordionGallery({ events }: AccordionGalleryProps) {
 
       {/* Mobile Screen: Vertical Stacking Accordion Cards */}
       <div className="md:hidden flex flex-col gap-4">
-        {events.map((event, idx) => {
+        {displayedEvents.map((event, idx) => {
           const isActive = activeIndex === idx;
           const { day, month, time } = formatDate(event.start_date);
           const badgeBg = [
