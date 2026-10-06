@@ -158,9 +158,9 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
         {/* Dynamic Interactive PillNav (Desktop) */}
         <nav
           aria-label="Primary navigation"
-          className="hidden lg:flex items-center rounded-full p-1 bg-pastel-purple border border-purple-100 shadow-xs shrink-1 min-w-0 overflow-x-auto"
+          className="hidden lg:flex items-center rounded-full p-1 bg-pastel-purple border border-purple-100 shadow-xs shrink-1 min-w-0"
         >
-          <ul role="menubar" className="list-none flex items-center m-0 p-0 gap-0.5 xl:gap-1 flex-nowrap">
+          <ul role="menubar" className="list-none flex items-center m-0 p-0 gap-0.5 flex-nowrap">
             {navLinks.map((item, i) => {
               // Check if item or any of its sublinks matches the current pathname
               const isRouteActive =
