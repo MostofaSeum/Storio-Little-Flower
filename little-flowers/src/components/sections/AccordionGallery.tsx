@@ -9,10 +9,13 @@ interface AccordionGalleryProps {
 }
 
 export default function AccordionGallery({ events }: AccordionGalleryProps) {
+  // Cap at a maximum of 4 events for balanced horizontal accordion layout
+  const displayedEvents = (events || []).slice(0, 4);
+
   // Default first event open, or activeIndex
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
-  if (!events || events.length === 0) return null;
+  if (!displayedEvents || displayedEvents.length === 0) return null;
 
   const formatDate = (dateStr?: string) => {
     if (!dateStr) return { day: '15', month: 'OCT', time: '9:00 AM' };
