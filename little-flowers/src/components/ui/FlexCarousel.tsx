@@ -729,7 +729,7 @@ export const FlexCarousel = ({
       image.onerror = () => {
         if (!alive) return;
         // If primary src fails and it wasn't the default fallback, attempt fallback
-        const fallbackSrc = "/homepage/Teachers/Teacher.jpg";
+        const fallbackSrc = "/homepage/Teachers/Teacher1.jpg";
         if (image.src && !image.src.includes(fallbackSrc)) {
           image.onerror = () => {
             slot.failed = true;

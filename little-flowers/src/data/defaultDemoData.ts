@@ -424,7 +424,7 @@ export const DEFAULT_DEMO_DATA: {
       name: "Mrs. Sarah Jenkins",
       designation: "Headmistress & Early Child Specialist",
       department: "Administration",
-      photo_url: "/homepage/Teachers/Teacher.jpg",
+      photo_url: "/homepage/Teachers/Teacher1.jpg",
       bio: "14+ years of passion in child cognitive development and joyful learning.",
     },
     {
@@ -432,7 +432,7 @@ export const DEFAULT_DEMO_DATA: {
       name: "Ms. Emily Watson",
       designation: "Playgroup & Sensory Lead",
       department: "Early Childhood",
-      photo_url: "/homepage/Teachers/Teacher.jpg",
+      photo_url: "/homepage/Teachers/Teacher2.jpg",
       bio: "Certified Montessori guide loving puppet theatre and expressive speech.",
     },
     {
@@ -440,7 +440,7 @@ export const DEFAULT_DEMO_DATA: {
       name: "Mr. David Miller",
       designation: "Physical Education & Games Coach",
       department: "Sports & Wellness",
-      photo_url: "/homepage/Teachers/Teacher.jpg",
+      photo_url: "/homepage/Teachers/Teacher3.jpg",
       bio: "Focusing on motor coordination, balance, and cooperative games for kids.",
     },
     {
@@ -448,7 +448,7 @@ export const DEFAULT_DEMO_DATA: {
       name: "Ms. Sophia Chen",
       designation: "Art, Craft & Clay Mentor",
       department: "Creative Arts",
-      photo_url: "/homepage/Teachers/Teacher.jpg",
+      photo_url: "/homepage/Teachers/Teacher4.jpg",
       bio: "Nurturing imaginative thinking through vibrant watercolor and sculpture.",
     },
     {
@@ -456,7 +456,7 @@ export const DEFAULT_DEMO_DATA: {
       name: "Ms. Rachel Kim",
       designation: "Nursery & Phonics Teacher",
       department: "Early Childhood",
-      photo_url: "/homepage/Teachers/Teacher.jpg",
+      photo_url: "/homepage/Teachers/Teacher5.jpg",
       bio: "Specializing in early literacy, phonics games, and storytelling circles.",
     },
     {
@@ -464,7 +464,7 @@ export const DEFAULT_DEMO_DATA: {
       name: "Mr. James O'Brien",
       designation: "Music & Rhythm Instructor",
       department: "Creative Arts",
-      photo_url: "/homepage/Teachers/Teacher.jpg",
+      photo_url: "/homepage/Teachers/Teacher6.jpg",
       bio: "Bringing joy through xylophones, drums, and nursery rhyme melodies.",
     },
     {
@@ -472,7 +472,7 @@ export const DEFAULT_DEMO_DATA: {
       name: "Ms. Priya Sharma",
       designation: "Kindergarten Math & Science",
       department: "Primary Education",
-      photo_url: "/homepage/Teachers/Teacher.jpg",
+      photo_url: "/homepage/Teachers/Teacher1.jpg",
       bio: "Making numbers fun with hands-on experiments and nature exploration.",
     },
     {
@@ -480,7 +480,7 @@ export const DEFAULT_DEMO_DATA: {
       name: "Mr. Thomas Berg",
       designation: "Language & Communication Coach",
       department: "Primary Education",
-      photo_url: "/homepage/Teachers/Teacher.jpg",
+      photo_url: "/homepage/Teachers/Teacher2.jpg",
       bio: "Building vocabulary, confidence, and expressive communication skills.",
     },
   ],
@@ -490,7 +490,7 @@ export const DEFAULT_DEMO_DATA: {
       name: "Dr. Eleanor Vance",
       designation: "Chairperson & Trustee",
       department: "Governing Body",
-      photo_url: "/homepage/Teachers/Teacher.jpg",
+      photo_url: "/homepage/Teachers/Teacher3.jpg",
       bio: "Lifelong advocate for child education, early literacy, and community wellness.",
     },
     {
@@ -498,7 +498,7 @@ export const DEFAULT_DEMO_DATA: {
       name: "Arthur Pendelton",
       designation: "Executive Director",
       department: "Management Board",
-      photo_url: "/homepage/Teachers/Teacher.jpg",
+      photo_url: "/homepage/Teachers/Teacher4.jpg",
       bio: "Guiding institutional operations, academic excellence, and campus safety standards.",
     },
     {
@@ -506,7 +506,7 @@ export const DEFAULT_DEMO_DATA: {
       name: "Prof. Kenneth Clarke",
       designation: "Academic Council Advisor",
       department: "Academic Advisory",
-      photo_url: "/homepage/Teachers/Teacher.jpg",
+      photo_url: "/homepage/Teachers/Teacher5.jpg",
       bio: "Curriculum designer and consultant on playful childhood pedagogy.",
     },
     {
@@ -514,7 +514,7 @@ export const DEFAULT_DEMO_DATA: {
       name: "Ms. Laura Bennett",
       designation: "Head of Early Years",
       department: "Academic Leadership",
-      photo_url: "/homepage/Teachers/Teacher.jpg",
+      photo_url: "/homepage/Teachers/Teacher6.jpg",
       bio: "Leading innovative play-based curriculum and teacher development programs.",
     },
     {
@@ -522,7 +522,7 @@ export const DEFAULT_DEMO_DATA: {
       name: "Mr. Robert Hayes",
       designation: "Facilities & Safety Director",
       department: "Operations",
-      photo_url: "/homepage/Teachers/Teacher.jpg",
+      photo_url: "/homepage/Teachers/Teacher1.jpg",
       bio: "Ensuring a secure, hygienic, and stimulating environment for every child.",
     },
     {
@@ -530,7 +530,7 @@ export const DEFAULT_DEMO_DATA: {
       name: "Ms. Nadia Ali",
       designation: "Parent Relations Coordinator",
       department: "Community Engagement",
-      photo_url: "/homepage/Teachers/Teacher.jpg",
+      photo_url: "/homepage/Teachers/Teacher2.jpg",
       bio: "Building strong home-school partnerships and community outreach initiatives.",
     },
   ],
@@ -1019,9 +1019,9 @@ export const DEFAULT_DEMO_DATA: {
       company: "Little Flowers Educational Trust",
       message:
         "Every child is born with an innate sense of wonder and extraordinary imagination. Our mission at Little Flowers is to safeguard that spark by providing a safe, joyful sanctuary where young minds flourish with curiosity, empathy, and unconditional love.",
-      image: "/homepage/Teachers/Teacher.jpg",
+      image: "/homepage/Teachers/Teacher1.jpg",
       image_data: {
-        file: "/homepage/Teachers/Teacher.jpg",
+        file: "/homepage/Teachers/Teacher1.jpg",
       },
     },
     {
@@ -1032,9 +1032,9 @@ export const DEFAULT_DEMO_DATA: {
       company: "Little Flowers Kindergarten",
       message:
         "Early childhood education is not about rushing children into academia; it is about building deep roots of confidence, social harmony, and sensory agility through play and purposeful exploration. We cherish every tiny milestone our students achieve.",
-      image: "/homepage/Teachers/Teacher.jpg",
+      image: "/homepage/Teachers/Teacher2.jpg",
       image_data: {
-        file: "/homepage/Teachers/Teacher.jpg",
+        file: "/homepage/Teachers/Teacher2.jpg",
       },
     },
     {
@@ -1045,9 +1045,9 @@ export const DEFAULT_DEMO_DATA: {
       company: "Sunshine Valley Academy",
       message:
         "By weaving storytelling, physical rhythm, artistic expression, and scientific inquiry into daily classroom routines, we empower little learners to embrace learning with laughter and resilient self-confidence.",
-      image: "/homepage/Teachers/Teacher.jpg",
+      image: "/homepage/Teachers/Teacher3.jpg",
       image_data: {
-        file: "/homepage/Teachers/Teacher.jpg",
+        file: "/homepage/Teachers/Teacher3.jpg",
       },
     },
   ],

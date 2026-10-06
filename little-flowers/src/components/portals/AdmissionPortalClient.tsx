@@ -338,15 +338,15 @@ export default function AdmissionPortalClient({
         const photoFallbacks: Record<string, string> = {};
         for (const pf of photoFields) {
           if (!formData[pf.id]?.trim()) {
-            photoFallbacks[pf.id] = '/homepage/Teachers/Teacher.jpg';
+            photoFallbacks[pf.id] = '/homepage/Teachers/Teacher1.jpg';
           }
         }
 
         // Also check common default field names if formConfig didn't include them explicitly
         if (!formData['photo'] && !formData['student_photo'] && !formData['profile_photo']) {
-          photoFallbacks['photo'] = photoFallbacks['photo'] || '/homepage/Teachers/Teacher.jpg';
-          photoFallbacks['student_photo'] = photoFallbacks['student_photo'] || '/homepage/Teachers/Teacher.jpg';
-          photoFallbacks['profile_photo'] = photoFallbacks['profile_photo'] || '/homepage/Teachers/Teacher.jpg';
+          photoFallbacks['photo'] = photoFallbacks['photo'] || '/homepage/Teachers/Teacher1.jpg';
+          photoFallbacks['student_photo'] = photoFallbacks['student_photo'] || '/homepage/Teachers/Teacher1.jpg';
+          photoFallbacks['profile_photo'] = photoFallbacks['profile_photo'] || '/homepage/Teachers/Teacher1.jpg';
         }
 
         const submissionFormData = {
