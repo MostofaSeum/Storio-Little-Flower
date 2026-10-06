@@ -41,6 +41,16 @@ export const DEFAULT_DEMO_DATA: {
   staff: StorioStaffMember[];
   team: StorioStaffMember[];
   gallery: StorioGalleryItem[];
+  videos: Array<{
+    id: number;
+    title: string;
+    description?: string;
+    url?: string;
+    thumbnail_url?: string;
+    views_count?: number;
+    likes_count?: number;
+    is_featured?: boolean;
+  }>;
   promotions: StorioPromotion[];
   events: StorioEvent[];
   testimonials: Array<{ id: number; name: string; role: string; quote: string; rating: number; avatar_url?: string }>;
@@ -534,62 +544,148 @@ export const DEFAULT_DEMO_DATA: {
     {
       id: 3,
       title: "Little Scientists Lab",
-      image_url: "/homepage/Happy Memories/Trial 1.jpg",
+      image_url: "/homepage/Early Exploration/Trial 1.jpg",
       caption: "Exploring plants and magnifying glasses.",
     },
     {
       id: 4,
       title: "Annual Colors Exhibition",
-      image_url: "/homepage/Happy Memories/Trial 2.webp",
+      image_url: "/homepage/Early Exploration/Trial 2.webp",
       caption: "Colorful finger-painting masterpieces.",
     },
     {
       id: 5,
       title: "Mini Sports Day Champions",
-      image_url: "/homepage/Happy Memories/Trial 1.jpg",
+      image_url: "/homepage/About Our Academy/Trial 1.jpg",
       caption: "Fun obstacle race and medal ceremony.",
     },
     {
       id: 6,
       title: "Music & Rhythm Session",
-      image_url: "/homepage/Happy Memories/Trial 2.webp",
+      image_url: "/homepage/About Our Academy/Trial 2.webp",
       caption: "Singing nursery rhymes with xylophones.",
     },
     {
       id: 7,
       title: "Garden Planting Day",
-      image_url: "/homepage/Happy Memories/Trial 1.jpg",
+      image_url: "/homepage/H1.jpg",
       caption: "Little farmers planting flower saplings.",
     },
     {
       id: 8,
       title: "Clay & Pottery Workshop",
-      image_url: "/homepage/Happy Memories/Trial 2.webp",
+      image_url: "/homepage/Happy Memories/Trial 1.jpg",
       caption: "Creating colorful animal shapes with clay.",
     },
     {
       id: 9,
       title: "Annual Day Celebration",
-      image_url: "/homepage/Happy Memories/Trial 1.jpg",
+      image_url: "/homepage/Happy Memories/Trial 2.webp",
       caption: "Stage performances and cultural programs.",
     },
     {
       id: 10,
       title: "Parent-Child Craft Fair",
-      image_url: "/homepage/Happy Memories/Trial 2.webp",
+      image_url: "/homepage/Early Exploration/Trial 1.jpg",
       caption: "Families creating art together.",
     },
     {
       id: 11,
       title: "Nature Walk & Leaf Collection",
-      image_url: "/homepage/Happy Memories/Trial 1.jpg",
+      image_url: "/homepage/Early Exploration/Trial 2.webp",
       caption: "Exploring the campus garden trail.",
     },
     {
       id: 12,
       title: "Birthday Celebrations",
-      image_url: "/homepage/Happy Memories/Trial 2.webp",
+      image_url: "/homepage/About Our Academy/Trial 1.jpg",
       caption: "Monthly birthday star celebrations.",
+    },
+    {
+      id: 13,
+      title: "Campus Garden View",
+      image_url: "/homepage/H1.jpg",
+      caption: "Beautiful flowers blooming in our garden.",
+    },
+    {
+      id: 14,
+      title: "Art Studio Creations",
+      image_url: "/homepage/About Our Academy/Trial 2.webp",
+      caption: "Young artists showcasing their masterpieces.",
+    },
+    {
+      id: 15,
+      title: "Playground Adventures",
+      image_url: "/homepage/Happy Memories/Trial 1.jpg",
+      caption: "Children enjoying the outdoor play area.",
+    },
+    {
+      id: 16,
+      title: "Classroom Learning Time",
+      image_url: "/homepage/Early Exploration/Trial 2.webp",
+      caption: "Engaged in fun learning activities.",
+    },
+  ],
+  videos: [
+    {
+      id: 1,
+      title: "Annual Day Performance 2026",
+      description: "Highlights from our annual day celebration with dances, songs, and cultural programs.",
+      url: "/videos/annual-day-2026.mp4",
+      thumbnail_url: "/homepage/Happy Memories/Trial 1.jpg",
+      views_count: 1250,
+      likes_count: 89,
+      is_featured: true,
+    },
+    {
+      id: 2,
+      title: "Campus Virtual Tour",
+      description: "Take a virtual walk through our beautiful campus, classrooms, and play areas.",
+      url: "/videos/campus-tour.mp4",
+      thumbnail_url: "/homepage/About Our Academy/Trial 1.jpg",
+      views_count: 2100,
+      likes_count: 156,
+      is_featured: true,
+    },
+    {
+      id: 3,
+      title: "Playgroup Activities Montage",
+      description: "Fun moments from our playgroup sensory play, music sessions, and outdoor activities.",
+      url: "/videos/playgroup-activities.mp4",
+      thumbnail_url: "/homepage/Early Exploration/Trial 1.jpg",
+      views_count: 890,
+      likes_count: 67,
+      is_featured: false,
+    },
+    {
+      id: 4,
+      title: "Art & Craft Workshop Highlights",
+      description: "Children creating beautiful paintings, clay models, and paper crafts.",
+      url: "/videos/art-craft-workshop.mp4",
+      thumbnail_url: "/homepage/Early Exploration/Trial 2.webp",
+      views_count: 756,
+      likes_count: 54,
+      is_featured: false,
+    },
+    {
+      id: 5,
+      title: "Sports Day Action Reel",
+      description: "Exciting moments from our annual sports day with races, games, and celebrations.",
+      url: "/videos/sports-day.mp4",
+      thumbnail_url: "/homepage/Happy Memories/Trial 2.webp",
+      views_count: 1580,
+      likes_count: 112,
+      is_featured: true,
+    },
+    {
+      id: 6,
+      title: "Music & Rhythm Class",
+      description: "Children enjoying xylophones, drums, and nursery rhyme melodies.",
+      url: "/videos/music-class.mp4",
+      thumbnail_url: "/homepage/About Our Academy/Trial 2.webp",
+      views_count: 623,
+      likes_count: 45,
+      is_featured: false,
     },
   ],
   promotions: [

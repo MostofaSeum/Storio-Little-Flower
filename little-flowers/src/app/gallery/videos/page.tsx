@@ -7,6 +7,7 @@ import Footer from "@/components/layout/Footer";
 import DynamicThemeStyles from "@/components/layout/DynamicThemeStyles";
 import SplitText from "@/components/ui/SplitText";
 import ThemeIcon from "@/components/ui/ThemeIcon";
+import { DEFAULT_DEMO_DATA } from "@/data/defaultDemoData";
 
 interface StorioReelItem {
   id: number;
@@ -39,7 +40,10 @@ export default async function VideosGalleryPage() {
 
   const rawReels = await getVideos(tenantHost).catch(() => null);
 
-  const videos: StorioReelItem[] = Array.isArray(rawReels) ? rawReels : [];
+  // Fall back to demo data in standalone mode when API returns null
+  const videos: StorioReelItem[] = Array.isArray(rawReels) && rawReels.length > 0
+    ? rawReels
+    : (isStandalone ? DEFAULT_DEMO_DATA.videos as unknown as StorioReelItem[] : []);
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-gray-900 selection:bg-pink-100 selection:text-pink-700">

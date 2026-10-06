@@ -6,6 +6,7 @@ import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 import SplitText from '@/components/ui/SplitText';
 import ScrollObserver from '@/components/ui/ScrollObserver';
 import PhotoGalleryClient, { BackendAlbum, BackendPhotoItem } from '@/components/sections/PhotoGalleryClient';
+import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
 
 export async function generateMetadata() {
   const { tenantHost, isStandalone } = await getTenantContext();
@@ -28,8 +29,13 @@ export default async function PhotosGalleryPage() {
     getGallery(tenantHost).catch(() => null),
   ]);
 
-  const albums: BackendAlbum[] = Array.isArray(rawAlbums) ? (rawAlbums as unknown as BackendAlbum[]) : [];
-  const photos: BackendPhotoItem[] = Array.isArray(rawGallery) ? (rawGallery as unknown as BackendPhotoItem[]) : [];
+  // Fall back to demo data in standalone mode when API returns null
+  const albums: BackendAlbum[] = Array.isArray(rawAlbums) && rawAlbums.length > 0
+    ? (rawAlbums as unknown as BackendAlbum[])
+    : (isStandalone ? DEFAULT_DEMO_DATA.gallery.map((g, i) => ({ id: i + 1, title: g.title, cover_image_url: g.image_url, images: [] })) : []);
+  const photos: BackendPhotoItem[] = Array.isArray(rawGallery) && rawGallery.length > 0
+    ? (rawGallery as unknown as BackendPhotoItem[])
+    : (isStandalone ? DEFAULT_DEMO_DATA.gallery : []);
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-gray-900 selection:bg-pink-100 selection:text-pink-700">
