@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getTenantContext, getTemplateLayout, getJobDetail } from '@/lib/storio';
+import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
 import { resolveMediaUrl } from '@/lib/media';
 import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
@@ -37,11 +38,20 @@ interface CareerDetailPageProps {
 
 export async function generateMetadata({ params }: CareerDetailPageProps) {
   const { slug } = await params;
-  const { tenantHost } = await getTenantContext();
+  const { tenantHost, isStandalone } = await getTenantContext();
 
-  const job = (await getJobDetail(slug, tenantHost).catch(() => null)) as StorioJobDetail | null;
+  const rawJob = (await getJobDetail(slug, tenantHost).catch(() => null)) as StorioJobDetail | null;
+  const demoJob = isStandalone ? DEFAULT_DEMO_DATA.careers?.find((c) => c.slug === slug) : null;
+  const job = rawJob || (demoJob ? {
+    id: demoJob.id,
+    title: demoJob.title,
+    slug: demoJob.slug,
+    description: demoJob.content || demoJob.summary,
+    location: demoJob.location,
+    job_type: demoJob.type,
+    deadline: demoJob.deadline,
+  } : null);
 
-  const { isStandalone } = await getTenantContext();
   const { settings } = await getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null }));
   const schoolName = settings?.site_title || 'Careers';
 
@@ -63,7 +73,20 @@ export default async function CareerDetailPage({ params }: CareerDetailPageProps
   const { settings, customization, navigation } = await getTemplateLayout(tenantHost, isStandalone);
 
   // Fetch single job detail via storio.ts helper
-  const job = (await getJobDetail(slug, tenantHost).catch(() => null)) as StorioJobDetail | null;
+  const rawJob = (await getJobDetail(slug, tenantHost).catch(() => null)) as StorioJobDetail | null;
+  const demoJob = isStandalone ? DEFAULT_DEMO_DATA.careers?.find((c) => c.slug === slug) : null;
+  const job: StorioJobDetail | null = rawJob || (demoJob ? {
+    id: demoJob.id,
+    title: demoJob.title,
+    slug: demoJob.slug,
+    company_name: settings?.site_title || 'Little Flowers',
+    location: demoJob.location,
+    job_type: demoJob.type,
+    vacancy: 1,
+    deadline: demoJob.deadline,
+    description: demoJob.content || demoJob.summary,
+    status: 'ACTIVE',
+  } : null);
 
   if (!job) {
     notFound();
