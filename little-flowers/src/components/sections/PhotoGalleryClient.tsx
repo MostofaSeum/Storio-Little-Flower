@@ -237,9 +237,6 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
                       </div>
                     )}
 
-                    {/* Solid dark-to-transparent gradient backing for perfect contrast */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-transparent pointer-events-none" />
-
                     {/* Badge: Photo count */}
                     <div className="absolute top-4 right-4 z-10">
                       <span className="px-3 py-1 rounded-full bg-white/95 backdrop-blur-md text-xs font-bold text-gray-800 shadow-sm flex items-center gap-1.5">
@@ -250,20 +247,18 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
                         <span>{album.computedCount} {album.computedCount === 1 ? 'photo' : 'photos'}</span>
                       </span>
                     </div>
-
-                    {/* Album Title overlay with bright, high-contrast styling */}
-                    <div className="absolute bottom-4 left-4 right-4 z-10">
-                      <h3 className="text-xl font-extrabold font-fredoka leading-snug text-amber-300 drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)] group-hover:text-yellow-200 transition-colors">
-                        {album.name}
-                      </h3>
-                    </div>
                   </div>
 
-                  {/* Album Details Footer */}
+                  {/* Album Details Body */}
                   <div className="p-5 flex-1 flex flex-col justify-between bg-white">
-                    <p className="text-sm text-gray-600 line-clamp-2 font-quicksand">
-                      {album.description || 'Browse high resolution memories and highlights captured inside this album.'}
-                    </p>
+                    <div>
+                      <h3 className="text-xl font-bold font-fredoka leading-snug line-clamp-1 mb-2 group-hover:text-primary-color transition-colors">
+                        {album.name}
+                      </h3>
+                      <p className="text-sm text-gray-600 line-clamp-2 font-quicksand leading-relaxed">
+                        {album.description || 'Browse high resolution memories and highlights captured inside this album.'}
+                      </p>
+                    </div>
 
                     <div className="mt-4 pt-3 border-t border-purple-50 flex items-center justify-between">
                       <span className="text-xs font-bold text-primary-color group-hover:underline flex items-center gap-1">
