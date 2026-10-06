@@ -69,12 +69,14 @@ export const DEFAULT_DEMO_DATA: {
     id: number;
     exam_name: string;
     class_name: string;
-    year: number;
+    year: number | string;
     total_examinees: number;
     passed: number;
     failed: number;
     pass_rate: string;
     exam_type: string;
+    aplus_count?: number;
+    agrade_count?: number;
     file_url?: string;
   }>;
   careers: Array<{
@@ -1054,51 +1056,101 @@ export const DEFAULT_DEMO_DATA: {
   examResults: [
     {
       id: 1,
-      exam_name: "Junior KG Annual Assessment",
+      exam_name: "Annual Assessment & Milestone Evaluation 2026",
       class_name: "Junior KG",
       year: 2026,
       total_examinees: 45,
       passed: 45,
       failed: 0,
       pass_rate: "100%",
-      exam_type: "Internal School Examination",
+      exam_type: "school",
+      aplus_count: 32,
+      agrade_count: 13,
       file_url: "/downloads/junior-kg-results-2026.pdf",
     },
     {
       id: 2,
-      exam_name: "Senior KG Annual Assessment",
+      exam_name: "Senior KG Final Term Examination 2026",
       class_name: "Senior KG",
       year: 2026,
       total_examinees: 52,
       passed: 52,
       failed: 0,
       pass_rate: "100%",
-      exam_type: "Internal School Examination",
+      exam_type: "school",
+      aplus_count: 40,
+      agrade_count: 12,
       file_url: "/downloads/senior-kg-results-2026.pdf",
     },
     {
       id: 3,
-      exam_name: "Class 1 Primary Assessment",
+      exam_name: "Class 1 Mid-Term Evaluation",
       class_name: "Class 1",
       year: 2026,
       total_examinees: 38,
       passed: 38,
       failed: 0,
       pass_rate: "100%",
-      exam_type: "Internal School Examination",
+      exam_type: "school",
+      aplus_count: 28,
+      agrade_count: 10,
       file_url: "/downloads/class-1-results-2026.pdf",
     },
     {
       id: 4,
-      exam_name: "Class 2 Primary Assessment",
-      class_name: "Class 2",
+      exam_name: "National Junior Mathematics Olympiad",
+      class_name: "Class 1 & 2",
       year: 2026,
-      total_examinees: 41,
-      passed: 41,
+      total_examinees: 24,
+      passed: 24,
       failed: 0,
       pass_rate: "100%",
-      exam_type: "Internal School Examination",
-      file_url: "/downloads/class-2-results-2026.pdf",
+      exam_type: "public",
+      aplus_count: 18,
+      agrade_count: 6,
+      file_url: "/downloads/math-olympiad-results-2026.pdf",
+    },
+    {
+      id: 5,
+      exam_name: "Inter-School Spelling Bee & Literacy Championship",
+      class_name: "Senior KG",
+      year: 2026,
+      total_examinees: 30,
+      passed: 30,
+      failed: 0,
+      pass_rate: "100%",
+      exam_type: "public",
+      aplus_count: 22,
+      agrade_count: 8,
+      file_url: "/downloads/spelling-bee-results-2026.pdf",
+    },
+    {
+      id: 6,
+      exam_name: "New Learner Readiness & Admission Assessment 2026-27",
+      class_name: "Playgroup & Nursery",
+      year: 2026,
+      total_examinees: 65,
+      passed: 62,
+      failed: 3,
+      pass_rate: "95.4%",
+      exam_type: "admission",
+      aplus_count: 45,
+      agrade_count: 17,
+      file_url: "/downloads/admission-screening-results-2026.pdf",
+    },
+    {
+      id: 7,
+      exam_name: "Junior KG Admission Screening Test",
+      class_name: "Junior KG",
+      year: 2026,
+      total_examinees: 48,
+      passed: 46,
+      failed: 2,
+      pass_rate: "95.8%",
+      exam_type: "admission",
+      aplus_count: 35,
+      agrade_count: 11,
+      file_url: "/downloads/junior-kg-admission-results-2026.pdf",
     },
   ],
   careers: [
