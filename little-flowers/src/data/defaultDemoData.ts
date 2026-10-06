@@ -51,14 +51,29 @@ export const DEFAULT_DEMO_DATA: {
 } = {
   navigation: [
     { id: "1", name: "Home", href: "/" },
-    { id: "2", name: "About", href: "/about" },
-    { id: "3", name: "Facilities", href: "/facilities" },
-    { id: "4", name: "Notices", href: "/notice" },
-    { id: "5", name: "Blog", href: "/blog" },
-    { id: "6", name: "Admission", href: "/admission" },
-    { id: "7", name: "Faculty", href: "/staff" },
-    { id: "8", name: "Gallery", href: "/gallery" },
-    { id: "9", name: "Contact", href: "/contact" },
+    { id: "2", name: "About Us", href: "/about", subLinks: [
+      { id: "2-1", name: "Institution Profile", href: "/about/institution-profile" },
+      { id: "2-2", name: "Mission & Vision", href: "/about/mission-vision" }
+    ]},
+    { id: "3", name: "Administration", href: "/administration/leadership-message", subLinks: [
+      { id: "3-1", name: "Leadership Message", href: "/administration/leadership-message" },
+      { id: "3-2", name: "Staff", href: "/administration/staff" },
+      { id: "3-3", name: "Team", href: "/administration/team" }
+    ]},
+    { id: "4", name: "Faculty", href: "/staff" },
+    { id: "5", name: "News & Events", href: "/notice", subLinks: [
+      { id: "5-1", name: "Notices", href: "/notice" },
+      { id: "5-2", name: "Events", href: "/event" }
+    ]},
+    { id: "6", name: "Gallery", href: "/gallery/photos", subLinks: [
+      { id: "6-1", name: "Photos", href: "/gallery/photos" },
+      { id: "6-2", name: "Videos", href: "/gallery/videos" }
+    ]},
+    { id: "7", name: "Blog", href: "/blog" },
+    { id: "8", name: "Careers", href: "/career" },
+    { id: "9", name: "Exam Results", href: "/exam" },
+    { id: "10", name: "Admission", href: "/admission" },
+    { id: "11", name: "Contact", href: "/contact" },
   ],
   customization: {
     primaryColor: '#0e704b',
