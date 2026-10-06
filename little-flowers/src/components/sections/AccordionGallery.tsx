@@ -223,7 +223,10 @@ export default function AccordionGallery({ events }: AccordionGalleryProps) {
                 </div>
 
                 <div className="absolute bottom-3 left-3 right-3 text-white">
-                  <h4 className="font-extrabold text-base leading-tight drop-shadow">
+                  <h4
+                    style={{ color: 'var(--blob-yellow, #fde68a)' }}
+                    className="font-extrabold text-base leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]"
+                  >
                     {event.title}
                   </h4>
                 </div>
