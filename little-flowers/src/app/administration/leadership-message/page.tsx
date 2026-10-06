@@ -7,6 +7,7 @@ import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 import SplitText from '@/components/ui/SplitText';
 import ThemeIcon from '@/components/ui/ThemeIcon';
+import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
 
 interface LeadershipMessageItem {
   id: number;
@@ -48,7 +49,10 @@ export default async function LeadershipMessagePage() {
 
   const rawMessages = await getLeadershipMessages(tenantHost).catch(() => null);
 
-  const messages: LeadershipMessageItem[] = Array.isArray(rawMessages) ? rawMessages : [];
+  // Fall back to demo data in standalone mode when API returns null
+  const messages: LeadershipMessageItem[] = Array.isArray(rawMessages) && rawMessages.length > 0
+    ? rawMessages
+    : (isStandalone ? DEFAULT_DEMO_DATA.leadershipMessages as unknown as LeadershipMessageItem[] : []);
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-gray-900 selection:bg-pink-100 selection:text-pink-700">

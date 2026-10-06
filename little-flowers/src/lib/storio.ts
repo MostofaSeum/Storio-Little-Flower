@@ -15,6 +15,16 @@ import {
 } from '@/types';
 import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
 
+// Suppress expected 404 errors in standalone mode (no backend server)
+const originalConsoleError = console.error;
+console.error = (...args: unknown[]) => {
+  const message = typeof args[0] === 'string' ? args[0] : '';
+  if (message.includes('[Storio SDK]') && message.includes('404')) {
+    return; // Silently ignore expected standalone mode 404s
+  }
+  originalConsoleError.apply(console, args);
+};
+
 export interface TenantContext {
   host: string;
   tenantHost: string;

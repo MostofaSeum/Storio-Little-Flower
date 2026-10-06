@@ -6,6 +6,7 @@ import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 import SplitText from '@/components/ui/SplitText';
 import ExamResultsClientView, { StorioExamResult } from '@/components/sections/ExamResultsClientView';
+import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
 
 export async function generateMetadata() {
   const { tenantHost, isStandalone } = await getTenantContext();
@@ -24,7 +25,10 @@ export default async function ExamResultsPage() {
 
   const rawExams = await getExamResults(tenantHost).catch(() => null);
 
-  const results: StorioExamResult[] = Array.isArray(rawExams) ? rawExams : [];
+  // Fall back to demo data in standalone mode when API returns null
+  const results: StorioExamResult[] = Array.isArray(rawExams) && rawExams.length > 0
+    ? rawExams
+    : (isStandalone ? DEFAULT_DEMO_DATA.examResults as unknown as StorioExamResult[] : []);
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-gray-900 selection:bg-pink-100 selection:text-pink-700">

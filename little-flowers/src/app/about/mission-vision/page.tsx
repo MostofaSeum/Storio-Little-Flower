@@ -4,6 +4,7 @@ import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 import SplitText from '@/components/ui/SplitText';
+import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
 
 interface InstitutionProfileData {
   id?: number;
@@ -37,7 +38,8 @@ export default async function MissionVisionPage() {
 
   const rawProfile = (await getInstitutionProfile(tenantHost).catch(() => null)) as InstitutionProfileData | null;
 
-  const profile = rawProfile || null;
+  // Fall back to demo data in standalone mode when API returns null
+  const profile: InstitutionProfileData | null = rawProfile || (isStandalone ? DEFAULT_DEMO_DATA.institutionProfile as unknown as InstitutionProfileData : null);
   const heroImage = profile?.institution_image_url
     ? resolveMediaUrl(profile.institution_image_url)
     : null;

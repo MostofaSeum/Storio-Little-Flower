@@ -6,6 +6,7 @@ import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 import SplitText from '@/components/ui/SplitText';
 import ThemeIcon from '@/components/ui/ThemeIcon';
+import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
 
 interface StorioJobOpening {
   id: number;
@@ -51,7 +52,10 @@ export default async function CareersPage() {
 
   const rawJobs = await getCareers(tenantHost).catch(() => null);
 
-  const jobs: StorioJobOpening[] = Array.isArray(rawJobs) ? rawJobs : [];
+  // Fall back to demo data in standalone mode when API returns null
+  const jobs: StorioJobOpening[] = Array.isArray(rawJobs) && rawJobs.length > 0
+    ? rawJobs
+    : (isStandalone ? DEFAULT_DEMO_DATA.careers as unknown as StorioJobOpening[] : []);
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-gray-900 selection:bg-pink-100 selection:text-pink-700">
