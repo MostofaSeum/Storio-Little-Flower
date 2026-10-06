@@ -144,7 +144,7 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
             />
           </div>
           {/* Responsive title wrapper that wraps long school names into multiple lines */}
-          <div className="min-w-0 max-w-[160px] sm:max-w-[220px] md:max-w-[280px] lg:max-w-[240px] xl:max-w-[320px]">
+          <div className="min-w-0 max-w-[120px] sm:max-w-[160px] md:max-w-[200px] lg:max-w-[180px] xl:max-w-[240px]">
             <span
               className="text-sm sm:text-base xl:text-lg font-bold tracking-tight font-fredoka flex items-center gap-1.5 leading-snug break-words"
               style={{ color: 'var(--heading-color, #111827)' }}
@@ -158,9 +158,9 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
         {/* Dynamic Interactive PillNav (Desktop) */}
         <nav
           aria-label="Primary navigation"
-          className="hidden lg:flex items-center rounded-full p-1 bg-pastel-purple border border-purple-100 shadow-xs shrink"
+          className="hidden lg:flex items-center rounded-full p-1 bg-pastel-purple border border-purple-100 shadow-xs shrink-1 min-w-0 overflow-x-auto"
         >
-          <ul role="menubar" className="list-none flex items-center m-0 p-0 gap-1 xl:gap-1.5 flex-nowrap">
+          <ul role="menubar" className="list-none flex items-center m-0 p-0 gap-0.5 xl:gap-1 flex-nowrap">
             {navLinks.map((item, i) => {
               // Check if item or any of its sublinks matches the current pathname
               const isRouteActive =
@@ -192,7 +192,7 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
                   <a
                     role="menuitem"
                     href={item.href}
-                    className={`relative overflow-hidden inline-flex items-center justify-center h-8.5 px-3 xl:px-4 rounded-full font-bold text-[11px] xl:text-xs tracking-wide uppercase transition-all duration-300 group cursor-pointer select-none gap-1 border shadow-xs hover:shadow-md ${
+                    className={`relative overflow-hidden inline-flex items-center justify-center h-8 px-2.5 xl:px-3 rounded-full font-bold text-[10px] xl:text-[11px] tracking-wide uppercase transition-all duration-300 group cursor-pointer select-none gap-0.5 border shadow-xs hover:shadow-md whitespace-nowrap ${
                       isRouteActive
                         ? 'shadow-sm'
                         : 'bg-white text-gray-700 border-gray-100/80 hover:text-gray-900'
