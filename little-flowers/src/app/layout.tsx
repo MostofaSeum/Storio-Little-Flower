@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Quicksand, Fredoka } from "next/font/google";
 import "./globals.css";
 import ClickSpark from "@/components/ui/ClickSpark";
+import { getTenantContext, getTemplateLayout } from "@/lib/storio";
 
 const quicksand = Quicksand({
   variable: "--font-quicksand",
@@ -15,13 +16,22 @@ const fredoka = Fredoka({
   weight: ["400", "500", "600", "700"],
 });
 
-export const metadata: Metadata = {
-  title: {
-    template: "%s",
-    default: "Kindergarten & School",
-  },
-  description: "Practical teaching & social development for kids",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { tenantHost, isStandalone } = await getTenantContext();
+  const { settings } = await getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null }));
+
+  return {
+    title: {
+      template: "%s",
+      default: settings?.site_title || "Kindergarten & School",
+    },
+    description: settings?.site_tagline || "Practical teaching & social development for kids",
+    icons: {
+      icon: settings?.favicon_url || "/favicon.ico",
+      apple: settings?.favicon_url || "/apple-touch-icon.png",
+    },
+  };
+}
 
 export default function RootLayout({
   children,
