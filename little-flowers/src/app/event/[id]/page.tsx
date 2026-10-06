@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getTenantContext, getTemplateLayout, getEvents, getEventDetail } from '@/lib/storio';
 import { resolveMediaUrl } from '@/lib/media';
+import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
 import { StorioEvent } from '@/types';
 import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
@@ -17,10 +18,16 @@ interface EventDetailPageProps {
 export async function generateMetadata({ params }: EventDetailPageProps) {
   const { id } = await params;
   const { tenantHost, isStandalone } = await getTenantContext();
-  const [{ settings }, event] = await Promise.all([
+  const [{ settings }, rawEvent] = await Promise.all([
     getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null })),
     getEventDetail(id, tenantHost).catch(() => null),
   ]);
+
+  let event: StorioEvent | null = rawEvent;
+  if (!event && isStandalone) {
+    event =
+      DEFAULT_DEMO_DATA.events.find((e) => String(e.id) === id || e.slug === id) || null;
+  }
 
   const schoolName = settings?.site_title || 'Events';
 
@@ -51,8 +58,18 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
   // 2. If id was a slug or direct ID fetch returned null, search in list
   if (!event) {
     const listRes = await getEvents(tenantHost).catch(() => null);
-    const list = Array.isArray(listRes) ? listRes : [];
+    const list = Array.isArray(listRes)
+      ? listRes
+      : Array.isArray((listRes as unknown as { results?: StorioEvent[] })?.results)
+        ? ((listRes as unknown as { results: StorioEvent[] }).results)
+        : [];
     event = list.find((e) => String(e.id) === id || e.slug === id) || null;
+  }
+
+  // 3. Standalone mode fallback to DEFAULT_DEMO_DATA.events
+  if (!event && isStandalone) {
+    event =
+      DEFAULT_DEMO_DATA.events.find((e) => String(e.id) === id || e.slug === id) || null;
   }
 
   if (!event) {

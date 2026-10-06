@@ -1,8 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getTenantContext, getTemplateLayout, getActivityDetail } from '@/lib/storio';
+import { getTenantContext, getTemplateLayout, getActivityDetail, getActivities } from '@/lib/storio';
 import { resolveMediaUrl } from '@/lib/media';
+import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
 import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
@@ -52,10 +53,26 @@ interface ActivityDetailPageProps {
 export async function generateMetadata({ params }: ActivityDetailPageProps) {
   const { slug } = await params;
   const { tenantHost, isStandalone } = await getTenantContext();
-  const [{ settings }, activity] = await Promise.all([
+  const [{ settings }, rawActivity] = await Promise.all([
     getTemplateLayout(tenantHost, isStandalone).catch(() => ({ settings: null })),
     getActivityDetail(slug, tenantHost).catch(() => null) as Promise<StorioActivityDetail | null>,
   ]);
+
+  let activity = rawActivity;
+  if (!activity && isStandalone) {
+    const demo = DEFAULT_DEMO_DATA.activities?.find(
+      (a) => a.slug === slug || String(a.id) === slug
+    );
+    if (demo) {
+      activity = {
+        id: demo.id,
+        title: demo.title,
+        slug: demo.slug || slug,
+        excerpt: demo.excerpt || demo.summary,
+        content: demo.content || demo.summary,
+      };
+    }
+  }
 
   const schoolName = settings?.site_title || 'Learning Programs';
 
@@ -76,16 +93,58 @@ export default async function ActivityDetailPage({ params }: ActivityDetailPageP
   const { tenantHost, isStandalone } = await getTenantContext();
   const { settings, customization, navigation } = await getTemplateLayout(tenantHost, isStandalone);
 
-  // Fetch single activity details via storio.ts helper
-  const activity = (await getActivityDetail(slug, tenantHost).catch(() => null)) as StorioActivityDetail | null;
+  // 1. Fetch single activity details via storio.ts helper
+  let activity = (await getActivityDetail(slug, tenantHost).catch(() => null)) as StorioActivityDetail | null;
+
+  // 2. If single endpoint returned null, try looking in list
+  if (!activity) {
+    const listRes = await getActivities(tenantHost).catch(() => null);
+    const list = Array.isArray(listRes) ? listRes : [];
+    const found = list.find((a) => a.slug === slug || String(a.id) === slug);
+    if (found) {
+      activity = {
+        id: found.id,
+        title: found.title,
+        slug: found.slug || slug,
+        excerpt: found.excerpt || found.summary,
+        content: found.content || found.summary,
+        featured_image_data: found.featured_image_url
+          ? { file: found.featured_image_url }
+          : undefined,
+      };
+    }
+  }
+
+  // 3. In standalone preview mode, fallback to DEFAULT_DEMO_DATA.activities
+  if (!activity && isStandalone) {
+    const demo = DEFAULT_DEMO_DATA.activities?.find(
+      (a) => a.slug === slug || String(a.id) === slug
+    );
+    if (demo) {
+      activity = {
+        id: demo.id,
+        title: demo.title,
+        slug: demo.slug || slug,
+        excerpt: demo.excerpt || demo.summary,
+        content:
+          demo.content ||
+          `${demo.summary}\n\nOur ${demo.title} program is thoughtfully designed to nurture children's creative, emotional, and cognitive growth. Under the guidance of our caring educators, little learners explore key concepts through joyful, hands-on experiences.`,
+        is_featured: true,
+        featured_image_data: demo.featured_image_url
+          ? { file: demo.featured_image_url }
+          : undefined,
+      };
+    }
+  }
 
   if (!activity) {
     notFound();
   }
 
-  const heroImage = activity.featured_image_data?.file
-    ? resolveMediaUrl(activity.featured_image_data.file)
-    : null;
+  const rawImage =
+    activity.featured_image_data?.file ||
+    (activity as unknown as { featured_image_url?: string })?.featured_image_url;
+  const heroImage = resolveMediaUrl(rawImage);
 
   const categories = activity.categories_data || [];
   const galleryImages = activity.gallery_images || [];

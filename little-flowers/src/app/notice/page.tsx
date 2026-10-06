@@ -36,7 +36,12 @@ export default async function NoticePage() {
         ? DEFAULT_DEMO_DATA.notices || []
         : [];
 
-  const boardNotices: StorioBoardNotice[] = Array.isArray(rawBoardNotices) ? rawBoardNotices : [];
+  const boardNotices: StorioBoardNotice[] =
+    Array.isArray(rawBoardNotices) && rawBoardNotices.length > 0
+      ? rawBoardNotices
+      : isStandalone
+        ? DEFAULT_DEMO_DATA.boardNotices || []
+        : [];
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-gray-900 selection:bg-pink-100 selection:text-pink-700">

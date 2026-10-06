@@ -18,6 +18,7 @@ import {
   StorioDynamicNavItem,
   StorioLeadershipMessage,
   StorioCalendarEvent,
+  StorioBoardNotice,
 } from '@/data/storioExtendedTypes';
 
 /**
@@ -94,6 +95,7 @@ export const DEFAULT_DEMO_DATA: {
     deadline?: string;
     is_active: boolean;
   }>;
+  boardNotices: StorioBoardNotice[];
 } = {
   navigation: [
     { id: "1", name: "Home", href: "/" },
@@ -1277,6 +1279,32 @@ export const DEFAULT_DEMO_DATA: {
       salary_range: "Competitive",
       deadline: "2026-12-31",
       is_active: true,
+    },
+  ],
+  boardNotices: [
+    {
+      title: "Revised Academic Calendar & National Holidays Schedule (2026-2027)",
+      url: "https://dhakaeducationboard.gov.bd",
+      publish_date: "2026-09-18",
+      board_name: "Dhaka",
+    },
+    {
+      title: "Early Childhood Care & Development (ECCD) Curriculum Guidelines Circular",
+      url: "http://www.dpe.gov.bd",
+      publish_date: "2026-09-24",
+      board_name: "Primary Education",
+    },
+    {
+      title: "Student Safety, Campus Hygiene & Seasonal Immunization Protocols",
+      url: "http://www.dshe.gov.bd",
+      publish_date: "2026-10-02",
+      board_name: "DSHE",
+    },
+    {
+      title: "Junior Co-Curricular & Creative Arts Talent Hunt Festival Guidelines",
+      url: "https://dhakaeducationboard.gov.bd",
+      publish_date: "2026-10-05",
+      board_name: "Dhaka",
     },
   ],
 };
