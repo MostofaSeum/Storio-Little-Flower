@@ -143,9 +143,9 @@ export default function AccordionGallery({ events }: AccordionGalleryProps) {
                     )}
                   </div>
 
-                  {/* Title with bright color from globals.css tokens (--blob-yellow / #fde68a) */}
+                  {/* Title using theme token var(--blob-yellow) from globals.css */}
                   <h3
-                    style={{ color: 'var(--blob-yellow, #fde68a)' }}
+                    style={{ color: 'var(--blob-yellow)' }}
                     className="text-2xl lg:text-3xl font-black font-fredoka leading-snug drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]"
                   >
                     {event.title}
@@ -224,7 +224,7 @@ export default function AccordionGallery({ events }: AccordionGalleryProps) {
 
                 <div className="absolute bottom-3 left-3 right-3 text-white">
                   <h4
-                    style={{ color: 'var(--blob-yellow, #fde68a)' }}
+                    style={{ color: 'var(--blob-yellow)' }}
                     className="font-extrabold text-base leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]"
                   >
                     {event.title}

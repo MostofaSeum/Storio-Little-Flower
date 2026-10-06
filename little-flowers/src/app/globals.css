@@ -143,6 +143,10 @@ h6 span {
   background-color: var(--blob-yellow);
 }
 
+.text-blob-yellow {
+  color: var(--blob-yellow);
+}
+
 .bg-button-dark {
   background-color: var(--button-bg);
   color: var(--button-text);
