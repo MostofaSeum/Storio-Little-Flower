@@ -500,7 +500,6 @@
             { "id": "3-3", "name": "Team", "href": "/administration/team" }
           ]
         },
-        { "id": "4", "name": "Faculty", "href": "/staff" },
         {
           "id": "5",
           "name": "News & Events",
