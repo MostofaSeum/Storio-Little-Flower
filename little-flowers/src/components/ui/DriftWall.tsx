@@ -80,7 +80,7 @@ const DriftWall = ({
   fade = 0.6,
   dim = 0.55,
   grayscale = false,
-  overlayColor = '#060010',
+  overlayColor = 'var(--topbar-bg)',
   className = '',
   style,
   onTileClick
@@ -251,8 +251,8 @@ const DriftWall = ({
   }, [release]);
 
   const maskStyle =
-    'radial-gradient(ellipse 78% 82% at 50% 46%, #000 var(--dw-edge), transparent 100%), ' +
-    'linear-gradient(to top, #000 var(--dw-edge), transparent 100%)';
+    'radial-gradient(ellipse 78% 82% at 50% 46%, var(--topbar-bg) var(--dw-edge), transparent 100%), ' +
+    'linear-gradient(to top, var(--topbar-bg) var(--dw-edge), transparent 100%)';
 
   const cssVars = useMemo<CSSProperties>(
     () =>
@@ -282,7 +282,7 @@ const DriftWall = ({
     'w-full h-[calc(var(--dw-tile-h)+var(--dw-gap))] [transform-style:preserve-3d]'
   );
   const innerClass = cx(
-    'pointer-events-none absolute inset-[calc(var(--dw-gap)/2)] block overflow-hidden bg-[#0b0b12]',
+    'pointer-events-none absolute inset-[calc(var(--dw-gap)/2)] block overflow-hidden bg-[var(--topbar-bg)]',
     'rounded-[var(--dw-radius)] opacity-[var(--dw-dim)] [transform:translateZ(0)]',
     'transition-[transform,opacity,box-shadow] duration-[420ms] ease-[cubic-bezier(0.22,1,0.36,1)]',
     'group-[.is-active]/tile:opacity-100 group-[.is-active]/tile:[transform:translateZ(var(--dw-lift))]',

@@ -223,7 +223,7 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
                       <span
                         className="block transition-transform duration-300 ease-out"
                         style={{
-                          color: isRouteActive ? 'var(--active-nav-text)' : (isHovered ? '#ffffff' : item.color),
+                          color: isRouteActive ? 'var(--active-nav-text)' : (isHovered ? 'var(--button-text)' : item.color),
                           fontWeight: isRouteActive ? 800 : 700,
                           transform: !isRouteActive && isHovered ? 'translateY(-100%)' : 'translateY(0)',
                         }}

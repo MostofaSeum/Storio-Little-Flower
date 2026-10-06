@@ -290,7 +290,7 @@
         "id": "badge1_color",
         "label": "Badge 1 Color",
         "type": "color",
-        "default": "#ff9800"
+        "default": ""
       },
       {
         "id": "badge1_icon",
@@ -314,7 +314,7 @@
         "id": "badge2_color",
         "label": "Badge 2 Color",
         "type": "color",
-        "default": "#ff4081"
+        "default": ""
       },
       {
         "id": "badge2_icon",
@@ -338,7 +338,7 @@
         "id": "badge3_color",
         "label": "Badge 3 Color",
         "type": "color",
-        "default": "#29b6f6"
+        "default": ""
       },
       {
         "id": "badge3_icon",
@@ -362,7 +362,7 @@
         "id": "badge4_color",
         "label": "Badge 4 Color",
         "type": "color",
-        "default": "#8bc34a"
+        "default": ""
       },
       {
         "id": "badge4_icon",
