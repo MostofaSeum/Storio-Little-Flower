@@ -769,7 +769,7 @@ export const DEFAULT_DEMO_DATA: {
       end_date: "2026-10-15T13:00:00Z",
       status: "Upcoming",
       is_featured: true,
-      featured_image: "/homepage/Happy Memories/Trial 1.jpg",
+      featured_image: "/homepage/Campus Life & Gatherings/1.jpg",
     },
     {
       id: 2,
@@ -782,7 +782,7 @@ export const DEFAULT_DEMO_DATA: {
       end_date: "2026-10-24T14:30:00Z",
       status: "Upcoming",
       is_featured: false,
-      featured_image: "/homepage/Early Exploration/Trial 2.webp",
+      featured_image: "/homepage/Campus Life & Gatherings/2.jpg",
     },
     {
       id: 3,
@@ -795,7 +795,7 @@ export const DEFAULT_DEMO_DATA: {
       end_date: "2026-11-05T12:00:00Z",
       status: "Upcoming",
       is_featured: false,
-      featured_image: "/homepage/About Our Academy/Trial 1.jpg",
+      featured_image: "/homepage/Campus Life & Gatherings/3.jpg",
     },
     {
       id: 4,
@@ -808,7 +808,7 @@ export const DEFAULT_DEMO_DATA: {
       end_date: "2026-11-18T13:30:00Z",
       status: "Upcoming",
       is_featured: true,
-      featured_image: "/homepage/Happy Memories/Trial 2.webp",
+      featured_image: "/homepage/Campus Life & Gatherings/4.jpg",
     },
     {
       id: 5,
@@ -821,7 +821,7 @@ export const DEFAULT_DEMO_DATA: {
       end_date: "2026-12-10T12:00:00Z",
       status: "Upcoming",
       is_featured: true,
-      featured_image: "/homepage/Happy Memories/Trial 1.jpg",
+      featured_image: "/homepage/Campus Life & Gatherings/1.jpg",
     },
     {
       id: 6,
@@ -834,7 +834,7 @@ export const DEFAULT_DEMO_DATA: {
       end_date: "2026-12-18T13:00:00Z",
       status: "Upcoming",
       is_featured: false,
-      featured_image: "/homepage/Early Exploration/Trial 2.webp",
+      featured_image: "/homepage/Campus Life & Gatherings/2.jpg",
     },
   ],
   calendarEvents: [

@@ -51,7 +51,7 @@ export default function AccordionGallery({ events }: AccordionGalleryProps) {
               ? (event.featured_image_detail.file.startsWith('http')
                   ? event.featured_image_detail.file
                   : `https://api.storio.cloud${event.featured_image_detail.file}`)
-              : event.featured_image || '/homepage/Happy Memories/Trial 1.jpg';
+              : event.featured_image || '/homepage/Campus Life & Gatherings/1.jpg';
 
           return (
             <div
@@ -143,8 +143,11 @@ export default function AccordionGallery({ events }: AccordionGalleryProps) {
                     )}
                   </div>
 
-                  {/* Title */}
-                  <h3 className="text-2xl lg:text-3xl font-black font-fredoka leading-snug drop-shadow-md text-white">
+                  {/* Title with bright color from globals.css tokens (--blob-yellow / #fde68a) */}
+                  <h3
+                    style={{ color: 'var(--blob-yellow, #fde68a)' }}
+                    className="text-2xl lg:text-3xl font-black font-fredoka leading-snug drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]"
+                  >
                     {event.title}
                   </h3>
 
@@ -190,7 +193,7 @@ export default function AccordionGallery({ events }: AccordionGalleryProps) {
               ? (event.featured_image_detail.file.startsWith('http')
                   ? event.featured_image_detail.file
                   : `https://api.storio.cloud${event.featured_image_detail.file}`)
-              : event.featured_image || '/homepage/Happy Memories/Trial 1.jpg';
+              : event.featured_image || '/homepage/Campus Life & Gatherings/1.jpg';
 
           return (
             <div
