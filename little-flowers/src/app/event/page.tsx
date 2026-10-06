@@ -28,13 +28,24 @@ export default async function EventsPage() {
     getCalendarEvents(tenantHost).catch(() => null),
   ]);
 
-  const events: StorioEvent[] = Array.isArray(rawEvents)
+  const rawEventsList: StorioEvent[] = Array.isArray(rawEvents)
     ? rawEvents
     : Array.isArray((rawEvents as unknown as { results?: StorioEvent[] })?.results)
       ? ((rawEvents as unknown as { results: StorioEvent[] }).results)
       : [];
 
-  const calendarEvents: StorioCalendarEvent[] = Array.isArray(rawCalendar) ? rawCalendar : [];
+  const events: StorioEvent[] =
+    rawEventsList.length > 0
+      ? rawEventsList
+      : isStandalone
+        ? (DEFAULT_DEMO_DATA.events as unknown as StorioEvent[])
+        : [];
+
+  const calendarEvents: StorioCalendarEvent[] = Array.isArray(rawCalendar) && rawCalendar.length > 0
+    ? rawCalendar
+    : isStandalone
+      ? (DEFAULT_DEMO_DATA.calendarEvents || [])
+      : [];
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-gray-900 selection:bg-pink-100 selection:text-pink-700">
