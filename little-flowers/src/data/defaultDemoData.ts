@@ -17,6 +17,7 @@ import {
   LittleFlowersCustomizationConfig,
   StorioDynamicNavItem,
   StorioLeadershipMessage,
+  StorioCalendarEvent,
 } from '@/data/storioExtendedTypes';
 
 /**
@@ -60,6 +61,7 @@ export const DEFAULT_DEMO_DATA: {
   }>;
   promotions: StorioPromotion[];
   events: StorioEvent[];
+  calendarEvents: StorioCalendarEvent[];
   testimonials: Array<{ id: number; name: string; role: string; quote: string; rating: number; avatar_url?: string }>;
   faqs: StorioFaq[];
   admissionFormConfig: StorioAdmissionFormConfig;
@@ -833,6 +835,50 @@ export const DEFAULT_DEMO_DATA: {
       status: "Upcoming",
       is_featured: false,
       featured_image: "/homepage/Early Exploration/Trial 2.webp",
+    },
+  ],
+  calendarEvents: [
+    {
+      id: 1,
+      title: "Autumn Term Begins",
+      description: "Welcome day for all students and introductory orientation sessions.",
+      start_date: "2026-10-01",
+      category: "event",
+      is_all_day: true,
+    },
+    {
+      id: 2,
+      title: "Mid-Term Assessment Week",
+      description: "Formative milestones and skill evaluations across all playgroups and grades.",
+      start_date: "2026-10-18",
+      end_date: "2026-10-22",
+      category: "exam",
+      is_all_day: true,
+    },
+    {
+      id: 3,
+      title: "National Children's Holiday",
+      description: "School closed in observance of National Children's Celebration.",
+      start_date: "2026-10-28",
+      category: "holiday",
+      is_all_day: true,
+    },
+    {
+      id: 4,
+      title: "Annual Sports & Play Day",
+      description: "Junior obstacle relays, games, and medal presentations at Sunshine Playground.",
+      start_date: "2026-11-12",
+      category: "event",
+      is_all_day: false,
+    },
+    {
+      id: 5,
+      title: "Winter Break & New Year Recess",
+      description: "Campus closed for winter holidays. Administrative office re-opens in January.",
+      start_date: "2026-12-24",
+      end_date: "2027-01-02",
+      category: "holiday",
+      is_all_day: true,
     },
   ],
   testimonials: [
