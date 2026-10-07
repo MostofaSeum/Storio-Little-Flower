@@ -47,14 +47,16 @@ export default function RoutineClientView({ routines }: RoutineClientViewProps) 
   // Current active routine to display schedule
   const activeRoutine = filteredRoutines[0] || null;
 
-  // Extract schedule days
+  // Extract schedule days (supporting both SDK .schedule and API raw .schedule_json)
   const scheduleDays = useMemo(() => {
-    if (!activeRoutine || !activeRoutine.schedule) return [];
-    if (Array.isArray(activeRoutine.schedule)) {
-      return activeRoutine.schedule;
+    if (!activeRoutine) return [];
+    const sched = activeRoutine.schedule || (activeRoutine as any).schedule_json;
+    if (!sched) return [];
+    if (Array.isArray(sched)) {
+      return sched;
     }
-    // Object format fallback
-    const schedObj = activeRoutine.schedule as Record<string, unknown>;
+    // Object format { days: [...] }
+    const schedObj = sched as Record<string, unknown>;
     if (Array.isArray(schedObj.days)) {
       return schedObj.days as Array<{ day: string; periods?: any[]; slots?: any[] }>;
     }
