@@ -112,7 +112,7 @@ export default function ComplianceClientView({
                       : 'text-gray-600 hover:text-gray-900 hover:bg-white/60'
                   }`}
                 >
-                  <span>{tab.icon}</span>
+                  <img src={`/icons/${tab.icon}`} alt="" className="w-4 h-4" />
                   <span>{tab.label}</span>
                 </button>
               );
