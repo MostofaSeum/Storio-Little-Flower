@@ -18,7 +18,6 @@ import {
   StorioGalleryItem,
   StorioAlbum,
   StorioCustomPage,
-  StorioClassRoutine,
   StorioSyllabus,
   StorioStudentStatsResponse,
   StorioStudentStat,
@@ -39,12 +38,45 @@ export type {
   StorioGalleryItem,
   StorioAlbum,
   StorioCustomPage,
-  StorioClassRoutine,
   StorioSyllabus,
   StorioStudentStatsResponse,
   StorioStudentStat,
   StorioStudentGroupStat,
 };
+
+export interface StorioClassRoutineScheduleItem {
+  period?: number | string;
+  time?: string;
+  start_time?: string;
+  end_time?: string;
+  subject?: string;
+  teacher?: string;
+  room?: string;
+}
+
+export interface StorioClassRoutineDaySchedule {
+  day: string;
+  periods?: StorioClassRoutineScheduleItem[];
+  slots?: StorioClassRoutineScheduleItem[];
+}
+
+export interface StorioClassRoutine {
+  id: number;
+  class_name: string;
+  section?: string;
+  shift?: string;
+  academic_year?: number;
+  effective_from?: string;
+  routine_file?: number;
+  routine_file_url?: string;
+  is_active?: boolean;
+  schedule?: StorioClassRoutineDaySchedule[] | Record<string, unknown>;
+  schedule_json?: {
+    days?: StorioClassRoutineDaySchedule[];
+  };
+  created_at?: string;
+  updated_at?: string;
+}
 
 /**
  * Little Flowers Theme Customization Configuration
