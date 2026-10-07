@@ -85,6 +85,11 @@ export default function Footer({ settings, profile, importantLinks = [] }: Foote
               </a>
             </li>
             <li>
+              <a href="/promotions" className="hover:text-secondary-color transition-colors">
+                Promotions & Offers
+              </a>
+            </li>
+            <li>
               <a href="/admission" className="hover:text-accent-pink transition-colors">
                 Admission Portal
               </a>
