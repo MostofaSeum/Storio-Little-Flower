@@ -115,16 +115,26 @@ const DriftWall = ({
     const validItems = items && items.length > 0 ? items : DEFAULT_ITEMS;
     const cols: DriftWallItem[][] = Array.from({ length: columns }, () => []);
     validItems.forEach((item, i) => cols[i % columns].push(item));
-    return cols.map(col => (col.length ? col : validItems.slice(0, 1)));
+    // Ensure all columns have the same number of items by duplicating if needed
+    const maxItems = Math.max(...cols.map(col => col.length), 1);
+    return cols.map(col => {
+      if (col.length === 0) return validItems.slice(0, maxItems);
+      // Duplicate items to match the max column length
+      const duplicated: DriftWallItem[] = [];
+      for (let i = 0; i < maxItems; i++) {
+        duplicated.push(col[i % col.length]);
+      }
+      return duplicated;
+    });
   }, [items, columns]);
 
   const columnMeta = useMemo<ColumnMeta[]>(() => {
     const unit = tileHeight + gap;
-    return columnItems.map(col => {
-      const copyHeight = Math.max(unit, col.length * unit);
-      const copies = Math.max(2, Math.ceil((containerHeight * 1.6) / copyHeight) + 1);
-      return { copyHeight, copies };
-    });
+    // Use the same copyHeight for all columns to keep animation in sync
+    const maxItems = Math.max(...columnItems.map(col => col.length), 1);
+    const copyHeight = Math.max(unit, maxItems * unit);
+    const copies = Math.max(2, Math.ceil((containerHeight * 1.6) / copyHeight) + 1);
+    return columnItems.map(() => ({ copyHeight, copies }));
   }, [columnItems, tileHeight, gap, containerHeight]);
 
   useLayoutEffect(() => {

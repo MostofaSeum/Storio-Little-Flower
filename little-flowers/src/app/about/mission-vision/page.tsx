@@ -82,8 +82,12 @@ export default async function MissionVisionPage() {
               
               {/* Mission Card */}
               <div className="bg-white rounded-3xl p-8 sm:p-10 border border-purple-100 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
-                <div className="w-14 h-14 rounded-2xl bg-pastel-purple text-primary-color flex items-center justify-center text-2xl mb-6 shadow-2xs">
-                  🎯
+                <div className="w-14 h-14 rounded-2xl bg-pastel-purple text-primary-color flex items-center justify-center mb-6 shadow-2xs">
+                  <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <circle cx="12" cy="12" r="6" />
+                    <circle cx="12" cy="12" r="2" />
+                  </svg>
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-bold font-fredoka text-primary-color mb-4">
                   Our Mission
@@ -99,8 +103,10 @@ export default async function MissionVisionPage() {
 
               {/* Vision Card */}
               <div className="bg-white rounded-3xl p-8 sm:p-10 border border-amber-100 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
-                <div className="w-14 h-14 rounded-2xl bg-soft-amber text-secondary-color flex items-center justify-center text-2xl mb-6 shadow-2xs">
-                  🌟
+                <div className="w-14 h-14 rounded-2xl bg-soft-amber text-secondary-color flex items-center justify-center mb-6 shadow-2xs">
+                  <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                  </svg>
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-bold font-fredoka text-secondary-color mb-4">
                   Our Vision
@@ -138,8 +144,14 @@ export default async function MissionVisionPage() {
                 {/* 4 Creative Philosophy Cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
                   <div className="bg-white/90 backdrop-blur-xs rounded-2xl p-5 border border-purple-100/80 shadow-2xs hover:-translate-y-1 transition-all duration-300">
-                    <div className="w-12 h-12 rounded-xl bg-purple-100 text-primary-color flex items-center justify-center text-2xl mb-3 shadow-2xs">
-                      🎨
+                    <div className="w-12 h-12 rounded-xl bg-purple-100 text-primary-color flex items-center justify-center mb-3 shadow-2xs">
+                      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="13.5" cy="6.5" r=".5" fill="currentColor" />
+                        <circle cx="17.5" cy="10.5" r=".5" fill="currentColor" />
+                        <circle cx="8.5" cy="7.5" r=".5" fill="currentColor" />
+                        <circle cx="6.5" cy="12.5" r=".5" fill="currentColor" />
+                        <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.563-2.512 5.563-5.563C21.998 6.136 17.514 2 12 2z" />
+                      </svg>
                     </div>
                     <h4 className="font-extrabold font-fredoka text-gray-900 text-lg mb-1">Joyful Play</h4>
                     <p className="text-xs sm:text-sm text-gray-600 font-quicksand leading-relaxed">
@@ -148,8 +160,12 @@ export default async function MissionVisionPage() {
                   </div>
 
                   <div className="bg-white/90 backdrop-blur-xs rounded-2xl p-5 border border-amber-100/80 shadow-2xs hover:-translate-y-1 transition-all duration-300">
-                    <div className="w-12 h-12 rounded-xl bg-amber-100 text-secondary-color flex items-center justify-center text-2xl mb-3 shadow-2xs">
-                      🌱
+                    <div className="w-12 h-12 rounded-xl bg-amber-100 text-secondary-color flex items-center justify-center mb-3 shadow-2xs">
+                      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M12 10v12" />
+                        <path d="M12 22s-3-2-5-5-2-6-2-6 3.5.5 5 2c1.5-1.5 5-2 5-2s0 3-2 6-5 5-5 5z" />
+                        <path d="M7 10c-3-2-4-5-4-5s3 0 5 2" />
+                      </svg>
                     </div>
                     <h4 className="font-extrabold font-fredoka text-gray-900 text-lg mb-1">Growth Mindset</h4>
                     <p className="text-xs sm:text-sm text-gray-600 font-quicksand leading-relaxed">
@@ -158,8 +174,10 @@ export default async function MissionVisionPage() {
                   </div>
 
                   <div className="bg-white/90 backdrop-blur-xs rounded-2xl p-5 border border-pink-100/80 shadow-2xs hover:-translate-y-1 transition-all duration-300">
-                    <div className="w-12 h-12 rounded-xl bg-pink-100 text-accent-pink flex items-center justify-center text-2xl mb-3 shadow-2xs">
-                      ❤️
+                    <div className="w-12 h-12 rounded-xl bg-pink-100 text-accent-pink flex items-center justify-center mb-3 shadow-2xs">
+                      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                      </svg>
                     </div>
                     <h4 className="font-extrabold font-fredoka text-gray-900 text-lg mb-1">Warm Care</h4>
                     <p className="text-xs sm:text-sm text-gray-600 font-quicksand leading-relaxed">
@@ -168,8 +186,13 @@ export default async function MissionVisionPage() {
                   </div>
 
                   <div className="bg-white/90 backdrop-blur-xs rounded-2xl p-5 border border-sky-100/80 shadow-2xs hover:-translate-y-1 transition-all duration-300">
-                    <div className="w-12 h-12 rounded-xl bg-sky-100 text-accent-blue flex items-center justify-center text-2xl mb-3 shadow-2xs">
-                      🤝
+                    <div className="w-12 h-12 rounded-xl bg-sky-100 text-accent-blue flex items-center justify-center mb-3 shadow-2xs">
+                      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                      </svg>
                     </div>
                     <h4 className="font-extrabold font-fredoka text-gray-900 text-lg mb-1">Empathy & Unity</h4>
                     <p className="text-xs sm:text-sm text-gray-600 font-quicksand leading-relaxed">
@@ -183,8 +206,13 @@ export default async function MissionVisionPage() {
                   <div className="rounded-2xl bg-white/95 backdrop-blur-md p-6 flex flex-wrap items-center justify-around gap-6 border border-purple-100/80 shadow-sm">
                     {profile?.total_students !== undefined && (
                       <div className="text-center flex items-center gap-3.5">
-                        <div className="w-11 h-11 rounded-full bg-purple-50 text-primary-color flex items-center justify-center text-xl">
-                          🧸
+                        <div className="w-11 h-11 rounded-full bg-purple-50 text-primary-color flex items-center justify-center">
+                          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                          </svg>
                         </div>
                         <div className="text-left">
                           <span className="block text-2xl sm:text-3xl font-extrabold font-fredoka text-primary-color leading-none">
@@ -198,8 +226,11 @@ export default async function MissionVisionPage() {
                     )}
                     {profile?.total_teachers !== undefined && (
                       <div className="text-center flex items-center gap-3.5">
-                        <div className="w-11 h-11 rounded-full bg-amber-50 text-secondary-color flex items-center justify-center text-xl">
-                          👩‍🏫
+                        <div className="w-11 h-11 rounded-full bg-amber-50 text-secondary-color flex items-center justify-center">
+                          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                          </svg>
                         </div>
                         <div className="text-left">
                           <span className="block text-2xl sm:text-3xl font-extrabold font-fredoka text-secondary-color leading-none">
@@ -212,8 +243,10 @@ export default async function MissionVisionPage() {
                       </div>
                     )}
                     <div className="text-center flex items-center gap-3.5">
-                      <div className="w-11 h-11 rounded-full bg-pink-50 text-accent-pink flex items-center justify-center text-xl">
-                        ⭐
+                      <div className="w-11 h-11 rounded-full bg-pink-50 text-accent-pink flex items-center justify-center">
+                        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                        </svg>
                       </div>
                       <div className="text-left">
                         <span className="block text-2xl sm:text-3xl font-extrabold font-fredoka text-accent-pink leading-none">
