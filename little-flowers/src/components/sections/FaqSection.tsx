@@ -51,8 +51,8 @@ export default function FaqSection({ faqs }: FaqSectionProps) {
               text="Frequently Asked Questions"
               tag="span"
               splitType="chars"
-              delay={35}
-              duration={0.8}
+              delay={60}
+              duration={1.2}
               ease="power3.out"
               className="inline-block"
             />
@@ -94,8 +94,8 @@ export default function FaqSection({ faqs }: FaqSectionProps) {
                         text={faq.question}
                         tag="span"
                         splitType="words, chars"
-                        delay={15}
-                        duration={0.6}
+                        delay={30}
+                        duration={0.9}
                         ease="power3.out"
                         textAlign="left"
                         className="inline"
@@ -120,8 +120,8 @@ export default function FaqSection({ faqs }: FaqSectionProps) {
                         text={faq.answer}
                         tag="p"
                         splitType="words"
-                        delay={25}
-                        duration={0.5}
+                        delay={50}
+                        duration={0.8}
                         ease="power2.out"
                         triggerOnMount={true}
                         textAlign="left"
