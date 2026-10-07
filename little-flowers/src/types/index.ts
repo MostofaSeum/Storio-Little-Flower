@@ -19,8 +19,8 @@ import {
   StorioAlbum,
   StorioCustomPage,
   StorioSyllabus,
-  StorioStudentStatsResponse,
-  StorioStudentStat,
+  StorioStudentStat as SDKStorioStudentStat,
+  StorioStudentStatsResponse as SDKStorioStudentStatsResponse,
   StorioStudentGroupStat,
   StorioMpoInfo,
   StorioMpoDocument,
@@ -29,6 +29,14 @@ import {
   StorioComplaintStep,
   StorioHotline,
 } from '@storio/template-sdk';
+
+export interface StorioStudentStat extends SDKStorioStudentStat {
+  program?: string | null;
+}
+
+export interface StorioStudentStatsResponse extends Omit<SDKStorioStudentStatsResponse, 'classes'> {
+  classes: StorioStudentStat[];
+}
 
 // Re-export SDK interfaces
 export type {
@@ -45,8 +53,6 @@ export type {
   StorioAlbum,
   StorioCustomPage,
   StorioSyllabus,
-  StorioStudentStatsResponse,
-  StorioStudentStat,
   StorioStudentGroupStat,
   StorioMpoInfo,
   StorioMpoDocument,
@@ -407,3 +413,4 @@ export interface StorioLeadershipMessage {
     alt_text?: string | null;
   };
 }
+

@@ -8,10 +8,13 @@ interface StatisticsClientViewProps {
   stats: StorioStudentStatsResponse | null;
 }
 
+// Type helper to access optional program field from API response
+type StudentStatItem = StorioStudentStatsResponse['classes'][number] & {
+  program?: string | null;
+};
+
 export default function StatisticsClientView({ stats }: StatisticsClientViewProps) {
   if (!stats) return null;
-
-  const [selectedClassId, setSelectedClassId] = useState<number | 'all'>('all');
 
   const grandTotal = stats.grand_total || 0;
   const grandMale = stats.grand_total_male || 0;
@@ -20,11 +23,37 @@ export default function StatisticsClientView({ stats }: StatisticsClientViewProp
   const malePercent = grandTotal > 0 ? Math.round((grandMale / grandTotal) * 100) : 50;
   const femalePercent = grandTotal > 0 ? Math.round((grandFemale / grandTotal) * 100) : 50;
 
-  const classes = stats.classes || [];
+  const classes: StudentStatItem[] = (stats.classes || []) as StudentStatItem[];
 
-  const displayClasses = selectedClassId === 'all'
+  // Helper to extract the program name from an item
+  const getItemProgram = (item: StudentStatItem): string => {
+    if (item.program && typeof item.program === 'string' && item.program.trim().length > 0) {
+      return item.program.trim();
+    }
+    if (item.class_name_en && typeof item.class_name_en === 'string' && item.class_name_en.trim().length > 0) {
+      return item.class_name_en.trim();
+    }
+    return item.class_name || 'General Program';
+  };
+
+  // Extract unique available programs from the data
+  const availablePrograms = React.useMemo(() => {
+    const list: string[] = [];
+    classes.forEach((c) => {
+      const prog = getItemProgram(c);
+      if (prog && !list.includes(prog)) {
+        list.push(prog);
+      }
+    });
+    return list;
+  }, [classes]);
+
+  // Selected program filter state ('all' or program name)
+  const [selectedProgram, setSelectedProgram] = useState<string>('all');
+
+  const displayClasses = selectedProgram === 'all'
     ? classes
-    : classes.filter((c) => c.id === selectedClassId);
+    : classes.filter((c) => getItemProgram(c).toLowerCase() === selectedProgram.toLowerCase());
 
   return (
     <div className="space-y-10">
@@ -98,7 +127,7 @@ export default function StatisticsClientView({ stats }: StatisticsClientViewProp
           </div>
         </div>
 
-        {/* Active Class Sections */}
+        {/* Active Sections */}
         <div className="p-6 rounded-3xl bg-white border border-purple-100 shadow-sm relative overflow-hidden flex flex-col justify-between">
           <div className="flex items-center justify-between mb-4">
             <span className="w-12 h-12 rounded-2xl bg-lime-50 text-accent-green flex items-center justify-center font-bold">
@@ -168,37 +197,37 @@ export default function StatisticsClientView({ stats }: StatisticsClientViewProp
             </p>
           </div>
 
-          {/* Filter Pills */}
+          {/* Filter Pills: Separated by Programs */}
           <div className="flex flex-wrap items-center gap-1.5">
             <button
               type="button"
-              onClick={() => setSelectedClassId('all')}
+              onClick={() => setSelectedProgram('all')}
               className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all ${
-                selectedClassId === 'all'
+                selectedProgram === 'all'
                   ? 'bg-primary-color text-white shadow-xs'
                   : 'bg-white text-gray-600 border border-purple-100 hover:bg-pastel-purple'
               }`}
             >
               All Programs
             </button>
-            {classes.map((cls) => (
+            {availablePrograms.map((programName) => (
               <button
-                key={cls.id}
+                key={programName}
                 type="button"
-                onClick={() => setSelectedClassId(cls.id)}
+                onClick={() => setSelectedProgram(programName)}
                 className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all ${
-                  selectedClassId === cls.id
+                  selectedProgram.toLowerCase() === programName.toLowerCase()
                     ? 'bg-primary-color text-white shadow-xs'
                     : 'bg-white text-gray-600 border border-purple-100 hover:bg-pastel-purple'
                 }`}
               >
-                {cls.class_name}
+                {programName}
               </button>
             ))}
           </div>
         </div>
 
-        {/* Programs Cards */}
+        {/* Programs / Classes Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {displayClasses.map((item, idx) => {
             const classTotal = item.total_students ?? ((item.total_male || 0) + (item.total_female || 0));
@@ -209,6 +238,7 @@ export default function StatisticsClientView({ stats }: StatisticsClientViewProp
               { border: 'border-emerald-200', tag: 'bg-lime-50 text-accent-green' },
             ];
             const accent = colorAccents[idx % colorAccents.length];
+            const itemProgram = getItemProgram(item);
 
             return (
               <div
@@ -216,12 +246,19 @@ export default function StatisticsClientView({ stats }: StatisticsClientViewProp
                 className={`p-6 rounded-3xl bg-white border ${accent.border} shadow-sm hover:shadow-md transition-all flex flex-col justify-between`}
               >
                 <div>
-                  <div className="flex items-center justify-between mb-3">
-                    {item.shift ? (
-                      <span className={`text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${accent.tag}`}>
-                        {item.shift} Shift
-                      </span>
-                    ) : <span />}
+                  <div className="flex flex-wrap items-center justify-between gap-1.5 mb-3">
+                    <div className="flex items-center gap-1.5">
+                      {item.shift && (
+                        <span className={`text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${accent.tag}`}>
+                          {item.shift} Shift
+                        </span>
+                      )}
+                      {itemProgram && (
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-50 text-primary-color border border-purple-100">
+                          {itemProgram}
+                        </span>
+                      )}
+                    </div>
                     <span className="text-xs font-bold text-gray-400">
                       Total: {classTotal} Learners
                     </span>
@@ -230,7 +267,7 @@ export default function StatisticsClientView({ stats }: StatisticsClientViewProp
                   <h4 className="text-xl font-bold font-fredoka text-gray-900">
                     {item.class_name}
                   </h4>
-                  {item.class_name_en && (
+                  {item.class_name_en && item.class_name_en !== item.class_name && (
                     <p className="text-xs text-gray-500 font-medium mt-0.5">
                       {item.class_name_en}
                     </p>
