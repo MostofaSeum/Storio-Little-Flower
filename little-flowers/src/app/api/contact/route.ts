@@ -9,13 +9,19 @@ export async function POST(req: NextRequest) {
       process.env.NEXT_PUBLIC_STORIO_TENANT_HOST ||
       '';
 
+    // Forward payload ensuring both mobile and phone are populated if provided
+    const payload = {
+      ...body,
+      mobile: body.mobile || body.phone || '',
+    };
+
     const backendRes = await fetch(`${baseUrl}/api/v2/template/contact/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         ...(tenantHost ? { 'X-Tenant-Host': tenantHost } : {}),
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify(payload),
     });
 
     const contentType = backendRes.headers.get('content-type') || '';

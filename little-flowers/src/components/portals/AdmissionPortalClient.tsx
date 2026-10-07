@@ -204,6 +204,11 @@ export default function AdmissionPortalClient({
     );
 
     const email = getApplicantEmail();
+    const phone =
+      formData['guardian_phone'] ||
+      formData['phone'] ||
+      formData['mobile'] ||
+      '';
 
     if (!email) {
       setErrors((prev) => ({
@@ -230,7 +235,7 @@ export default function AdmissionPortalClient({
             'Content-Type': 'application/json',
             'x-tenant-host': tenantHost,
           },
-          body: JSON.stringify({ email }),
+          body: JSON.stringify({ email, ...(phone ? { phone } : {}) }),
         });
 
         const data = await res.json().catch(() => null);
@@ -266,6 +271,12 @@ export default function AdmissionPortalClient({
 
     if (!email) return;
 
+    const phone =
+      formData['guardian_phone'] ||
+      formData['phone'] ||
+      formData['mobile'] ||
+      '';
+
     setResending(true);
     setOtpError(null);
 
@@ -280,7 +291,7 @@ export default function AdmissionPortalClient({
             'Content-Type': 'application/json',
             'x-tenant-host': tenantHost,
           },
-          body: JSON.stringify({ email }),
+          body: JSON.stringify({ email, ...(phone ? { phone } : {}) }),
         });
 
         const data = await res.json().catch(() => null);
