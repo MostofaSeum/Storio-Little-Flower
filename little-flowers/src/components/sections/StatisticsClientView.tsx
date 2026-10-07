@@ -33,8 +33,10 @@ export default function StatisticsClientView({ stats }: StatisticsClientViewProp
         {/* Total Students */}
         <div className="p-6 rounded-3xl bg-white border border-purple-100 shadow-sm relative overflow-hidden flex flex-col justify-between">
           <div className="flex items-center justify-between mb-4">
-            <span className="w-12 h-12 rounded-2xl bg-amber-50 text-secondary-color flex items-center justify-center text-2xl font-bold">
-              🎒
+            <span className="w-12 h-12 rounded-2xl bg-amber-50 text-secondary-color flex items-center justify-center font-bold">
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-5.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+              </svg>
             </span>
             {stats.academic_year && (
               <span className="text-[10px] font-extrabold uppercase tracking-wider bg-purple-50 text-primary-color px-2.5 py-1 rounded-full">
@@ -55,8 +57,10 @@ export default function StatisticsClientView({ stats }: StatisticsClientViewProp
         {/* Boys / Male Students */}
         <div className="p-6 rounded-3xl bg-white border border-purple-100 shadow-sm relative overflow-hidden flex flex-col justify-between">
           <div className="flex items-center justify-between mb-4">
-            <span className="w-12 h-12 rounded-2xl bg-sky-50 text-accent-blue flex items-center justify-center text-2xl font-bold">
-              👦
+            <span className="w-12 h-12 rounded-2xl bg-sky-50 text-accent-blue flex items-center justify-center font-bold">
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
             </span>
             <span className="text-[10px] font-extrabold uppercase tracking-wider bg-sky-50 text-accent-blue px-2.5 py-1 rounded-full">
               {malePercent}% Total
@@ -75,8 +79,10 @@ export default function StatisticsClientView({ stats }: StatisticsClientViewProp
         {/* Girls / Female Students */}
         <div className="p-6 rounded-3xl bg-white border border-purple-100 shadow-sm relative overflow-hidden flex flex-col justify-between">
           <div className="flex items-center justify-between mb-4">
-            <span className="w-12 h-12 rounded-2xl bg-pink-50 text-accent-pink flex items-center justify-center text-2xl font-bold">
-              👧
+            <span className="w-12 h-12 rounded-2xl bg-pink-50 text-accent-pink flex items-center justify-center font-bold">
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
             </span>
             <span className="text-[10px] font-extrabold uppercase tracking-wider bg-pink-50 text-accent-pink px-2.5 py-1 rounded-full">
               {femalePercent}% Total
@@ -95,8 +101,10 @@ export default function StatisticsClientView({ stats }: StatisticsClientViewProp
         {/* Active Class Sections */}
         <div className="p-6 rounded-3xl bg-white border border-purple-100 shadow-sm relative overflow-hidden flex flex-col justify-between">
           <div className="flex items-center justify-between mb-4">
-            <span className="w-12 h-12 rounded-2xl bg-lime-50 text-accent-green flex items-center justify-center text-2xl font-bold">
-              🏫
+            <span className="w-12 h-12 rounded-2xl bg-lime-50 text-accent-green flex items-center justify-center font-bold">
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
             </span>
             <span className="text-[10px] font-extrabold uppercase tracking-wider bg-lime-50 text-accent-green px-2.5 py-1 rounded-full">
               Active Sections

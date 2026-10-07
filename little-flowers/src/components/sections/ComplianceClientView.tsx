@@ -22,20 +22,6 @@ export default function ComplianceClientView({
   complaintOfficer,
   hotlines,
 }: ComplianceClientViewProps) {
-  // Navigation tabs matching the available sections
-  type TabKey = 'all' | 'mpo' | 'rti' | 'grs' | 'hotlines';
-  const [activeTab, setActiveTab] = useState<TabKey>('all');
-
-  const tabs: { key: TabKey; label: string; icon: string; show: boolean }[] = [
-    { key: 'all', label: 'All Services', icon: 'document-paper.svg', show: true },
-    { key: 'mpo', label: 'MPO & Recognition', icon: 'school-building.svg', show: hasMpoContent },
-    { key: 'rti', label: 'Right to Information', icon: 'info-circle.svg', show: hasRtiContent },
-    { key: 'grs', label: 'Grievance Redress', icon: 'scroll-certificate.svg', show: hasGrsContent },
-    { key: 'hotlines', label: 'Emergency Hotlines', icon: 'phone-call.svg', show: hasHotlinesContent },
-  ];
-
-  const visibleTabs = tabs.filter((t) => t.show);
-
   // Normalize complaint steps (supports array of objects or JSON)
   const complaintSteps = Array.isArray(complaintOfficer?.complaint_process)
     ? complaintOfficer.complaint_process
@@ -49,43 +35,63 @@ export default function ComplianceClientView({
       : [];
 
   // Check if MPO section has any visible content
-  const hasMpoContent = mpoInfo && (
-    mpoInfo.mpo_code ||
-    mpoInfo.mpo_status ||
-    mpoInfo.mpo_order_number ||
-    mpoInfo.mpo_date ||
-    (typeof mpoInfo.total_mpo_teachers === 'number' || typeof mpoInfo.total_non_mpo_teachers === 'number') ||
-    (mpoInfo.documents && mpoInfo.documents.length > 0)
+  const hasMpoContent = Boolean(
+    mpoInfo && (
+      mpoInfo.mpo_code ||
+      mpoInfo.mpo_status ||
+      mpoInfo.mpo_order_number ||
+      mpoInfo.mpo_date ||
+      (typeof mpoInfo.total_mpo_teachers === 'number' || typeof mpoInfo.total_non_mpo_teachers === 'number') ||
+      (mpoInfo.documents && mpoInfo.documents.length > 0)
+    )
   );
 
   // Check if RTI section has any visible content
-  const hasRtiContent = informationService && (
-    informationService.responsible_person ||
-    informationService.designation ||
-    informationService.mobile ||
-    informationService.phone ||
-    informationService.email ||
-    informationService.address ||
-    informationService.office_hours ||
-    informationService.description ||
-    servicesList.length > 0
+  const hasRtiContent = Boolean(
+    informationService && (
+      informationService.responsible_person ||
+      informationService.designation ||
+      informationService.mobile ||
+      informationService.phone ||
+      informationService.email ||
+      informationService.address ||
+      informationService.office_hours ||
+      informationService.description ||
+      servicesList.length > 0
+    )
   );
 
   // Check if GRS section has any visible content
-  const hasGrsContent = complaintOfficer && (
-    complaintOfficer.name ||
-    complaintOfficer.designation ||
-    complaintOfficer.mobile ||
-    complaintOfficer.phone ||
-    complaintOfficer.email ||
-    complaintOfficer.address ||
-    complaintOfficer.office_hours ||
-    complaintOfficer.description ||
-    complaintSteps.length > 0
+  const hasGrsContent = Boolean(
+    complaintOfficer && (
+      complaintOfficer.name ||
+      complaintOfficer.designation ||
+      complaintOfficer.mobile ||
+      complaintOfficer.phone ||
+      complaintOfficer.email ||
+      complaintOfficer.address ||
+      complaintOfficer.office_hours ||
+      complaintOfficer.description ||
+      complaintSteps.length > 0
+    )
   );
 
   // Check if hotlines section has any visible content
-  const hasHotlinesContent = hotlines.length > 0;
+  const hasHotlinesContent = Boolean(hotlines && hotlines.length > 0);
+
+  // Navigation tabs matching the available sections
+  type TabKey = 'all' | 'mpo' | 'rti' | 'grs' | 'hotlines';
+  const [activeTab, setActiveTab] = useState<TabKey>('all');
+
+  const tabs: { key: TabKey; label: string; icon: string; show: boolean }[] = [
+    { key: 'all', label: 'All Services', icon: 'document-paper.svg', show: true },
+    { key: 'mpo', label: 'MPO & Recognition', icon: 'school-building.svg', show: hasMpoContent },
+    { key: 'rti', label: 'Right to Information', icon: 'info-circle.svg', show: hasRtiContent },
+    { key: 'grs', label: 'Grievance Redress', icon: 'scroll-certificate.svg', show: hasGrsContent },
+    { key: 'hotlines', label: 'Emergency Hotlines', icon: 'phone-call.svg', show: hasHotlinesContent },
+  ];
+
+  const visibleTabs = tabs.filter((t) => t.show);
 
   return (
     <div className="space-y-10">
@@ -116,7 +122,7 @@ export default function ComplianceClientView({
       )}
 
       {/* 1. MPO & Institutional Recognition Section */}
-      {(activeTab === 'all' || activeTab === 'mpo') && mpoInfo && (
+      {(activeTab === 'all' || activeTab === 'mpo') && hasMpoContent && (
         <section id="mpo" className="p-6 sm:p-10 rounded-3xl bg-white border border-purple-100 shadow-sm space-y-6">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-purple-50 pb-6">
             <div>
@@ -254,7 +260,7 @@ export default function ComplianceClientView({
       )}
 
       {/* 2. Right to Information (RTI) Service */}
-      {(activeTab === 'all' || activeTab === 'rti') && informationService && (
+      {(activeTab === 'all' || activeTab === 'rti') && hasRtiContent && (
         <section id="rti" className="p-6 sm:p-10 rounded-3xl bg-white border border-purple-100 shadow-sm space-y-6">
           <div className="flex items-center gap-2 border-b border-purple-50 pb-4">
             <span className="w-9 h-9 rounded-xl bg-sky-50 text-accent-blue flex items-center justify-center">
@@ -369,7 +375,7 @@ export default function ComplianceClientView({
                         key={sIdx}
                         className="flex items-center gap-2 p-2.5 rounded-xl bg-pastel-purple/50 border border-purple-50 text-xs font-semibold text-gray-800"
                       >
-                        <span className="text-accent-blue font-bold">✓</span>
+                        <img src="/icons/success-check.svg" alt="Check" className="w-4 h-4 inline-block" />
                         <span>{svc}</span>
                       </div>
                     ))}
@@ -382,7 +388,7 @@ export default function ComplianceClientView({
       )}
 
       {/* 3. Grievance Redress System (GRS) Section */}
-      {(activeTab === 'all' || activeTab === 'grs') && complaintOfficer && (
+      {(activeTab === 'all' || activeTab === 'grs') && hasGrsContent && (
         <section id="grs" className="p-6 sm:p-10 rounded-3xl bg-white border border-purple-100 shadow-sm space-y-6">
           <div className="flex items-center gap-2 border-b border-purple-50 pb-4">
             <span className="w-9 h-9 rounded-xl bg-pink-50 text-accent-pink flex items-center justify-center">
@@ -523,7 +529,7 @@ export default function ComplianceClientView({
       )}
 
       {/* 4. Public Hotlines Section */}
-      {(activeTab === 'all' || activeTab === 'hotlines') && hotlines.length > 0 && (
+      {(activeTab === 'all' || activeTab === 'hotlines') && hasHotlinesContent && (
         <section id="hotlines" className="p-6 sm:p-10 rounded-3xl bg-white border border-purple-100 shadow-sm space-y-6">
           <div className="flex items-center gap-2 border-b border-purple-50 pb-4">
             <span className="w-9 h-9 rounded-xl bg-lime-50 text-accent-green flex items-center justify-center">

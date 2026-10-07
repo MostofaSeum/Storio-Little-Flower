@@ -911,6 +911,7 @@ export const DEFAULT_DEMO_DATA: {
       role: "Mother of Abrar (Playgroup)",
       quote: "Little Flowers has been a second home for Abrar! He used to be shy, but within two months he started singing rhymes and making friends with so much joy.",
       rating: 5,
+      avatar_url: "/homepage/Teachers/Teacher3.jpg",
     },
     {
       id: 2,
@@ -918,6 +919,7 @@ export const DEFAULT_DEMO_DATA: {
       role: "Father of Mehek (Nursery)",
       quote: "The teachers are remarkably attentive and patient. The daily sensory activities and outdoor plays make learning exciting for young kids.",
       rating: 5,
+      avatar_url: "/homepage/Teachers/Teacher4.jpg",
     },
     {
       id: 3,
@@ -925,6 +927,7 @@ export const DEFAULT_DEMO_DATA: {
       role: "Mother of Aaryan (Senior KG)",
       quote: "Outstanding early childhood environment! The safety standards, loving atmosphere, and creative curriculum exceeded our highest expectations.",
       rating: 5,
+      avatar_url: "/homepage/Teachers/Teacher6.jpg",
     },
     {
       id: 4,
@@ -932,6 +935,7 @@ export const DEFAULT_DEMO_DATA: {
       role: "Father of Labiba (Junior KG)",
       quote: "Labiba comes home every day sharing new stories and songs. The teachers genuinely care about each child's emotional and academic growth.",
       rating: 5,
+      avatar_url: "/homepage/Teachers/Teacher2.jpg",
     },
     {
       id: 5,
@@ -939,6 +943,7 @@ export const DEFAULT_DEMO_DATA: {
       role: "Mother of Nabil (Nursery)",
       quote: "The campus is beautiful, safe, and always full of laughter. Nabil has learned to share, count, and express himself with confidence.",
       rating: 5,
+      avatar_url: "/homepage/Teachers/Teacher1.jpg",
     },
     {
       id: 6,
@@ -946,6 +951,7 @@ export const DEFAULT_DEMO_DATA: {
       role: "Father of Anika (Playgroup)",
       quote: "We visited many kindergartens before choosing Little Flowers. The warmth of the staff and the joy on every child's face made our decision easy.",
       rating: 5,
+      avatar_url: "/homepage/Teachers/Teacher5.jpg",
     },
   ],
   faqs: [
@@ -993,6 +999,7 @@ export const DEFAULT_DEMO_DATA: {
         type: "text",
         required: true,
         placeholder: "e.g., Liam Arthur",
+        order: 1,
         step: 1,
       },
       {
@@ -1006,6 +1013,7 @@ export const DEFAULT_DEMO_DATA: {
           "Junior KG (Age 4-5)",
           "Senior KG (Age 5-6)",
         ],
+        order: 1,
         step: 1,
       },
       {
@@ -1013,6 +1021,7 @@ export const DEFAULT_DEMO_DATA: {
         label: "Date of Birth",
         type: "date",
         required: true,
+        order: 1,
         step: 1,
       },
       {
@@ -1021,6 +1030,7 @@ export const DEFAULT_DEMO_DATA: {
         type: "select",
         required: true,
         options: ["Male", "Female", "Other"],
+        order: 1,
         step: 1,
       },
       {
@@ -1029,6 +1039,7 @@ export const DEFAULT_DEMO_DATA: {
         type: "select",
         required: false,
         options: ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"],
+        order: 1,
         step: 1,
       },
       {
@@ -1037,6 +1048,7 @@ export const DEFAULT_DEMO_DATA: {
         type: "text",
         required: true,
         placeholder: "e.g., John Arthur",
+        order: 2,
         step: 2,
       },
       {
@@ -1045,6 +1057,7 @@ export const DEFAULT_DEMO_DATA: {
         type: "text",
         required: true,
         placeholder: "e.g., Emily Arthur",
+        order: 2,
         step: 2,
       },
       {
@@ -1053,6 +1066,7 @@ export const DEFAULT_DEMO_DATA: {
         type: "tel",
         required: true,
         placeholder: "+1 (555) 000-0000",
+        order: 2,
         step: 2,
       },
       {
@@ -1061,6 +1075,7 @@ export const DEFAULT_DEMO_DATA: {
         type: "email",
         required: true,
         placeholder: "guardian@example.com",
+        order: 2,
         step: 2,
       },
       {
@@ -1069,6 +1084,7 @@ export const DEFAULT_DEMO_DATA: {
         type: "textarea",
         required: true,
         placeholder: "Street address, apartment, city, postal code",
+        order: 2,
         step: 2,
       },
       {
@@ -1077,6 +1093,7 @@ export const DEFAULT_DEMO_DATA: {
         type: "textarea",
         required: false,
         placeholder: "Any allergies or special guidance for our mentors...",
+        order: 2,
         step: 2,
       },
     ],

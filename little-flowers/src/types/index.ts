@@ -57,7 +57,7 @@ export type {
 };
 
 export interface StorioClassRoutineScheduleItem {
-  period?: number | string;
+  period?: number;
   time?: string;
   start_time?: string;
   end_time?: string;
@@ -266,7 +266,6 @@ export interface StorioEvent {
     url?: string;
     file?: string;
     fileName?: string;
-    file_name?: string;
     alt_text?: string;
   };
 }
@@ -354,7 +353,7 @@ export interface StorioCalendarEvent {
   id: number;
   title: string;
   description?: string;
-  start_date: string;
+  start_date?: string;
   end_date?: string;
   category?: 'holiday' | 'exam' | 'event' | string;
   level?: string;
