@@ -21,7 +21,7 @@ export default function AdmissionPortalClient({
   isStandalone,
   siteTitle,
 }: AdmissionPortalClientProps) {
-  // Stepper state: 1 = Student Info, 2 = Guardian Info, 3 = OTP Verification, 4 = Success
+  // Stepper state: 1 = Application Details, 2 = OTP Verification, 3 = Confirmed
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [formData, setFormData] = useState<Record<string, string>>({
     applied_class: 'Playgroup (Age 2-3)',
@@ -38,10 +38,10 @@ export default function AdmissionPortalClient({
   const [resendCountdown, setResendCountdown] = useState<number>(60);
   const [resending, setResending] = useState<boolean>(false);
 
-  // 60-second countdown for Resend Code when in Step 3
+  // 60-second countdown for Resend Code when in Step 2 (Verification)
   useEffect(() => {
     let timer: NodeJS.Timeout;
-    if (currentStep === 3 && resendCountdown > 0) {
+    if (currentStep === 2 && resendCountdown > 0) {
       timer = setInterval(() => {
         setResendCountdown((prev) => prev - 1);
       }, 1000);
@@ -94,9 +94,7 @@ export default function AdmissionPortalClient({
     }
   };
 
-  // Group fields dynamically and ensure photo/image uploads are optional:
-  // Step 1: Little Learner's profile (only learner's name, photo, birth date, gender, applied class)
-  // Step 2: Parents & Contact details (Phone, Father's Name, Mother's Name, Email, Address, Notes)
+  // Normalize all fields from formConfig (ensuring photos/images are optional)
   const normalizedFields = (formConfig.fields || []).map((f) => {
     const isPhotoField =
       f.type === 'image' ||
@@ -108,75 +106,32 @@ export default function AdmissionPortalClient({
     return f;
   });
 
-  const hasExplicitSteps = normalizedFields.some((f) => typeof f.order === 'number' || typeof f.step === 'number');
-
-  let step1Fields: typeof formConfig.fields = [];
-  let step2Fields: typeof formConfig.fields = [];
-
-  if (hasExplicitSteps) {
-    step1Fields = normalizedFields.filter((f) => f.order === 1 || f.step === 1);
-    step2Fields = normalizedFields.filter((f) => f.order === 2 || f.step === 2);
-  } else {
-    const allFields = normalizedFields;
-
-    // Filter Step 1 strictly to learner details (excluding phone, contact, father, mother, guardian)
-    step1Fields = allFields.filter((f) => {
-      const idOrLabel = `${f.id} ${f.label}`.toLowerCase();
-      const isContactOrParent =
-        idOrLabel.includes('phone') ||
-        idOrLabel.includes('mobile') ||
-        idOrLabel.includes('contact') ||
-        idOrLabel.includes('email') ||
-        idOrLabel.includes('father') ||
-        idOrLabel.includes('mother') ||
-        idOrLabel.includes('parent') ||
-        idOrLabel.includes('guardian') ||
-        idOrLabel.includes('address');
-
-      if (isContactOrParent) return false;
-
-      return (
-        idOrLabel.includes('name') ||
-        idOrLabel.includes('student') ||
-        idOrLabel.includes('learner') ||
-        idOrLabel.includes('dob') ||
-        idOrLabel.includes('birth') ||
-        idOrLabel.includes('gender') ||
-        idOrLabel.includes('class') ||
-        idOrLabel.includes('blood') ||
-        idOrLabel.includes('photo') ||
-        idOrLabel.includes('image') ||
-        f.type === 'image'
-      );
-    });
-
-    step2Fields = allFields.filter((f) => !step1Fields.some((s1) => s1.id === f.id));
-
-    // Fallback if no match: first field (Learner's Name) in Step 1, rest in Step 2
-    if (step1Fields.length === 0 && allFields.length > 0) {
-      step1Fields = [allFields[0]];
-      step2Fields = allFields.slice(1);
-    }
-  }
-
-  // Validate current step
-  const validateStep = (fields: typeof formConfig.fields): boolean => {
+  // Validate form fields
+  const validateForm = (): boolean => {
     const newErrors: Record<string, string> = {};
-    for (const field of fields) {
+    for (const field of normalizedFields) {
       if (field.required && !formData[field.id]?.trim()) {
         newErrors[field.id] = `${field.label} is required`;
       }
     }
+
+    // Check if an email field exists or fallback guardian_email is filled
+    const hasConfiguredEmail = normalizedFields.some(
+      (f) =>
+        (f.label.toLowerCase().includes('email') || f.id.toLowerCase().includes('email')) &&
+        !f.label.toLowerCase().includes('name')
+    );
+
+    const email = getApplicantEmail();
+    if (!email) {
+      const targetId = hasConfiguredEmail
+        ? (normalizedFields.find((f) => f.label.toLowerCase().includes('email') || f.id.toLowerCase().includes('email'))?.id || 'email')
+        : 'guardian_email';
+      newErrors[targetId] = 'Email address is required to receive verification code';
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  };
-
-  const handleNextToStep2 = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (validateStep(step1Fields)) {
-      setCurrentStep(2);
-      window.scrollTo({ top: 200, behavior: 'smooth' });
-    }
   };
 
   // Helper to reliably find email from form data
@@ -194,14 +149,7 @@ export default function AdmissionPortalClient({
 
   const handleProceedToOTP = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validateStep(step2Fields)) return;
-
-    // Check if formConfig has a native email field in its fields
-    const hasConfiguredEmail = formConfig.fields?.some(
-      (f) =>
-        (f.label.toLowerCase().includes('email') || f.id.toLowerCase().includes('email')) &&
-        !f.label.toLowerCase().includes('name')
-    );
+    if (!validateForm()) return;
 
     const email = getApplicantEmail();
     const phone =
@@ -209,15 +157,6 @@ export default function AdmissionPortalClient({
       formData['phone'] ||
       formData['mobile'] ||
       '';
-
-    if (!email) {
-      setErrors((prev) => ({
-        ...prev,
-        [hasConfiguredEmail ? (formConfig.fields?.find(f => f.label.toLowerCase().includes('email'))?.id || 'email') : 'guardian_email']:
-          'Email address is required to receive your application verification code.',
-      }));
-      return;
-    }
 
     setOtpLoading(true);
     setOtpError(null);
@@ -227,7 +166,7 @@ export default function AdmissionPortalClient({
         // Standalone preview mock behavior
         setOtpSent(true);
         setOtpSuccessMsg('Demo OTP code sent! Use "123456" to verify in standalone preview mode.');
-        setCurrentStep(3);
+        setCurrentStep(2);
       } else {
         const res = await fetch('/api/admission/send-otp', {
           method: 'POST',
@@ -244,7 +183,7 @@ export default function AdmissionPortalClient({
           setOtpSent(true);
           setOtpSuccessMsg(data.message || 'Verification code sent to your email.');
           setResendCountdown(60);
-          setCurrentStep(3);
+          setCurrentStep(2);
         } else {
           setOtpError(data?.message || 'Failed to dispatch verification code. Please check your email.');
         }
@@ -255,7 +194,7 @@ export default function AdmissionPortalClient({
         setOtpSent(true);
         setOtpSuccessMsg('Demo OTP code dispatched! Use 123456 to test.');
         setResendCountdown(60);
-        setCurrentStep(3);
+        setCurrentStep(2);
       } else {
         setOtpError('Network error connecting to admission server. Please try again.');
       }
@@ -268,7 +207,6 @@ export default function AdmissionPortalClient({
     if (resendCountdown > 0 || resending) return;
 
     const email = getApplicantEmail();
-
     if (!email) return;
 
     const phone =
@@ -326,16 +264,12 @@ export default function AdmissionPortalClient({
         if (otpCode.trim() === '123456' || otpCode.trim().length >= 4) {
           const generatedAppId = `LFK-${new Date().getFullYear()}-${Math.floor(10000 + Math.random() * 90000)}`;
           setApplicationNumber(generatedAppId);
-          setCurrentStep(4);
+          setCurrentStep(3);
         } else {
           setOtpError('Invalid code. In Standalone Preview mode, use 123456.');
         }
       } else {
-        // 1. Submit Application directly with OTP
-        // Note: The Storio admission backend API accepts { form_data, otp_code } at /admission/applications/
-        // which atomically verifies the OTP code and creates the student application record.
         const email = getApplicantEmail();
-        const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://api.storio.cloud';
 
         // Prepare submission form data
         // Ensure photo/image fields are never empty so backend validation passes even if user skipped uploading
@@ -353,7 +287,6 @@ export default function AdmissionPortalClient({
           }
         }
 
-        // Also check common default field names if formConfig didn't include them explicitly
         if (!formData['photo'] && !formData['student_photo'] && !formData['profile_photo']) {
           photoFallbacks['photo'] = photoFallbacks['photo'] || '/homepage/Teachers/Teacher1.jpg';
           photoFallbacks['student_photo'] = photoFallbacks['student_photo'] || '/homepage/Teachers/Teacher1.jpg';
@@ -367,8 +300,6 @@ export default function AdmissionPortalClient({
           guardian_email: email,
         };
 
-        // Submit application with OTP code — the /admission/applications endpoint
-        // requires otp_code field and verifies it atomically.
         const submitResponse = await fetch('/api/admission/applications', {
           method: 'POST',
           headers: {
@@ -385,9 +316,8 @@ export default function AdmissionPortalClient({
 
         if (submitResponse.ok && (submitData?.success || submitData?.application_number || submitResponse.status === 201)) {
           setApplicationNumber(submitData.application_number || `ADM-${Date.now()}`);
-          setCurrentStep(4);
+          setCurrentStep(3);
         } else {
-          // If the backend failed due to OTP code specifically:
           const otpErrorMsg = submitData?.otp_code
             ? Array.isArray(submitData.otp_code)
               ? submitData.otp_code.join(', ')
@@ -400,7 +330,6 @@ export default function AdmissionPortalClient({
             return;
           }
 
-          // Also attempt verify-otp endpoint check if application submission reported general failure
           if (submitResponse.status === 400 && submitData?.message?.toLowerCase().includes('otp')) {
             setOtpError(submitData.message);
             setSubmitting(false);
@@ -430,11 +359,16 @@ export default function AdmissionPortalClient({
   };
 
   const steps = [
-    { num: 1, title: 'Student Info' },
-    { num: 2, title: 'Parent & Guardian' },
-    { num: 3, title: 'Verification' },
-    { num: 4, title: 'Confirmed' },
+    { num: 1, title: 'Application Form' },
+    { num: 2, title: 'Verification' },
+    { num: 3, title: 'Confirmed' },
   ];
+
+  const hasConfiguredEmail = normalizedFields.some(
+    (f) =>
+      (f.label.toLowerCase().includes('email') || f.id.toLowerCase().includes('email')) &&
+      !f.label.toLowerCase().includes('name')
+  );
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12 print:p-0 print:m-0 print:max-w-none">
@@ -461,7 +395,7 @@ export default function AdmissionPortalClient({
 
       {/* 2. Visual Stepper Bar */}
       <div className="mb-8 sm:mb-12 bg-white rounded-3xl p-3 sm:p-6 border border-purple-100 shadow-sm print:hidden">
-        <div className="grid grid-cols-4 gap-1.5 sm:gap-4 relative">
+        <div className="grid grid-cols-3 gap-2 sm:gap-6 relative">
           {steps.map((st) => {
             const isCompleted = currentStep > st.num;
             const isCurrent = currentStep === st.num;
@@ -469,7 +403,7 @@ export default function AdmissionPortalClient({
             return (
               <div key={st.num} className="flex flex-col items-center text-center relative z-10">
                 <div
-                  className={`w-8 h-8 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center font-bold text-xs sm:text-base transition-all duration-300 shadow-xs ${
+                  className={`w-9 h-9 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center font-bold text-xs sm:text-base transition-all duration-300 shadow-xs ${
                     isCompleted
                       ? 'bg-accent-green text-white scale-95'
                       : isCurrent
@@ -486,7 +420,7 @@ export default function AdmissionPortalClient({
                   )}
                 </div>
                 <span
-                  className={`text-[10px] sm:text-xs font-bold mt-1.5 sm:mt-2 truncate w-full ${
+                  className={`text-xs sm:text-sm font-bold mt-1.5 sm:mt-2 truncate w-full ${
                     isCurrent
                       ? 'text-primary-color font-black'
                       : isCompleted
@@ -502,27 +436,26 @@ export default function AdmissionPortalClient({
         </div>
       </div>
 
-      {/* 3. Interactive Multi-Step Form Card */}
+      {/* 3. Interactive Form Card */}
       <div className="bg-white rounded-3xl p-6 sm:p-10 border-2 border-purple-100 shadow-md relative overflow-hidden print:p-0 print:border-none print:shadow-none">
         {/* Decorative corner background aura */}
         <div className="absolute top-0 right-0 w-48 h-48 bg-soft-amber rounded-full blur-3xl opacity-60 pointer-events-none print:hidden" />
         <div className="absolute bottom-0 left-0 w-48 h-48 bg-soft-pink rounded-full blur-3xl opacity-60 pointer-events-none print:hidden" />
 
-        {/* STEP 1: Student Information */}
+        {/* STEP 1: Unified Application Form (All fields from API) */}
         {currentStep === 1 && (
-          <form onSubmit={handleNextToStep2} className="relative z-10 space-y-6 animate-fadeIn">
+          <form onSubmit={handleProceedToOTP} className="relative z-10 space-y-6 animate-fadeIn">
             <div className="border-b border-purple-100 pb-4 mb-6">
-              <h2 className="text-xl font-extrabold text-primary-color font-fredoka flex items-center gap-2">
-                <span>Step 1:</span>
-                <span>Little Learner’s Profile</span>
+              <h2 className="text-xl sm:text-2xl font-extrabold text-primary-color font-fredoka flex items-center gap-2">
+                <span>{formConfig.title || 'Online Admission Form'}</span>
               </h2>
-              <p className="text-xs text-gray-500 font-medium mt-1">
-                Tell us about your child to customize classroom placement.
+              <p className="text-xs sm:text-sm text-gray-500 font-medium mt-1">
+                Please fill in the application information below.
               </p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              {step1Fields.map((field) => (
+              {normalizedFields.map((field) => (
                 <div
                   key={field.id}
                   className={field.type === 'textarea' ? 'sm:col-span-2' : ''}
@@ -623,131 +556,12 @@ export default function AdmissionPortalClient({
                   )}
                 </div>
               ))}
-            </div>
-
-            <div className="pt-6 flex justify-end">
-              <button
-                type="submit"
-                className="w-full sm:w-auto px-8 py-3.5 bg-primary-color hover:opacity-95 text-white font-extrabold text-sm rounded-full shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 inline-flex items-center justify-center gap-2 cursor-pointer"
-              >
-                <span>Continue to Parent Details</span>
-              </button>
-            </div>
-          </form>
-        )}
-
-        {/* STEP 2: Parents & Guardian Information */}
-        {currentStep === 2 && (
-          <form onSubmit={handleProceedToOTP} className="relative z-10 space-y-6 animate-fadeIn">
-            <div className="border-b border-purple-100 pb-4 mb-6">
-              <h2 className="text-xl font-extrabold text-primary-color font-fredoka flex items-center gap-2">
-                <span>Step 2:</span>
-                <span>Parents & Guardian Details</span>
-              </h2>
-              <p className="text-xs text-gray-500 font-medium mt-1">
-                Provide contact and emergency details for school correspondence.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              {step2Fields.map((field) => (
-                <div
-                  key={field.id}
-                  className={field.type === 'textarea' ? 'sm:col-span-2' : ''}
-                >
-                  <label className="block text-xs font-bold text-gray-700 mb-1.5 uppercase tracking-wide">
-                    {field.label} {field.required && <span className="text-accent-pink">*</span>}
-                  </label>
-
-                  {field.type === 'textarea' ? (
-                    <textarea
-                      rows={3}
-                      value={formData[field.id] || ''}
-                      onChange={(e) => handleInputChange(field.id, e.target.value)}
-                      placeholder={field.placeholder || ''}
-                      className="w-full px-4 py-3 bg-pastel-purple rounded-2xl border border-purple-100 focus:border-primary-color focus:bg-white focus:outline-none focus:ring-4 focus:ring-purple-100 text-sm font-semibold text-gray-800 transition-all"
-                    />
-                  ) : field.type === 'image' || field.type === 'file' ? (
-                    <div className="space-y-3">
-                      <div className="relative">
-                        <input
-                          type="file"
-                          accept={field.type === 'image' ? 'image/*' : '*'}
-                          onChange={(e) => {
-                            const file = e.target.files?.[0];
-                            handleFileChange(field.id, file);
-                          }}
-                          className="w-full px-4 py-3 bg-pastel-purple rounded-2xl border border-purple-100 file:mr-4 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-primary-color file:text-white hover:file:opacity-90 text-xs text-gray-600 transition-all cursor-pointer"
-                        />
-                      </div>
-
-                      {/* Live Image Preview */}
-                      {imagePreviews[field.id] ? (
-                        <div className="flex items-center gap-3 p-2.5 bg-white rounded-2xl border border-purple-100 shadow-sm animate-fadeIn">
-                          <img
-                            src={imagePreviews[field.id]}
-                            alt="Selected preview"
-                            className="w-16 h-16 object-cover rounded-xl border border-purple-100 shadow-inner"
-                          />
-                          <div className="flex-1 min-w-0">
-                            <span className="text-[11px] font-bold text-accent-green inline-flex items-center gap-1">
-                              <ThemeIcon name="success-check" size={12} /> Photo Selected
-                            </span>
-                            <span className="text-xs text-gray-500 truncate block">
-                              {formData[field.id]}
-                            </span>
-                          </div>
-                        </div>
-                      ) : formData[field.id] ? (
-                        <span className="text-[11px] text-accent-green font-bold mt-1 inline-flex items-center gap-1">
-                          <ThemeIcon name="success-check" size={12} /> Selected: {formData[field.id]}
-                        </span>
-                      ) : null}
-                    </div>
-                  ) : field.type === 'number' || field.type === 'tel' || `${field.id} ${field.label}`.toLowerCase().includes('phone') ? (
-                    <input
-                      type="tel"
-                      inputMode="numeric"
-                      value={formData[field.id] || ''}
-                      onChange={(e) => handlePhoneChange(field.id, e.target.value)}
-                      placeholder={field.placeholder || `Enter ${field.label}`}
-                      className="w-full px-4 py-3 bg-pastel-purple rounded-2xl border border-purple-100 focus:border-primary-color focus:bg-white focus:outline-none focus:ring-4 focus:ring-purple-100 text-sm font-semibold text-gray-800 transition-all"
-                    />
-                  ) : (
-                    <input
-                      type={
-                        field.label.toLowerCase().includes('email') || (field.type === 'email' && !field.label.toLowerCase().includes('name'))
-                          ? 'email'
-                          : field.type === 'number'
-                          ? 'number'
-                          : field.type === 'date'
-                          ? 'date'
-                          : 'text'
-                      }
-                      value={formData[field.id] || ''}
-                      onChange={(e) => handleInputChange(field.id, e.target.value)}
-                      placeholder={field.placeholder || `Enter ${field.label}`}
-                      className="w-full px-4 py-3 bg-pastel-purple rounded-2xl border border-purple-100 focus:border-primary-color focus:bg-white focus:outline-none focus:ring-4 focus:ring-purple-100 text-sm font-semibold text-gray-800 transition-all"
-                    />
-                  )}
-
-                  {errors[field.id] && (
-                    <p className="text-[11px] font-bold text-accent-pink mt-1 animate-fadeIn inline-flex items-center gap-1">
-                      <ThemeIcon name="warning-alert" size={12} /> {errors[field.id]}
-                    </p>
-                  )}
-                </div>
-              ))}
 
               {/* Ensure an email input exists if tenant config didn't include one */}
-              {!formConfig.fields?.some(
-                (f) =>
-                  (f.label.toLowerCase().includes('email') || f.id.toLowerCase().includes('email')) &&
-                  !f.label.toLowerCase().includes('name')
-              ) && (
+              {!hasConfiguredEmail && (
                 <div>
                   <label className="block text-xs font-bold text-gray-700 mb-1.5 uppercase tracking-wide">
-                    Guardian Email <span className="text-accent-pink">*</span>
+                    Email Address <span className="text-accent-pink">*</span>
                   </label>
                   <input
                     type="email"
@@ -772,32 +586,24 @@ export default function AdmissionPortalClient({
               </div>
             )}
 
-            <div className="pt-6 flex flex-col-reverse sm:flex-row items-center justify-between gap-3 sm:gap-4">
-              <button
-                type="button"
-                onClick={() => setCurrentStep(1)}
-                className="w-full sm:w-auto px-6 py-3 border border-purple-200 text-gray-600 hover:bg-purple-50 font-bold text-xs rounded-full transition-all cursor-pointer text-center"
-              >
-                Back
-              </button>
-
+            <div className="pt-6 flex justify-end">
               <button
                 type="submit"
                 disabled={otpLoading}
-                className="w-full sm:w-auto px-8 py-3.5 bg-secondary-color hover:opacity-95 text-white font-extrabold text-sm rounded-full shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 inline-flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 text-center"
+                className="w-full sm:w-auto px-8 py-3.5 bg-primary-color hover:opacity-95 text-white font-extrabold text-sm rounded-full shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 inline-flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 text-center"
               >
                 {otpLoading ? (
                   <span>Sending Verification Code...</span>
                 ) : (
-                  <span>Proceed to Email Verification</span>
+                  <span>Submit & Verify</span>
                 )}
               </button>
             </div>
           </form>
         )}
 
-        {/* STEP 3: OTP Verification */}
-        {currentStep === 3 && (
+        {/* STEP 2: OTP Verification */}
+        {currentStep === 2 && (
           <form onSubmit={handleVerifyAndSubmit} className="relative z-10 max-w-lg mx-auto py-6 text-center space-y-6 animate-fadeIn">
             <div className="w-16 h-16 mx-auto rounded-3xl bg-pastel-purple text-primary-color flex items-center justify-center shadow-inner border border-purple-100">
               <ThemeIcon name="mail-envelope" size={32} />
@@ -805,7 +611,7 @@ export default function AdmissionPortalClient({
 
             <div>
               <h2 className="text-2xl font-black text-primary-color font-fredoka">
-                Verify Guardian Email
+                Verify Email Address
               </h2>
               <div className="flex flex-wrap items-center justify-center gap-2 mt-2">
                 <p className="text-xs text-gray-600 font-medium leading-relaxed">
@@ -816,10 +622,10 @@ export default function AdmissionPortalClient({
                 </p>
                 <button
                   type="button"
-                  onClick={() => setCurrentStep(2)}
+                  onClick={() => setCurrentStep(1)}
                   className="text-xs font-bold text-accent-pink hover:text-primary-color underline underline-offset-2 transition-colors cursor-pointer"
                 >
-                  Change Email
+                  Edit Details
                 </button>
               </div>
             </div>
@@ -872,7 +678,7 @@ export default function AdmissionPortalClient({
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
                 type="button"
-                onClick={() => setCurrentStep(2)}
+                onClick={() => setCurrentStep(1)}
                 className="w-full sm:w-auto px-6 py-3 border border-purple-200 text-gray-600 hover:bg-purple-50 font-bold text-xs rounded-full transition-all cursor-pointer"
               >
                 Back to Details
@@ -883,14 +689,14 @@ export default function AdmissionPortalClient({
                 disabled={submitting}
                 className="w-full sm:w-auto px-8 py-3.5 bg-primary-color hover:opacity-95 text-white font-extrabold text-sm rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 cursor-pointer disabled:opacity-50"
               >
-                {submitting ? 'Submitting Application...' : 'Verify & Submit Application'}
+                {submitting ? 'Submitting Application...' : 'Verify & Complete Application'}
               </button>
             </div>
           </form>
         )}
 
-        {/* STEP 4: Success & Confirmation */}
-        {currentStep === 4 && (
+        {/* STEP 3: Success & Confirmation */}
+        {currentStep === 3 && (
           <div className="relative z-10 max-w-lg mx-auto py-4 text-center space-y-6 animate-fadeIn print:py-0 print:max-w-none print:text-left">
             {/* Realtime birthday popper confetti explosion canvas */}
             <PartyPopperExplosion />
@@ -903,9 +709,15 @@ export default function AdmissionPortalClient({
                 {`Welcome to ${siteTitle || 'Our School'}!`}
               </h2>
               <p className="text-gray-600 text-xs sm:text-sm mt-2 leading-relaxed font-medium">
-                Thank you, <strong>{formData['father_name'] || formData['mother_name'] || 'Guardian'}</strong>. We have
-                received your admission registration for <strong>{formData['student_name']}</strong> in{' '}
-                <strong>{formData['applied_class']}</strong>.
+                Thank you! We have received your admission application for{' '}
+                <strong>
+                  {formData['student_name'] ||
+                    formData['name'] ||
+                    formData['learner_name'] ||
+                    formData['applicant_name'] ||
+                    'Student'}
+                </strong>
+                {formData['applied_class'] ? ` in ${formData['applied_class']}` : ''}.
               </p>
             </div>
 
@@ -919,17 +731,23 @@ export default function AdmissionPortalClient({
                   {applicationNumber}
                 </span>
               </div>
-              <div className="flex flex-wrap justify-between gap-1 text-xs text-gray-600">
-                <span>Student Name:</span>
-                <strong className="text-gray-900 break-words">{formData['student_name']}</strong>
-              </div>
-              <div className="flex flex-wrap justify-between gap-1 text-xs text-gray-600">
-                <span>Enrolled Grade:</span>
-                <strong className="text-secondary-color">{formData['applied_class']}</strong>
-              </div>
+              {(formData['student_name'] || formData['name'] || formData['learner_name'] || formData['applicant_name']) && (
+                <div className="flex flex-wrap justify-between gap-1 text-xs text-gray-600">
+                  <span>Student Name:</span>
+                  <strong className="text-gray-900 break-words">
+                    {formData['student_name'] || formData['name'] || formData['learner_name'] || formData['applicant_name']}
+                  </strong>
+                </div>
+              )}
+              {formData['applied_class'] && (
+                <div className="flex flex-wrap justify-between gap-1 text-xs text-gray-600">
+                  <span>Enrolled Grade:</span>
+                  <strong className="text-secondary-color">{formData['applied_class']}</strong>
+                </div>
+              )}
               <div className="flex flex-wrap justify-between gap-1 text-xs text-gray-600">
                 <span>Contact Email:</span>
-                <strong className="text-gray-900 break-all">{formData['guardian_email']}</strong>
+                <strong className="text-gray-900 break-all">{getApplicantEmail()}</strong>
               </div>
             </div>
 
