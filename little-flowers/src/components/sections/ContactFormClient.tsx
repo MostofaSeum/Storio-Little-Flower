@@ -47,7 +47,7 @@ export default function ContactFormClient({ settings, tenantHost }: ContactFormC
 
       if (res.ok) {
         setStatus('success');
-        setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+        setFormData({ name: '', email: '', mobile: '', subject: '', message: '' });
       } else {
         const err = data?.error || data?.message || data?.detail || `Failed to submit message (${res.status}).`;
         setErrorMessage(err);
@@ -212,8 +212,8 @@ export default function ContactFormClient({ settings, tenantHost }: ContactFormC
                   </label>
                   <input
                     type="tel"
-                    name="phone"
-                    value={formData.phone}
+                    name="mobile"
+                    value={formData.mobile}
                     onChange={handleChange}
                     placeholder="+1 (555) 000-0000"
                     className="w-full px-4 py-3 rounded-2xl bg-purple-50/50 border border-purple-100 focus:outline-none focus:border-primary-color text-sm text-gray-900 transition-colors"

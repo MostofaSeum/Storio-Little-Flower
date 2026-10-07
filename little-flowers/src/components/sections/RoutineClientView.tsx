@@ -28,19 +28,65 @@ export default function RoutineClientView({ routines }: RoutineClientViewProps) 
   // Active day selection for the current routine view (initialized dynamically from available days)
   const [selectedDay, setSelectedDay] = useState<string>('');
 
-  // Filter routines
+  // Helper to extract schedule days array from a routine
+  const getRoutineDays = (r: StorioClassRoutine) => {
+    const sched = r.schedule || (r as any).schedule_json;
+    if (!sched) return [];
+    if (Array.isArray(sched)) return sched;
+    const schedObj = sched as Record<string, unknown>;
+    if (Array.isArray(schedObj.days)) {
+      return schedObj.days as Array<{ day: string; periods?: any[]; slots?: any[] }>;
+    }
+    return [];
+  };
+
+  // Filter routines: matches class, shift, and search query across:
+  // - class_name, section, shift, academic_year
+  // - days, subjects, teachers, rooms, period numbers, times
   const filteredRoutines = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+
     return routines.filter((r) => {
       const matchClass =
         selectedClass === 'All' || (r.class_name && r.class_name.toLowerCase() === selectedClass.toLowerCase());
       const matchShift =
         selectedShift === 'All' ||
         (r.shift || '').toLowerCase() === selectedShift.toLowerCase();
-      const matchSearch =
-        !searchQuery ||
-        (r.class_name && r.class_name.toLowerCase().includes(searchQuery.toLowerCase())) ||
-        (r.section && r.section.toLowerCase().includes(searchQuery.toLowerCase()));
-      return matchClass && matchShift && matchSearch;
+
+      if (!matchClass || !matchShift) return false;
+      if (!query) return true;
+
+      // Check top-level metadata
+      const metaMatches =
+        (r.class_name && r.class_name.toLowerCase().includes(query)) ||
+        (r.section && r.section.toLowerCase().includes(query)) ||
+        (r.shift && r.shift.toLowerCase().includes(query)) ||
+        (r.academic_year && String(r.academic_year).includes(query));
+
+      if (metaMatches) return true;
+
+      // Check deeply inside schedule periods/slots
+      const days = getRoutineDays(r);
+      const scheduleMatches = days.some((d) => {
+        if (d.day && d.day.toLowerCase().includes(query)) return true;
+        const periods = d.periods || d.slots || [];
+        return periods.some((p: any) => {
+          const subject = (p.subject || '').toLowerCase();
+          const teacher = (p.teacher || '').toLowerCase();
+          const room = (p.room || '').toLowerCase();
+          const period = (p.period !== undefined ? `period ${p.period}` : '').toLowerCase();
+          const time = (p.time || `${p.start_time || ''} ${p.end_time || ''}`).toLowerCase();
+          return (
+            subject.includes(query) ||
+            teacher.includes(query) ||
+            room.includes(query) ||
+            period.includes(query) ||
+            time.includes(query)
+          );
+        });
+      });
+
+      return scheduleMatches;
     });
   }, [routines, selectedClass, selectedShift, searchQuery]);
 
@@ -50,30 +96,58 @@ export default function RoutineClientView({ routines }: RoutineClientViewProps) 
   // Extract schedule days (supporting both SDK .schedule and API raw .schedule_json)
   const scheduleDays = useMemo(() => {
     if (!activeRoutine) return [];
-    const sched = activeRoutine.schedule || (activeRoutine as any).schedule_json;
-    if (!sched) return [];
-    if (Array.isArray(sched)) {
-      return sched;
-    }
-    // Object format { days: [...] }
-    const schedObj = sched as Record<string, unknown>;
-    if (Array.isArray(schedObj.days)) {
-      return schedObj.days as Array<{ day: string; periods?: any[]; slots?: any[] }>;
-    }
-    return [];
+    return getRoutineDays(activeRoutine);
   }, [activeRoutine]);
 
-  // Currently selected day schedule (defaults cleanly to the first day returned by the API)
+  // When search query is entered, auto-detect which day has the matching period(s)
+  // so the user immediately sees the search result without having to click around
+  const matchingDayFromSearch = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+    if (!query || scheduleDays.length === 0) return null;
+
+    // Check if the current selectedDay already has matches
+    const currentMatch = scheduleDays.find(
+      (d) =>
+        d.day?.toLowerCase() === selectedDay.toLowerCase() &&
+        (d.periods || d.slots || []).some((p: any) =>
+          (p.subject || '').toLowerCase().includes(query) ||
+          (p.teacher || '').toLowerCase().includes(query) ||
+          (p.room || '').toLowerCase().includes(query) ||
+          (p.period !== undefined && `period ${p.period}`.toLowerCase().includes(query))
+        )
+    );
+    if (currentMatch) return currentMatch.day;
+
+    // Otherwise find the first day containing a matching period
+    const firstMatch = scheduleDays.find((d) => {
+      if (d.day?.toLowerCase().includes(query)) return true;
+      const periods = d.periods || d.slots || [];
+      return periods.some((p: any) =>
+        (p.subject || '').toLowerCase().includes(query) ||
+        (p.teacher || '').toLowerCase().includes(query) ||
+        (p.room || '').toLowerCase().includes(query) ||
+        (p.period !== undefined && `period ${p.period}`.toLowerCase().includes(query))
+      );
+    });
+
+    return firstMatch ? firstMatch.day : null;
+  }, [scheduleDays, searchQuery, selectedDay]);
+
+  // Currently selected day schedule
   const currentDaySchedule = useMemo(() => {
     if (scheduleDays.length === 0) return null;
-    if (selectedDay) {
+
+    // If search matched a specific day, prioritize that
+    const effectiveDay = matchingDayFromSearch || selectedDay;
+
+    if (effectiveDay) {
       const match = scheduleDays.find(
-        (d) => d.day?.toLowerCase() === selectedDay.toLowerCase()
+        (d) => d.day?.toLowerCase() === effectiveDay.toLowerCase()
       );
       if (match) return match;
     }
     return scheduleDays[0];
-  }, [scheduleDays, selectedDay]);
+  }, [scheduleDays, selectedDay, matchingDayFromSearch]);
 
   const routineFile =
     activeRoutine?.routine_file_url ||
@@ -128,17 +202,29 @@ export default function RoutineClientView({ routines }: RoutineClientViewProps) 
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search section or period..."
-              className="w-full pl-9 pr-4 py-2.5 rounded-full text-xs sm:text-sm bg-white border border-purple-100 focus:outline-hidden focus:border-primary-color text-gray-800 placeholder-gray-400 shadow-2xs"
+              placeholder="Search subject, teacher, period..."
+              className="w-full pl-9 pr-8 py-2.5 rounded-full text-xs sm:text-sm bg-white border border-purple-100 focus:outline-hidden focus:border-primary-color text-gray-800 placeholder-gray-400 shadow-2xs"
             />
             <svg
-              className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2"
+              className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => setSearchQuery('')}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
+                aria-label="Clear search"
+              >
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -235,15 +321,45 @@ export default function RoutineClientView({ routines }: RoutineClientViewProps) 
           )}
 
           {/* Periods Timetable Grid */}
-          {currentDaySchedule && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {(currentDaySchedule.periods || currentDaySchedule.slots || []).map(
-                (item: any, idx: number) => {
+          {currentDaySchedule && (() => {
+            const allItems = (currentDaySchedule.periods || currentDaySchedule.slots || []) as any[];
+            const query = searchQuery.trim().toLowerCase();
+
+            // Filter items matching the query if searching specifically
+            const displayedItems = query
+              ? allItems.filter((item: any) => {
+                  const subjectName = (item.subject || '').toLowerCase();
+                  const teacherName = (item.teacher || '').toLowerCase();
+                  const roomName = (item.room || '').toLowerCase();
+                  const periodTitle = (item.period !== undefined ? `period ${item.period}` : '').toLowerCase();
+                  const periodTime = (item.time || `${item.start_time || ''} ${item.end_time || ''}`).toLowerCase();
+                  return (
+                    subjectName.includes(query) ||
+                    teacherName.includes(query) ||
+                    roomName.includes(query) ||
+                    periodTitle.includes(query) ||
+                    periodTime.includes(query)
+                  );
+                })
+              : allItems;
+
+            const itemsToShow = displayedItems.length > 0 ? displayedItems : allItems;
+
+            return (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {itemsToShow.map((item: any, idx: number) => {
                   const periodTitle = item.period ? `Period ${item.period}` : null;
                   const subjectName = item.subject;
                   const teacherName = item.teacher;
                   const roomName = item.room;
                   const periodTime = item.time || (item.start_time && item.end_time ? `${item.start_time} - ${item.end_time}` : item.start_time || item.end_time || null);
+
+                  const isMatched = query && (
+                    (subjectName || '').toLowerCase().includes(query) ||
+                    (teacherName || '').toLowerCase().includes(query) ||
+                    (roomName || '').toLowerCase().includes(query) ||
+                    (periodTitle || '').toLowerCase().includes(query)
+                  );
 
                   const colorStyles = [
                     { border: 'border-l-secondary-color', badgeBg: 'bg-amber-50 text-secondary-color' },
@@ -256,7 +372,7 @@ export default function RoutineClientView({ routines }: RoutineClientViewProps) 
                   return (
                     <div
                       key={idx}
-                      className={`p-5 rounded-2xl bg-white border border-purple-100/80 shadow-xs hover:shadow-md transition-all border-l-4 ${currentStyle.border} flex flex-col justify-between`}
+                      className={`p-5 rounded-2xl bg-white border border-purple-100/80 shadow-xs hover:shadow-md transition-all border-l-4 ${currentStyle.border} ${isMatched ? 'ring-2 ring-primary-color/50 bg-amber-50/20' : ''} flex flex-col justify-between`}
                     >
                       <div>
                         {(periodTitle || periodTime) && (
@@ -303,10 +419,10 @@ export default function RoutineClientView({ routines }: RoutineClientViewProps) 
                       )}
                     </div>
                   );
-                }
-              )}
-            </div>
-          )}
+                })}
+              </div>
+            );
+          })()}
         </div>
       )}
     </div>
