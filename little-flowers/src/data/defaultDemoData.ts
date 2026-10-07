@@ -1682,7 +1682,7 @@ export const DEFAULT_DEMO_DATA: {
     mobile: "+880 1711-234567",
     phone: "+880 2-9876543",
     email: "rti@littleflowers.edu.bd",
-    photo_url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
+    photo_url: "/homepage/Teachers/Teacher4.jpg",
     office_hours: "Sunday to Thursday: 09:00 AM - 03:00 PM",
     description: "In accordance with the Right to Information Act, our dedicated information desk ensures transparent, accountable, and prompt assistance for parents, guardians, and community members.",
     services_offered: [
@@ -1700,7 +1700,7 @@ export const DEFAULT_DEMO_DATA: {
     mobile: "+880 1819-876543",
     phone: "+880 2-9876544",
     email: "complaints@littleflowers.edu.bd",
-    photo_url: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80",
+    photo_url: "/homepage/Teachers/Teacher2.jpg",
     description: "Our Grievance Redress System (GRS) provides a secure, confidential, and empathetic platform to resolve student safety concerns, guardian feedback, and academic grievances with prompt fairness.",
     office_hours: "Sunday to Thursday: 10:00 AM - 02:00 PM",
     complaint_process: [
