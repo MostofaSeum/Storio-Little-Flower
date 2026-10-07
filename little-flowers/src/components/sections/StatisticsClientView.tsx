@@ -156,13 +156,16 @@ export default function StatisticsClientView({ stats }: StatisticsClientViewProp
         </div>
       </div>
 
-      {/* 3. Class-by-Class Demographics Breakdown */}
+      {/* 3. Program Demographics Breakdown */}
       <div className="space-y-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
             <h3 className="text-2xl font-extrabold font-fredoka text-gray-900">
-              Grade-Wise Student Distribution
+              Program-Wise Student Distribution
             </h3>
+            <p className="text-xs text-gray-500 font-medium mt-0.5">
+              Filter learner enrollment metrics by educational program and age tier.
+            </p>
           </div>
 
           {/* Filter Pills */}
@@ -176,7 +179,7 @@ export default function StatisticsClientView({ stats }: StatisticsClientViewProp
                   : 'bg-white text-gray-600 border border-purple-100 hover:bg-pastel-purple'
               }`}
             >
-              All Grades
+              All Programs
             </button>
             {classes.map((cls) => (
               <button
@@ -195,7 +198,7 @@ export default function StatisticsClientView({ stats }: StatisticsClientViewProp
           </div>
         </div>
 
-        {/* Classes Cards */}
+        {/* Programs Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {displayClasses.map((item, idx) => {
             const classTotal = item.total_students ?? ((item.total_male || 0) + (item.total_female || 0));

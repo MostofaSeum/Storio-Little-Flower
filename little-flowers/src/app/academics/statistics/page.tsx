@@ -81,7 +81,7 @@ export default async function StatisticsPage() {
             </h1>
 
             <p className="mt-3 text-sm sm:text-base text-gray-600 leading-relaxed font-quicksand max-w-2xl mx-auto">
-              Transparent institutional student strength, gender parity, and class-wise section allocation.
+              Transparent institutional student strength, gender parity, and program-wise section allocation.
             </p>
           </div>
         </section>
