@@ -65,7 +65,7 @@ export default async function AdmissionPage() {
         ) : (
           <div className="max-w-2xl mx-auto px-4 py-20 text-center">
             <div className="w-16 h-16 mx-auto mb-4 rounded-3xl bg-amber-100 text-secondary-color flex items-center justify-center text-2xl font-bold">
-              ℹ️
+              <img src="/icons/info-circle.svg" alt="Info" className="w-4 h-4 inline-block" />
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold font-fredoka">
               Admissions Closed

@@ -134,7 +134,7 @@ export default function AccordionGallery({ events }: AccordionGalleryProps) {
                   {/* Category / Location & Time Tags */}
                   <div className="flex flex-wrap items-center gap-2 mb-2">
                     <span className="text-xs font-bold text-amber-300 bg-amber-950/60 backdrop-blur-xs px-2.5 py-0.5 rounded-full border border-amber-400/30">
-                      ⏰ {time}
+                      <img src="/icons/clock-time.svg" alt="Time" className="w-4 h-4 inline-block" /> {time}
                     </span>
                     {event.location && (
                       <span className="inline-flex items-center gap-1 text-xs font-bold text-sky-200 bg-sky-950/60 backdrop-blur-xs px-2.5 py-0.5 rounded-full border border-sky-400/30">
@@ -235,7 +235,7 @@ export default function AccordionGallery({ events }: AccordionGalleryProps) {
               {isActive && (
                 <div className="p-4 bg-white space-y-2 text-xs text-gray-600 animate-fadeIn">
                   <div className="flex items-center gap-2 text-primary-color font-bold">
-                    <span>⏰ {time}</span>
+                    <span><img src="/icons/clock-time.svg" alt="Time" className="w-4 h-4 inline-block" /> {time}</span>
                     {event.location && (
                       <span className="inline-flex items-center gap-1">• <ThemeIcon name="location-pin" size={13} /> {event.location}</span>
                     )}

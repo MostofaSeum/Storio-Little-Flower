@@ -250,7 +250,7 @@ export default async function InstitutionProfilePage() {
                     {profile?.mission && (
                       <div className="p-6 rounded-3xl bg-pastel-purple border border-purple-100">
                         <div className="w-10 h-10 rounded-2xl bg-primary-color text-white flex items-center justify-center font-bold text-lg mb-3">
-                          🎯
+                          <img src="/icons/exam-report.svg" alt="Mission" className="w-10 h-10" />
                         </div>
                         <h3 className="text-lg font-bold font-fredoka text-primary-color mb-2">Our Mission</h3>
                         <p className="text-sm text-gray-700 leading-relaxed font-quicksand whitespace-pre-line">
@@ -262,7 +262,7 @@ export default async function InstitutionProfilePage() {
                     {profile?.vision && (
                       <div className="p-6 rounded-3xl bg-soft-amber border border-amber-100">
                         <div className="w-10 h-10 rounded-2xl bg-secondary-color text-white flex items-center justify-center font-bold text-lg mb-3">
-                          🌟
+                          <img src="/icons/sparkle-star.svg" alt="Vision" className="w-10 h-10" />
                         </div>
                         <h3 className="text-lg font-bold font-fredoka text-secondary-color mb-2">Our Vision</h3>
                         <p className="text-sm text-gray-700 leading-relaxed font-quicksand whitespace-pre-line">

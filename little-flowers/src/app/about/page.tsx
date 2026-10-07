@@ -126,7 +126,7 @@ export default async function AboutPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
                 <div className="p-5 bg-white rounded-2xl border border-purple-50 shadow-sm">
                   <div className="w-10 h-10 rounded-xl bg-pink-100 text-accent-pink flex items-center justify-center text-xl font-bold mb-3">
-                    🎯
+                    <img src="/icons/exam-report.svg" alt="Mission" className="w-7 h-7" />
                   </div>
                   <h3 className="font-extrabold text-gray-900 text-base mb-1.5">Our Mission</h3>
                   <p className="text-xs text-gray-600 leading-relaxed">
@@ -136,7 +136,7 @@ export default async function AboutPage() {
 
                 <div className="p-5 bg-white rounded-2xl border border-purple-50 shadow-sm">
                   <div className="w-10 h-10 rounded-xl bg-amber-100 text-secondary-color flex items-center justify-center text-xl font-bold mb-3">
-                    🌱
+                    <img src="/icons/sprout-admissions.svg" alt="Vision" className="w-7 h-7" />
                   </div>
                   <h3 className="font-extrabold text-gray-900 text-base mb-1.5">Our Vision</h3>
                   <p className="text-xs text-gray-600 leading-relaxed">

@@ -143,7 +143,7 @@ export default async function VideosGalleryPage() {
                             />
                             <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
                               <div className="w-12 h-12 rounded-full bg-white/90 text-primary-color flex items-center justify-center text-xl shadow-md">
-                                ▶
+                                <img src="/icons/play-video.svg" alt="Play" className="w-4 h-4" />
                               </div>
                             </div>
                           </a>

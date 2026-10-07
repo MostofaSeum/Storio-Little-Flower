@@ -52,7 +52,7 @@ export default function TestimonialSlider({ testimonials }: TestimonialSliderPro
                 {/* Star rating */}
                 <div className="flex items-center space-x-1 text-secondary-color text-base mb-4">
                   {Array.from({ length: t.rating || 5 }).map((_, i) => (
-                    <span key={i} className="transform hover:scale-125 transition-transform">★</span>
+                    <img key={i} src="/icons/star-rating.svg" alt="Star" className="w-4 h-4 transform hover:scale-125 transition-transform inline-block" />
                   ))}
                 </div>
 

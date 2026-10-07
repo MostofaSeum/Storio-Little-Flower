@@ -150,7 +150,7 @@ export default function StaffClientView({
               onClick={() => setSearchQuery('')}
               className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700 p-0.5 text-xs rounded-full"
             >
-              ✕
+              <img src="/icons/close-cross.svg" alt="Close" className="w-4 h-4" />
             </button>
           )}
         </div>
@@ -270,7 +270,7 @@ export default function StaffClientView({
       ) : (
         <div className="max-w-md mx-auto text-center py-16 px-6 bg-white rounded-3xl border border-gray-100 shadow-sm">
           <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-purple-50 text-primary-color flex items-center justify-center text-3xl">
-            👥
+            <img src="/icons/user-group.svg" alt="Team" className="w-6 h-6" />
           </div>
           <h3 className="text-lg font-bold text-gray-900 mb-2">No Profiles Found</h3>
           <p className="text-sm text-gray-500">
