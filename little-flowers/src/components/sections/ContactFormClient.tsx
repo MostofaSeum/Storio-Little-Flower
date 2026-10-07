@@ -13,7 +13,7 @@ export default function ContactFormClient({ settings, tenantHost }: ContactFormC
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
+    mobile: '',
     subject: '',
     message: '',
   });
