@@ -45,7 +45,7 @@ export default function AcademicsNavTabs({
   ];
 
   return (
-    <div className="flex justify-center mb-8 reveal-on-scroll">
+    <div className="flex justify-center mb-5 sm:mb-6 reveal-on-scroll">
       <div className="inline-flex flex-wrap items-center justify-center p-1.5 bg-pastel-purple border border-purple-100 rounded-3xl shadow-xs gap-1.5 max-w-full">
         {tabs.map((tab) => {
           const isActive = pathname === tab.href || pathname?.startsWith(`${tab.href}/`);

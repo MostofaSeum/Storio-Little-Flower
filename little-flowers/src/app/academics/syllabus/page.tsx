@@ -76,7 +76,7 @@ export default async function SyllabusPage() {
         </section>
 
         {/* Main Content */}
-        <section className="site-section-py site-section-px site-container w-full">
+        <section className="pt-6 sm:pt-8 pb-16 sm:pb-20 site-section-px site-container w-full">
           <AcademicsNavTabs
             routineCount={routineCount}
             syllabusCount={syllabuses.length}

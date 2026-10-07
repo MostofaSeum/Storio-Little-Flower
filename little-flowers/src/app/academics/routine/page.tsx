@@ -77,7 +77,7 @@ export default async function RoutinePage() {
         </section>
 
         {/* Content Section */}
-        <section className="site-section-py site-section-px site-container w-full">
+        <section className="pt-6 sm:pt-8 pb-16 sm:pb-20 site-section-px site-container w-full">
           {/* Sub-navigation tabs */}
           <AcademicsNavTabs
             routineCount={routines.length}
