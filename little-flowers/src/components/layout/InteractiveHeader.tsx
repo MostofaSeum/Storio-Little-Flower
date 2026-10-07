@@ -81,6 +81,8 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
         customVarColor = 'var(--nav-contact-color, var(--primary))';
       } else if (lowerLabel.includes('blog')) {
         customVarColor = 'var(--nav-blog-color, var(--secondary))';
+      } else if (lowerLabel.includes('promo')) {
+        customVarColor = 'var(--secondary)';
       }
 
       const color = customVarColor || colorPalette[index % colorPalette.length];

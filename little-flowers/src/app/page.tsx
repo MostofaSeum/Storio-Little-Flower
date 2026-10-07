@@ -241,7 +241,7 @@ export default async function Home() {
       <StaffSection staffList={staffList} />
 
       {/* 9. ADMISSIONS CALL-TO-ACTION PROMOTION */}
-      <PromoCtaSection promo={activePromo} />
+      <PromoCtaSection promotions={promotions} promo={activePromo} />
 
       {/* 10. PHOTO GALLERY MOMENTS */}
       <GallerySection items={galleryItems} siteTitle={settings?.site_title} />
