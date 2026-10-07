@@ -25,21 +25,21 @@ export default function RoutineClientView({ routines }: RoutineClientViewProps) 
   const [selectedShift, setSelectedShift] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
-  // Active day selection for the current routine view
-  const [selectedDay, setSelectedDay] = useState<string>('Sunday');
+  // Active day selection for the current routine view (initialized dynamically from available days)
+  const [selectedDay, setSelectedDay] = useState<string>('');
 
   // Filter routines
   const filteredRoutines = useMemo(() => {
     return routines.filter((r) => {
       const matchClass =
-        selectedClass === 'All' || r.class_name.toLowerCase() === selectedClass.toLowerCase();
+        selectedClass === 'All' || (r.class_name && r.class_name.toLowerCase() === selectedClass.toLowerCase());
       const matchShift =
         selectedShift === 'All' ||
         (r.shift || '').toLowerCase() === selectedShift.toLowerCase();
       const matchSearch =
         !searchQuery ||
-        r.class_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (r.section || '').toLowerCase().includes(searchQuery.toLowerCase());
+        (r.class_name && r.class_name.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (r.section && r.section.toLowerCase().includes(searchQuery.toLowerCase()));
       return matchClass && matchShift && matchSearch;
     });
   }, [routines, selectedClass, selectedShift, searchQuery]);
@@ -63,13 +63,16 @@ export default function RoutineClientView({ routines }: RoutineClientViewProps) 
     return [];
   }, [activeRoutine]);
 
-  // Currently selected day schedule
+  // Currently selected day schedule (defaults cleanly to the first day returned by the API)
   const currentDaySchedule = useMemo(() => {
     if (scheduleDays.length === 0) return null;
-    const match = scheduleDays.find(
-      (d) => d.day?.toLowerCase() === selectedDay.toLowerCase()
-    );
-    return match || scheduleDays[0];
+    if (selectedDay) {
+      const match = scheduleDays.find(
+        (d) => d.day?.toLowerCase() === selectedDay.toLowerCase()
+      );
+      if (match) return match;
+    }
+    return scheduleDays[0];
   }, [scheduleDays, selectedDay]);
 
   const routineFile =
@@ -148,7 +151,7 @@ export default function RoutineClientView({ routines }: RoutineClientViewProps) 
           </div>
           <h3 className="text-xl font-bold font-fredoka text-gray-800 mb-2">No Routine Found</h3>
           <p className="text-sm text-gray-500 max-w-md mx-auto">
-            There are no class timetables matching your selected criteria. Please try another grade or clear your search.
+            There are no class timetables matching your selected criteria.
           </p>
         </div>
       ) : (
@@ -158,9 +161,11 @@ export default function RoutineClientView({ routines }: RoutineClientViewProps) 
             <div className="p-6 sm:p-8 rounded-3xl bg-white border border-purple-100 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <div>
                 <div className="flex flex-wrap items-center gap-2 mb-2">
-                  <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide bg-amber-50 text-secondary-color">
-                    Academic Year {activeRoutine.academic_year || 2026}
-                  </span>
+                  {activeRoutine.academic_year && (
+                    <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide bg-amber-50 text-secondary-color">
+                      Academic Year {activeRoutine.academic_year}
+                    </span>
+                  )}
                   {activeRoutine.shift && (
                     <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide bg-blue-50 text-accent-blue">
                       {activeRoutine.shift} Shift
@@ -172,9 +177,11 @@ export default function RoutineClientView({ routines }: RoutineClientViewProps) 
                     </span>
                   )}
                 </div>
-                <h2 className="text-2xl sm:text-3xl font-extrabold font-fredoka text-gray-900">
-                  {activeRoutine.class_name} Class Routine
-                </h2>
+                {activeRoutine.class_name && (
+                  <h2 className="text-2xl sm:text-3xl font-extrabold font-fredoka text-gray-900">
+                    {activeRoutine.class_name} Class Routine
+                  </h2>
+                )}
                 {activeRoutine.effective_from && (
                   <p className="text-xs text-gray-500 mt-1">
                     Effective From: {new Date(activeRoutine.effective_from).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
@@ -203,7 +210,8 @@ export default function RoutineClientView({ routines }: RoutineClientViewProps) 
           {scheduleDays.length > 0 && (
             <div className="flex flex-wrap items-center gap-2 pb-2">
               {scheduleDays.map((d) => {
-                const dayName = d.day || 'Day';
+                const dayName = d.day;
+                if (!dayName) return null;
                 const isCurrent =
                   currentDaySchedule?.day?.toLowerCase() === dayName.toLowerCase();
                 return (
@@ -229,11 +237,11 @@ export default function RoutineClientView({ routines }: RoutineClientViewProps) 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {(currentDaySchedule.periods || currentDaySchedule.slots || []).map(
                 (item: any, idx: number) => {
-                  const periodTitle = item.period || `Period ${idx + 1}`;
-                  const subjectName = item.subject || 'Creative Activity';
-                  const teacherName = item.teacher || 'Class Mentor';
-                  const roomName = item.room || 'Main Hall';
-                  const periodTime = item.time || (item.start_time && item.end_time ? `${item.start_time} - ${item.end_time}` : 'Morning');
+                  const periodTitle = item.period ? `Period ${item.period}` : null;
+                  const subjectName = item.subject;
+                  const teacherName = item.teacher;
+                  const roomName = item.room;
+                  const periodTime = item.time || (item.start_time && item.end_time ? `${item.start_time} - ${item.end_time}` : item.start_time || item.end_time || null);
 
                   const colorStyles = [
                     { border: 'border-l-secondary-color', badgeBg: 'bg-amber-50 text-secondary-color' },
@@ -249,27 +257,41 @@ export default function RoutineClientView({ routines }: RoutineClientViewProps) 
                       className={`p-5 rounded-2xl bg-white border border-purple-100/80 shadow-xs hover:shadow-md transition-all border-l-4 ${currentStyle.border} flex flex-col justify-between`}
                     >
                       <div>
-                        <div className="flex items-center justify-between gap-2 mb-2">
-                          <span className={`text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${currentStyle.badgeBg}`}>
-                            {periodTitle}
-                          </span>
-                          <span className="text-xs font-semibold text-gray-500">
-                            {periodTime}
-                          </span>
-                        </div>
-                        <h4 className="text-base font-extrabold font-fredoka text-gray-900 mt-1">
-                          {subjectName}
-                        </h4>
+                        {(periodTitle || periodTime) && (
+                          <div className="flex items-center justify-between gap-2 mb-2">
+                            {periodTitle && (
+                              <span className={`text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${currentStyle.badgeBg}`}>
+                                {periodTitle}
+                              </span>
+                            )}
+                            {periodTime && (
+                              <span className="text-xs font-semibold text-gray-500">
+                                {periodTime}
+                              </span>
+                            )}
+                          </div>
+                        )}
+                        {subjectName && (
+                          <h4 className="text-base font-extrabold font-fredoka text-gray-900 mt-1">
+                            {subjectName}
+                          </h4>
+                        )}
                       </div>
 
-                      <div className="mt-4 pt-3 border-t border-purple-50 flex items-center justify-between text-xs text-gray-600">
-                        <span className="inline-flex items-center gap-1 font-medium">
-                          <span>👩‍🏫</span> {teacherName}
-                        </span>
-                        <span className="inline-flex items-center gap-1 text-gray-500 font-semibold bg-pastel-purple px-2 py-0.5 rounded-md">
-                          <span>📍</span> {roomName}
-                        </span>
-                      </div>
+                      {(teacherName || roomName) && (
+                        <div className="mt-4 pt-3 border-t border-purple-50 flex items-center justify-between text-xs text-gray-600">
+                          {teacherName ? (
+                            <span className="inline-flex items-center gap-1 font-medium">
+                              <span>👩‍🏫</span> {teacherName}
+                            </span>
+                          ) : <span />}
+                          {roomName && (
+                            <span className="inline-flex items-center gap-1 text-gray-500 font-semibold bg-pastel-purple px-2 py-0.5 rounded-md">
+                              <span>📍</span> {roomName}
+                            </span>
+                          )}
+                        </div>
+                      )}
                     </div>
                   );
                 }

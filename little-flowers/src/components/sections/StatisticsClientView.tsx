@@ -36,16 +36,18 @@ export default function StatisticsClientView({ stats }: StatisticsClientViewProp
             <span className="w-12 h-12 rounded-2xl bg-amber-50 text-secondary-color flex items-center justify-center text-2xl font-bold">
               🎒
             </span>
-            <span className="text-[10px] font-extrabold uppercase tracking-wider bg-purple-50 text-primary-color px-2.5 py-1 rounded-full">
-              Session {stats.academic_year || 2026}
-            </span>
+            {stats.academic_year && (
+              <span className="text-[10px] font-extrabold uppercase tracking-wider bg-purple-50 text-primary-color px-2.5 py-1 rounded-full">
+                Session {stats.academic_year}
+              </span>
+            )}
           </div>
           <div>
             <div className="text-3xl sm:text-4xl font-extrabold font-fredoka text-gray-900">
               <AnimatedCounter end={grandTotal} />
             </div>
             <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mt-1">
-              Enrolled Little Learners
+              Enrolled Students
             </p>
           </div>
         </div>
@@ -102,10 +104,10 @@ export default function StatisticsClientView({ stats }: StatisticsClientViewProp
           </div>
           <div>
             <div className="text-3xl sm:text-4xl font-extrabold font-fredoka text-accent-green">
-              <AnimatedCounter end={stats.total_sections || classes.length * 2} />
+              <AnimatedCounter end={stats.total_sections || 0} />
             </div>
             <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mt-1">
-              Classrooms & Wings
+              Total Sections
             </p>
           </div>
         </div>
@@ -116,11 +118,8 @@ export default function StatisticsClientView({ stats }: StatisticsClientViewProp
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div>
             <h3 className="text-lg font-bold font-fredoka text-gray-900">
-              Campus Gender Balance & Inclusion
+              Campus Gender Balance
             </h3>
-            <p className="text-xs text-gray-500">
-              Balanced, friendly, and nurturing co-educational learning atmosphere
-            </p>
           </div>
           <div className="flex items-center gap-4 text-xs font-bold">
             <span className="inline-flex items-center gap-1.5 text-accent-blue">
@@ -156,9 +155,6 @@ export default function StatisticsClientView({ stats }: StatisticsClientViewProp
             <h3 className="text-2xl font-extrabold font-fredoka text-gray-900">
               Grade-Wise Student Distribution
             </h3>
-            <p className="text-xs sm:text-sm text-gray-500">
-              Explore enrollment counts, section capacities, and shift assignments across all classes.
-            </p>
           </div>
 
           {/* Filter Pills */}
@@ -194,7 +190,7 @@ export default function StatisticsClientView({ stats }: StatisticsClientViewProp
         {/* Classes Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {displayClasses.map((item, idx) => {
-            const classTotal = item.total_students || ((item.total_male || 0) + (item.total_female || 0));
+            const classTotal = item.total_students ?? ((item.total_male || 0) + (item.total_female || 0));
             const colorAccents = [
               { border: 'border-amber-200', tag: 'bg-amber-50 text-secondary-color' },
               { border: 'border-pink-200', tag: 'bg-pink-50 text-accent-pink' },
@@ -210,9 +206,11 @@ export default function StatisticsClientView({ stats }: StatisticsClientViewProp
               >
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <span className={`text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${accent.tag}`}>
-                      {item.shift ? `${item.shift} Shift` : 'Morning'}
-                    </span>
+                    {item.shift ? (
+                      <span className={`text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${accent.tag}`}>
+                        {item.shift} Shift
+                      </span>
+                    ) : <span />}
                     <span className="text-xs font-bold text-gray-400">
                       Total: {classTotal} Learners
                     </span>
