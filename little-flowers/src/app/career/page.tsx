@@ -7,20 +7,7 @@ import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 import SplitText from '@/components/ui/SplitText';
 import ThemeIcon from '@/components/ui/ThemeIcon';
 import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
-
-interface StorioJobOpening {
-  id: number;
-  title: string;
-  slug?: string;
-  company_name?: string;
-  location?: string;
-  job_type?: string;
-  vacancy?: number | string;
-  deadline?: string;
-  description?: string;
-  application_link?: string;
-  status?: string;
-}
+import { StorioJobOpening } from '@/types';
 
 function stripHtml(html: string): string {
   return html
@@ -133,9 +120,9 @@ export default async function CareersPage() {
                         </p>
                       )}
 
-                      {job.description && (
+                      {(job.content || job.description) && (
                         <p className="text-sm text-gray-600 font-quicksand line-clamp-2 leading-relaxed">
-                          {stripHtml(job.description)}
+                          {stripHtml(job.content || job.description || '')}
                         </p>
                       )}
                     </div>

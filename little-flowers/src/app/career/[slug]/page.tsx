@@ -46,9 +46,9 @@ export async function generateMetadata({ params }: CareerDetailPageProps) {
     id: demoJob.id,
     title: demoJob.title,
     slug: demoJob.slug,
-    description: demoJob.content || demoJob.summary,
+    description: demoJob.content,
     location: demoJob.location,
-    job_type: demoJob.type,
+    job_type: demoJob.job_type,
     deadline: demoJob.deadline,
   } : null);
 
@@ -81,11 +81,11 @@ export default async function CareerDetailPage({ params }: CareerDetailPageProps
     slug: demoJob.slug,
     company_name: settings?.site_title || 'Little Flowers',
     location: demoJob.location,
-    job_type: demoJob.type,
+    job_type: demoJob.job_type,
     vacancy: 1,
     deadline: demoJob.deadline,
-    description: demoJob.content || demoJob.summary,
-    status: 'ACTIVE',
+    description: demoJob.content,
+    status: demoJob.status || 'ACTIVE',
   } : null);
 
   if (!job) {

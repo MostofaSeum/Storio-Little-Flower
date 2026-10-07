@@ -191,6 +191,7 @@ export default function EventsAndCalendarClient({
                 );
                 const rawImg =
                   event.featured_image_detail?.file ||
+                  event.featured_image_detail?.url ||
                   (typeof event.featured_image === "string"
                     ? event.featured_image
                     : null);

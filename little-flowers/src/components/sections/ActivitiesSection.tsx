@@ -67,11 +67,12 @@ export default function ActivitiesSection({ activities }: ActivitiesSectionProps
                     ? "delay-250"
                     : "delay-100";
 
-            const activityImage =
-              activity.featured_image_url ||
-              ((activity as unknown as { featured_image_data?: { file?: string } })?.featured_image_data?.file
-                ? `https://api.storio.cloud${(activity as unknown as { featured_image_data?: { file?: string } })?.featured_image_data?.file}`
-                : null);
+            const file = activity.featured_image_data?.file;
+            const activityImage = file
+              ? (file.startsWith('http') || file.startsWith('/')
+                  ? file
+                  : `https://api.storio.cloud${file}`)
+              : null;
 
             return (
               <div

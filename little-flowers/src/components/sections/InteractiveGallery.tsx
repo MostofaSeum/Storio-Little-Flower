@@ -31,11 +31,13 @@ export default function InteractiveGallery({ items }: InteractiveGalleryProps) {
   const displayedItems = items.slice(0, 6);
 
   const resolveImageUrl = (item: StorioGalleryItem): string => {
-    if (item.image_url) return item.image_url;
     const mediaFile = (item as unknown as { media_data?: { file?: string } })?.media_data?.file;
     if (mediaFile) {
-      return mediaFile.startsWith('http') ? mediaFile : `https://api.storio.cloud${mediaFile}`;
+      return mediaFile.startsWith('http') || mediaFile.startsWith('/')
+        ? mediaFile
+        : `https://api.storio.cloud${mediaFile}`;
     }
+    if (item.image_url) return item.image_url;
     return '/homepage/gal1.png';
   };
 

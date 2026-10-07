@@ -32,11 +32,11 @@ export default async function PhotosGalleryPage() {
   // Fall back to demo data in standalone mode when API returns null
   const demoPhotos = Array.isArray(rawGallery) && rawGallery.length > 0
     ? (rawGallery as unknown as BackendPhotoItem[])
-    : (isStandalone ? DEFAULT_DEMO_DATA.gallery.map((g, i) => ({
+    : (isStandalone ? DEFAULT_DEMO_DATA.gallery.map((g) => ({
         id: g.id,
         image_title: g.title,
         caption: g.caption,
-        media_data: { file: g.image_url },
+        media_data: { file: g.media_data?.file || g.image_url },
       })) : []);
 
   // Create albums with photos distributed across them

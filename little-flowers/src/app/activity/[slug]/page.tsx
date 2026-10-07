@@ -108,8 +108,8 @@ export default async function ActivityDetailPage({ params }: ActivityDetailPageP
         slug: found.slug || slug,
         excerpt: found.excerpt || found.summary,
         content: found.content || found.summary,
-        featured_image_data: found.featured_image_url
-          ? { file: found.featured_image_url }
+        featured_image_data: found.featured_image_data?.file
+          ? { file: found.featured_image_data.file }
           : undefined,
       };
     }
@@ -130,8 +130,8 @@ export default async function ActivityDetailPage({ params }: ActivityDetailPageP
           demo.content ||
           `${demo.summary}\n\nOur ${demo.title} program is thoughtfully designed to nurture children's creative, emotional, and cognitive growth. Under the guidance of our caring educators, little learners explore key concepts through joyful, hands-on experiences.`,
         is_featured: true,
-        featured_image_data: demo.featured_image_url
-          ? { file: demo.featured_image_url }
+        featured_image_data: demo.featured_image_data?.file
+          ? { file: demo.featured_image_data.file }
           : undefined,
       };
     }
