@@ -87,8 +87,7 @@ export default async function PromotionsPage() {
             <div className="space-y-8 max-w-5xl mx-auto">
               {promotions.map((promo, idx) => {
                 const rawImage =
-                  promo.image_detail?.file ||
-                  promo.image_detail?.file_url ||
+                  (typeof promo.image_detail === 'string' ? promo.image_detail : undefined) ||
                   (typeof promo.image === 'string' ? promo.image : undefined);
 
                 const bgImageUrl = rawImage

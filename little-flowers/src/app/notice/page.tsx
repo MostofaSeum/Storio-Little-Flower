@@ -158,9 +158,9 @@ export default async function NoticePage() {
                   >
                     <div className="space-y-1.5">
                       <div className="flex items-center gap-2">
-                        {bn.board_name && (
+                        {(bn.board || bn.board_name) && (
                           <span className="text-[10px] font-bold uppercase tracking-wider bg-purple-100 text-primary-color px-2 py-0.5 rounded-full">
-                            {bn.board_name} Board
+                            {bn.board || bn.board_name} Board
                           </span>
                         )}
                         {bn.publish_date && (

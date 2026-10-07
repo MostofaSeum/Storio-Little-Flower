@@ -4,6 +4,7 @@ import {
   StorioSettingsResponse,
   StorioLayoutResponse,
   StorioStaffMember,
+  StorioTeamMember,
   StorioGalleryItem,
   StorioBlogPost,
 } from '@storio/template-sdk';
@@ -48,11 +49,11 @@ export const DEFAULT_DEMO_DATA: {
   institutionProfile: StorioInstitutionProfile;
   activities: StorioActivityItem[];
   staff: StorioStaffMember[];
-  team: StorioStaffMember[];
+  team: (StorioStaffMember | StorioTeamMember)[];
   gallery: StorioGalleryItem[];
   albums: Array<{
     id: number;
-    name: string;
+    title: string;
     description?: string;
     cover_image_url?: string;
     total_images?: number;
@@ -513,7 +514,7 @@ export const DEFAULT_DEMO_DATA: {
   team: [
     {
       id: 1,
-      name: "Dr. Kazi Mostafa",
+      fullname: "Dr. Kazi Mostafa",
       designation: "Chairperson & Trustee",
       department: "Governing Body",
       photo_url: "/homepage/Teachers/Teacher1.jpg",
@@ -521,7 +522,7 @@ export const DEFAULT_DEMO_DATA: {
     },
     {
       id: 2,
-      name: "Mr. Mahmudul Hasan",
+      fullname: "Mr. Mahmudul Hasan",
       designation: "Executive Director",
       department: "Management Board",
       photo_url: "/homepage/Teachers/Teacher4.jpg",
@@ -529,7 +530,7 @@ export const DEFAULT_DEMO_DATA: {
     },
     {
       id: 3,
-      name: "Prof. Shamsul Alam",
+      fullname: "Prof. Shamsul Alam",
       designation: "Academic Council Advisor",
       department: "Academic Advisory",
       photo_url: "/homepage/Teachers/Teacher5.jpg",
@@ -537,7 +538,7 @@ export const DEFAULT_DEMO_DATA: {
     },
     {
       id: 4,
-      name: "Mrs. Rokeya Sultana",
+      fullname: "Mrs. Rokeya Sultana",
       designation: "Head of Early Years",
       department: "Academic Leadership",
       photo_url: "/homepage/Teachers/Teacher3.jpg",
@@ -545,7 +546,7 @@ export const DEFAULT_DEMO_DATA: {
     },
     {
       id: 5,
-      name: "Mr. Rafiqul Islam",
+      fullname: "Mr. Rafiqul Islam",
       designation: "Facilities & Safety Director",
       department: "Operations",
       photo_url: "/homepage/Teachers/Teacher2.jpg",
@@ -553,7 +554,7 @@ export const DEFAULT_DEMO_DATA: {
     },
     {
       id: 6,
-      name: "Ms. Nazmun Naher",
+      fullname: "Ms. Nazmun Naher",
       designation: "Parent Relations Coordinator",
       department: "Community Engagement",
       photo_url: "/homepage/Teachers/Teacher6.jpg",
@@ -661,28 +662,28 @@ export const DEFAULT_DEMO_DATA: {
   albums: [
     {
       id: 1,
-      name: "Campus Life",
+      title: "Campus Life",
       description: "Daily moments, activities, and joyful interactions across our beautiful campus.",
       cover_image_url: "/homepage/Happy Memories/Trial 1.jpg",
       total_images: 4,
     },
     {
       id: 2,
-      name: "Events & Celebrations",
+      title: "Events & Celebrations",
       description: "Annual days, cultural festivals, sports days, and special celebrations.",
       cover_image_url: "/homepage/Happy Memories/Trial 3.jpg",
       total_images: 4,
     },
     {
       id: 3,
-      name: "Classroom Learning",
+      title: "Classroom Learning",
       description: "Engaging lessons, hands-on activities, and creative learning moments.",
       cover_image_url: "/homepage/Happy Memories/Trial 5.jpg",
       total_images: 4,
     },
     {
       id: 4,
-      name: "Outdoor Adventures",
+      title: "Outdoor Adventures",
       description: "Playground fun, nature walks, gardening, and outdoor exploration.",
       cover_image_url: "/homepage/Happy Memories/Trial 7.jpg",
       total_images: 4,
@@ -1306,25 +1307,25 @@ export const DEFAULT_DEMO_DATA: {
       title: "Revised Academic Calendar & National Holidays Schedule (2026-2027)",
       url: "https://dhakaeducationboard.gov.bd",
       publish_date: "2026-09-18",
-      board_name: "Dhaka",
+      board: "Dhaka",
     },
     {
       title: "Early Childhood Care & Development (ECCD) Curriculum Guidelines Circular",
       url: "http://www.dpe.gov.bd",
       publish_date: "2026-09-24",
-      board_name: "Primary Education",
+      board: "Primary Education",
     },
     {
       title: "Student Safety, Campus Hygiene & Seasonal Immunization Protocols",
       url: "http://www.dshe.gov.bd",
       publish_date: "2026-10-02",
-      board_name: "DSHE",
+      board: "DSHE",
     },
     {
       title: "Junior Co-Curricular & Creative Arts Talent Hunt Festival Guidelines",
       url: "https://dhakaeducationboard.gov.bd",
       publish_date: "2026-10-05",
-      board_name: "Dhaka",
+      board: "Dhaka",
     },
   ],
   classRoutines: [

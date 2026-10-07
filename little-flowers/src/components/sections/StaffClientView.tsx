@@ -23,7 +23,7 @@ export default function StaffClientView({
     const raw = s as unknown as Record<string, unknown>;
     const name = String(s.name || raw.fullname || raw.title || 'Faculty Member');
     const role = String(s.designation || raw.role || raw.position || '');
-    const dept = String(raw.department_name || (isNaN(Number(s.department)) ? s.department : '') || raw.section_name || '');
+    const dept = String((isNaN(Number(s.department)) ? s.department : '') || raw.department || raw.department_name || raw.section_name || '');
     const bio = String(s.bio || raw.experience || '');
     const email = String(s.email || '');
     const phone = String(s.phone_number || raw.phone || '');
@@ -45,7 +45,7 @@ export default function StaffClientView({
     const raw = t as unknown as Record<string, unknown>;
     const name = String(raw.fullname || raw.name || raw.title || 'Board Member');
     const role = String(raw.designation || raw.role || raw.position || '');
-    const dept = String(raw.section_name || raw.department_name || (isNaN(Number(raw.department)) ? raw.department : '') || 'Governing Body');
+    const dept = String(raw.department || (isNaN(Number(raw.department)) ? raw.department : '') || raw.section_name || raw.department_name || 'Governing Body');
     const bio = String(raw.experience || raw.bio || '');
     const email = String(raw.email || '');
     const phone = String(raw.phone || raw.phone_number || '');

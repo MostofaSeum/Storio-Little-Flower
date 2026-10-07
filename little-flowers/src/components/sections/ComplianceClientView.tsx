@@ -27,11 +27,11 @@ export default function ComplianceClientView({
   const [activeTab, setActiveTab] = useState<TabKey>('all');
 
   const tabs: { key: TabKey; label: string; icon: string; show: boolean }[] = [
-    { key: 'all', label: 'All Services', icon: '📋', show: true },
-    { key: 'mpo', label: 'MPO & Recognition', icon: '🏛️', show: !!mpoInfo },
-    { key: 'rti', label: 'Right to Information', icon: 'ℹ️', show: !!informationService },
-    { key: 'grs', label: 'Grievance Redress', icon: '⚖️', show: !!complaintOfficer },
-    { key: 'hotlines', label: 'Emergency Hotlines', icon: '📞', show: hotlines.length > 0 },
+    { key: 'all', label: 'All Services', icon: 'document-paper.svg', show: true },
+    { key: 'mpo', label: 'MPO & Recognition', icon: 'school-building.svg', show: hasMpoContent },
+    { key: 'rti', label: 'Right to Information', icon: 'info-circle.svg', show: hasRtiContent },
+    { key: 'grs', label: 'Grievance Redress', icon: 'scroll-certificate.svg', show: hasGrsContent },
+    { key: 'hotlines', label: 'Emergency Hotlines', icon: 'phone-call.svg', show: hasHotlinesContent },
   ];
 
   const visibleTabs = tabs.filter((t) => t.show);
@@ -47,6 +47,45 @@ export default function ComplianceClientView({
     : typeof informationService?.services_offered === 'string'
       ? [informationService.services_offered]
       : [];
+
+  // Check if MPO section has any visible content
+  const hasMpoContent = mpoInfo && (
+    mpoInfo.mpo_code ||
+    mpoInfo.mpo_status ||
+    mpoInfo.mpo_order_number ||
+    mpoInfo.mpo_date ||
+    (typeof mpoInfo.total_mpo_teachers === 'number' || typeof mpoInfo.total_non_mpo_teachers === 'number') ||
+    (mpoInfo.documents && mpoInfo.documents.length > 0)
+  );
+
+  // Check if RTI section has any visible content
+  const hasRtiContent = informationService && (
+    informationService.responsible_person ||
+    informationService.designation ||
+    informationService.mobile ||
+    informationService.phone ||
+    informationService.email ||
+    informationService.address ||
+    informationService.office_hours ||
+    informationService.description ||
+    servicesList.length > 0
+  );
+
+  // Check if GRS section has any visible content
+  const hasGrsContent = complaintOfficer && (
+    complaintOfficer.name ||
+    complaintOfficer.designation ||
+    complaintOfficer.mobile ||
+    complaintOfficer.phone ||
+    complaintOfficer.email ||
+    complaintOfficer.address ||
+    complaintOfficer.office_hours ||
+    complaintOfficer.description ||
+    complaintSteps.length > 0
+  );
+
+  // Check if hotlines section has any visible content
+  const hasHotlinesContent = hotlines.length > 0;
 
   return (
     <div className="space-y-10">
@@ -82,8 +121,8 @@ export default function ComplianceClientView({
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-purple-50 pb-6">
             <div>
               <div className="flex items-center gap-2 mb-2">
-                <span className="w-9 h-9 rounded-xl bg-amber-50 text-secondary-color flex items-center justify-center text-xl font-bold">
-                  🏛️
+                <span className="w-9 h-9 rounded-xl bg-amber-50 text-secondary-color flex items-center justify-center">
+                  <img src="/icons/school-building.svg" alt="MPO" className="w-5 h-5" />
                 </span>
                 <span className="text-[10px] font-extrabold uppercase tracking-wider bg-emerald-50 text-accent-green px-2.5 py-1 rounded-full border border-emerald-100">
                   {mpoInfo.is_mpo_enlisted ? 'MPO Enlisted Institution' : 'Private / Non-MPO'}
@@ -101,7 +140,7 @@ export default function ComplianceClientView({
 
             {mpoInfo.mpo_code && (
               <div className="p-4 rounded-2xl bg-pastel-purple border border-purple-100 flex items-center gap-3 shrink-0">
-                <span className="text-2xl">🔖</span>
+                <img src="/icons/document-paper.svg" alt="MPO Code" className="w-6 h-6" />
                 <div>
                   <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400 block">
                     Official MPO Code
@@ -218,8 +257,8 @@ export default function ComplianceClientView({
       {(activeTab === 'all' || activeTab === 'rti') && informationService && (
         <section id="rti" className="p-6 sm:p-10 rounded-3xl bg-white border border-purple-100 shadow-sm space-y-6">
           <div className="flex items-center gap-2 border-b border-purple-50 pb-4">
-            <span className="w-9 h-9 rounded-xl bg-sky-50 text-accent-blue flex items-center justify-center text-xl font-bold">
-              ℹ️
+            <span className="w-9 h-9 rounded-xl bg-sky-50 text-accent-blue flex items-center justify-center">
+              <img src="/icons/info-circle.svg" alt="RTI" className="w-5 h-5" />
             </span>
             <div>
               <span className="text-[10px] font-extrabold uppercase tracking-wider text-accent-blue">
@@ -261,7 +300,7 @@ export default function ComplianceClientView({
                     href={`tel:${informationService.mobile}`}
                     className="flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-full bg-white hover:bg-sky-50 text-gray-700 hover:text-accent-blue font-bold transition-colors shadow-2xs"
                   >
-                    <span>📱</span>
+                    <img src="/icons/phone-call.svg" alt="Mobile" className="w-4 h-4" />
                     <span>{informationService.mobile}</span>
                   </a>
                 )}
@@ -270,7 +309,7 @@ export default function ComplianceClientView({
                     href={`tel:${informationService.phone}`}
                     className="flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-full bg-white hover:bg-sky-50 text-gray-700 hover:text-accent-blue font-bold transition-colors shadow-2xs"
                   >
-                    <span>☎️</span>
+                    <img src="/icons/phone-call.svg" alt="Phone" className="w-4 h-4" />
                     <span>{informationService.phone}</span>
                   </a>
                 )}
@@ -279,7 +318,7 @@ export default function ComplianceClientView({
                     href={`mailto:${informationService.email}`}
                     className="flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-full bg-white hover:bg-sky-50 text-gray-700 hover:text-accent-blue font-bold transition-colors shadow-2xs truncate"
                   >
-                    <span>✉️</span>
+                    <img src="/icons/mail-envelope.svg" alt="Email" className="w-4 h-4" />
                     <span className="truncate">{informationService.email}</span>
                   </a>
                 )}
@@ -302,7 +341,7 @@ export default function ComplianceClientView({
                       Office Location
                     </span>
                     <span className="font-medium text-gray-800 mt-1 block">
-                      📍 {informationService.address}
+                      <img src="/icons/location-pin.svg" alt="Location" className="w-4 h-4 inline-block" /> {informationService.address}
                     </span>
                   </div>
                 )}
@@ -312,7 +351,7 @@ export default function ComplianceClientView({
                       Office Hours
                     </span>
                     <span className="font-medium text-gray-800 mt-1 block">
-                      🕒 {informationService.office_hours}
+                      <img src="/icons/clock-time.svg" alt="Hours" className="w-4 h-4 inline-block" /> {informationService.office_hours}
                     </span>
                   </div>
                 )}
@@ -346,8 +385,8 @@ export default function ComplianceClientView({
       {(activeTab === 'all' || activeTab === 'grs') && complaintOfficer && (
         <section id="grs" className="p-6 sm:p-10 rounded-3xl bg-white border border-purple-100 shadow-sm space-y-6">
           <div className="flex items-center gap-2 border-b border-purple-50 pb-4">
-            <span className="w-9 h-9 rounded-xl bg-pink-50 text-accent-pink flex items-center justify-center text-xl font-bold">
-              ⚖️
+            <span className="w-9 h-9 rounded-xl bg-pink-50 text-accent-pink flex items-center justify-center">
+              <img src="/icons/scroll-certificate.svg" alt="GRS" className="w-5 h-5" />
             </span>
             <div>
               <span className="text-[10px] font-extrabold uppercase tracking-wider text-accent-pink">
@@ -389,7 +428,7 @@ export default function ComplianceClientView({
                     href={`tel:${complaintOfficer.mobile}`}
                     className="flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-full bg-white hover:bg-pink-50 text-gray-700 hover:text-accent-pink font-bold transition-colors shadow-2xs"
                   >
-                    <span>📱</span>
+                    <img src="/icons/phone-call.svg" alt="Mobile" className="w-4 h-4" />
                     <span>{complaintOfficer.mobile}</span>
                   </a>
                 )}
@@ -398,7 +437,7 @@ export default function ComplianceClientView({
                     href={`tel:${complaintOfficer.phone}`}
                     className="flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-full bg-white hover:bg-pink-50 text-gray-700 hover:text-accent-pink font-bold transition-colors shadow-2xs"
                   >
-                    <span>☎️</span>
+                    <img src="/icons/phone-call.svg" alt="Phone" className="w-4 h-4" />
                     <span>{complaintOfficer.phone}</span>
                   </a>
                 )}
@@ -407,7 +446,7 @@ export default function ComplianceClientView({
                     href={`mailto:${complaintOfficer.email}`}
                     className="flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-full bg-white hover:bg-pink-50 text-gray-700 hover:text-accent-pink font-bold transition-colors shadow-2xs truncate"
                   >
-                    <span>✉️</span>
+                    <img src="/icons/mail-envelope.svg" alt="Email" className="w-4 h-4" />
                     <span className="truncate">{complaintOfficer.email}</span>
                   </a>
                 )}
@@ -430,7 +469,7 @@ export default function ComplianceClientView({
                       Office Room
                     </span>
                     <span className="font-medium text-gray-800 mt-1 block">
-                      📍 {complaintOfficer.address}
+                      <img src="/icons/location-pin.svg" alt="Address" className="w-4 h-4 inline-block" /> {complaintOfficer.address}
                     </span>
                   </div>
                 )}
@@ -440,7 +479,7 @@ export default function ComplianceClientView({
                       Office Hours
                     </span>
                     <span className="font-medium text-gray-800 mt-1 block">
-                      🕒 {complaintOfficer.office_hours}
+                      <img src="/icons/clock-time.svg" alt="Hours" className="w-4 h-4 inline-block" /> {complaintOfficer.office_hours}
                     </span>
                   </div>
                 )}
@@ -487,8 +526,8 @@ export default function ComplianceClientView({
       {(activeTab === 'all' || activeTab === 'hotlines') && hotlines.length > 0 && (
         <section id="hotlines" className="p-6 sm:p-10 rounded-3xl bg-white border border-purple-100 shadow-sm space-y-6">
           <div className="flex items-center gap-2 border-b border-purple-50 pb-4">
-            <span className="w-9 h-9 rounded-xl bg-lime-50 text-accent-green flex items-center justify-center text-xl font-bold">
-              📞
+            <span className="w-9 h-9 rounded-xl bg-lime-50 text-accent-green flex items-center justify-center">
+              <img src="/icons/phone-call.svg" alt="Hotlines" className="w-5 h-5" />
             </span>
             <div>
               <span className="text-[10px] font-extrabold uppercase tracking-wider text-accent-green">
@@ -542,7 +581,7 @@ export default function ComplianceClientView({
                       href={`tel:${item.number}`}
                       className="px-4 py-2 rounded-full bg-button-dark hover:opacity-90 text-white font-bold text-xs shadow-sm hover:shadow-md transition-all inline-flex items-center gap-1.5"
                     >
-                      <span>📞</span>
+                      <img src="/icons/phone-call.svg" alt="Call" className="w-3.5 h-3.5" />
                       <span>Call Now</span>
                     </a>
                   </div>

@@ -108,14 +108,14 @@ export default function AdmissionPortalClient({
     return f;
   });
 
-  const hasExplicitSteps = normalizedFields.some((f) => typeof f.step === 'number');
+  const hasExplicitSteps = normalizedFields.some((f) => typeof f.order === 'number' || typeof f.step === 'number');
 
   let step1Fields: typeof formConfig.fields = [];
   let step2Fields: typeof formConfig.fields = [];
 
   if (hasExplicitSteps) {
-    step1Fields = normalizedFields.filter((f) => f.step === 1);
-    step2Fields = normalizedFields.filter((f) => f.step === 2);
+    step1Fields = normalizedFields.filter((f) => f.order === 1 || f.step === 1);
+    step2Fields = normalizedFields.filter((f) => f.order === 2 || f.step === 2);
   } else {
     const allFields = normalizedFields;
 

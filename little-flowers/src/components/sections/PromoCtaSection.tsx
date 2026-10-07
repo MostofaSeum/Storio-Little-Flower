@@ -32,8 +32,7 @@ export default function PromoCtaSection({
       {displayPromos.map((item, index) => {
         // Resolve promo image (handles /media/ prefixes from API)
         const rawImage =
-          item.image_detail?.file ||
-          item.image_detail?.file_url ||
+          (typeof item.image_detail === 'string' ? item.image_detail : undefined) ||
           (typeof item.image === 'string' ? item.image : undefined);
 
         const bgImageUrl = rawImage

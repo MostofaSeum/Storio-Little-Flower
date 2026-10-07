@@ -5,7 +5,8 @@ import { resolveMediaUrl } from '@/lib/media';
 
 export interface BackendAlbum {
   id: number;
-  name: string;
+  title: string;
+  name?: string;
   slug?: string;
   description?: string;
   parent?: number | null;
@@ -224,7 +225,7 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
                     {album.computedCover ? (
                       <img
                         src={album.computedCover}
-                        alt={album.name}
+                        alt={album.title || album.name || 'Album'}
                         className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
                         loading="lazy"
                       />
@@ -253,7 +254,7 @@ export default function PhotoGalleryClient({ albums, photos }: PhotoGalleryClien
                   <div className="p-5 flex-1 flex flex-col justify-between bg-white">
                     <div>
                       <h3 className="text-xl font-bold font-fredoka leading-snug line-clamp-1 mb-2 group-hover:text-primary-color transition-colors">
-                        {album.name}
+                        {album.title || album.name}
                       </h3>
                       <p className="text-sm text-gray-600 line-clamp-2 font-quicksand leading-relaxed">
                         {album.description || 'Browse high resolution memories and highlights captured inside this album.'}

@@ -64,11 +64,11 @@ export default function StaffSection({ staffList }: StaffSectionProps) {
             "Teacher & Mentor";
 
           // If department is numeric ID (like 1), prefer department_name
-          const rawDept = (member as { department_name?: string }).department_name || member.department;
+          const rawDept = member.department || (member as { department_name?: string }).department_name;
           const departmentName =
             rawDept && isNaN(Number(rawDept))
               ? String(rawDept)
-              : (member as { department_name?: string }).department_name || null;
+              : member.department || (member as { department_name?: string }).department_name || null;
 
           return (
             <div

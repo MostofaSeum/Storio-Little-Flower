@@ -45,7 +45,8 @@ export default async function PhotosGalleryPage() {
         const photosForAlbum = demoPhotos.filter((_, photoIdx) => photoIdx % 4 === albumIdx);
         return {
           id: album.id,
-          name: album.name,
+          title: album.title,
+          name: album.title,
           description: album.description,
           cover_image_url: album.cover_image_url || photosForAlbum[0]?.media_data?.file || '',
           total_images: album.total_images || photosForAlbum.length,

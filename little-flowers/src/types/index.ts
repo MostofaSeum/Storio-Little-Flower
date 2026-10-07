@@ -224,11 +224,9 @@ export interface StorioPromotion {
   badge_text?: string;
   cta_label?: string;
   cta_url?: string;
-  image?: number | string;
-  image_detail?: {
-    file?: string;
-    file_url?: string;
-  };
+  cta_is_external?: boolean;
+  image?: string;
+  image_detail?: string;
 }
 
 export interface StorioTestimonial {
@@ -264,8 +262,10 @@ export interface StorioEvent {
   is_featured?: boolean;
   featured_image?: string;
   featured_image_detail?: {
-    id: number;
-    file: string;
+    id?: number;
+    url?: string;
+    file?: string;
+    fileName?: string;
     file_name?: string;
     alt_text?: string;
   };
@@ -283,6 +283,7 @@ export interface StorioAdmissionFormField {
   label: string;
   type: 'text' | 'email' | 'tel' | 'number' | 'date' | 'select' | 'textarea' | 'image' | 'file' | string;
   required?: boolean;
+  order?: number;
   options?: string[];
   placeholder?: string;
   step?: 1 | 2;
@@ -361,9 +362,11 @@ export interface StorioCalendarEvent {
 }
 
 export interface StorioBoardNotice {
+  id?: number;
   title: string;
   url: string;
   publish_date?: string;
+  board?: string;
   board_name?: string;
 }
 
