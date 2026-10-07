@@ -83,6 +83,8 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
         customVarColor = 'var(--nav-blog-color, var(--secondary))';
       } else if (lowerLabel.includes('promo')) {
         customVarColor = 'var(--secondary)';
+      } else if (lowerLabel.includes('academic') || lowerLabel.includes('routine') || lowerLabel.includes('syllabus')) {
+        customVarColor = 'var(--primary)';
       }
 
       const color = customVarColor || colorPalette[index % colorPalette.length];

@@ -521,8 +521,18 @@
         { "id": "7", "name": "Blog", "href": "/blog" },
         { "id": "8", "name": "Careers", "href": "/career" },
         { "id": "9", "name": "Exam Results", "href": "/exam" },
-        { "id": "10", "name": "Admission", "href": "/admission" },
-        { "id": "11", "name": "Contact", "href": "/contact" }
+        {
+          "id": "10",
+          "name": "Academics",
+          "href": "/academics/routine",
+          "subLinks": [
+            { "id": "10-1", "name": "Class Routines", "href": "/academics/routine" },
+            { "id": "10-2", "name": "Syllabuses", "href": "/academics/syllabus" },
+            { "id": "10-3", "name": "Student Demographics", "href": "/academics/statistics" }
+          ]
+        },
+        { "id": "11", "name": "Admission", "href": "/admission" },
+        { "id": "12", "name": "Contact", "href": "/contact" }
       ]
     }
   ]

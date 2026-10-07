@@ -90,6 +90,11 @@ export default function Footer({ settings, profile, importantLinks = [] }: Foote
               </a>
             </li>
             <li>
+              <a href="/academics/routine" className="hover:text-accent-blue transition-colors">
+                Class Routines & Syllabuses
+              </a>
+            </li>
+            <li>
               <a href="/admission" className="hover:text-accent-pink transition-colors">
                 Admission Portal
               </a>

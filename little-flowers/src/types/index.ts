@@ -18,6 +18,11 @@ import {
   StorioGalleryItem,
   StorioAlbum,
   StorioCustomPage,
+  StorioClassRoutine,
+  StorioSyllabus,
+  StorioStudentStatsResponse,
+  StorioStudentStat,
+  StorioStudentGroupStat,
 } from '@storio/template-sdk';
 
 // Re-export SDK interfaces
@@ -34,6 +39,11 @@ export type {
   StorioGalleryItem,
   StorioAlbum,
   StorioCustomPage,
+  StorioClassRoutine,
+  StorioSyllabus,
+  StorioStudentStatsResponse,
+  StorioStudentStat,
+  StorioStudentGroupStat,
 };
 
 /**

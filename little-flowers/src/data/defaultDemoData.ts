@@ -19,6 +19,9 @@ import {
   StorioLeadershipMessage,
   StorioCalendarEvent,
   StorioBoardNotice,
+  StorioClassRoutine,
+  StorioSyllabus,
+  StorioStudentStatsResponse,
 } from '@/data/storioExtendedTypes';
 
 /**
@@ -96,6 +99,9 @@ export const DEFAULT_DEMO_DATA: {
     is_active: boolean;
   }>;
   boardNotices: StorioBoardNotice[];
+  classRoutines: StorioClassRoutine[];
+  syllabuses: StorioSyllabus[];
+  studentStats: StorioStudentStatsResponse;
 } = {
   navigation: [
     { id: "1", name: "Home", href: "/" },
@@ -119,8 +125,13 @@ export const DEFAULT_DEMO_DATA: {
     { id: "7", name: "Blog", href: "/blog" },
     { id: "8", name: "Careers", href: "/career" },
     { id: "9", name: "Exam Results", href: "/exam" },
-    { id: "10", name: "Admission", href: "/admission" },
-    { id: "11", name: "Contact", href: "/contact" },
+    { id: "10", name: "Academics", href: "/academics/routine", subLinks: [
+      { id: "10-1", name: "Class Routines", href: "/academics/routine" },
+      { id: "10-2", name: "Syllabuses", href: "/academics/syllabus" },
+      { id: "10-3", name: "Student Demographics", href: "/academics/statistics" },
+    ]},
+    { id: "11", name: "Admission", href: "/admission" },
+    { id: "12", name: "Contact", href: "/contact" },
   ],
   customization: {
     primaryColor: '#0e704b',
@@ -1307,4 +1318,304 @@ export const DEFAULT_DEMO_DATA: {
       board_name: "Dhaka",
     },
   ],
+  classRoutines: [
+    {
+      id: 1,
+      class_name: "Playgroup",
+      section: "Sunflower",
+      shift: "Morning",
+      academic_year: 2026,
+      effective_from: "2026-01-10",
+      routine_file_url: "/docs/playgroup-routine-2026.pdf",
+      is_active: true,
+      schedule: [
+        {
+          day: "Sunday",
+          periods: [
+            { period: "Period 1", time: "08:30 AM - 09:15 AM", subject: "Circle Time & Morning Rhymes", teacher: "Ms. Emily Clark", room: "Room 101" },
+            { period: "Period 2", time: "09:15 AM - 10:00 AM", subject: "Sensory & Color Play", teacher: "Ms. Sarah Jenkins", room: "Activity Hall" },
+            { period: "Period 3", time: "10:30 AM - 11:15 AM", subject: "Storytelling & Picture Books", teacher: "Mr. David Miller", room: "Library Corner" },
+          ],
+        },
+        {
+          day: "Monday",
+          periods: [
+            { period: "Period 1", time: "08:30 AM - 09:15 AM", subject: "Music & Movement", teacher: "Ms. Emily Clark", room: "Room 101" },
+            { period: "Period 2", time: "09:15 AM - 10:00 AM", subject: "Playdough & Motor Skills", teacher: "Ms. Sarah Jenkins", room: "Craft Room" },
+            { period: "Period 3", time: "10:30 AM - 11:15 AM", subject: "Garden Walk & Nature Discovery", teacher: "Mr. David Miller", room: "Play Courtyard" },
+          ],
+        },
+        {
+          day: "Tuesday",
+          periods: [
+            { period: "Period 1", time: "08:30 AM - 09:15 AM", subject: "Alphabet Sounds (Phonics)", teacher: "Ms. Emily Clark", room: "Room 101" },
+            { period: "Period 2", time: "09:15 AM - 10:00 AM", subject: "Building Blocks & Shapes", teacher: "Ms. Sarah Jenkins", room: "Room 101" },
+            { period: "Period 3", time: "10:30 AM - 11:15 AM", subject: "Free Play & Puppet Theatre", teacher: "Mr. David Miller", room: "Activity Hall" },
+          ],
+        },
+        {
+          day: "Wednesday",
+          periods: [
+            { period: "Period 1", time: "08:30 AM - 09:15 AM", subject: "Number Discovery (1-10)", teacher: "Ms. Emily Clark", room: "Room 101" },
+            { period: "Period 2", time: "09:15 AM - 10:00 AM", subject: "Finger Painting & Sketching", teacher: "Ms. Sarah Jenkins", room: "Craft Room" },
+            { period: "Period 3", time: "10:30 AM - 11:15 AM", subject: "Healthy Snack & Table Manners", teacher: "Ms. Emily Clark", room: "Dining Nook" },
+          ],
+        },
+        {
+          day: "Thursday",
+          periods: [
+            { period: "Period 1", time: "08:30 AM - 09:15 AM", subject: "Fun Obstacle & Balance Games", teacher: "Coach Alex Vance", room: "Playground" },
+            { period: "Period 2", time: "09:15 AM - 10:00 AM", subject: "Sing-Along Rhymes & Dance", teacher: "Ms. Emily Clark", room: "Music Room" },
+            { period: "Period 3", time: "10:30 AM - 11:15 AM", subject: "Weekly Star Celebration", teacher: "Ms. Sarah Jenkins", room: "Room 101" },
+          ],
+        },
+      ],
+    },
+    {
+      id: 2,
+      class_name: "Nursery",
+      section: "Buttercup",
+      shift: "Morning",
+      academic_year: 2026,
+      effective_from: "2026-01-10",
+      routine_file_url: "/docs/nursery-routine-2026.pdf",
+      is_active: true,
+      schedule: [
+        {
+          day: "Sunday",
+          periods: [
+            { period: "Period 1", time: "08:15 AM - 09:00 AM", subject: "English Alphabet Phonics", teacher: "Ms. Olivia Brown", room: "Room 102" },
+            { period: "Period 2", time: "09:00 AM - 09:45 AM", subject: "Early Math & Number Puzzles", teacher: "Mr. David Miller", room: "Room 102" },
+            { period: "Period 3", time: "10:15 AM - 11:00 AM", subject: "Creative Arts & Origami", teacher: "Ms. Sarah Jenkins", room: "Craft Room" },
+            { period: "Period 4", time: "11:00 AM - 11:45 AM", subject: "Outdoor Playground Sports", teacher: "Coach Alex Vance", room: "Play Courtyard" },
+          ],
+        },
+        {
+          day: "Monday",
+          periods: [
+            { period: "Period 1", time: "08:15 AM - 09:00 AM", subject: "General Awareness & Seasons", teacher: "Ms. Olivia Brown", room: "Room 102" },
+            { period: "Period 2", time: "09:00 AM - 09:45 AM", subject: "Writing Readiness & Tracing", teacher: "Ms. Olivia Brown", room: "Room 102" },
+            { period: "Period 3", time: "10:15 AM - 11:00 AM", subject: "Rhythm, Instruments & Rhymes", teacher: "Ms. Emily Clark", room: "Music Room" },
+            { period: "Period 4", time: "11:00 AM - 11:45 AM", subject: "Story Drama & Role Play", teacher: "Mr. David Miller", room: "Activity Hall" },
+          ],
+        },
+        {
+          day: "Tuesday",
+          periods: [
+            { period: "Period 1", time: "08:15 AM - 09:00 AM", subject: "Sight Words & Story Reading", teacher: "Ms. Olivia Brown", room: "Room 102" },
+            { period: "Period 2", time: "09:00 AM - 09:45 AM", subject: "Math Quantities & Counting", teacher: "Mr. David Miller", room: "Room 102" },
+            { period: "Period 3", time: "10:15 AM - 11:00 AM", subject: "Little Botanists: Seed Planting", teacher: "Ms. Sarah Jenkins", room: "Eco Garden" },
+            { period: "Period 4", time: "11:00 AM - 11:45 AM", subject: "Yoga & Mindfulness Stretch", teacher: "Coach Alex Vance", room: "Room 102" },
+          ],
+        },
+        {
+          day: "Wednesday",
+          periods: [
+            { period: "Period 1", time: "08:15 AM - 09:00 AM", subject: "Language & Rhyme Recitation", teacher: "Ms. Olivia Brown", room: "Room 102" },
+            { period: "Period 2", time: "09:00 AM - 09:45 AM", subject: "Pattern Matching & Logic", teacher: "Mr. David Miller", room: "Room 102" },
+            { period: "Period 3", time: "10:15 AM - 11:00 AM", subject: "Watercolor Painting", teacher: "Ms. Sarah Jenkins", room: "Craft Room" },
+            { period: "Period 4", time: "11:00 AM - 11:45 AM", subject: "Interactive Library Time", teacher: "Ms. Emily Clark", room: "Library Corner" },
+          ],
+        },
+        {
+          day: "Thursday",
+          periods: [
+            { period: "Period 1", time: "08:15 AM - 09:00 AM", subject: "Community Helpers & Social Skills", teacher: "Ms. Olivia Brown", room: "Room 102" },
+            { period: "Period 2", time: "09:00 AM - 09:45 AM", subject: "Sensory Sand & Water Science", teacher: "Ms. Sarah Jenkins", room: "Play Courtyard" },
+            { period: "Period 3", time: "10:15 AM - 11:00 AM", subject: "Junior Gymnastics", teacher: "Coach Alex Vance", room: "Playground" },
+            { period: "Period 4", time: "11:00 AM - 11:45 AM", subject: "Circle Recap & Good Habits", teacher: "Ms. Olivia Brown", room: "Room 102" },
+          ],
+        },
+      ],
+    },
+    {
+      id: 3,
+      class_name: "Kindergarten (KG)",
+      section: "Bluebell",
+      shift: "Morning",
+      academic_year: 2026,
+      effective_from: "2026-01-10",
+      routine_file_url: "/docs/kg-routine-2026.pdf",
+      is_active: true,
+      schedule: [
+        {
+          day: "Sunday",
+          periods: [
+            { period: "Period 1", time: "08:00 AM - 08:45 AM", subject: "English Reading & Sentence Play", teacher: "Ms. Rachel Green", room: "Room 201" },
+            { period: "Period 2", time: "08:45 AM - 09:30 AM", subject: "Basic Math: Addition & Shapes", teacher: "Mr. David Miller", room: "Room 201" },
+            { period: "Period 3", time: "10:00 AM - 10:45 AM", subject: "Environmental Studies (EVS)", teacher: "Ms. Rachel Green", room: "Room 201" },
+            { period: "Period 4", time: "10:45 AM - 11:30 AM", subject: "Art, Craft & Model Making", teacher: "Ms. Sarah Jenkins", room: "Craft Room" },
+          ],
+        },
+        {
+          day: "Monday",
+          periods: [
+            { period: "Period 1", time: "08:00 AM - 08:45 AM", subject: "Second Language & Phonetics", teacher: "Ms. Fatima Noor", room: "Room 201" },
+            { period: "Period 2", time: "08:45 AM - 09:30 AM", subject: "Math Time & Measurement", teacher: "Mr. David Miller", room: "Room 201" },
+            { period: "Period 3", time: "10:00 AM - 10:45 AM", subject: "Physical Education & Relay", teacher: "Coach Alex Vance", room: "Sports Ground" },
+            { period: "Period 4", time: "10:45 AM - 11:30 AM", subject: "Music, Choral & Instruments", teacher: "Ms. Emily Clark", room: "Music Room" },
+          ],
+        },
+        {
+          day: "Tuesday",
+          periods: [
+            { period: "Period 1", time: "08:00 AM - 08:45 AM", subject: "Creative Writing & Spelling", teacher: "Ms. Rachel Green", room: "Room 201" },
+            { period: "Period 2", time: "08:45 AM - 09:30 AM", subject: "Junior Science & Experiments", teacher: "Ms. Sarah Jenkins", room: "Discovery Lab" },
+            { period: "Period 3", time: "10:00 AM - 10:45 AM", subject: "Computer & Coding Play", teacher: "Mr. Liam Foster", room: "Digital Lab" },
+            { period: "Period 4", time: "10:45 AM - 11:30 AM", subject: "Drama & Story Performance", teacher: "Ms. Emily Clark", room: "Auditorium" },
+          ],
+        },
+        {
+          day: "Wednesday",
+          periods: [
+            { period: "Period 1", time: "08:00 AM - 08:45 AM", subject: "Math Problems & Number Line", teacher: "Mr. David Miller", room: "Room 201" },
+            { period: "Period 2", time: "08:45 AM - 09:30 AM", subject: "English Comprehension", teacher: "Ms. Rachel Green", room: "Room 201" },
+            { period: "Period 3", time: "10:00 AM - 10:45 AM", subject: "Clay Sculpting & Pottery", teacher: "Ms. Sarah Jenkins", room: "Craft Room" },
+            { period: "Period 4", time: "10:45 AM - 11:30 AM", subject: "Sports & Ball Games", teacher: "Coach Alex Vance", room: "Sports Ground" },
+          ],
+        },
+        {
+          day: "Thursday",
+          periods: [
+            { period: "Period 1", time: "08:00 AM - 08:45 AM", subject: "Values, Ethics & Kindness", teacher: "Ms. Rachel Green", room: "Room 201" },
+            { period: "Period 2", time: "08:45 AM - 09:30 AM", subject: "Story Time & Book Reviews", teacher: "Ms. Olivia Brown", room: "Library Corner" },
+            { period: "Period 3", time: "10:00 AM - 10:45 AM", subject: "Show and Tell Presentation", teacher: "Ms. Rachel Green", room: "Room 201" },
+            { period: "Period 4", time: "10:45 AM - 11:30 AM", subject: "Celebration & Clean-up Habit", teacher: "All Mentors", room: "Room 201" },
+          ],
+        },
+      ],
+    },
+  ],
+  syllabuses: [
+    {
+      id: 1,
+      title: "Playgroup Early Wonder Term 1 Syllabus",
+      class_name: "Playgroup",
+      exam_type: "Midterm Assessment",
+      academic_year: 2026,
+      file_url: "/docs/playgroup-term1-syllabus.pdf",
+      file_size: "1.4 MB",
+      description: "Foundational phonics, sensory colors, primary motor actions, tactile play, and nursery rhymes for session 1.",
+      uploaded_at: "2026-01-15T08:00:00Z",
+      is_active: true,
+    },
+    {
+      id: 2,
+      title: "Playgroup Annual Progress & Development Milestones",
+      class_name: "Playgroup",
+      exam_type: "Annual Assessment",
+      academic_year: 2026,
+      file_url: "/docs/playgroup-annual-syllabus.pdf",
+      file_size: "2.1 MB",
+      description: "Holistic development assessment: social communication, emotional balance, musical rhythms, and alphabet recognition.",
+      uploaded_at: "2026-01-15T08:00:00Z",
+      is_active: true,
+    },
+    {
+      id: 3,
+      title: "Nursery Term 1 Comprehensive Learning Outline",
+      class_name: "Nursery",
+      exam_type: "Midterm Assessment",
+      academic_year: 2026,
+      file_url: "/docs/nursery-term1-syllabus.pdf",
+      file_size: "1.8 MB",
+      description: "Tracing letters A-M, numbers 1-20, colors & shapes, seasons, hygiene habits, and junior creative arts.",
+      uploaded_at: "2026-01-18T08:00:00Z",
+      is_active: true,
+    },
+    {
+      id: 4,
+      title: "Nursery Annual Academic & Practical Syllabus",
+      class_name: "Nursery",
+      exam_type: "Annual Assessment",
+      academic_year: 2026,
+      file_url: "/docs/nursery-annual-syllabus.pdf",
+      file_size: "2.6 MB",
+      description: "Full alphabetic literacy A-Z, basic addition with objects, environmental awareness, and nature projects.",
+      uploaded_at: "2026-01-18T08:00:00Z",
+      is_active: true,
+    },
+    {
+      id: 5,
+      title: "Kindergarten (KG) Midterm Academic Blueprint",
+      class_name: "Kindergarten (KG)",
+      exam_type: "Midterm Assessment",
+      academic_year: 2026,
+      file_url: "/docs/kg-midterm-syllabus.pdf",
+      file_size: "2.4 MB",
+      description: "Sentence reading, word families, addition & subtraction within 50, plant life cycle, and digital literacy basics.",
+      uploaded_at: "2026-01-20T08:00:00Z",
+      is_active: true,
+    },
+    {
+      id: 6,
+      title: "Kindergarten (KG) Final Comprehensive Curriculum",
+      class_name: "Kindergarten (KG)",
+      exam_type: "Final Examination",
+      academic_year: 2026,
+      file_url: "/docs/kg-final-syllabus.pdf",
+      file_size: "3.2 MB",
+      description: "Grade 1 readiness curriculum: independent paragraph reading, numbers up to 100, elementary science, and artistic expression.",
+      uploaded_at: "2026-01-20T08:00:00Z",
+      is_active: true,
+    },
+  ],
+  studentStats: {
+    academic_year: 2026,
+    grand_total_male: 245,
+    grand_total_female: 255,
+    grand_total: 500,
+    total_sections: 12,
+    classes: [
+      {
+        id: 1,
+        academic_year: 2026,
+        year: 2026,
+        class_name: "Playgroup",
+        class_name_en: "Playgroup Learners",
+        shift: "Morning",
+        order: 1,
+        total_male: 65,
+        total_female: 70,
+        total_students: 135,
+        groups: [
+          { group_name: "Sunflower Section", sections: ["Sunflower-A", "Sunflower-B"], total_male: 35, total_female: 35, total_students: 70 },
+          { group_name: "Daisy Section", sections: ["Daisy-A", "Daisy-B"], total_male: 30, total_female: 35, total_students: 65 },
+        ],
+      },
+      {
+        id: 2,
+        academic_year: 2026,
+        year: 2026,
+        class_name: "Nursery",
+        class_name_en: "Junior Nursery",
+        shift: "Morning",
+        order: 2,
+        total_male: 85,
+        total_female: 90,
+        total_students: 175,
+        groups: [
+          { group_name: "Buttercup Section", sections: ["Buttercup-A", "Buttercup-B"], total_male: 45, total_female: 45, total_students: 90 },
+          { group_name: "Lily Section", sections: ["Lily-A", "Lily-B"], total_male: 40, total_female: 45, total_students: 85 },
+        ],
+      },
+      {
+        id: 3,
+        academic_year: 2026,
+        year: 2026,
+        class_name: "Kindergarten (KG)",
+        class_name_en: "Senior Kindergarten",
+        shift: "Morning",
+        order: 3,
+        total_male: 95,
+        total_female: 95,
+        total_students: 190,
+        groups: [
+          { group_name: "Bluebell Section", sections: ["Bluebell-A", "Bluebell-B"], total_male: 50, total_female: 50, total_students: 100 },
+          { group_name: "Rose Section", sections: ["Rose-A", "Rose-B"], total_male: 45, total_female: 45, total_students: 90 },
+        ],
+      },
+    ],
+  },
 };
+

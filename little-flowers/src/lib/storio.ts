@@ -12,6 +12,9 @@ import {
   StorioImportantLink,
   StorioFaq,
   StorioCalendarEvent,
+  StorioClassRoutine,
+  StorioSyllabus,
+  StorioStudentStatsResponse,
 } from '@/types';
 import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
 
@@ -346,6 +349,18 @@ export async function getCareers(tenantHost: string) {
 
 export async function getJobDetail(slug: string, tenantHost: string) {
   return storio.apiFetch<any>(`/api/v2/template/careers/jobs/${slug}/`, { tenantHost });
+}
+
+export async function getClassRoutines(tenantHost: string) {
+  return storio.getClassRoutines(tenantHost);
+}
+
+export async function getSyllabuses(tenantHost: string) {
+  return storio.getSyllabuses(tenantHost);
+}
+
+export async function getStudentStats(tenantHost?: string) {
+  return storio.getStudentStats(tenantHost);
 }
 
 
