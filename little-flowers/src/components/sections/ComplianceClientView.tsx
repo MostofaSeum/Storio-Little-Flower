@@ -122,7 +122,7 @@ export default function ComplianceClientView({
       )}
 
       {/* 1. MPO & Institutional Recognition Section */}
-      {(activeTab === 'all' || activeTab === 'mpo') && hasMpoContent && (
+      {(activeTab === 'all' || activeTab === 'mpo') && hasMpoContent && mpoInfo && (
         <section id="mpo" className="p-6 sm:p-10 rounded-3xl bg-white border border-purple-100 shadow-sm space-y-6">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-purple-50 pb-6">
             <div>
@@ -260,7 +260,7 @@ export default function ComplianceClientView({
       )}
 
       {/* 2. Right to Information (RTI) Service */}
-      {(activeTab === 'all' || activeTab === 'rti') && hasRtiContent && (
+      {(activeTab === 'all' || activeTab === 'rti') && hasRtiContent && informationService && (
         <section id="rti" className="p-6 sm:p-10 rounded-3xl bg-white border border-purple-100 shadow-sm space-y-6">
           <div className="flex items-center gap-2 border-b border-purple-50 pb-4">
             <span className="w-9 h-9 rounded-xl bg-sky-50 text-accent-blue flex items-center justify-center">
@@ -388,7 +388,7 @@ export default function ComplianceClientView({
       )}
 
       {/* 3. Grievance Redress System (GRS) Section */}
-      {(activeTab === 'all' || activeTab === 'grs') && hasGrsContent && (
+      {(activeTab === 'all' || activeTab === 'grs') && hasGrsContent && complaintOfficer && (
         <section id="grs" className="p-6 sm:p-10 rounded-3xl bg-white border border-purple-100 shadow-sm space-y-6">
           <div className="flex items-center gap-2 border-b border-purple-50 pb-4">
             <span className="w-9 h-9 rounded-xl bg-pink-50 text-accent-pink flex items-center justify-center">

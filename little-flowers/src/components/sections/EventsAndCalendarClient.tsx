@@ -39,7 +39,8 @@ export default function EventsAndCalendarClient({
     return { day, month, year, time };
   };
 
-  const formatCalendarRange = (startStr: string, endStr?: string) => {
+  const formatCalendarRange = (startStr?: string, endStr?: string) => {
+    if (!startStr) return "";
     const startDate = new Date(startStr);
     const options: Intl.DateTimeFormatOptions = {
       month: "short",
@@ -289,11 +290,11 @@ export default function EventsAndCalendarClient({
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredCalendar.map((item) => {
                 const badge = getCategoryBadge(item.category);
-                const startDate = new Date(item.start_date);
-                const day = startDate.getDate().toString().padStart(2, "0");
+                const startDate = item.start_date ? new Date(item.start_date) : null;
+                const day = startDate ? startDate.getDate().toString().padStart(2, "0") : "--";
                 const month = startDate
-                  .toLocaleDateString("en-US", { month: "short" })
-                  .toUpperCase();
+                  ? startDate.toLocaleDateString("en-US", { month: "short" }).toUpperCase()
+                  : "";
                 const dateRange = formatCalendarRange(
                   item.start_date,
                   item.end_date,
