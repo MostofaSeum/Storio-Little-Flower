@@ -363,4 +363,20 @@ export async function getStudentStats(tenantHost?: string) {
   return storio.getStudentStats(tenantHost);
 }
 
+export async function getMpoInfo(tenantHost: string) {
+  return storio.getMpoInfo(tenantHost);
+}
+
+export async function getInformationService(tenantHost: string) {
+  return storio.getInformationService(tenantHost);
+}
+
+export async function getComplaintOfficer(tenantHost: string) {
+  return storio.getComplaintOfficer(tenantHost);
+}
+
+export async function getHotlines(tenantHost: string) {
+  return storio.getHotlines(tenantHost);
+}
+
 

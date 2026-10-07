@@ -22,6 +22,10 @@ import {
   StorioClassRoutine,
   StorioSyllabus,
   StorioStudentStatsResponse,
+  StorioMpoInfo,
+  StorioInformationService,
+  StorioComplaintOfficer,
+  StorioHotline,
 } from '@/data/storioExtendedTypes';
 
 /**
@@ -102,6 +106,10 @@ export const DEFAULT_DEMO_DATA: {
   classRoutines: StorioClassRoutine[];
   syllabuses: StorioSyllabus[];
   studentStats: StorioStudentStatsResponse;
+  mpoInfo: StorioMpoInfo;
+  informationService: StorioInformationService;
+  complaintOfficer: StorioComplaintOfficer;
+  hotlines: StorioHotline[];
 } = {
   navigation: [
     { id: "1", name: "Home", href: "/" },
@@ -130,8 +138,9 @@ export const DEFAULT_DEMO_DATA: {
       { id: "10-2", name: "Syllabuses", href: "/academics/syllabus" },
       { id: "10-3", name: "Student Demographics", href: "/academics/statistics" },
     ]},
-    { id: "11", name: "Admission", href: "/admission" },
-    { id: "12", name: "Contact", href: "/contact" },
+    { id: "11", name: "Compliance", href: "/compliance" },
+    { id: "12", name: "Admission", href: "/admission" },
+    { id: "13", name: "Contact", href: "/contact" },
   ],
   customization: {
     primaryColor: '#0e704b',
@@ -1617,5 +1626,149 @@ export const DEFAULT_DEMO_DATA: {
       },
     ],
   },
+  mpoInfo: {
+    id: 1,
+    is_mpo_enlisted: true,
+    mpo_status: "Active & Recognized",
+    mpo_code: "MPO-LF-202488",
+    mpo_date: "2018-05-12",
+    mpo_order_number: "GOV-EDU-DH-2018/451",
+    subtitle: "Government Board Recognition & Pay Order Accreditation",
+    description: "Little Flowers Kindergarten & Preparatory School is fully registered and enlisted under the primary education board standards, adhering to quality benchmarks, curriculum compliance, and ethical administration.",
+    total_mpo_teachers: 18,
+    total_non_mpo_teachers: 6,
+    documents: [
+      {
+        title: "Official Gazette Recognition Certificate",
+        file_url: "/docs/mpo-recognition-gazette.pdf",
+        issue_date: "2018-05-12",
+      },
+      {
+        title: "Annual Managing Committee Accreditation Order",
+        file_url: "/docs/managing-committee-approval.pdf",
+        issue_date: "2024-02-10",
+      },
+      {
+        title: "Campus Sanitation & Safety Compliance Clearance",
+        file_url: "/docs/health-safety-clearance.pdf",
+        issue_date: "2025-11-20",
+      },
+    ],
+  },
+  informationService: {
+    id: 1,
+    title: "Right to Information (RTI) Service Desk",
+    address: "Administrative Wing, Room 102, Little Flowers Campus, Green Road, Dhaka",
+    responsible_person: "Mr. Farhan Ahmed",
+    designation: "Assistant Headmaster & Designated RTI Officer",
+    mobile: "+880 1711-234567",
+    phone: "+880 2-9876543",
+    email: "rti@littleflowers.edu.bd",
+    photo_url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
+    office_hours: "Sunday to Thursday: 09:00 AM - 03:00 PM",
+    description: "In accordance with the Right to Information Act, our dedicated information desk ensures transparent, accountable, and prompt assistance for parents, guardians, and community members.",
+    services_offered: [
+      "Admission guidelines and quota verification",
+      "Academic performance records and transfer certificates",
+      "Tuition fee structures and financial aid regulations",
+      "School facility safety compliance records",
+    ],
+  },
+  complaintOfficer: {
+    id: 1,
+    name: "Dr. Selina Parveen",
+    designation: "Child Psychology Counselor & Grievance Redress Officer",
+    address: "Student Welfare & Counseling Annex, Room 204",
+    mobile: "+880 1819-876543",
+    phone: "+880 2-9876544",
+    email: "complaints@littleflowers.edu.bd",
+    photo_url: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80",
+    description: "Our Grievance Redress System (GRS) provides a secure, confidential, and empathetic platform to resolve student safety concerns, guardian feedback, and academic grievances with prompt fairness.",
+    office_hours: "Sunday to Thursday: 10:00 AM - 02:00 PM",
+    complaint_process: [
+      {
+        step_number: 1,
+        title: "Lodge Concern / Written Submission",
+        description: "Submit written concern via email, suggestion drop-box, or in person at the counselor desk.",
+      },
+      {
+        step_number: 2,
+        title: "Preliminary Review & Acknowledgment",
+        description: "Formal acknowledgment issued within 48 hours; preliminary fact-finding session initiated.",
+      },
+      {
+        step_number: 3,
+        title: "Mediation & Investigation",
+        description: "Impartial mediation with guardian, teachers, or staff to identify supportive solutions.",
+      },
+      {
+        step_number: 4,
+        title: "Resolution & Implementation",
+        description: "Written resolution delivered within 7 working days, followed by monitoring check-ins.",
+      },
+    ],
+  },
+  hotlines: [
+    {
+      id: 1,
+      title: "National Emergency Helpline",
+      number: "999",
+      description: "Police, Fire Service, Ambulance & Immediate First Responders (Toll-Free, 24/7)",
+      category: "Emergency",
+      is_emergency: true,
+      order: 1,
+      is_active: true,
+    },
+    {
+      id: 2,
+      title: "Child Helpline Bangladesh",
+      number: "1098",
+      description: "National toll-free round-the-clock helpline for children at risk, abuse prevention, and counseling",
+      category: "Child Safety",
+      is_emergency: true,
+      order: 2,
+      is_active: true,
+    },
+    {
+      id: 3,
+      title: "National Help Desk & Citizen Services",
+      number: "333",
+      description: "Government public services, administrative information, and public health support",
+      category: "Public Service",
+      is_emergency: false,
+      order: 3,
+      is_active: true,
+    },
+    {
+      id: 4,
+      title: "Violence Against Women & Children",
+      number: "109",
+      description: "Ministry of Women and Children Affairs toll-free emergency support & legal protection",
+      category: "Protection",
+      is_emergency: true,
+      order: 4,
+      is_active: true,
+    },
+    {
+      id: 5,
+      title: "Disaster Warning & Weather Alerts",
+      number: "1090",
+      description: "Ministry of Disaster Management early warning, weather advisory, and flood reports",
+      category: "Disaster Advisory",
+      is_emergency: false,
+      order: 5,
+      is_active: true,
+    },
+    {
+      id: 6,
+      title: "Anti-Corruption Commission Helpline",
+      number: "106",
+      description: "National hotline for transparency, anti-graft reports, and institutional accountability",
+      category: "Integrity",
+      is_emergency: false,
+      order: 6,
+      is_active: true,
+    },
+  ],
 };
 

@@ -22,6 +22,12 @@ import {
   StorioStudentStatsResponse,
   StorioStudentStat,
   StorioStudentGroupStat,
+  StorioMpoInfo,
+  StorioMpoDocument,
+  StorioInformationService,
+  StorioComplaintOfficer,
+  StorioComplaintStep,
+  StorioHotline,
 } from '@storio/template-sdk';
 
 // Re-export SDK interfaces
@@ -42,6 +48,12 @@ export type {
   StorioStudentStatsResponse,
   StorioStudentStat,
   StorioStudentGroupStat,
+  StorioMpoInfo,
+  StorioMpoDocument,
+  StorioInformationService,
+  StorioComplaintOfficer,
+  StorioComplaintStep,
+  StorioHotline,
 };
 
 export interface StorioClassRoutineScheduleItem {
