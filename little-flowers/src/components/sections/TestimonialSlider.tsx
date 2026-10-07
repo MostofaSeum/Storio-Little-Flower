@@ -63,13 +63,12 @@ export default function TestimonialSlider({ testimonials }: TestimonialSliderPro
 
               <div className="mt-6 pt-5 border-t border-gray-100 flex items-center space-x-3.5">
                 {(() => {
-                  const photoSrc =
-                    t.avatar_url ||
-                    (t.photo_data?.file_url
-                      ? (t.photo_data.file_url.startsWith('http')
-                          ? t.photo_data.file_url
-                          : `https://api.storio.cloud${t.photo_data.file_url}`)
-                      : null);
+                  const rawUrl = t.photo_data?.file_url || t.photo_data?.file;
+                  const photoSrc = rawUrl
+                    ? (rawUrl.startsWith('http') || rawUrl.startsWith('/')
+                        ? rawUrl
+                        : `https://api.storio.cloud${rawUrl}`)
+                    : null;
 
                   return (
                     <div className="w-11 h-11 rounded-full bg-gradient-to-tr from-pink-300 to-amber-200 flex items-center justify-center text-primary-color font-extrabold text-sm shadow-inner ring-2 ring-white overflow-hidden shrink-0">

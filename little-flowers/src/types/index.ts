@@ -213,7 +213,7 @@ export interface StorioActivityItem {
   summary?: string;
   excerpt?: string;
   content?: string;
-  featured_image_url?: string;
+  featured_image_data?: { file?: string };
 }
 
 export interface StorioPromotion {
@@ -239,14 +239,30 @@ export interface StorioTestimonial {
   content?: string;
   message?: string;
   rating?: number;
-  avatar_url?: string;
   photo?: number;
   photo_data?: {
-    id: number;
+    id?: number;
     file_url?: string;
     file?: string;
     alt_text?: string;
   };
+}
+
+export interface StorioJobOpening {
+  id: number;
+  title: string;
+  slug: string;
+  content?: string;
+  location?: string;
+  job_type?: string;
+  experience?: string;
+  salary_range?: string;
+  deadline?: string;
+  status: string;
+  company_name?: string;
+  vacancy?: number | string;
+  description?: string;
+  application_link?: string;
 }
 
 export interface StorioEvent {

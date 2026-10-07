@@ -27,6 +27,8 @@ import {
   StorioInformationService,
   StorioComplaintOfficer,
   StorioHotline,
+  StorioTestimonial,
+  StorioJobOpening,
 } from '@/data/storioExtendedTypes';
 
 /**
@@ -71,7 +73,7 @@ export const DEFAULT_DEMO_DATA: {
   promotions: StorioPromotion[];
   events: StorioEvent[];
   calendarEvents: StorioCalendarEvent[];
-  testimonials: Array<{ id: number; name: string; role: string; quote: string; rating: number; avatar_url?: string }>;
+  testimonials: StorioTestimonial[];
   faqs: StorioFaq[];
   admissionFormConfig: StorioAdmissionFormConfig;
   navigation: StorioDynamicNavItem[];
@@ -90,19 +92,7 @@ export const DEFAULT_DEMO_DATA: {
     agrade_count?: number;
     file_url?: string;
   }>;
-  careers: Array<{
-    id: number;
-    title: string;
-    slug: string;
-    summary?: string;
-    content?: string;
-    location?: string;
-    type?: string;
-    experience?: string;
-    salary_range?: string;
-    deadline?: string;
-    is_active: boolean;
-  }>;
+  careers: StorioJobOpening[];
   boardNotices: StorioBoardNotice[];
   classRoutines: StorioClassRoutine[];
   syllabuses: StorioSyllabus[];
@@ -911,7 +901,7 @@ export const DEFAULT_DEMO_DATA: {
       role: "Mother of Abrar (Playgroup)",
       quote: "Little Flowers has been a second home for Abrar! He used to be shy, but within two months he started singing rhymes and making friends with so much joy.",
       rating: 5,
-      avatar_url: "/homepage/Teachers/Teacher3.jpg",
+      photo_data: { file_url: "/homepage/Teachers/Teacher3.jpg" },
     },
     {
       id: 2,
@@ -919,7 +909,7 @@ export const DEFAULT_DEMO_DATA: {
       role: "Father of Mehek (Nursery)",
       quote: "The teachers are remarkably attentive and patient. The daily sensory activities and outdoor plays make learning exciting for young kids.",
       rating: 5,
-      avatar_url: "/homepage/Teachers/Teacher4.jpg",
+      photo_data: { file_url: "/homepage/Teachers/Teacher4.jpg" },
     },
     {
       id: 3,
@@ -927,7 +917,7 @@ export const DEFAULT_DEMO_DATA: {
       role: "Mother of Aaryan (Senior KG)",
       quote: "Outstanding early childhood environment! The safety standards, loving atmosphere, and creative curriculum exceeded our highest expectations.",
       rating: 5,
-      avatar_url: "/homepage/Teachers/Teacher6.jpg",
+      photo_data: { file_url: "/homepage/Teachers/Teacher6.jpg" },
     },
     {
       id: 4,
@@ -935,7 +925,7 @@ export const DEFAULT_DEMO_DATA: {
       role: "Father of Labiba (Junior KG)",
       quote: "Labiba comes home every day sharing new stories and songs. The teachers genuinely care about each child's emotional and academic growth.",
       rating: 5,
-      avatar_url: "/homepage/Teachers/Teacher2.jpg",
+      photo_data: { file_url: "/homepage/Teachers/Teacher2.jpg" },
     },
     {
       id: 5,
@@ -943,7 +933,7 @@ export const DEFAULT_DEMO_DATA: {
       role: "Mother of Nabil (Nursery)",
       quote: "The campus is beautiful, safe, and always full of laughter. Nabil has learned to share, count, and express himself with confidence.",
       rating: 5,
-      avatar_url: "/homepage/Teachers/Teacher1.jpg",
+      photo_data: { file_url: "/homepage/Teachers/Teacher1.jpg" },
     },
     {
       id: 6,
@@ -951,7 +941,7 @@ export const DEFAULT_DEMO_DATA: {
       role: "Father of Anika (Playgroup)",
       quote: "We visited many kindergartens before choosing Little Flowers. The warmth of the staff and the joy on every child's face made our decision easy.",
       rating: 5,
-      avatar_url: "/homepage/Teachers/Teacher5.jpg",
+      photo_data: { file_url: "/homepage/Teachers/Teacher5.jpg" },
     },
   ],
   faqs: [
