@@ -116,40 +116,118 @@ export default async function MissionVisionPage() {
 
             </div>
 
-            {/* School Campus Photo & Highlights Banner */}
-            {heroImage && (
-              <div className="mt-12 rounded-3xl overflow-hidden border border-purple-100 shadow-lg relative bg-pastel-purple">
-                <img
-                  src={heroImage}
-                  alt={settings?.site_title || 'Campus'}
-                  className="w-full h-80 sm:h-96 object-cover"
-                />
+            {/* Creative Educational Values & Highlights Showcase */}
+            <div className="mt-12 rounded-3xl overflow-hidden border border-purple-100 shadow-xl relative bg-linear-to-br from-purple-50/80 via-white to-amber-50/70 p-6 sm:p-10">
+              {/* Subtle decorative playful blobs */}
+              <div className="absolute -top-16 -right-16 w-52 h-52 bg-pink-100/60 rounded-full blur-2xl pointer-events-none" />
+              <div className="absolute -bottom-16 -left-16 w-52 h-52 bg-sky-100/60 rounded-full blur-2xl pointer-events-none" />
+
+              <div className="relative z-10">
+                <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+                  <span className="text-xs font-extrabold uppercase tracking-widest text-primary-color bg-purple-100/70 px-3.5 py-1 rounded-full inline-block mb-3">
+                    Our Guiding Pillars
+                  </span>
+                  <h3 className="text-2xl sm:text-3xl font-extrabold font-fredoka text-gray-900">
+                    Nurturing Hearts & Awakening Minds
+                  </h3>
+                  <p className="text-gray-600 text-sm sm:text-base font-quicksand mt-2">
+                    Every day at {settings?.site_title || 'Little Flowers'} is guided by empathy, playful discovery, and joyful learning milestones.
+                  </p>
+                </div>
+
+                {/* 4 Creative Philosophy Cards */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
+                  <div className="bg-white/90 backdrop-blur-xs rounded-2xl p-5 border border-purple-100/80 shadow-2xs hover:-translate-y-1 transition-all duration-300">
+                    <div className="w-12 h-12 rounded-xl bg-purple-100 text-primary-color flex items-center justify-center text-2xl mb-3 shadow-2xs">
+                      🎨
+                    </div>
+                    <h4 className="font-extrabold font-fredoka text-gray-900 text-lg mb-1">Joyful Play</h4>
+                    <p className="text-xs sm:text-sm text-gray-600 font-quicksand leading-relaxed">
+                      Learning sparked through tactile crafts, creative expression, and open-ended curiosity.
+                    </p>
+                  </div>
+
+                  <div className="bg-white/90 backdrop-blur-xs rounded-2xl p-5 border border-amber-100/80 shadow-2xs hover:-translate-y-1 transition-all duration-300">
+                    <div className="w-12 h-12 rounded-xl bg-amber-100 text-secondary-color flex items-center justify-center text-2xl mb-3 shadow-2xs">
+                      🌱
+                    </div>
+                    <h4 className="font-extrabold font-fredoka text-gray-900 text-lg mb-1">Growth Mindset</h4>
+                    <p className="text-xs sm:text-sm text-gray-600 font-quicksand leading-relaxed">
+                      Celebrating effort and small discoveries that blossom into lifelong confidence.
+                    </p>
+                  </div>
+
+                  <div className="bg-white/90 backdrop-blur-xs rounded-2xl p-5 border border-pink-100/80 shadow-2xs hover:-translate-y-1 transition-all duration-300">
+                    <div className="w-12 h-12 rounded-xl bg-pink-100 text-accent-pink flex items-center justify-center text-2xl mb-3 shadow-2xs">
+                      ❤️
+                    </div>
+                    <h4 className="font-extrabold font-fredoka text-gray-900 text-lg mb-1">Warm Care</h4>
+                    <p className="text-xs sm:text-sm text-gray-600 font-quicksand leading-relaxed">
+                      A safe, welcoming second home where each child feels valued, heard, and protected.
+                    </p>
+                  </div>
+
+                  <div className="bg-white/90 backdrop-blur-xs rounded-2xl p-5 border border-sky-100/80 shadow-2xs hover:-translate-y-1 transition-all duration-300">
+                    <div className="w-12 h-12 rounded-xl bg-sky-100 text-accent-blue flex items-center justify-center text-2xl mb-3 shadow-2xs">
+                      🤝
+                    </div>
+                    <h4 className="font-extrabold font-fredoka text-gray-900 text-lg mb-1">Empathy & Unity</h4>
+                    <p className="text-xs sm:text-sm text-gray-600 font-quicksand leading-relaxed">
+                      Encouraging sharing, mutual respect, and collaborative friendships from day one.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Key Metrics / Community Stats Strip */}
                 {(profile?.total_students !== undefined || profile?.total_teachers !== undefined) && (
-                  <div className="p-6 bg-white/95 backdrop-blur-md flex flex-wrap items-center justify-around gap-6 border-t border-purple-100">
+                  <div className="rounded-2xl bg-white/95 backdrop-blur-md p-6 flex flex-wrap items-center justify-around gap-6 border border-purple-100/80 shadow-sm">
                     {profile?.total_students !== undefined && (
-                      <div className="text-center">
-                        <span className="block text-2xl sm:text-3xl font-extrabold font-fredoka text-primary-color">
-                          {profile.total_students}
-                        </span>
-                        <span className="text-xs font-bold text-gray-500 uppercase tracking-wide">
-                          {profile.total_students_label || 'Students Enrolled'}
-                        </span>
+                      <div className="text-center flex items-center gap-3.5">
+                        <div className="w-11 h-11 rounded-full bg-purple-50 text-primary-color flex items-center justify-center text-xl">
+                          🧸
+                        </div>
+                        <div className="text-left">
+                          <span className="block text-2xl sm:text-3xl font-extrabold font-fredoka text-primary-color leading-none">
+                            {profile.total_students}+
+                          </span>
+                          <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+                            {profile.total_students_label || 'Happy Children'}
+                          </span>
+                        </div>
                       </div>
                     )}
                     {profile?.total_teachers !== undefined && (
-                      <div className="text-center">
-                        <span className="block text-2xl sm:text-3xl font-extrabold font-fredoka text-secondary-color">
-                          {profile.total_teachers}
-                        </span>
-                        <span className="text-xs font-bold text-gray-500 uppercase tracking-wide">
-                          {profile.total_teachers_label || 'Dedicated Mentors'}
-                        </span>
+                      <div className="text-center flex items-center gap-3.5">
+                        <div className="w-11 h-11 rounded-full bg-amber-50 text-secondary-color flex items-center justify-center text-xl">
+                          👩‍🏫
+                        </div>
+                        <div className="text-left">
+                          <span className="block text-2xl sm:text-3xl font-extrabold font-fredoka text-secondary-color leading-none">
+                            {profile.total_teachers}+
+                          </span>
+                          <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+                            {profile.total_teachers_label || 'Dedicated Mentors'}
+                          </span>
+                        </div>
                       </div>
                     )}
+                    <div className="text-center flex items-center gap-3.5">
+                      <div className="w-11 h-11 rounded-full bg-pink-50 text-accent-pink flex items-center justify-center text-xl">
+                        ⭐
+                      </div>
+                      <div className="text-left">
+                        <span className="block text-2xl sm:text-3xl font-extrabold font-fredoka text-accent-pink leading-none">
+                          100%
+                        </span>
+                        <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+                          Joyful Milestones
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 )}
               </div>
-            )}
+            </div>
           </div>
         </section>
       </main>
