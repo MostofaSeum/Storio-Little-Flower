@@ -227,7 +227,7 @@ export default async function Home() {
       <NoticeSection notices={notices} customization={customization} />
 
       {/* 6. ABOUT US & INSTITUTION PROFILE */}
-      <AboutSection profile={profile} customization={customization} />
+      <AboutSection profile={profile} customization={customization} isStandalone={isStandalone} />
 
       {/* 7. LEADERSHIP MESSAGES (Max 2 shown with alternating layout & read more) */}
       {leadershipMessages.length > 0 && (

@@ -91,14 +91,16 @@ export default async function AboutPage() {
                   className="w-full h-[400px] object-cover"
                 />
               </div>
-              <div className="absolute -bottom-6 -right-2 bg-yellow-300 p-4 rounded-2xl shadow-md border-2 border-white transform rotate-3">
-                <span className="text-2xl font-black text-primary-color">
-                  10+ Years
-                </span>
-                <p className="text-xs font-bold text-gray-800">
-                  Of Joyful Learning
-                </p>
-              </div>
+              {(customization?.about_experience_years || isStandalone) && (
+                <div className="absolute -bottom-6 -right-2 bg-yellow-300 p-4 rounded-2xl shadow-md border-2 border-white transform rotate-3">
+                  <span className="text-2xl font-black text-primary-color">
+                    {customization?.about_experience_years || "10+ Years"}
+                  </span>
+                  <p className="text-xs font-bold text-gray-800">
+                    {customization?.about_experience_label || "Of Joyful Learning"}
+                  </p>
+                </div>
+              )}
             </div>
 
             {/* Right: Mission, Details, Philosophy */}
