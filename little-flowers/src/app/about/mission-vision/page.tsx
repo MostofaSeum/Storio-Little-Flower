@@ -129,15 +129,18 @@ export default async function MissionVisionPage() {
               <div className="absolute -bottom-16 -left-16 w-52 h-52 bg-sky-100/60 rounded-full blur-2xl pointer-events-none" />
 
               <div className="relative z-10">
+                {/* Guiding Pillars Header */}
                 <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
                   <span className="text-xs font-extrabold uppercase tracking-widest text-primary-color bg-purple-100/70 px-3.5 py-1 rounded-full inline-block mb-3">
-                    Our Guiding Pillars
+                    {customization?.pillars_badge || "Our Guiding Pillars"}
                   </span>
                   <h3 className="text-2xl sm:text-3xl font-extrabold font-fredoka text-gray-900">
-                    Nurturing Hearts & Awakening Minds
+                    {customization?.pillars_title || "Nurturing Hearts & Awakening Minds"}
                   </h3>
                   <p className="text-gray-600 text-sm sm:text-base font-quicksand mt-2">
-                    Every day at {settings?.site_title || 'Little Flowers'} is guided by empathy, playful discovery, and joyful learning milestones.
+                    {customization?.pillars_subtitle
+                      ? customization.pillars_subtitle.replace('{school}', settings?.site_title || 'Little Flowers')
+                      : `Every day at ${settings?.site_title || 'Little Flowers'} is guided by empathy, playful discovery, and joyful learning milestones.`}
                   </p>
                 </div>
 
@@ -153,9 +156,11 @@ export default async function MissionVisionPage() {
                         <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.563-2.512 5.563-5.563C21.998 6.136 17.514 2 12 2z" />
                       </svg>
                     </div>
-                    <h4 className="font-extrabold font-fredoka text-gray-900 text-lg mb-1">Joyful Play</h4>
+                    <h4 className="font-extrabold font-fredoka text-gray-900 text-lg mb-1">
+                      {customization?.pillar1_title || "Joyful Play"}
+                    </h4>
                     <p className="text-xs sm:text-sm text-gray-600 font-quicksand leading-relaxed">
-                      Learning sparked through tactile crafts, creative expression, and open-ended curiosity.
+                      {customization?.pillar1_desc || "Learning sparked through tactile crafts, creative expression, and open-ended curiosity."}
                     </p>
                   </div>
 
@@ -167,9 +172,11 @@ export default async function MissionVisionPage() {
                         <path d="M7 10c-3-2-4-5-4-5s3 0 5 2" />
                       </svg>
                     </div>
-                    <h4 className="font-extrabold font-fredoka text-gray-900 text-lg mb-1">Growth Mindset</h4>
+                    <h4 className="font-extrabold font-fredoka text-gray-900 text-lg mb-1">
+                      {customization?.pillar2_title || "Growth Mindset"}
+                    </h4>
                     <p className="text-xs sm:text-sm text-gray-600 font-quicksand leading-relaxed">
-                      Celebrating effort and small discoveries that blossom into lifelong confidence.
+                      {customization?.pillar2_desc || "Celebrating effort and small discoveries that blossom into lifelong confidence."}
                     </p>
                   </div>
 
@@ -179,9 +186,11 @@ export default async function MissionVisionPage() {
                         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                       </svg>
                     </div>
-                    <h4 className="font-extrabold font-fredoka text-gray-900 text-lg mb-1">Warm Care</h4>
+                    <h4 className="font-extrabold font-fredoka text-gray-900 text-lg mb-1">
+                      {customization?.pillar3_title || "Warm Care"}
+                    </h4>
                     <p className="text-xs sm:text-sm text-gray-600 font-quicksand leading-relaxed">
-                      A safe, welcoming second home where each child feels valued, heard, and protected.
+                      {customization?.pillar3_desc || "A safe, welcoming second home where each child feels valued, heard, and protected."}
                     </p>
                   </div>
 
@@ -194,9 +203,11 @@ export default async function MissionVisionPage() {
                         <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                       </svg>
                     </div>
-                    <h4 className="font-extrabold font-fredoka text-gray-900 text-lg mb-1">Empathy & Unity</h4>
+                    <h4 className="font-extrabold font-fredoka text-gray-900 text-lg mb-1">
+                      {customization?.pillar4_title || "Empathy & Unity"}
+                    </h4>
                     <p className="text-xs sm:text-sm text-gray-600 font-quicksand leading-relaxed">
-                      Encouraging sharing, mutual respect, and collaborative friendships from day one.
+                      {customization?.pillar4_desc || "Encouraging sharing, mutual respect, and collaborative friendships from day one."}
                     </p>
                   </div>
                 </div>

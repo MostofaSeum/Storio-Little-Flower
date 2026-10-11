@@ -235,6 +235,19 @@ export interface LittleFlowersCustomizationConfig {
   page_compliance_title?: string;
   page_compliance_subtitle?: string;
 
+  // Mission & Vision Guiding Pillars Customization
+  pillars_badge?: string;
+  pillars_title?: string;
+  pillars_subtitle?: string;
+  pillar1_title?: string;
+  pillar1_desc?: string;
+  pillar2_title?: string;
+  pillar2_desc?: string;
+  pillar3_title?: string;
+  pillar3_desc?: string;
+  pillar4_title?: string;
+  pillar4_desc?: string;
+
   [key: string]: unknown;
 }
 
