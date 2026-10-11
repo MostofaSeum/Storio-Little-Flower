@@ -29,40 +29,28 @@ export default function PromoCtaSection({
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const total = allPromos.length;
+  const isRollingRef = useRef(false);
 
-  // Auto-roll timer: smooth rollover every 6.5 seconds when not hovered and multiple promos exist
+  // Auto-roll timer: clean interval without closure stale-state lockup
   useEffect(() => {
     if (total <= 1 || isPaused) return;
 
-    timerRef.current = setInterval(() => {
-      triggerRoll('next');
+    const interval = setInterval(() => {
+      if (isRollingRef.current) return;
+      isRollingRef.current = true;
+      setIsRolling(true);
+
+      setTimeout(() => {
+        setCurrentIndex((prev) => (prev + 1) % total);
+        setTimeout(() => {
+          setIsRolling(false);
+          isRollingRef.current = false;
+        }, 60);
+      }, 400);
     }, 5000);
 
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
-  }, [total, isPaused, currentIndex]);
-
-  const triggerRoll = (dir: 'next' | 'prev') => {
-    if (isRolling || total <= 1) return;
-    setIsRolling(true);
-    setRollDirection(dir === 'next' ? 'up' : 'down');
-
-    // Wait for the exit transition before switching index
-    setTimeout(() => {
-      setCurrentIndex((prev) => {
-        if (dir === 'next') {
-          return (prev + 1) % total;
-        } else {
-          return (prev - 1 + total) % total;
-        }
-      });
-      // Allow new card to mount and animate in
-      setTimeout(() => {
-        setIsRolling(false);
-      }, 50);
-    }, 450);
-  };
+    return () => clearInterval(interval);
+  }, [total, isPaused]);
 
   if (total === 0) return null;
 
@@ -167,12 +155,15 @@ export default function PromoCtaSection({
                 key={`dot-${dotIdx}`}
                 type="button"
                 onClick={() => {
-                  if (dotIdx !== currentIndex && !isRolling) {
+                  if (dotIdx !== currentIndex && !isRollingRef.current) {
+                    isRollingRef.current = true;
                     setIsRolling(true);
-                    setRollDirection(dotIdx > currentIndex ? 'up' : 'down');
                     setTimeout(() => {
                       setCurrentIndex(dotIdx);
-                      setTimeout(() => setIsRolling(false), 50);
+                      setTimeout(() => {
+                        setIsRolling(false);
+                        isRollingRef.current = false;
+                      }, 50);
                     }, 350);
                   }
                 }}
