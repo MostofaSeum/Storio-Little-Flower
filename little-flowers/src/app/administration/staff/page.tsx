@@ -54,12 +54,12 @@ export default async function TeachersPage() {
           <div className="site-container px-4 sm:px-8 relative z-10 text-center">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase bg-white text-primary-color border border-purple-200 shadow-2xs mb-2.5">
               <span className="w-2 h-2 rounded-full bg-accent-blue animate-pulse" />
-              Academic Personnel
+              {customization?.page_staff_badge || "Academic Personnel"}
             </span>
 
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight">
               <SplitText
-                text="Our Teachers"
+                text={customization?.page_staff_title || "Our Teachers"}
                 className="inline-block text-primary-color"
                 tag="span"
                 triggerOnMount={true}
@@ -67,7 +67,7 @@ export default async function TeachersPage() {
             </h1>
 
             <p className="mt-2 text-sm sm:text-base text-gray-600 leading-relaxed font-quicksand max-w-2xl mx-auto">
-              Meet our qualified, nurturing educators who inspire curiosity and joy in every student.
+              {customization?.page_staff_subtitle || "Meet our qualified, nurturing educators who inspire curiosity and joy in every student."}
             </p>
           </div>
         </section>

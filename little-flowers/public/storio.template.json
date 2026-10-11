@@ -848,6 +848,156 @@
         "label": "Pillar 4: Description",
         "type": "text",
         "default": "Encouraging sharing, mutual respect, and collaborative friendships from day one."
+      },
+      {
+        "id": "page_mission_vision_hero_badge",
+        "label": "Page Mission & Vision: Hero Badge",
+        "type": "text",
+        "default": "Educational Philosophy"
+      },
+      {
+        "id": "page_mission_vision_hero_title",
+        "label": "Page Mission & Vision: Hero Title",
+        "type": "text",
+        "default": "Mission & Vision"
+      },
+      {
+        "id": "page_mission_vision_metric3_value",
+        "label": "Page Mission & Vision: Milestone Metric Number",
+        "type": "text",
+        "default": "100%"
+      },
+      {
+        "id": "page_mission_vision_metric3_label",
+        "label": "Page Mission & Vision: Milestone Metric Label",
+        "type": "text",
+        "default": "Joyful Milestones"
+      },
+      {
+        "id": "page_about_leadership_badge",
+        "label": "Page About: Leadership Section Badge",
+        "type": "text",
+        "default": "Institutional Leadership"
+      },
+      {
+        "id": "page_about_leadership_title",
+        "label": "Page About: Leadership Section Title",
+        "type": "text",
+        "default": "Governing Body & Advisory Board"
+      },
+      {
+        "id": "page_about_leadership_subtitle",
+        "label": "Page About: Leadership Section Subtitle",
+        "type": "text",
+        "default": "Guiding our vision, educational excellence, and strategic foundation."
+      },
+      {
+        "id": "page_about_teachers_badge",
+        "label": "Page About: Mentors Section Badge",
+        "type": "text",
+        "default": "Loving & Certified"
+      },
+      {
+        "id": "page_about_teachers_title",
+        "label": "Page About: Mentors Section Title",
+        "type": "text",
+        "default": "Our Dedicated Mentors"
+      },
+      {
+        "id": "page_about_cta_title",
+        "label": "Page About: Bottom CTA Title",
+        "type": "text",
+        "default": "Ready to Join Our Loving Family?"
+      },
+      {
+        "id": "page_about_cta_desc",
+        "label": "Page About: Bottom CTA Description",
+        "type": "text",
+        "default": "Discover a joyful learning environment where your child thrives with care, wonder, and confidence."
+      },
+      {
+        "id": "page_about_cta_btn1_text",
+        "label": "Page About: Bottom CTA Button 1 Text",
+        "type": "text",
+        "default": "Apply for Admission →"
+      },
+      {
+        "id": "page_about_cta_btn1_link",
+        "label": "Page About: Bottom CTA Button 1 Link",
+        "type": "text",
+        "default": "/admission"
+      },
+      {
+        "id": "page_about_cta_btn2_text",
+        "label": "Page About: Bottom CTA Button 2 Text",
+        "type": "text",
+        "default": "Meet All Faculty →"
+      },
+      {
+        "id": "page_about_cta_btn2_link",
+        "label": "Page About: Bottom CTA Button 2 Link",
+        "type": "text",
+        "default": "/staff"
+      },
+      {
+        "id": "page_institution_profile_title",
+        "label": "Page Institution Profile: Title",
+        "type": "text",
+        "default": "Institution Profile"
+      },
+      {
+        "id": "page_staff_badge",
+        "label": "Page Teachers/Staff: Badge",
+        "type": "text",
+        "default": "Academic Personnel"
+      },
+      {
+        "id": "page_staff_title",
+        "label": "Page Teachers/Staff: Title",
+        "type": "text",
+        "default": "Our Teachers"
+      },
+      {
+        "id": "page_staff_subtitle",
+        "label": "Page Teachers/Staff: Subtitle",
+        "type": "text",
+        "default": "Meet our qualified, nurturing educators who inspire curiosity and joy in every student."
+      },
+      {
+        "id": "page_team_badge",
+        "label": "Page Committee/Team: Badge",
+        "type": "text",
+        "default": "Administrative Governance"
+      },
+      {
+        "id": "page_team_title",
+        "label": "Page Committee/Team: Title",
+        "type": "text",
+        "default": "Committee Members"
+      },
+      {
+        "id": "page_team_subtitle",
+        "label": "Page Committee/Team: Subtitle",
+        "type": "text",
+        "default": "Our governing body, trustees, and advisors steering the academy towards excellence."
+      },
+      {
+        "id": "page_promotions_badge",
+        "label": "Page Promotions: Badge",
+        "type": "text",
+        "default": "Special Announcements"
+      },
+      {
+        "id": "page_promotions_title",
+        "label": "Page Promotions: Title",
+        "type": "text",
+        "default": "Active School Promotions"
+      },
+      {
+        "id": "page_promotions_subtitle",
+        "label": "Page Promotions: Subtitle",
+        "type": "text",
+        "default": "Explore our current fee waivers, admission opportunities, sibling discounts, and early bird scholarship programs."
       }
     ]
   },

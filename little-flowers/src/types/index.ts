@@ -235,7 +235,7 @@ export interface LittleFlowersCustomizationConfig {
   page_compliance_title?: string;
   page_compliance_subtitle?: string;
 
-  // Mission & Vision Guiding Pillars Customization
+  // Mission & Vision Guiding Pillars & Hero Customization
   pillars_badge?: string;
   pillars_title?: string;
   pillars_subtitle?: string;
@@ -247,6 +247,35 @@ export interface LittleFlowersCustomizationConfig {
   pillar3_desc?: string;
   pillar4_title?: string;
   pillar4_desc?: string;
+  page_mission_vision_hero_badge?: string;
+  page_mission_vision_hero_title?: string;
+  page_mission_vision_metric3_value?: string;
+  page_mission_vision_metric3_label?: string;
+
+  // About Page Sub-sections Customization
+  page_about_leadership_badge?: string;
+  page_about_leadership_title?: string;
+  page_about_leadership_subtitle?: string;
+  page_about_teachers_badge?: string;
+  page_about_teachers_title?: string;
+  page_about_cta_title?: string;
+  page_about_cta_desc?: string;
+  page_about_cta_btn1_text?: string;
+  page_about_cta_btn1_link?: string;
+  page_about_cta_btn2_text?: string;
+  page_about_cta_btn2_link?: string;
+
+  // Institution Profile, Staff, Team & Promotions Pages Customization
+  page_institution_profile_title?: string;
+  page_staff_badge?: string;
+  page_staff_title?: string;
+  page_staff_subtitle?: string;
+  page_team_badge?: string;
+  page_team_title?: string;
+  page_team_subtitle?: string;
+  page_promotions_badge?: string;
+  page_promotions_title?: string;
+  page_promotions_subtitle?: string;
 
   [key: string]: unknown;
 }

@@ -72,7 +72,7 @@ export default async function InstitutionProfilePage() {
 
               <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight">
                 <SplitText
-                  text="Institution Profile"
+                  text={customization?.page_institution_profile_title || "Institution Profile"}
                   className="inline-block text-primary-color"
                   tag="span"
                   triggerOnMount={true}

@@ -54,12 +54,12 @@ export default async function CommitteeMembersPage() {
           <div className="site-container px-4 sm:px-8 relative z-10 text-center">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase bg-white text-primary-color border border-purple-200 shadow-2xs mb-2.5">
               <span className="w-2 h-2 rounded-full bg-secondary-color animate-pulse" />
-              Administrative Governance
+              {customization?.page_team_badge || "Administrative Governance"}
             </span>
 
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight">
               <SplitText
-                text="Committee Members"
+                text={customization?.page_team_title || "Committee Members"}
                 className="inline-block text-primary-color"
                 tag="span"
                 triggerOnMount={true}
@@ -67,7 +67,7 @@ export default async function CommitteeMembersPage() {
             </h1>
 
             <p className="mt-2 text-sm sm:text-base text-gray-600 leading-relaxed font-quicksand max-w-2xl mx-auto">
-              Our governing body, trustees, and advisors steering the academy towards excellence.
+              {customization?.page_team_subtitle || "Our governing body, trustees, and advisors steering the academy towards excellence."}
             </p>
           </div>
         </section>

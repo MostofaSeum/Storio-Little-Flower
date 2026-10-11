@@ -155,11 +155,11 @@ export default async function AboutPage() {
             <section className="bg-white rounded-3xl p-8 sm:p-12 border border-purple-50 shadow-sm">
               <div className="text-center max-w-2xl mx-auto mb-12">
                 <span className="text-xs font-extrabold tracking-wider uppercase text-purple-700 bg-purple-100 px-3.5 py-1 rounded-full">
-                  Institutional Leadership
+                  {customization?.page_about_leadership_badge || "Institutional Leadership"}
                 </span>
                 <h2 className="text-2xl sm:text-4xl font-extrabold text-gray-900 mt-3 font-fredoka">
                   <SplitText
-                    text="Governing Body & Advisory Board"
+                    text={customization?.page_about_leadership_title || "Governing Body & Advisory Board"}
                     tag="span"
                     splitType="words, chars"
                     delay={35}
@@ -169,7 +169,7 @@ export default async function AboutPage() {
                   />
                 </h2>
                 <p className="text-gray-500 text-sm mt-2 font-medium">
-                  Guiding our vision, educational excellence, and strategic foundation.
+                  {customization?.page_about_leadership_subtitle || "Guiding our vision, educational excellence, and strategic foundation."}
                 </p>
               </div>
 
@@ -219,11 +219,11 @@ export default async function AboutPage() {
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-purple-100 pb-4">
                 <div>
                   <span className="text-xs font-extrabold tracking-wider uppercase text-secondary-color bg-amber-100 px-3 py-1 rounded-full">
-                    Loving &amp; Certified
+                    {customization?.page_about_teachers_badge || "Loving & Certified"}
                   </span>
                   <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 mt-2 font-fredoka">
                     <SplitText
-                      text="Our Dedicated Mentors"
+                      text={customization?.page_about_teachers_title || "Our Dedicated Mentors"}
                       tag="span"
                       splitType="words, chars"
                       delay={35}
@@ -293,23 +293,23 @@ export default async function AboutPage() {
           <section className="bg-gradient-to-r from-purple-700 via-primary-color to-indigo-800 rounded-3xl p-8 sm:p-12 text-white text-center shadow-lg relative overflow-hidden">
             <div className="relative z-10 max-w-2xl mx-auto space-y-4">
               <h2 className="text-2xl sm:text-4xl font-black">
-                Ready to Join Our Loving Family?
+                {customization?.page_about_cta_title || "Ready to Join Our Loving Family?"}
               </h2>
               <p className="text-purple-100 text-sm sm:text-base">
-                Discover a joyful learning environment where your child thrives with care, wonder, and confidence.
+                {customization?.page_about_cta_desc || "Discover a joyful learning environment where your child thrives with care, wonder, and confidence."}
               </p>
               <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
                 <Link
-                  href="/admission"
+                  href={customization?.page_about_cta_btn1_link || "/admission"}
                   className="px-6 py-3 rounded-full bg-white text-primary-color font-bold text-sm hover:bg-yellow-300 transition shadow"
                 >
-                  Apply for Admission &rarr;
+                  {customization?.page_about_cta_btn1_text || "Apply for Admission →"}
                 </Link>
                 <Link
-                  href="/staff"
+                  href={customization?.page_about_cta_btn2_link || "/staff"}
                   className="px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white font-bold text-sm transition border border-white/20"
                 >
-                  Meet All Faculty &rarr;
+                  {customization?.page_about_cta_btn2_text || "Meet All Faculty →"}
                 </Link>
               </div>
             </div>
