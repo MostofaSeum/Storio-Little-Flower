@@ -360,7 +360,7 @@ export async function getSyllabuses(tenantHost: string) {
 }
 
 export async function getStudentStats(tenantHost?: string) {
-  return storio.getStudentStats(tenantHost);
+  return storio.apiFetch<StorioStudentStatsResponse>('/api/v2/template/student-stats/', { tenantHost });
 }
 
 export async function getMpoInfo(tenantHost: string) {
