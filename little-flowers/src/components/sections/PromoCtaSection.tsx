@@ -36,7 +36,7 @@ export default function PromoCtaSection({
 
     timerRef.current = setInterval(() => {
       triggerRoll('next');
-    }, 6500);
+    }, 5000);
 
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
