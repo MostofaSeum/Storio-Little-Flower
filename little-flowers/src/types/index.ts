@@ -30,7 +30,7 @@ import {
   StorioHotline,
 } from '@storio/template-sdk';
 
-export interface StorioStudentStat extends SDKStorioStudentStat {
+export interface StorioStudentStat extends Omit<SDKStorioStudentStat, 'program'> {
   program?: string | null;
 }
 

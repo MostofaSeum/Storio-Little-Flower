@@ -7,13 +7,13 @@ import { getTenantContext, getTemplateLayout } from "@/lib/storio";
 const quicksand = Quicksand({
   variable: "--font-quicksand",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 const fredoka = Fredoka({
   variable: "--font-fredoka",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 export async function generateMetadata(): Promise<Metadata> {
