@@ -173,6 +173,68 @@ export interface LittleFlowersCustomizationConfig {
   heroTitle1?: string;
   heroTitle2?: string;
   heroDescription?: string;
+
+  // Homepage Section Customization
+  about_section_badge?: string;
+  about_section_title?: string;
+  about_section_description?: string;
+  notice_section_badge?: string;
+  notice_section_title?: string;
+  notice_section_subtitle?: string;
+  notice_view_all_text?: string;
+  leadership_section_badge?: string;
+  leadership_section_title?: string;
+  leadership_section_subtitle?: string;
+  programs_section_badge?: string;
+  programs_section_title?: string;
+  programs_section_subtitle?: string;
+  teachers_section_badge?: string;
+  teachers_section_title?: string;
+  teachers_section_subtitle?: string;
+  events_section_badge?: string;
+  events_section_title?: string;
+  events_section_subtitle?: string;
+  events_view_all_text?: string;
+  gallery_section_badge?: string;
+  gallery_section_title?: string;
+  gallery_section_subtitle?: string;
+  gallery_view_all_text?: string;
+  testimonials_section_badge?: string;
+  testimonials_section_title?: string;
+  testimonials_section_subtitle?: string;
+  faqs_section_badge?: string;
+  faqs_section_title?: string;
+  faqs_section_subtitle?: string;
+
+  // Inner Page Customization
+  page_about_badge?: string;
+  page_about_title?: string;
+  page_about_subtitle?: string;
+  page_notices_badge?: string;
+  page_notices_title?: string;
+  page_notices_subtitle?: string;
+  page_events_badge?: string;
+  page_events_title?: string;
+  page_events_subtitle?: string;
+  page_blog_badge?: string;
+  page_blog_title?: string;
+  page_blog_subtitle?: string;
+  page_contact_badge?: string;
+  page_contact_title?: string;
+  page_contact_subtitle?: string;
+  page_gallery_badge?: string;
+  page_gallery_title?: string;
+  page_gallery_subtitle?: string;
+  page_career_badge?: string;
+  page_career_title?: string;
+  page_career_subtitle?: string;
+  page_exam_badge?: string;
+  page_exam_title?: string;
+  page_exam_subtitle?: string;
+  page_compliance_badge?: string;
+  page_compliance_title?: string;
+  page_compliance_subtitle?: string;
+
   [key: string]: unknown;
 }
 

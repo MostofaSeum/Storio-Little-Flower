@@ -1,11 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
-import { StorioLeadershipMessage } from '@/types';
+import { StorioLeadershipMessage, LittleFlowersCustomizationConfig } from '@/types';
 import { resolveMediaUrl } from '@/lib/media';
 import SplitText from '@/components/ui/SplitText';
 
 interface LeadershipSectionProps {
   messages: StorioLeadershipMessage[];
+  customization?: LittleFlowersCustomizationConfig | null;
 }
 
 function cleanHtmlToPlainText(raw?: string): string {
@@ -27,11 +28,15 @@ function cleanHtmlToPlainText(raw?: string): string {
     .trim();
 }
 
-export default function LeadershipSection({ messages }: LeadershipSectionProps) {
+export default function LeadershipSection({ messages, customization }: LeadershipSectionProps) {
   // Only take up to 2 messages as requested
   const displayMessages = Array.isArray(messages) ? messages.slice(0, 2) : [];
 
   if (displayMessages.length === 0) return null;
+
+  const badgeText = customization?.leadership_section_badge || "Leadership Desk";
+  const titleText = customization?.leadership_section_title || "Words from Our Leadership";
+  const subtitleText = customization?.leadership_section_subtitle || "Guiding principles and vision from the leaders shaping our students' future.";
 
   return (
     <section className="py-14 sm:py-20 px-4 sm:px-8 relative overflow-hidden">
@@ -47,19 +52,19 @@ export default function LeadershipSection({ messages }: LeadershipSectionProps) 
             style={{ backgroundColor: 'var(--bg-surface, #ffffff)' }}
           >
             <span className="w-2 h-2 rounded-full bg-accent-pink" />
-            Leadership Desk
+            {badgeText}
           </span>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-fredoka leading-tight">
             <SplitText
-              text="Words from Our Leadership"
+              text={titleText}
               tag="span"
               threshold={0.15}
             />
           </h2>
 
           <p className="mt-2 text-sm sm:text-base text-gray-600 font-quicksand font-medium">
-            Guiding principles and vision from the leaders shaping our students&apos; future.
+            {subtitleText}
           </p>
         </div>
         {displayMessages.map((item, index) => {

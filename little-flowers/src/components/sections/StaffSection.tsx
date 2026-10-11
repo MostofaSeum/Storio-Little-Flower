@@ -1,14 +1,20 @@
 import React from 'react';
 import { StorioStaffMember } from '@storio/template-sdk';
+import { LittleFlowersCustomizationConfig } from '@/types';
 import SplitText from '@/components/ui/SplitText';
 import { getStaffMemberPhoto } from '@/lib/storio';
 
 interface StaffSectionProps {
   staffList: StorioStaffMember[];
+  customization?: LittleFlowersCustomizationConfig | null;
 }
 
-export default function StaffSection({ staffList }: StaffSectionProps) {
+export default function StaffSection({ staffList, customization }: StaffSectionProps) {
   if (!staffList || staffList.length === 0) return null;
+
+  const badgeText = customization?.teachers_section_badge || "Warm & Caring";
+  const titleText = customization?.teachers_section_title || "Meet Our Loving Mentors";
+  const subtitleText = customization?.teachers_section_subtitle || "Certified childhood educators dedicated to giving every child warmth, guidance, and laughter.";
 
   return (
     <section
@@ -17,11 +23,11 @@ export default function StaffSection({ staffList }: StaffSectionProps) {
     >
       <div className="text-center max-w-2xl mx-auto mb-14 reveal-on-scroll">
         <span className="text-xs font-extrabold tracking-wider uppercase text-secondary-color bg-amber-100 px-3 py-1 rounded-full">
-          Warm & Caring
+          {badgeText}
         </span>
         <h2 className="text-3xl sm:text-4xl font-extrabold mt-3 font-fredoka">
           <SplitText
-            text="Meet Our Loving Mentors"
+            text={titleText}
             tag="span"
             splitType="chars"
             delay={30}
@@ -31,8 +37,7 @@ export default function StaffSection({ staffList }: StaffSectionProps) {
           />
         </h2>
         <p className="text-gray-500 text-sm mt-2 font-medium">
-          Certified childhood educators dedicated to giving every child warmth,
-          guidance, and laughter.
+          {subtitleText}
         </p>
       </div>
 

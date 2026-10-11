@@ -55,12 +55,12 @@ export default async function CareersPage() {
           <div className="site-container px-4 sm:px-8 relative z-10 text-center">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase bg-white text-primary-color border border-purple-200 shadow-2xs mb-2.5">
               <span className="w-2 h-2 rounded-full bg-accent-green animate-pulse" />
-              Join Our Family
+              {customization?.page_career_badge || "Join Our Family"}
             </span>
 
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight">
               <SplitText
-                text="Career Opportunities"
+                text={customization?.page_career_title || "Career Opportunities"}
                 className="inline-block text-primary-color"
                 tag="span"
                 triggerOnMount={true}
@@ -68,7 +68,7 @@ export default async function CareersPage() {
             </h1>
 
             <p className="mt-2 text-sm sm:text-base text-gray-600 leading-relaxed font-quicksand max-w-2xl mx-auto">
-              Work with passion and purpose in a joyful, supportive environment dedicated to child growth.
+              {customization?.page_career_subtitle || "Work with passion and purpose in a joyful, supportive environment dedicated to child growth."}
             </p>
           </div>
         </section>

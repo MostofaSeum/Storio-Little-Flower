@@ -74,19 +74,19 @@ export default async function PhotosGalleryPage() {
           <div className="site-container px-4 sm:px-8 relative z-10 text-center">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase bg-white text-primary-color border border-purple-200 shadow-2xs mb-2.5">
               <span className="w-2 h-2 rounded-full bg-accent-pink animate-pulse" />
-              School Memories
+              {customization?.page_gallery_badge || "School Memories"}
             </span>
 
             <h1 className="page-hero-title font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight">
               <SplitText
-                text="Photo Gallery"
+                text={customization?.page_gallery_title || "Photo Gallery"}
                 className="inline-block text-primary-color"
                 tag="span"
               />
             </h1>
 
             <p className="mt-4 text-base sm:text-lg text-gray-600 leading-relaxed font-quicksand max-w-2xl mx-auto">
-              Capturing vibrant campus life, joyous student interactions, and festive moments across our school albums.
+              {customization?.page_gallery_subtitle || "Capturing vibrant campus life, joyous student interactions, and festive moments across our school albums."}
             </p>
           </div>
         </section>

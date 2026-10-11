@@ -32,12 +32,12 @@ export default async function ContactPage() {
           <div className="site-container px-4 sm:px-8 relative z-10 text-center">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase bg-white text-primary-color border border-purple-200 shadow-2xs mb-2.5">
               <span className="w-2 h-2 rounded-full bg-accent-pink animate-pulse" />
-              Direct Communication
+              {customization?.page_contact_badge || "Direct Communication"}
             </span>
 
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight">
               <SplitText
-                text="Contact Our Campus"
+                text={customization?.page_contact_title || "Contact Our Campus"}
                 className="inline-block text-primary-color"
                 tag="span"
                 triggerOnMount={true}
@@ -45,7 +45,7 @@ export default async function ContactPage() {
             </h1>
 
             <p className="mt-3 text-sm sm:text-base text-gray-600 leading-relaxed font-quicksand max-w-2xl mx-auto">
-              We welcome parents, educators, and visitors to connect with our administrative office, schedule campus tours, or ask any questions.
+              {customization?.page_contact_subtitle || "We welcome parents, educators, and visitors to connect with our administrative office, schedule campus tours, or ask any questions."}
             </p>
           </div>
         </section>

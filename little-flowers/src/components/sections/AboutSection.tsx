@@ -51,11 +51,11 @@ export default function AboutSection({ profile, customization }: AboutSectionPro
         {/* Right: Mission, Details, and Key Metrics */}
         <div className="lg:col-span-7 space-y-6 reveal-on-scroll delay-150">
           <div className="inline-block bg-accent-soft-blue text-primary-color font-bold text-xs uppercase px-3.5 py-1 rounded-full">
-            About Our Academy
+            {customization?.about_section_badge || "About Our Academy"}
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight font-fredoka">
             <SplitText
-              text="A Loving Second Home for Your Little Ones"
+              text={customization?.about_section_title || "A Loving Second Home for Your Little Ones"}
               tag="span"
               splitType="words, chars"
               delay={30}
@@ -67,6 +67,7 @@ export default function AboutSection({ profile, customization }: AboutSectionPro
           </h2>
           <p className="text-gray-600 text-base leading-relaxed">
             {profile.school_details ||
+              customization?.about_section_description ||
               "Our school provides experiential early childhood education centered on play, sensory exploration, creativity, and foundational social skills."}
           </p>
 

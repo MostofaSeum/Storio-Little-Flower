@@ -2,13 +2,15 @@
 
 import React, { useState } from 'react';
 import { StorioFaq } from '@/data/storioExtendedTypes';
+import { LittleFlowersCustomizationConfig } from '@/types';
 import SplitText from '@/components/ui/SplitText';
 
 interface FaqSectionProps {
   faqs: StorioFaq[];
+  customization?: LittleFlowersCustomizationConfig | null;
 }
 
-export default function FaqSection({ faqs }: FaqSectionProps) {
+export default function FaqSection({ faqs, customization }: FaqSectionProps) {
   const [openId, setOpenId] = useState<number | null>(faqs?.[0]?.id ?? null);
 
   if (!faqs || faqs.length === 0) return null;
@@ -16,6 +18,10 @@ export default function FaqSection({ faqs }: FaqSectionProps) {
   const toggleFaq = (id: number) => {
     setOpenId((prev) => (prev === id ? null : id));
   };
+
+  const badgeText = customization?.faqs_section_badge || "Got Questions?";
+  const titleText = customization?.faqs_section_title || "Frequently Asked Questions";
+  const subtitleText = customization?.faqs_section_subtitle || "Everything parents need to know about our admissions, caring teachers, daily curriculum, and campus life.";
 
   const borderColors = [
     'border-pink-200 hover:border-pink-300',
@@ -43,12 +49,12 @@ export default function FaqSection({ faqs }: FaqSectionProps) {
         {/* Section Header with SplitText from React Bits */}
         <div className="text-center mb-12">
           <span className="inline-block text-xs font-extrabold tracking-wider uppercase text-secondary-color bg-amber-100 px-3.5 py-1 rounded-full shadow-xs mb-3">
-            Got Questions?
+            {badgeText}
           </span>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight font-fredoka">
             <SplitText
-              text="Frequently Asked Questions"
+              text={titleText}
               tag="span"
               splitType="chars"
               delay={60}
@@ -59,7 +65,7 @@ export default function FaqSection({ faqs }: FaqSectionProps) {
           </h2>
 
           <p className="text-gray-500 text-sm mt-3 font-medium max-w-xl mx-auto">
-            Everything parents need to know about our admissions, caring teachers, daily curriculum, and campus life.
+            {subtitleText}
           </p>
         </div>
 

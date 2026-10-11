@@ -224,36 +224,36 @@ export default async function Home() {
       />
 
       {/* 5. NOTICE BOARD & ANNOUNCEMENTS */}
-      <NoticeSection notices={notices} />
+      <NoticeSection notices={notices} customization={customization} />
 
       {/* 6. ABOUT US & INSTITUTION PROFILE */}
       <AboutSection profile={profile} customization={customization} />
 
       {/* 7. LEADERSHIP MESSAGES (Max 2 shown with alternating layout & read more) */}
       {leadershipMessages.length > 0 && (
-        <LeadershipSection messages={leadershipMessages} />
+        <LeadershipSection messages={leadershipMessages} customization={customization} />
       )}
 
       {/* 8. LEARNING PROGRAMS & ACTIVITIES */}
-      <ActivitiesSection activities={activities} />
+      <ActivitiesSection activities={activities} customization={customization} />
 
       {/* 9. TEACHERS & MENTORS */}
-      <StaffSection staffList={staffList} />
+      <StaffSection staffList={staffList} customization={customization} />
 
       {/* 9. ADMISSIONS CALL-TO-ACTION PROMOTION */}
       <PromoCtaSection promotions={promotions} promo={activePromo} />
 
       {/* 10. PHOTO GALLERY MOMENTS */}
-      <GallerySection items={galleryItems} siteTitle={settings?.site_title} />
+      <GallerySection items={galleryItems} siteTitle={settings?.site_title} customization={customization} />
 
       {/* 11. UPCOMING SCHOOL EVENTS */}
-      <EventsSection events={events} />
+      <EventsSection events={events} customization={customization} />
 
       {/* 12. PARENT TESTIMONIALS */}
-      <TestimonialsSection testimonials={testimonials} siteTitle={settings?.site_title} />
+      <TestimonialsSection testimonials={testimonials} siteTitle={settings?.site_title} customization={customization} />
 
       {/* 13. FREQUENTLY ASKED QUESTIONS */}
-      <FaqSection faqs={faqs} />
+      <FaqSection faqs={faqs} customization={customization} />
 
       {/* 14. PLAYFUL COLORFUL FOOTER */}
       <Footer settings={settings} profile={profile} importantLinks={importantLinks} />

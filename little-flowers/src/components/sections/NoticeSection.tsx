@@ -1,13 +1,20 @@
 import React from 'react';
 import { StorioNotice } from '@storio/template-sdk';
+import { LittleFlowersCustomizationConfig } from '@/types';
 import SplitText from '@/components/ui/SplitText';
 
 interface NoticeSectionProps {
   notices: StorioNotice[];
+  customization?: LittleFlowersCustomizationConfig | null;
 }
 
-export default function NoticeSection({ notices }: NoticeSectionProps) {
+export default function NoticeSection({ notices, customization }: NoticeSectionProps) {
   if (!notices || notices.length === 0) return null;
+
+  const badgeText = customization?.notice_section_badge || "Important Circulars";
+  const titleText = customization?.notice_section_title || "Campus Announcements";
+  const subtitleText = customization?.notice_section_subtitle || "Stay updated with latest school circulars, events, and schedules";
+  const viewAllText = customization?.notice_view_all_text || "View All Notices";
 
   return (
     <section
@@ -18,11 +25,11 @@ export default function NoticeSection({ notices }: NoticeSectionProps) {
         <div className="flex flex-wrap items-end justify-between border-b-2 border-purple-100/50 pb-4 mb-8 gap-4 reveal-on-scroll">
           <div>
             <span className="text-xs font-extrabold tracking-wider uppercase text-accent-pink bg-pink-100/80 px-3 py-1 rounded-full">
-              Important Circulars
+              {badgeText}
             </span>
             <h3 className="text-3xl font-extrabold mt-2 font-fredoka">
               <SplitText
-                text="Campus Announcements"
+                text={titleText}
                 tag="span"
                 splitType="chars"
                 delay={30}
@@ -33,14 +40,14 @@ export default function NoticeSection({ notices }: NoticeSectionProps) {
               />
             </h3>
             <p className="text-sm text-gray-500 font-medium">
-              Stay updated with latest school circulars, events, and schedules
+              {subtitleText}
             </p>
           </div>
           <a
             href="/notice"
             className="text-xs sm:text-sm font-bold text-accent-pink hover:text-accent-pink-hover transition-colors"
           >
-            View All Notices
+            {viewAllText}
           </a>
         </div>
 

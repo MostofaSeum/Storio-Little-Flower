@@ -1,13 +1,18 @@
 import React from 'react';
-import { StorioActivityItem } from '@/types';
+import { StorioActivityItem, LittleFlowersCustomizationConfig } from '@/types';
 import SplitText from '@/components/ui/SplitText';
 
 interface ActivitiesSectionProps {
   activities: StorioActivityItem[];
+  customization?: LittleFlowersCustomizationConfig | null;
 }
 
-export default function ActivitiesSection({ activities }: ActivitiesSectionProps) {
+export default function ActivitiesSection({ activities, customization }: ActivitiesSectionProps) {
   if (!activities || activities.length === 0) return null;
+
+  const badgeText = customization?.programs_section_badge || "Early Exploration";
+  const titleText = customization?.programs_section_title || "Our Learning Programs";
+  const subtitleText = customization?.programs_section_subtitle || "Tailored age-appropriate programs designed to kindle imagination and social confidence.";
 
   return (
     <section
@@ -17,11 +22,11 @@ export default function ActivitiesSection({ activities }: ActivitiesSectionProps
       <div className="site-container">
         <div className="text-center max-w-2xl mx-auto mb-14 reveal-on-scroll">
           <span className="text-xs font-extrabold tracking-wider uppercase text-accent-pink bg-pink-100 px-3 py-1 rounded-full">
-            Early Exploration
+            {badgeText}
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold mt-3 font-fredoka">
             <SplitText
-              text="Our Learning Programs"
+              text={titleText}
               tag="span"
               splitType="chars"
               delay={30}
@@ -31,8 +36,7 @@ export default function ActivitiesSection({ activities }: ActivitiesSectionProps
             />
           </h2>
           <p className="text-gray-500 text-sm mt-2 font-medium">
-            Tailored age-appropriate programs designed to kindle imagination
-            and social confidence.
+            {subtitleText}
           </p>
         </div>
 

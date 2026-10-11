@@ -41,12 +41,12 @@ export default async function ExamResultsPage() {
           <div className="site-container px-4 sm:px-8 relative z-10 text-center">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase bg-white text-primary-color border border-purple-200 shadow-2xs mb-2.5">
               <span className="w-2 h-2 rounded-full bg-accent-blue animate-pulse" />
-              Academic Performance
+              {customization?.page_exam_badge || "Academic Performance"}
             </span>
 
             <h1 className="page-hero-title font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight">
               <SplitText
-                text="Exam Results"
+                text={customization?.page_exam_title || "Exam Results"}
                 className="inline-block text-primary-color"
                 tag="span"
                 triggerOnMount={true}
@@ -54,7 +54,7 @@ export default async function ExamResultsPage() {
             </h1>
 
             <p className="mt-2 text-sm sm:text-base text-gray-600 leading-relaxed font-quicksand max-w-2xl mx-auto">
-              Official assessment statistics, term milestones, and downloadable grade reports.
+              {customization?.page_exam_subtitle || "Official assessment statistics, term milestones, and downloadable grade reports."}
             </p>
           </div>
         </section>

@@ -104,11 +104,11 @@ export default async function AboutPage() {
             {/* Right: Mission, Details, Philosophy */}
             <div className="lg:col-span-7 space-y-6">
               <div className="inline-block bg-purple-100 text-primary-color font-bold text-xs uppercase px-3.5 py-1 rounded-full">
-                Our Story &amp; Philosophy
+                {customization?.page_about_badge || "Our Story & Philosophy"}
               </div>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 leading-tight font-fredoka">
                 <SplitText
-                  text="Nurturing Wonder, Creativity & Empathy"
+                  text={customization?.page_about_title || "Nurturing Wonder, Creativity & Empathy"}
                   tag="span"
                   splitType="words, chars"
                   delay={30}
@@ -119,6 +119,7 @@ export default async function AboutPage() {
               </h1>
               <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
                 {profile?.school_details ||
+                  customization?.page_about_subtitle ||
                   "Our school provides experiential early childhood education centered on play, sensory exploration, creativity, and foundational social skills."}
               </p>
 

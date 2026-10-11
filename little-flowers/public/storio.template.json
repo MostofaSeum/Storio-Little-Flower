@@ -440,6 +440,348 @@
         "label": "About Metric 3 Label",
         "type": "text",
         "default": "Safe Campus & Care"
+      },
+      {
+        "id": "about_section_badge",
+        "label": "Homepage About: Badge Label",
+        "type": "text",
+        "default": "About Our Academy"
+      },
+      {
+        "id": "about_section_title",
+        "label": "Homepage About: Section Title",
+        "type": "text",
+        "default": "A Loving Second Home for Your Little Ones"
+      },
+      {
+        "id": "about_section_description",
+        "label": "Homepage About: Description",
+        "type": "textarea",
+        "default": "We nurture curiosity, creativity, and compassion in every child with early childhood specialists, joyful play, and secure learning environments."
+      },
+      {
+        "id": "notice_section_badge",
+        "label": "Homepage Notices: Badge Label",
+        "type": "text",
+        "default": "Important Circulars"
+      },
+      {
+        "id": "notice_section_title",
+        "label": "Homepage Notices: Section Title",
+        "type": "text",
+        "default": "Campus Announcements"
+      },
+      {
+        "id": "notice_section_subtitle",
+        "label": "Homepage Notices: Subtitle Description",
+        "type": "text",
+        "default": "Stay updated with latest school circulars, events, and schedules"
+      },
+      {
+        "id": "notice_view_all_text",
+        "label": "Homepage Notices: 'View All' Button Label",
+        "type": "text",
+        "default": "View All Notices"
+      },
+      {
+        "id": "leadership_section_badge",
+        "label": "Homepage Leadership: Badge Label",
+        "type": "text",
+        "default": "Leadership Desk"
+      },
+      {
+        "id": "leadership_section_title",
+        "label": "Homepage Leadership: Section Title",
+        "type": "text",
+        "default": "Words from Our Leadership"
+      },
+      {
+        "id": "leadership_section_subtitle",
+        "label": "Homepage Leadership: Subtitle Description",
+        "type": "text",
+        "default": "Insights and vision from our institutional leaders guiding our learners."
+      },
+      {
+        "id": "programs_section_badge",
+        "label": "Homepage Programs: Badge Label",
+        "type": "text",
+        "default": "Early Exploration"
+      },
+      {
+        "id": "programs_section_title",
+        "label": "Homepage Programs: Section Title",
+        "type": "text",
+        "default": "Our Learning Programs"
+      },
+      {
+        "id": "programs_section_subtitle",
+        "label": "Homepage Programs: Subtitle Description",
+        "type": "text",
+        "default": "Tailored age-appropriate programs designed to kindle imagination and social confidence."
+      },
+      {
+        "id": "teachers_section_badge",
+        "label": "Homepage Mentors: Badge Label",
+        "type": "text",
+        "default": "Warm & Caring"
+      },
+      {
+        "id": "teachers_section_title",
+        "label": "Homepage Mentors: Section Title",
+        "type": "text",
+        "default": "Meet Our Loving Mentors"
+      },
+      {
+        "id": "teachers_section_subtitle",
+        "label": "Homepage Mentors: Subtitle Description",
+        "type": "text",
+        "default": "Certified childhood educators dedicated to giving every child warmth, guidance, and laughter."
+      },
+      {
+        "id": "events_section_badge",
+        "label": "Homepage Events: Badge Label",
+        "type": "text",
+        "default": "Campus Life & Gatherings"
+      },
+      {
+        "id": "events_section_title",
+        "label": "Homepage Events: Section Title",
+        "type": "text",
+        "default": "Upcoming Events & Celebrations"
+      },
+      {
+        "id": "events_section_subtitle",
+        "label": "Homepage Events: Subtitle Description",
+        "type": "text",
+        "default": "Hover over any event card to view the schedule, venue, and program overview."
+      },
+      {
+        "id": "events_view_all_text",
+        "label": "Homepage Events: 'View All' Button Label",
+        "type": "text",
+        "default": "Full School Calendar"
+      },
+      {
+        "id": "gallery_section_badge",
+        "label": "Homepage Gallery: Badge Label",
+        "type": "text",
+        "default": "Happy Memories"
+      },
+      {
+        "id": "gallery_section_title",
+        "label": "Homepage Gallery: Section Title",
+        "type": "text",
+        "default": "Life at Our School"
+      },
+      {
+        "id": "gallery_section_subtitle",
+        "label": "Homepage Gallery: Subtitle Description",
+        "type": "text",
+        "default": "Click on any moment to zoom and view details"
+      },
+      {
+        "id": "gallery_view_all_text",
+        "label": "Homepage Gallery: 'View All' Button Label",
+        "type": "text",
+        "default": "Explore Full Gallery"
+      },
+      {
+        "id": "testimonials_section_badge",
+        "label": "Homepage Testimonials: Badge Label",
+        "type": "text",
+        "default": "Parent Voices"
+      },
+      {
+        "id": "testimonials_section_title",
+        "label": "Homepage Testimonials: Section Title",
+        "type": "text",
+        "default": "Loved by Families"
+      },
+      {
+        "id": "testimonials_section_subtitle",
+        "label": "Homepage Testimonials: Subtitle Description",
+        "type": "text",
+        "default": "Hear what parents say about their child's joyful journey with our school."
+      },
+      {
+        "id": "faqs_section_badge",
+        "label": "Homepage FAQ: Badge Label",
+        "type": "text",
+        "default": "Got Questions?"
+      },
+      {
+        "id": "faqs_section_title",
+        "label": "Homepage FAQ: Section Title",
+        "type": "text",
+        "default": "Frequently Asked Questions"
+      },
+      {
+        "id": "faqs_section_subtitle",
+        "label": "Homepage FAQ: Subtitle Description",
+        "type": "text",
+        "default": "Quick answers to common questions about admissions, routines, and policies."
+      },
+      {
+        "id": "page_about_badge",
+        "label": "Page About: Badge Label",
+        "type": "text",
+        "default": "Our Story & Philosophy"
+      },
+      {
+        "id": "page_about_title",
+        "label": "Page About: Title",
+        "type": "text",
+        "default": "Nurturing Wonder, Creativity & Empathy"
+      },
+      {
+        "id": "page_about_subtitle",
+        "label": "Page About: Subtitle Description",
+        "type": "textarea",
+        "default": "Our school provides experiential early childhood education centered on play, sensory exploration, creativity, and foundational social skills."
+      },
+      {
+        "id": "page_notices_badge",
+        "label": "Page Notices: Badge Label",
+        "type": "text",
+        "default": "Circulars & Updates"
+      },
+      {
+        "id": "page_notices_title",
+        "label": "Page Notices: Title",
+        "type": "text",
+        "default": "Notice Board"
+      },
+      {
+        "id": "page_notices_subtitle",
+        "label": "Page Notices: Subtitle Description",
+        "type": "text",
+        "default": "Stay up-to-date with official academic circulars, schedules, and important school notices."
+      },
+      {
+        "id": "page_events_badge",
+        "label": "Page Events: Badge Label",
+        "type": "text",
+        "default": "Campus Calendar"
+      },
+      {
+        "id": "page_events_title",
+        "label": "Page Events: Title",
+        "type": "text",
+        "default": "School Events & Celebrations"
+      },
+      {
+        "id": "page_events_subtitle",
+        "label": "Page Events: Subtitle Description",
+        "type": "text",
+        "default": "Join our interactive festivals, parent workshops, performances, and student assemblies."
+      },
+      {
+        "id": "page_blog_badge",
+        "label": "Page Blog: Badge Label",
+        "type": "text",
+        "default": "Our Stories & Insights"
+      },
+      {
+        "id": "page_blog_title",
+        "label": "Page Blog: Title",
+        "type": "text",
+        "default": "Stories, News & Updates"
+      },
+      {
+        "id": "page_blog_subtitle",
+        "label": "Page Blog: Subtitle Description",
+        "type": "text",
+        "default": "Explore insightful guides on early childhood development, exciting campus milestones, and classroom activities."
+      },
+      {
+        "id": "page_contact_badge",
+        "label": "Page Contact: Badge Label",
+        "type": "text",
+        "default": "Direct Communication"
+      },
+      {
+        "id": "page_contact_title",
+        "label": "Page Contact: Title",
+        "type": "text",
+        "default": "Contact Our Campus"
+      },
+      {
+        "id": "page_contact_subtitle",
+        "label": "Page Contact: Subtitle Description",
+        "type": "text",
+        "default": "We welcome parents, educators, and visitors to connect with our administrative office, schedule campus tours, or ask any questions."
+      },
+      {
+        "id": "page_gallery_badge",
+        "label": "Page Gallery: Badge Label",
+        "type": "text",
+        "default": "Visual Archive"
+      },
+      {
+        "id": "page_gallery_title",
+        "label": "Page Gallery: Title",
+        "type": "text",
+        "default": "Campus Photo Moments"
+      },
+      {
+        "id": "page_gallery_subtitle",
+        "label": "Page Gallery: Subtitle Description",
+        "type": "text",
+        "default": "A vibrant photographic chronicle of smiles, creative activities, discoveries, and friendship."
+      },
+      {
+        "id": "page_career_badge",
+        "label": "Page Career: Badge Label",
+        "type": "text",
+        "default": "Join Our Team"
+      },
+      {
+        "id": "page_career_title",
+        "label": "Page Career: Title",
+        "type": "text",
+        "default": "Career Opportunities"
+      },
+      {
+        "id": "page_career_subtitle",
+        "label": "Page Career: Subtitle Description",
+        "type": "text",
+        "default": "Discover rewarding career paths educating the next generation of bright young minds."
+      },
+      {
+        "id": "page_exam_badge",
+        "label": "Page Exam: Badge Label",
+        "type": "text",
+        "default": "Academic Excellence"
+      },
+      {
+        "id": "page_exam_title",
+        "label": "Page Exam: Title",
+        "type": "text",
+        "default": "Exam & Assessment Results"
+      },
+      {
+        "id": "page_exam_subtitle",
+        "label": "Page Exam: Subtitle Description",
+        "type": "text",
+        "default": "Instant result lookup portal for students and parents across all terms and assessments."
+      },
+      {
+        "id": "page_compliance_badge",
+        "label": "Page Compliance: Badge Label",
+        "type": "text",
+        "default": "Transparency & Governance"
+      },
+      {
+        "id": "page_compliance_title",
+        "label": "Page Compliance: Title",
+        "type": "text",
+        "default": "Institutional Governance & Compliance"
+      },
+      {
+        "id": "page_compliance_subtitle",
+        "label": "Page Compliance: Subtitle Description",
+        "type": "text",
+        "default": "Citizen Charter, Right to Information, MPO verification, and Institutional Disclosures."
       }
     ]
   },

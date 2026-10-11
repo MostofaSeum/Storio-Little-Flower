@@ -71,11 +71,11 @@ export default async function BlogPage() {
           <div className="text-center max-w-3xl mx-auto mb-8">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white shadow-sm border border-purple-100 text-xs font-semibold text-primary-color mb-3">
               <ThemeIcon name="flower-blossom" size={16} />
-              <span>Our Stories & Insights</span>
+              <span>{customization?.page_blog_badge || "Our Stories & Insights"}</span>
             </div>
             <h1 className="text-3xl md:text-5xl font-extrabold text-primary-color tracking-tight mb-3 font-fredoka">
               <SplitText
-                text="Stories, News & Updates"
+                text={customization?.page_blog_title || "Stories, News & Updates"}
                 tag="span"
                 splitType="chars"
                 delay={35}
@@ -86,7 +86,7 @@ export default async function BlogPage() {
               />
             </h1>
             <p className="text-gray-600 text-base md:text-lg">
-              Explore insightful guides on early childhood development, exciting campus milestones, and classroom activities.
+              {customization?.page_blog_subtitle || "Explore insightful guides on early childhood development, exciting campus milestones, and classroom activities."}
             </p>
           </div>
 
