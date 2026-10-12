@@ -2,7 +2,7 @@ import React from 'react';
 import { StorioStaffMember } from '@storio/template-sdk';
 import { LittleFlowersCustomizationConfig } from '@/types';
 import SplitText from '@/components/ui/SplitText';
-import { getStaffMemberPhoto } from '@/lib/storio';
+import { getStaffMemberPhoto } from '@/lib/media';
 
 interface StaffSectionProps {
   staffList: StorioStaffMember[];

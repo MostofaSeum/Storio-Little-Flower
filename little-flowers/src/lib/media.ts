@@ -3,6 +3,26 @@
  * Does not import any Next.js server-only modules (like next/headers).
  */
 
+function getPublicMediaBaseUrl(): string {
+  const publicUrl =
+    process.env.NEXT_PUBLIC_MEDIA_URL ||
+    process.env.NEXT_PUBLIC_API_URL ||
+    process.env.NEXT_PUBLIC_API_BASE_URL ||
+    'https://api.storio.cloud';
+  return publicUrl.replace(/\/$/, '');
+}
+
+/**
+ * Sanitizes URLs that may have been prefixed with private internal Docker hostnames
+ * (such as http://web:8000 or http://backend:8000) during SSR.
+ */
+function sanitizePublicMediaUrl(url: string): string {
+  if (url.includes('://web:8000') || url.includes('://backend:8000') || url.includes('://127.0.0.1:8000')) {
+    return url.replace(/^https?:\/\/(web|backend|127\.0\.0\.1):8000/, getPublicMediaBaseUrl());
+  }
+  return url;
+}
+
 /**
  * Resolves full image URL for a blog post.
  */
@@ -14,16 +34,11 @@ export function getBlogPostImageUrl(post: {
   if (!rawPath) return null;
 
   if (rawPath.startsWith('http://') || rawPath.startsWith('https://')) {
-    return rawPath;
+    return sanitizePublicMediaUrl(rawPath);
   }
 
   if (rawPath.startsWith('/media/')) {
-    const backendUrl =
-      process.env.BACKEND_INTERNAL_URL ||
-      process.env.NEXT_PUBLIC_API_URL ||
-      process.env.NEXT_PUBLIC_API_BASE_URL ||
-      'https://api.storio.cloud';
-    return `${backendUrl.replace(/\/$/, '')}${rawPath}`;
+    return `${getPublicMediaBaseUrl()}${rawPath}`;
   }
 
   return rawPath;
@@ -55,16 +70,11 @@ export function getStaffMemberPhoto(member: unknown): string {
   if (!rawPath) return '/icons/user.png';
 
   if (rawPath.startsWith('http://') || rawPath.startsWith('https://')) {
-    return rawPath;
+    return sanitizePublicMediaUrl(rawPath);
   }
 
   if (rawPath.startsWith('/media/')) {
-    const backendUrl =
-      process.env.BACKEND_INTERNAL_URL ||
-      process.env.NEXT_PUBLIC_API_URL ||
-      process.env.NEXT_PUBLIC_API_BASE_URL ||
-      'https://api.storio.cloud';
-    return `${backendUrl.replace(/\/$/, '')}${rawPath}`;
+    return `${getPublicMediaBaseUrl()}${rawPath}`;
   }
 
   return rawPath;
@@ -76,15 +86,11 @@ export function getStaffMemberPhoto(member: unknown): string {
 export function resolveMediaUrl(rawPath?: string | null): string {
   if (!rawPath) return '';
   if (rawPath.startsWith('http://') || rawPath.startsWith('https://')) {
-    return rawPath;
+    return sanitizePublicMediaUrl(rawPath);
   }
   if (rawPath.startsWith('/media/')) {
-    const backendUrl =
-      process.env.BACKEND_INTERNAL_URL ||
-      process.env.NEXT_PUBLIC_API_URL ||
-      process.env.NEXT_PUBLIC_API_BASE_URL ||
-      'https://api.storio.cloud';
-    return `${backendUrl.replace(/\/$/, '')}${rawPath}`;
+    return `${getPublicMediaBaseUrl()}${rawPath}`;
   }
   return rawPath;
 }
+

@@ -379,4 +379,7 @@ export async function getHotlines(tenantHost: string) {
   return storio.getHotlines(tenantHost);
 }
 
+// Media resolution re-exports for convenience
+export { getStaffMemberPhoto, resolveMediaUrl, getBlogPostImageUrl } from './media';
+
 
