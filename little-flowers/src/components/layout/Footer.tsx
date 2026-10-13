@@ -38,7 +38,7 @@ export default function Footer({ settings, profile, importantLinks = [] }: Foote
                 />
               ) : null}
               <img
-                src="/icons/school.png"
+                src={settings?.logo_url || "/icons/school.png"}
                 alt={settings?.site_title || "School Logo"}
                 className={`w-6 h-6 object-contain brightness-0 invert ${settings?.logo_url ? 'hidden' : 'block'}`}
               />

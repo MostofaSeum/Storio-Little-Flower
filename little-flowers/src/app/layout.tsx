@@ -28,7 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description: settings?.site_tagline || "Practical teaching & social development for kids",
     icons: {
       icon: settings?.favicon_url || "/favicon.ico",
-      apple: settings?.favicon_url || "/apple-touch-icon.png",
+      apple: settings?.favicon_url || "/favicon.ico",
     },
   };
 }

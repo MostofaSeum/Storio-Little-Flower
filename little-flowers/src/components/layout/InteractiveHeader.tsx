@@ -142,9 +142,9 @@ export default function InteractiveHeader({ settings, navigation }: InteractiveH
               />
             ) : null}
             <img
-              src="/icons/school.png"
+              src={settings?.logo_url || "/icons/school.png"}
               alt={settings?.site_title || 'School Logo'}
-              className={`w-full h-full object-contain brightness-0 invert drop-shadow-xs ${settings?.logo_url ? 'hidden' : 'block'}`}
+              className="w-full h-full object-contain brightness-0 invert drop-shadow-xs"
             />
           </div>
           {/* Responsive title wrapper that wraps long school names into multiple lines */}
