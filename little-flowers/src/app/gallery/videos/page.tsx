@@ -56,12 +56,12 @@ export default async function VideosGalleryPage() {
           <div className="site-container px-4 sm:px-8 relative z-10 text-center">
             <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase bg-white text-primary-color border border-purple-200 shadow-2xs mb-2.5">
               <span className="w-2 h-2 rounded-full bg-accent-pink animate-pulse" />
-              Video Highlights
+              {customization?.page_videos_badge || "Video Highlights"}
             </span>
 
             <h1 className="page-hero-title font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight">
               <SplitText
-                text="Video Gallery"
+                text={customization?.page_videos_title || "Video Gallery"}
                 className="inline-block text-primary-color"
                 tag="span"
                 triggerOnMount={true}
@@ -69,8 +69,7 @@ export default async function VideosGalleryPage() {
             </h1>
 
             <p className="mt-2 text-sm sm:text-base text-gray-600 leading-relaxed font-quicksand max-w-2xl mx-auto">
-              Engaging reels, student performances, and recorded highlights from
-              our vibrant community.
+              {customization?.page_videos_subtitle || "Engaging reels, student performances, and recorded highlights from our vibrant community."}
             </p>
           </div>
         </section>
@@ -189,7 +188,7 @@ export default async function VideosGalleryPage() {
         </section>
       </main>
 
-      <Footer settings={settings} importantLinks={importantLinks} />
+      <Footer settings={settings} importantLinks={importantLinks} customization={customization} />
     </div>
   );
 }

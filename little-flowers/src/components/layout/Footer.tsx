@@ -2,16 +2,18 @@
 
 import React from "react";
 import { StorioSettingsResponse } from "@storio/template-sdk";
-import { StorioInstitutionProfile } from "@/types";
+import { StorioInstitutionProfile, LittleFlowersCustomizationConfig } from "@/types";
 
 interface FooterProps {
   settings?: StorioSettingsResponse | null;
   profile?: StorioInstitutionProfile | null;
   importantLinks?: { id: number; title: string; url: string; order?: number }[];
+  customization?: LittleFlowersCustomizationConfig | null;
 }
 
-export default function Footer({ settings, profile, importantLinks = [] }: FooterProps) {
+export default function Footer({ settings, profile, importantLinks = [], customization }: FooterProps) {
   const hasLinks = importantLinks && importantLinks.length > 0;
+  const quickLinksTitle = (customization?.footer_quick_links_title as string) || "Quick Exploration";
 
   return (
     <footer
@@ -56,7 +58,7 @@ export default function Footer({ settings, profile, importantLinks = [] }: Foote
         {/* Col 2: Quick Links */}
         <div className="space-y-3">
           <h4 className="text-white font-bold text-sm tracking-wide">
-            Quick Exploration
+            {quickLinksTitle}
           </h4>
           <ul className="space-y-2 text-xs text-gray-400">
             <li>

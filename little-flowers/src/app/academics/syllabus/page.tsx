@@ -57,12 +57,12 @@ export default async function SyllabusPage() {
           <div className="site-container px-4 sm:px-8 relative z-10 text-center">
             <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase bg-white text-primary-color border border-purple-200 shadow-2xs mb-3">
               <span className="w-2 h-2 rounded-full bg-secondary-color animate-pulse" />
-              Curriculum & Guides
+              {customization?.page_syllabus_badge || "Curriculum & Guides"}
             </span>
 
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight">
               <SplitText
-                text="Curriculum Syllabuses & Outlines"
+                text={customization?.page_syllabus_title || "Curriculum Syllabuses & Outlines"}
                 className="inline-block text-primary-color"
                 tag="span"
                 triggerOnMount={true}
@@ -70,7 +70,7 @@ export default async function SyllabusPage() {
             </h1>
 
             <p className="mt-3 text-sm sm:text-base text-gray-600 leading-relaxed font-quicksand max-w-2xl mx-auto">
-              Download approved term syllabuses, core competency benchmarks, and examination prep blueprints.
+              {customization?.page_syllabus_subtitle || "Download approved term syllabuses, core competency benchmarks, and examination prep blueprints."}
             </p>
           </div>
         </section>
@@ -87,7 +87,7 @@ export default async function SyllabusPage() {
         </section>
       </main>
 
-      <Footer settings={settings} importantLinks={importantLinks} />
+      <Footer settings={settings} importantLinks={importantLinks} customization={customization} />
     </div>
   );
 }

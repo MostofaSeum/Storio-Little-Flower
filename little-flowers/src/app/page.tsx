@@ -256,7 +256,7 @@ export default async function Home() {
       <FaqSection faqs={faqs} customization={customization} />
 
       {/* 14. PLAYFUL COLORFUL FOOTER */}
-      <Footer settings={settings} profile={profile} importantLinks={importantLinks} />
+      <Footer settings={settings} profile={profile} importantLinks={importantLinks} customization={customization} />
 
       {/* 15. FLOATING QUICK ENROLLMENT ACTION */}
       <FloatingEnrollButton customization={customization} />
