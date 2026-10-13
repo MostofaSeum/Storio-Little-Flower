@@ -259,12 +259,14 @@ export default function HeroCarousel({ slides, siteTitle, customization }: HeroC
             >
               {slideButtonText}
             </a>
-            <a
-              href="/admission"
-              className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 sm:py-4 bg-white hover:bg-pink-50 text-accent-pink font-bold text-sm rounded-full border-2 border-accent-pink shadow-sm hover:shadow-md transition-all transform hover:-translate-y-0.5 text-center"
-            >
-              <span>Book Campus Tour</span>
-            </a>
+            {customization?.hero_btn2_show !== false && (
+              <a
+                href={customization?.hero_btn2_link || "/admission"}
+                className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 sm:py-4 bg-white hover:bg-pink-50 text-accent-pink font-bold text-sm rounded-full border-2 border-accent-pink shadow-sm hover:shadow-md transition-all transform hover:-translate-y-0.5 text-center"
+              >
+                <span>{customization?.hero_btn2_text || "Book Campus Tour"}</span>
+              </a>
+            )}
           </div>
 
           {/* Interactive Slide Controls & Modern Progress Indicators */}

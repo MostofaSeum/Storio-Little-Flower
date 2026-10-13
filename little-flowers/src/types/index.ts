@@ -277,6 +277,36 @@ export interface LittleFlowersCustomizationConfig {
   page_promotions_title?: string;
   page_promotions_subtitle?: string;
 
+  // Hero Secondary Button & Floating Action Button
+  hero_btn2_text?: string;
+  hero_btn2_link?: string;
+  hero_btn2_show?: boolean;
+  floating_enroll_show?: boolean;
+  floating_enroll_text?: string;
+  floating_enroll_link?: string;
+
+  // Academic Subpages (Routine, Syllabus, Demographics)
+  page_routines_badge?: string;
+  page_routines_title?: string;
+  page_routines_subtitle?: string;
+  page_syllabus_badge?: string;
+  page_syllabus_title?: string;
+  page_syllabus_subtitle?: string;
+  page_statistics_badge?: string;
+  page_statistics_title?: string;
+  page_statistics_subtitle?: string;
+
+  // Leadership Messages & Video Gallery Pages
+  page_leadership_badge?: string;
+  page_leadership_title?: string;
+  page_leadership_subtitle?: string;
+  page_videos_badge?: string;
+  page_videos_title?: string;
+  page_videos_subtitle?: string;
+
+  // Footer Titles
+  footer_quick_links_title?: string;
+
   [key: string]: unknown;
 }
 

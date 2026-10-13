@@ -998,6 +998,138 @@
         "label": "Page Promotions: Subtitle",
         "type": "text",
         "default": "Explore our current fee waivers, admission opportunities, sibling discounts, and early bird scholarship programs."
+      },
+      {
+        "id": "hero_btn2_text",
+        "label": "Hero Secondary Button Text",
+        "type": "text",
+        "default": "Book Campus Tour"
+      },
+      {
+        "id": "hero_btn2_link",
+        "label": "Hero Secondary Button Link",
+        "type": "text",
+        "default": "/admission"
+      },
+      {
+        "id": "hero_btn2_show",
+        "label": "Show Hero Secondary Button",
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "id": "floating_enroll_show",
+        "label": "Show Floating Enroll Action Button",
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "id": "floating_enroll_text",
+        "label": "Floating Enroll Button Text",
+        "type": "text",
+        "default": "Enroll Your Child"
+      },
+      {
+        "id": "floating_enroll_link",
+        "label": "Floating Enroll Button Link",
+        "type": "text",
+        "default": "/admission"
+      },
+      {
+        "id": "page_routines_badge",
+        "label": "Page Class Routines: Badge Label",
+        "type": "text",
+        "default": "Academic Schedules"
+      },
+      {
+        "id": "page_routines_title",
+        "label": "Page Class Routines: Title",
+        "type": "text",
+        "default": "Class Timetables & Daily Routines"
+      },
+      {
+        "id": "page_routines_subtitle",
+        "label": "Page Class Routines: Subtitle Description",
+        "type": "text",
+        "default": "Explore subject hours, teacher assignments, and download print-ready PDF routines for each grade."
+      },
+      {
+        "id": "page_syllabus_badge",
+        "label": "Page Syllabuses: Badge Label",
+        "type": "text",
+        "default": "Curriculum & Guides"
+      },
+      {
+        "id": "page_syllabus_title",
+        "label": "Page Syllabuses: Title",
+        "type": "text",
+        "default": "Curriculum Syllabuses & Outlines"
+      },
+      {
+        "id": "page_syllabus_subtitle",
+        "label": "Page Syllabuses: Subtitle Description",
+        "type": "text",
+        "default": "Download approved term syllabuses, core competency benchmarks, and examination prep blueprints."
+      },
+      {
+        "id": "page_statistics_badge",
+        "label": "Page Student Demographics: Badge Label",
+        "type": "text",
+        "default": "Enrollment Transparency"
+      },
+      {
+        "id": "page_statistics_title",
+        "label": "Page Student Demographics: Title",
+        "type": "text",
+        "default": "Student Demographics & Statistics"
+      },
+      {
+        "id": "page_statistics_subtitle",
+        "label": "Page Student Demographics: Subtitle Description",
+        "type": "text",
+        "default": "Transparent institutional student strength, gender parity, and program-wise section allocation."
+      },
+      {
+        "id": "page_leadership_badge",
+        "label": "Page Leadership Messages: Badge Label",
+        "type": "text",
+        "default": "Administrative Governance"
+      },
+      {
+        "id": "page_leadership_title",
+        "label": "Page Leadership Messages: Title",
+        "type": "text",
+        "default": "Leadership Messages"
+      },
+      {
+        "id": "page_leadership_subtitle",
+        "label": "Page Leadership Messages: Subtitle Description",
+        "type": "text",
+        "default": "Guiding principles and vision from the leaders shaping our students' future."
+      },
+      {
+        "id": "page_videos_badge",
+        "label": "Page Video Gallery: Badge Label",
+        "type": "text",
+        "default": "Video Highlights"
+      },
+      {
+        "id": "page_videos_title",
+        "label": "Page Video Gallery: Title",
+        "type": "text",
+        "default": "Video Gallery"
+      },
+      {
+        "id": "page_videos_subtitle",
+        "label": "Page Video Gallery: Subtitle Description",
+        "type": "text",
+        "default": "Engaging reels, student performances, and recorded highlights from our vibrant community."
+      },
+      {
+        "id": "footer_quick_links_title",
+        "label": "Footer: Quick Exploration Column Title",
+        "type": "text",
+        "default": "Quick Exploration"
       }
     ]
   },

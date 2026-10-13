@@ -259,7 +259,7 @@ export default async function Home() {
       <Footer settings={settings} profile={profile} importantLinks={importantLinks} />
 
       {/* 15. FLOATING QUICK ENROLLMENT ACTION */}
-      <FloatingEnrollButton />
+      <FloatingEnrollButton customization={customization} />
     </div>
   );
 }
