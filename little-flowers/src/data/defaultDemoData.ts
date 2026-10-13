@@ -225,6 +225,8 @@ export const DEFAULT_DEMO_DATA: {
     page_videos_title: 'Video Gallery',
     page_videos_subtitle: 'Engaging reels, student performances, and recorded highlights from our vibrant community.',
     footer_quick_links_title: 'Quick Exploration',
+    header_login_text: 'Login',
+    header_login_link: '/login',
   },
   settings: {
     site_title: "Little Flowers",

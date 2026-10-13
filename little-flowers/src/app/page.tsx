@@ -204,7 +204,7 @@ export default async function Home() {
       )}
 
       {/* 2. MODERN INTERACTIVE NAVBAR WITH CMS DYNAMIC LINKS */}
-      <InteractiveHeader settings={settings} navigation={navigation} />
+      <InteractiveHeader settings={settings} navigation={navigation} customization={customization} />
 
       {/* 3. HERO SECTION WITH PLAYFUL INTERACTIVE CAROUSEL */}
       <section className="relative pt-1 sm:pt-2 pb-8 lg:pt-2 lg:pb-12 px-4 sm:px-8 site-container w-full flex-1 flex flex-col justify-center">

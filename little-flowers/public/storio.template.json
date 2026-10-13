@@ -1130,6 +1130,18 @@
         "label": "Footer: Quick Exploration Column Title",
         "type": "text",
         "default": "Quick Exploration"
+      },
+      {
+        "id": "header_login_text",
+        "label": "Header: Login Button Label",
+        "type": "text",
+        "default": "Login"
+      },
+      {
+        "id": "header_login_link",
+        "label": "Header: Login Button Link",
+        "type": "text",
+        "default": "/login"
       }
     ]
   },

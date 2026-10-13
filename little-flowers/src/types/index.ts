@@ -307,6 +307,10 @@ export interface LittleFlowersCustomizationConfig {
   // Footer Titles
   footer_quick_links_title?: string;
 
+  // Header Login Action
+  header_login_text?: string;
+  header_login_link?: string;
+
   [key: string]: unknown;
 }
 
