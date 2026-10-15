@@ -27,7 +27,7 @@ export default async function ExamResultsPage() {
 
   // Fall back to demo data in standalone mode when API returns null
   const results: StorioExamResult[] = Array.isArray(rawExams) && rawExams.length > 0
-    ? rawExams
+    ? (rawExams as unknown as StorioExamResult[])
     : (isStandalone ? DEFAULT_DEMO_DATA.examResults as unknown as StorioExamResult[] : []);
 
   return (

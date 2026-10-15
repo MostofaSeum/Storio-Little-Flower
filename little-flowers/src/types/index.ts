@@ -449,7 +449,7 @@ export interface StorioAdmissionFormField {
 }
 
 export interface StorioAdmissionFormConfig {
-  id: number;
+  id?: number;
   is_active: boolean;
   title?: string;
   description?: string;
@@ -459,13 +459,13 @@ export interface StorioAdmissionFormConfig {
 
 export interface StorioAdmissionOTPResponse {
   success: boolean;
-  message: string;
+  message?: string;
 }
 
 export interface StorioAdmissionApplicationResponse {
   success: boolean;
-  application_number: string;
-  message: string;
+  application_number?: string;
+  message?: string;
 }
 
 export interface StorioAuthLoginRequest {
@@ -522,8 +522,8 @@ export interface StorioCalendarEvent {
 
 export interface StorioBoardNotice {
   id?: number;
-  title: string;
-  url: string;
+  title?: string;
+  url?: string;
   publish_date?: string;
   board?: string;
   board_name?: string;

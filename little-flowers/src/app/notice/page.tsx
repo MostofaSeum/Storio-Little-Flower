@@ -38,7 +38,7 @@ export default async function NoticePage() {
 
   const boardNotices: StorioBoardNotice[] =
     Array.isArray(rawBoardNotices) && rawBoardNotices.length > 0
-      ? rawBoardNotices
+      ? (rawBoardNotices as unknown as StorioBoardNotice[])
       : isStandalone
         ? DEFAULT_DEMO_DATA.boardNotices || []
         : [];

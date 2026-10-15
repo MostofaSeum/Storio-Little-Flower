@@ -35,7 +35,7 @@ export default async function AdmissionPage() {
   // 4. Apply Rule 1 fallback
   const formConfig: StorioAdmissionFormConfig =
     rawFormConfig && rawFormConfig.is_active
-      ? rawFormConfig
+      ? (rawFormConfig as unknown as StorioAdmissionFormConfig)
       : isStandalone
         ? DEFAULT_DEMO_DATA.admissionFormConfig
         : {

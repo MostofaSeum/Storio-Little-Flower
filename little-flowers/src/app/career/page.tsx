@@ -41,7 +41,7 @@ export default async function CareersPage() {
 
   // Fall back to demo data in standalone mode when API returns null
   const jobs: StorioJobOpening[] = Array.isArray(rawJobs) && rawJobs.length > 0
-    ? rawJobs
+    ? (rawJobs as unknown as StorioJobOpening[])
     : (isStandalone ? DEFAULT_DEMO_DATA.careers as unknown as StorioJobOpening[] : []);
 
   return (
