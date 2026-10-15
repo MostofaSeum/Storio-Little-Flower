@@ -92,6 +92,8 @@ export default function WaveBadgesSection({
                 key={idx}
                 href={badge.href}
                 className="flex flex-col items-center group cursor-pointer"
+                data-customizer-field={`badge${idx + 1}_text`}
+                data-customizer-title={`Wave Badge ${idx + 1}: ${badge.title}`}
               >
                 <div
                   className="w-20 h-20 sm:w-24 sm:h-24 rounded-full text-white flex items-center justify-center shadow-md p-5 badge-interactive transition-transform hover:scale-105"

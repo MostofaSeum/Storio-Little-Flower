@@ -25,10 +25,18 @@ export default function TestimonialsSection({ testimonials, siteTitle, customiza
 
       <div className="site-container relative z-10">
         <div className="text-center max-w-2xl mx-auto mb-14 reveal-on-scroll">
-          <span className="text-xs font-extrabold tracking-wider uppercase text-accent-pink bg-pink-100 px-3.5 py-1 rounded-full shadow-xs">
+          <span
+            className="text-xs font-extrabold tracking-wider uppercase text-accent-pink bg-pink-100 px-3.5 py-1 rounded-full shadow-xs"
+            data-customizer-field="testimonials_section_badge"
+            data-customizer-title="Testimonials Section Badge"
+          >
             {badgeText}
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold mt-3 font-fredoka">
+          <h2
+            className="text-3xl sm:text-4xl font-extrabold mt-3 font-fredoka"
+            data-customizer-field="testimonials_section_title"
+            data-customizer-title="Testimonials Section Title"
+          >
             <SplitText
               text={titleText}
               tag="span"
@@ -39,7 +47,11 @@ export default function TestimonialsSection({ testimonials, siteTitle, customiza
               className="inline-block"
             />
           </h2>
-          <p className="text-gray-600 text-sm mt-2 font-medium">
+          <p
+            className="text-gray-600 text-sm mt-2 font-medium"
+            data-customizer-field="testimonials_section_subtitle"
+            data-customizer-title="Testimonials Section Subtitle"
+          >
             {subtitleText}
           </p>
         </div>

@@ -48,11 +48,19 @@ export default function FaqSection({ faqs, customization }: FaqSectionProps) {
       <div className="max-w-4xl mx-auto relative z-10">
         {/* Section Header with SplitText from React Bits */}
         <div className="text-center mb-12">
-          <span className="inline-block text-xs font-extrabold tracking-wider uppercase text-secondary-color bg-amber-100 px-3.5 py-1 rounded-full shadow-xs mb-3">
+          <span
+            className="inline-block text-xs font-extrabold tracking-wider uppercase text-secondary-color bg-amber-100 px-3.5 py-1 rounded-full shadow-xs mb-3"
+            data-customizer-field="faqs_section_badge"
+            data-customizer-title="FAQs Section Badge"
+          >
             {badgeText}
           </span>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight font-fredoka">
+          <h2
+            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight font-fredoka"
+            data-customizer-field="faqs_section_title"
+            data-customizer-title="FAQs Section Title"
+          >
             <SplitText
               text={titleText}
               tag="span"
@@ -64,7 +72,11 @@ export default function FaqSection({ faqs, customization }: FaqSectionProps) {
             />
           </h2>
 
-          <p className="text-gray-500 text-sm mt-3 font-medium max-w-xl mx-auto">
+          <p
+            className="text-gray-500 text-sm mt-3 font-medium max-w-xl mx-auto"
+            data-customizer-field="faqs_section_subtitle"
+            data-customizer-title="FAQs Section Subtitle"
+          >
             {subtitleText}
           </p>
         </div>

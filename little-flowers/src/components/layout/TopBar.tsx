@@ -69,7 +69,11 @@ export default function TopBar({
 
         {/* Right: Quick School Badge & Dynamic Important / Social Links */}
         <div className="flex items-center space-x-4">
-          <span className="hidden sm:inline-flex items-center gap-1.5 text-[11px] font-bold text-amber-300 bg-amber-950/60 px-2.5 py-0.5 rounded-full border border-amber-500/30">
+          <span
+            className="hidden sm:inline-flex items-center gap-1.5 text-[11px] font-bold text-amber-300 bg-amber-950/60 px-2.5 py-0.5 rounded-full border border-amber-500/30"
+            data-customizer-field="admission_badge_text"
+            data-customizer-title="TopBar Admissions Badge"
+          >
             <ThemeIcon name="sprout-admissions" size={14} />
             <span>{admissionBadgeText || 'Admissions Open 2026-27'}</span>
           </span>

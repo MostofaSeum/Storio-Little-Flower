@@ -50,12 +50,18 @@ export default function LeadershipSection({ messages, customization }: Leadershi
           <span
             className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase text-primary-color border border-purple-200/80 shadow-2xs mb-3"
             style={{ backgroundColor: 'var(--bg-surface, #ffffff)' }}
+            data-customizer-field="leadership_section_badge"
+            data-customizer-title="Leadership Section Badge"
           >
             <span className="w-2 h-2 rounded-full bg-accent-pink" />
             {badgeText}
           </span>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-fredoka leading-tight">
+          <h2
+            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-fredoka leading-tight"
+            data-customizer-field="leadership_section_title"
+            data-customizer-title="Leadership Section Title"
+          >
             <SplitText
               text={titleText}
               tag="span"
@@ -63,7 +69,11 @@ export default function LeadershipSection({ messages, customization }: Leadershi
             />
           </h2>
 
-          <p className="mt-2 text-sm sm:text-base text-gray-600 font-quicksand font-medium">
+          <p
+            className="mt-2 text-sm sm:text-base text-gray-600 font-quicksand font-medium"
+            data-customizer-field="leadership_section_subtitle"
+            data-customizer-title="Leadership Section Subtitle"
+          >
             {subtitleText}
           </p>
         </div>

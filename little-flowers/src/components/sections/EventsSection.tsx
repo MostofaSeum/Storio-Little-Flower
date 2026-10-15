@@ -21,10 +21,18 @@ export default function EventsSection({ events, customization }: EventsSectionPr
       <div className="site-container">
         <div className="flex flex-wrap items-end justify-between gap-4 mb-12 reveal-on-scroll">
           <div>
-            <span className="text-xs font-extrabold tracking-wider uppercase text-secondary-color bg-amber-100 px-3.5 py-1 rounded-full shadow-xs">
+            <span
+              className="text-xs font-extrabold tracking-wider uppercase text-secondary-color bg-amber-100 px-3.5 py-1 rounded-full shadow-xs"
+              data-customizer-field="events_section_badge"
+              data-customizer-title="Events Section Badge"
+            >
               {badgeText}
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold mt-3 font-fredoka">
+            <h2
+              className="text-3xl sm:text-4xl font-extrabold mt-3 font-fredoka"
+              data-customizer-field="events_section_title"
+              data-customizer-title="Events Section Title"
+            >
               <SplitText
                 text={titleText}
                 tag="span"
@@ -35,13 +43,19 @@ export default function EventsSection({ events, customization }: EventsSectionPr
                 className="inline-block"
               />
             </h2>
-            <p className="text-gray-500 text-sm mt-1 font-medium">
+            <p
+              className="text-gray-500 text-sm mt-1 font-medium"
+              data-customizer-field="events_section_subtitle"
+              data-customizer-title="Events Section Subtitle"
+            >
               {subtitleText}
             </p>
           </div>
           <a
             href="/event"
             className="text-xs sm:text-sm font-bold text-primary-color hover:text-accent-pink transition-colors inline-flex items-center gap-1 group"
+            data-customizer-field="events_view_all_text"
+            data-customizer-title="Events View All Button Text"
           >
             <span>{viewAllText}</span>
           </a>

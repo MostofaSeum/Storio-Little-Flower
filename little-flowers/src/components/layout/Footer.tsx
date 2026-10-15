@@ -57,7 +57,11 @@ export default function Footer({ settings, profile, importantLinks = [], customi
 
         {/* Col 2: Quick Links */}
         <div className="space-y-3">
-          <h4 className="text-white font-bold text-sm tracking-wide">
+          <h4
+            className="text-white font-bold text-sm tracking-wide"
+            data-customizer-field="footer_quick_links_title"
+            data-customizer-title="Footer Quick Links Title"
+          >
             {quickLinksTitle}
           </h4>
           <ul className="space-y-2 text-xs text-gray-400">

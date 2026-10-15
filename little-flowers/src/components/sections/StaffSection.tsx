@@ -22,10 +22,18 @@ export default function StaffSection({ staffList, customization }: StaffSectionP
       className="site-section-py site-section-px site-container w-full"
     >
       <div className="text-center max-w-2xl mx-auto mb-14 reveal-on-scroll">
-        <span className="text-xs font-extrabold tracking-wider uppercase text-secondary-color bg-amber-100 px-3 py-1 rounded-full">
+        <span
+          className="text-xs font-extrabold tracking-wider uppercase text-secondary-color bg-amber-100 px-3 py-1 rounded-full"
+          data-customizer-field="teachers_section_badge"
+          data-customizer-title="Teachers Section Badge"
+        >
           {badgeText}
         </span>
-        <h2 className="text-3xl sm:text-4xl font-extrabold mt-3 font-fredoka">
+        <h2
+          className="text-3xl sm:text-4xl font-extrabold mt-3 font-fredoka"
+          data-customizer-field="teachers_section_title"
+          data-customizer-title="Teachers Section Title"
+        >
           <SplitText
             text={titleText}
             tag="span"
@@ -36,7 +44,11 @@ export default function StaffSection({ staffList, customization }: StaffSectionP
             className="inline-block"
           />
         </h2>
-        <p className="text-gray-500 text-sm mt-2 font-medium">
+        <p
+          className="text-gray-500 text-sm mt-2 font-medium"
+          data-customizer-field="teachers_section_subtitle"
+          data-customizer-title="Teachers Section Subtitle"
+        >
           {subtitleText}
         </p>
       </div>
