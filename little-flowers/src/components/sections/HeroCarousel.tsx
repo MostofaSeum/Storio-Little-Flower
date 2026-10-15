@@ -132,7 +132,11 @@ export default function HeroCarousel({ slides, siteTitle, customization }: HeroC
 
           {/* Modern Floating Stat Badge 1: Top Right */}
           {customization?.hero_card1_show !== false && (
-            <div className="absolute top-6 sm:top-8 -right-2 sm:-right-6 bg-white/95 backdrop-blur-md p-2 sm:p-3.5 rounded-2xl shadow-xl border border-pink-100 flex items-center space-x-2 sm:space-x-3 transform animate-float z-20 hover:scale-105 transition-transform cursor-pointer max-w-[150px] sm:max-w-none">
+            <div
+              className="absolute top-6 sm:top-8 -right-2 sm:-right-6 bg-white/95 backdrop-blur-md p-2 sm:p-3.5 rounded-2xl shadow-xl border border-pink-100 flex items-center space-x-2 sm:space-x-3 transform animate-float z-20 hover:scale-105 transition-transform cursor-pointer max-w-[150px] sm:max-w-none"
+              data-customizer-field="hero_card1_title"
+              data-customizer-title="Floating Card 1 (Creative Arts)"
+            >
               <div
                 className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center shadow-xs shrink-0 p-1.5"
                 style={{ backgroundColor: `${customization?.hero_card1_color || 'var(--accent-pink)'}20` }}
@@ -232,7 +236,11 @@ export default function HeroCarousel({ slides, siteTitle, customization }: HeroC
             <ThemeIcon name="sparkle-star" size={14} className="shrink-0" />
             <span className="leading-snug">{`Welcome to ${siteTitle || 'Our School'}`}</span>
           </div>
-          <div className="inline-flex items-center gap-1.5 shrink-0 whitespace-nowrap">
+          <div
+            className="inline-flex items-center gap-1.5 shrink-0 whitespace-nowrap"
+            data-customizer-field="admission_badge_text"
+            data-customizer-title="Admissions Badge Text"
+          >
             <span className="w-1.5 h-1.5 rounded-full bg-primary-color shrink-0 hidden sm:inline-block"></span>
             <span className="bg-white/80 text-primary-color px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-extrabold tracking-wide">
               {customization?.admission_badge_text || 'Admissions Open 2026-27'}
@@ -242,12 +250,20 @@ export default function HeroCarousel({ slides, siteTitle, customization }: HeroC
 
         {/* Dynamic Slide Title and Information */}
         <div className="space-y-1">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.15] tracking-tight font-fredoka">
+          <h1
+            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.15] tracking-tight font-fredoka"
+            data-customizer-field="heroHeadline"
+            data-customizer-title="Hero Headline"
+          >
             {slideTitle}
           </h1>
 
           {/* Paragraph Text */}
-          <p className="pt-4 text-gray-600 text-base sm:text-lg leading-relaxed max-w-xl font-medium">
+          <p
+            className="pt-4 text-gray-600 text-base sm:text-lg leading-relaxed max-w-xl font-medium"
+            data-customizer-field="heroDescription"
+            data-customizer-title="Hero Description"
+          >
             {slideSubtitle}
           </p>
 
@@ -256,6 +272,8 @@ export default function HeroCarousel({ slides, siteTitle, customization }: HeroC
             <a
               href={slideButtonUrl}
               className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 sm:py-4 bg-button-dark text-white font-bold text-sm rounded-full shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-1 hover:scale-102 text-center"
+              data-customizer-field="buttonColor"
+              data-customizer-title="Primary Button Styling"
             >
               {slideButtonText}
             </a>
@@ -263,6 +281,8 @@ export default function HeroCarousel({ slides, siteTitle, customization }: HeroC
               <a
                 href={customization?.hero_btn2_link || "/admission"}
                 className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 sm:py-4 bg-white hover:bg-pink-50 text-accent-pink font-bold text-sm rounded-full border-2 border-accent-pink shadow-sm hover:shadow-md transition-all transform hover:-translate-y-0.5 text-center"
+                data-customizer-field="hero_btn2_text"
+                data-customizer-title="Hero Secondary Button Text"
               >
                 <span>{customization?.hero_btn2_text || "Book Campus Tour"}</span>
               </a>

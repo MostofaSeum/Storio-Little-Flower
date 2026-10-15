@@ -190,47 +190,27 @@ export * from './media';
 // --- Storio Admission & Contact API Helpers ---
 
 export async function getAdmissionFormConfig(tenantHost: string) {
-  return storio.apiFetch<any>('/api/v2/template/admission/form-config/current/', { tenantHost });
+  return storio.getAdmissionFormConfig(tenantHost);
 }
 
 export async function sendAdmissionOTP(email: string, tenantHost: string) {
-  return storio.apiFetch<any>('/api/v2/template/admission/send-otp/', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email }),
-    tenantHost,
-  });
+  return storio.sendAdmissionOTP(email, undefined, tenantHost);
 }
 
 export async function verifyAdmissionOTP(email: string, otpCode: string, tenantHost: string) {
-  return storio.apiFetch<any>('/api/v2/template/admission/verify-otp/', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, otp_code: otpCode }),
-    tenantHost,
-  });
+  return storio.verifyAdmissionOTP(email, otpCode, tenantHost);
 }
 
-export async function submitAdmissionApplication(formData: Record<string, any>, otpCode: string, tenantHost: string) {
-  return storio.apiFetch<any>('/api/v2/template/admission/applications/', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ form_data: formData, otp_code: otpCode }),
-    tenantHost,
-  });
+export async function submitAdmissionApplication(formData: Record<string, unknown>, otpCode: string, tenantHost: string) {
+  return storio.submitAdmissionApplication(formData, otpCode, tenantHost);
 }
 
-export async function submitContactMessage(formData: Record<string, any>, tenantHost?: string) {
-  return storio.apiFetch<any>('/api/v2/template/contact/', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formData),
-    tenantHost,
-  });
+export async function submitContactMessage(formData: Record<string, unknown>, tenantHost?: string) {
+  return storio.submitContactMessage(formData, tenantHost);
 }
 
 export async function getBoardNotices(tenantHost: string) {
-  return storio.apiFetch<any[]>('/api/v2/template/board-notices/', { tenantHost });
+  return storio.getBoardNotices(tenantHost);
 }
 
 export async function getPageBySlug(slug: string, tenantHost: string) {
@@ -332,7 +312,7 @@ export async function getFaqs(tenantHost: string) {
 }
 
 export async function getVideos(tenantHost: string) {
-  return storio.apiFetch<any[]>('/api/v2/template/reels/', { tenantHost });
+  return storio.getVideos(tenantHost);
 }
 
 export async function getCalendarEvents(tenantHost: string) {
@@ -340,15 +320,15 @@ export async function getCalendarEvents(tenantHost: string) {
 }
 
 export async function getExamResults(tenantHost: string) {
-  return storio.apiFetch<any[]>('/api/v2/template/exam-results/', { tenantHost });
+  return storio.getExamResults(tenantHost);
 }
 
 export async function getCareers(tenantHost: string) {
-  return storio.apiFetch<any[]>('/api/v2/template/careers/jobs/', { tenantHost });
+  return storio.getCareers(tenantHost);
 }
 
 export async function getJobDetail(slug: string, tenantHost: string) {
-  return storio.apiFetch<any>(`/api/v2/template/careers/jobs/${slug}/`, { tenantHost });
+  return storio.getJobDetail(slug, tenantHost);
 }
 
 export async function getClassRoutines(tenantHost: string) {

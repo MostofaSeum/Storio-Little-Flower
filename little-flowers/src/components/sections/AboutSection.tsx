@@ -64,10 +64,18 @@ export default function AboutSection({ profile, customization, isStandalone }: A
 
         {/* Right: Mission, Details, and Key Metrics */}
         <div className="lg:col-span-7 space-y-6 reveal-on-scroll delay-150">
-          <div className="inline-block bg-accent-soft-blue text-primary-color font-bold text-xs uppercase px-3.5 py-1 rounded-full">
+          <div
+            className="inline-block bg-accent-soft-blue text-primary-color font-bold text-xs uppercase px-3.5 py-1 rounded-full"
+            data-customizer-field="about_section_badge"
+            data-customizer-title="About Section Badge"
+          >
             {customization?.about_section_badge || "About Our Academy"}
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight font-fredoka">
+          <h2
+            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight font-fredoka"
+            data-customizer-field="about_section_title"
+            data-customizer-title="About Section Title"
+          >
             <SplitText
               text={customization?.about_section_title || "A Loving Second Home for Your Little Ones"}
               tag="span"
@@ -79,7 +87,11 @@ export default function AboutSection({ profile, customization, isStandalone }: A
               className="inline-block"
             />
           </h2>
-          <p className="text-gray-600 text-base leading-relaxed">
+          <p
+            className="text-gray-600 text-base leading-relaxed"
+            data-customizer-field="about_section_description"
+            data-customizer-title="About Section Description"
+          >
             {profile.school_details ||
               customization?.about_section_description ||
               (isStandalone

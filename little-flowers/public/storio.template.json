@@ -86,9 +86,10 @@
     "typography": [
       {
         "id": "fontFamily",
-        "label": "Main Font",
-        "type": "text",
-        "default": "Fredoka, Nunito, sans-serif"
+        "label": "Primary Font Family",
+        "type": "font-picker",
+        "default": "Fredoka",
+        "description": "Primary typography applied to headings, navigation, and badges across the academy template."
       }
     ],
     "layout": [
@@ -96,7 +97,8 @@
         "id": "borderRadius",
         "label": "Button Border Radius",
         "type": "text",
-        "default": "9999px"
+        "default": "9999px",
+        "description": "Border radius for interactive buttons and pills across the website (e.g. 9999px for playful pill, 16px for rounded corners)."
       }
     ],
     "content": [
@@ -210,8 +212,9 @@
       {
         "id": "heroDescription",
         "label": "Hero Description",
-        "type": "text",
-        "default": "We aim at success by creating skills necessary for kids to enrich & empower in studies & sports."
+        "type": "textarea",
+        "default": "We aim at success by creating skills necessary for kids to enrich & empower in studies & sports.",
+        "description": "Introductory paragraph displayed beneath the main hero headline on the landing page."
       },
       {
         "id": "admission_badge_text",
@@ -1151,6 +1154,7 @@
     "gallery",
     "faq",
     "heroSlide",
+    "reels",
     "activity",
     "mediaFile",
     "careers",

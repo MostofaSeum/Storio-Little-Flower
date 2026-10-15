@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Quicksand, Fredoka } from "next/font/google";
 import "./globals.css";
 import ClickSpark from "@/components/ui/ClickSpark";
+import TemplateVisualInspector from "@/components/layout/TemplateVisualInspector";
 import { getTenantContext, getTemplateLayout } from "@/lib/storio";
 
 const quicksand = Quicksand({
@@ -44,6 +45,7 @@ export default function RootLayout({
       className={`${quicksand.variable} ${fredoka.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans text-gray-800">
+        <TemplateVisualInspector />
         <ClickSpark />
         {children}
       </body>
