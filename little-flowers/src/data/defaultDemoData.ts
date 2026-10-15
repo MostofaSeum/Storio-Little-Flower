@@ -1085,6 +1085,10 @@ export const DEFAULT_DEMO_DATA: {
       image_data: {
         file: "/homepage/Teachers/Teacher1.jpg",
       },
+      signature: "/homepage/Signature/Signature 1.png",
+      signature_data: {
+        file: "/homepage/Signature/Signature 1.png",
+      },
     },
     {
       id: 2,
@@ -1098,6 +1102,10 @@ export const DEFAULT_DEMO_DATA: {
       image_data: {
         file: "/homepage/Teachers/Teacher6.jpg",
       },
+      signature: "/homepage/Signature/Signature 2.png",
+      signature_data: {
+        file: "/homepage/Signature/Signature 2.png",
+      },
     },
     {
       id: 3,
@@ -1110,6 +1118,10 @@ export const DEFAULT_DEMO_DATA: {
       image: "/homepage/Teachers/Teacher5.jpg",
       image_data: {
         file: "/homepage/Teachers/Teacher5.jpg",
+      },
+      signature: "/homepage/Signature/Signature 3.png",
+      signature_data: {
+        file: "/homepage/Signature/Signature 3.png",
       },
     },
   ],
