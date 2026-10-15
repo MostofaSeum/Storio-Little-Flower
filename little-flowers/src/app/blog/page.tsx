@@ -69,11 +69,19 @@ export default async function BlogPage() {
         <div className="site-container px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb & Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white shadow-sm border border-purple-100 text-xs font-semibold text-primary-color mb-3">
+            <div
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white shadow-sm border border-purple-100 text-xs font-semibold text-primary-color mb-3"
+              data-customizer-field="page_blog_badge"
+              data-customizer-title="Blog Page Badge"
+            >
               <ThemeIcon name="flower-blossom" size={16} />
               <span>{customization?.page_blog_badge || "Our Stories & Insights"}</span>
             </div>
-            <h1 className="text-3xl md:text-5xl font-extrabold text-primary-color tracking-tight mb-3 font-fredoka">
+            <h1
+              className="text-3xl md:text-5xl font-extrabold text-primary-color tracking-tight mb-3 font-fredoka"
+              data-customizer-field="page_blog_title"
+              data-customizer-title="Blog Page Title"
+            >
               <SplitText
                 text={customization?.page_blog_title || "Stories, News & Updates"}
                 tag="span"
@@ -85,7 +93,11 @@ export default async function BlogPage() {
                 className="inline-block text-primary-color"
               />
             </h1>
-            <p className="text-gray-600 text-base md:text-lg">
+            <p
+              className="text-gray-600 text-base md:text-lg"
+              data-customizer-field="page_blog_subtitle"
+              data-customizer-title="Blog Page Subtitle"
+            >
               {customization?.page_blog_subtitle || "Explore insightful guides on early childhood development, exciting campus milestones, and classroom activities."}
             </p>
           </div>

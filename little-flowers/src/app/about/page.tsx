@@ -105,10 +105,18 @@ export default async function AboutPage() {
 
             {/* Right: Mission, Details, Philosophy */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="inline-block bg-purple-100 text-primary-color font-bold text-xs uppercase px-3.5 py-1 rounded-full">
+              <div
+                className="inline-block bg-purple-100 text-primary-color font-bold text-xs uppercase px-3.5 py-1 rounded-full"
+                data-customizer-field="page_about_badge"
+                data-customizer-title="About Page Badge"
+              >
                 {customization?.page_about_badge || "Our Story & Philosophy"}
               </div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 leading-tight font-fredoka">
+              <h1
+                className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 leading-tight font-fredoka"
+                data-customizer-field="page_about_title"
+                data-customizer-title="About Page Title"
+              >
                 <SplitText
                   text={customization?.page_about_title || "Nurturing Wonder, Creativity & Empathy"}
                   tag="span"

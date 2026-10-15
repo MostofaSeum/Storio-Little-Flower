@@ -53,12 +53,20 @@ export default async function CareersPage() {
         {/* Hero Section */}
         <section className="relative overflow-hidden bg-pastel-purple pt-8 pb-6 sm:pt-10 sm:pb-8 border-b border-purple-100">
           <div className="site-container px-4 sm:px-8 relative z-10 text-center">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase bg-white text-primary-color border border-purple-200 shadow-2xs mb-2.5">
+            <span
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase bg-white text-primary-color border border-purple-200 shadow-2xs mb-2.5"
+              data-customizer-field="page_career_badge"
+              data-customizer-title="Careers Page Badge"
+            >
               <span className="w-2 h-2 rounded-full bg-accent-green animate-pulse" />
               {customization?.page_career_badge || "Join Our Family"}
             </span>
 
-            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight">
+            <h1
+              className="text-3xl sm:text-5xl font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight"
+              data-customizer-field="page_career_title"
+              data-customizer-title="Careers Page Title"
+            >
               <SplitText
                 text={customization?.page_career_title || "Career Opportunities"}
                 className="inline-block text-primary-color"
@@ -67,7 +75,11 @@ export default async function CareersPage() {
               />
             </h1>
 
-            <p className="mt-2 text-sm sm:text-base text-gray-600 leading-relaxed font-quicksand max-w-2xl mx-auto">
+            <p
+              className="mt-2 text-sm sm:text-base text-gray-600 leading-relaxed font-quicksand max-w-2xl mx-auto"
+              data-customizer-field="page_career_subtitle"
+              data-customizer-title="Careers Page Subtitle"
+            >
               {customization?.page_career_subtitle || "Work with passion and purpose in a joyful, supportive environment dedicated to child growth."}
             </p>
           </div>
