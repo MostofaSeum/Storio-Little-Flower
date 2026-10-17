@@ -1,6 +1,6 @@
 import React from 'react';
 import { StorioActivityItem, LittleFlowersCustomizationConfig } from '@/types';
-import SplitText from '@/components/ui/SplitText';
+import LiveText from '@/components/ui/LiveText';
 
 interface ActivitiesSectionProps {
   activities: StorioActivityItem[];
@@ -9,10 +9,6 @@ interface ActivitiesSectionProps {
 
 export default function ActivitiesSection({ activities, customization }: ActivitiesSectionProps) {
   if (!activities || activities.length === 0) return null;
-
-  const badgeText = customization?.programs_section_badge || "Early Exploration";
-  const titleText = customization?.programs_section_title || "Our Learning Programs";
-  const subtitleText = customization?.programs_section_subtitle || "Tailored age-appropriate programs designed to kindle imagination and social confidence.";
 
   return (
     <section
@@ -26,29 +22,21 @@ export default function ActivitiesSection({ activities, customization }: Activit
             data-customizer-field="programs_section_badge"
             data-customizer-title="Programs Section Badge"
           >
-            {badgeText}
+            <LiveText field="programs_section_badge" initial={customization?.programs_section_badge} fallback="Early Exploration" />
           </span>
           <h2
             className="text-3xl sm:text-4xl font-extrabold mt-3 font-fredoka"
             data-customizer-field="programs_section_title"
             data-customizer-title="Programs Section Title"
           >
-            <SplitText
-              text={titleText}
-              tag="span"
-              splitType="chars"
-              delay={30}
-              duration={0.7}
-              ease="power3.out"
-              className="inline-block"
-            />
+            <LiveText field="programs_section_title" initial={customization?.programs_section_title} fallback="Our Learning Programs" />
           </h2>
           <p
             className="text-gray-500 text-sm mt-2 font-medium"
             data-customizer-field="programs_section_subtitle"
             data-customizer-title="Programs Section Subtitle"
           >
-            {subtitleText}
+            <LiveText field="programs_section_subtitle" initial={customization?.programs_section_subtitle} fallback="Tailored age-appropriate programs designed to kindle imagination and social confidence." />
           </p>
         </div>
 

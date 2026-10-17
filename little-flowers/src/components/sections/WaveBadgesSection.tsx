@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { LittleFlowersCustomizationConfig, StorioActivityItem } from '@/types';
+import LiveText from '@/components/ui/LiveText';
 
 interface WaveBadgesSectionProps {
   customization?: LittleFlowersCustomizationConfig | null;
@@ -109,7 +110,7 @@ export default function WaveBadgesSection({
                   className="mt-3 font-bold text-gray-700 text-sm transition-colors text-center max-w-[140px] truncate"
                   style={{ color: 'var(--text-dark)' }}
                 >
-                  {badge.title}
+                  <LiveText field={`badge${idx + 1}_text` as any} initial={badge.title} fallback={badge.title} />
                 </span>
               </Link>
             ))}

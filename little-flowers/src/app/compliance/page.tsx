@@ -17,7 +17,7 @@ import {
 import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
-import SplitText from '@/components/ui/SplitText';
+import LiveText from '@/components/ui/LiveText';
 import ComplianceClientView from '@/components/sections/ComplianceClientView';
 
 export async function generateMetadata() {
@@ -75,20 +75,15 @@ export default async function CompliancePage() {
               data-customizer-title="Compliance Page Badge"
             >
               <span className="w-2 h-2 rounded-full bg-accent-pink animate-pulse" />
-              {customization?.page_compliance_badge || "Institutional Transparency"}
+              <LiveText field="page_compliance_badge" initial={customization?.page_compliance_badge} fallback="Institutional Transparency" />
             </span>
 
             <h1
-              className="text-3xl sm:text-5xl font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight"
+              className="text-3xl sm:text-5xl font-extrabold tracking-tight font-fredoka text-primary-color leading-tight"
               data-customizer-field="page_compliance_title"
               data-customizer-title="Compliance Page Title"
             >
-              <SplitText
-                text={customization?.page_compliance_title || "Citizen Charter & Institutional Compliance"}
-                className="inline-block text-primary-color"
-                tag="span"
-                triggerOnMount={true}
-              />
+              <LiveText field="page_compliance_title" initial={customization?.page_compliance_title} fallback="Citizen Charter & Institutional Compliance" />
             </h1>
 
             <p
@@ -96,7 +91,7 @@ export default async function CompliancePage() {
               data-customizer-field="page_compliance_subtitle"
               data-customizer-title="Compliance Page Subtitle"
             >
-              {customization?.page_compliance_subtitle || "Government board recognition, Right to Information (RTI) service desk, Grievance Redress System, and public safety helplines."}
+              <LiveText field="page_compliance_subtitle" initial={customization?.page_compliance_subtitle} fallback="Government board recognition, Right to Information (RTI) service desk, Grievance Redress System, and public safety helplines." />
             </p>
           </div>
         </section>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { StorioGalleryItem } from '@storio/template-sdk';
 import { LittleFlowersCustomizationConfig } from '@/types';
-import SplitText from '@/components/ui/SplitText';
+import LiveText from '@/components/ui/LiveText';
 import InteractiveGallery from '@/components/sections/InteractiveGallery';
 
 interface GallerySectionProps {
@@ -14,10 +14,6 @@ export default function GallerySection({ items, siteTitle, customization }: Gall
   if (!items || items.length === 0) return null;
 
   const defaultHeading = siteTitle ? `Life at ${siteTitle}` : 'Life at Our School';
-  const badgeText = customization?.gallery_section_badge || "Happy Memories";
-  const titleText = customization?.gallery_section_title || defaultHeading;
-  const subtitleText = customization?.gallery_section_subtitle || "Click on any moment to zoom and view details";
-  const viewAllText = customization?.gallery_view_all_text || "Explore Full Gallery";
 
   return (
     <section
@@ -31,29 +27,21 @@ export default function GallerySection({ items, siteTitle, customization }: Gall
             data-customizer-field="gallery_section_badge"
             data-customizer-title="Gallery Section Badge"
           >
-            {badgeText}
+            <LiveText field="gallery_section_badge" initial={customization?.gallery_section_badge} fallback="Happy Memories" />
           </span>
           <h2
             className="text-3xl sm:text-4xl font-extrabold mt-3 font-fredoka"
             data-customizer-field="gallery_section_title"
             data-customizer-title="Gallery Section Title"
           >
-            <SplitText
-              text={titleText}
-              tag="span"
-              splitType="chars"
-              delay={30}
-              duration={0.7}
-              ease="power3.out"
-              className="inline-block"
-            />
+            <LiveText field="gallery_section_title" initial={customization?.gallery_section_title} fallback={defaultHeading} />
           </h2>
           <p
             className="text-gray-500 text-sm mt-1 font-medium"
             data-customizer-field="gallery_section_subtitle"
             data-customizer-title="Gallery Section Subtitle"
           >
-            {subtitleText}
+            <LiveText field="gallery_section_subtitle" initial={customization?.gallery_section_subtitle} fallback="Click on any moment to zoom and view details" />
           </p>
         </div>
         <a
@@ -62,7 +50,9 @@ export default function GallerySection({ items, siteTitle, customization }: Gall
           data-customizer-field="gallery_view_all_text"
           data-customizer-title="Gallery View All Button Text"
         >
-          <span>{viewAllText}</span>
+          <span>
+            <LiveText field="gallery_view_all_text" initial={customization?.gallery_view_all_text} fallback="Explore Full Gallery" />
+          </span>
         </a>
       </div>
 

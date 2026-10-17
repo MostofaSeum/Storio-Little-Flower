@@ -1,6 +1,7 @@
 import React from 'react';
 import ThemeIcon from '../ui/ThemeIcon';
 import { StorioSocialLink } from '@storio/template-sdk';
+import LiveText from '@/components/ui/LiveText';
 
 interface TopBarProps {
   contactEmail?: string;
@@ -75,7 +76,9 @@ export default function TopBar({
             data-customizer-title="TopBar Admissions Badge"
           >
             <ThemeIcon name="sprout-admissions" size={14} />
-            <span>{admissionBadgeText || 'Admissions Open 2026-27'}</span>
+            <span>
+              <LiveText field="admission_badge_text" initial={admissionBadgeText} fallback="Admissions Open 2026-27" />
+            </span>
           </span>
 
           {hasSocial && (

@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { StorioFaq } from '@/data/storioExtendedTypes';
 import { LittleFlowersCustomizationConfig } from '@/types';
 import SplitText from '@/components/ui/SplitText';
+import LiveText from '@/components/ui/LiveText';
 
 interface FaqSectionProps {
   faqs: StorioFaq[];
@@ -53,7 +54,7 @@ export default function FaqSection({ faqs, customization }: FaqSectionProps) {
             data-customizer-field="faqs_section_badge"
             data-customizer-title="FAQs Section Badge"
           >
-            {badgeText}
+            <LiveText field="faqs_section_badge" initial={customization?.faqs_section_badge} fallback="Got Questions?" />
           </span>
 
           <h2
@@ -61,15 +62,7 @@ export default function FaqSection({ faqs, customization }: FaqSectionProps) {
             data-customizer-field="faqs_section_title"
             data-customizer-title="FAQs Section Title"
           >
-            <SplitText
-              text={titleText}
-              tag="span"
-              splitType="chars"
-              delay={60}
-              duration={1.2}
-              ease="power3.out"
-              className="inline-block"
-            />
+            <LiveText field="faqs_section_title" initial={customization?.faqs_section_title} fallback="Frequently Asked Questions" />
           </h2>
 
           <p
@@ -77,7 +70,7 @@ export default function FaqSection({ faqs, customization }: FaqSectionProps) {
             data-customizer-field="faqs_section_subtitle"
             data-customizer-title="FAQs Section Subtitle"
           >
-            {subtitleText}
+            <LiveText field="faqs_section_subtitle" initial={customization?.faqs_section_subtitle} fallback="Everything parents need to know about our admissions, caring teachers, daily curriculum, and campus life." />
           </p>
         </div>
 

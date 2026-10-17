@@ -1,6 +1,6 @@
 import React from 'react';
 import { StorioInstitutionProfile, LittleFlowersCustomizationConfig } from '@/types';
-import SplitText from '@/components/ui/SplitText';
+import LiveText from '@/components/ui/LiveText';
 import AnimatedCounter from '@/components/ui/AnimatedCounter';
 
 interface AboutSectionProps {
@@ -69,34 +69,25 @@ export default function AboutSection({ profile, customization, isStandalone }: A
             data-customizer-field="about_section_badge"
             data-customizer-title="About Section Badge"
           >
-            {customization?.about_section_badge || "About Our Academy"}
+            <LiveText field="about_section_badge" initial={customization?.about_section_badge} fallback="About Our Academy" />
           </div>
           <h2
             className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight font-fredoka"
             data-customizer-field="about_section_title"
             data-customizer-title="About Section Title"
           >
-            <SplitText
-              text={customization?.about_section_title || "A Loving Second Home for Your Little Ones"}
-              tag="span"
-              splitType="words, chars"
-              delay={30}
-              duration={0.7}
-              ease="power3.out"
-              textAlign="left"
-              className="inline-block"
-            />
+            <LiveText field="about_section_title" initial={customization?.about_section_title} fallback="A Loving Second Home for Your Little Ones" />
           </h2>
           <p
             className="text-gray-600 text-base leading-relaxed"
             data-customizer-field="about_section_description"
             data-customizer-title="About Section Description"
           >
-            {profile.school_details ||
-              customization?.about_section_description ||
-              (isStandalone
-                ? "Our school provides experiential early childhood education centered on play, sensory exploration, creativity, and foundational social skills."
-                : "")}
+            <LiveText
+              field="about_section_description"
+              initial={customization?.about_section_description || profile.school_details}
+              fallback={isStandalone ? "Our school provides experiential early childhood education centered on play, sensory exploration, creativity, and foundational social skills." : ""}
+            />
           </p>
 
           {/* Stats Highlights with Animated Counter */}

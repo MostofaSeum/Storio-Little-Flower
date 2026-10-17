@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { StorioSettingsResponse } from '@storio/template-sdk';
 import { StorioDynamicNavItem, LittleFlowersCustomizationConfig } from '@/types';
+import LiveText from '@/components/ui/LiveText';
 
 interface InteractiveHeaderProps {
   settings: StorioSettingsResponse;
@@ -315,7 +316,9 @@ export default function InteractiveHeader({ settings, navigation, customization 
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
             </svg>
-            <span>{(customization?.header_login_text as string) || "Login"}</span>
+            <span>
+              <LiveText field="header_login_text" initial={customization?.header_login_text} fallback="Login" />
+            </span>
           </a>
 
           {/* Mobile Hamburger Button */}

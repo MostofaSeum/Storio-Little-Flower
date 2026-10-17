@@ -4,6 +4,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import ThemeIcon from '../ui/ThemeIcon';
 import { StorioHeroSlide } from '@storio/template-sdk';
 import { LittleFlowersCustomizationConfig } from '@/types';
+import LiveText from '@/components/ui/LiveText';
+import { useStorioConfigLive } from '@/lib/liveConfig';
 
 interface HeroCarouselProps {
   slides: StorioHeroSlide[];
@@ -12,6 +14,7 @@ interface HeroCarouselProps {
 }
 
 export default function HeroCarousel({ slides, siteTitle, customization }: HeroCarouselProps) {
+  const liveConfig = useStorioConfigLive();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -58,12 +61,22 @@ export default function HeroCarousel({ slides, siteTitle, customization }: HeroC
 
   const slideImageUrl = getSlideImageUrl(activeSlide);
 
+  const liveHeadline = typeof liveConfig?.heroHeadline === 'string' && liveConfig.heroHeadline.trim() !== ''
+    ? liveConfig.heroHeadline
+    : (customization?.heroHeadline?.trim() || '');
+
   const slideTitle =
+    liveHeadline ||
     activeSlide?.title ||
     (activeSlide as unknown as { heading?: string })?.heading ||
     'Practical teaching & Social Development';
 
+  const liveDesc = typeof liveConfig?.heroDescription === 'string' && liveConfig.heroDescription.trim() !== ''
+    ? liveConfig.heroDescription
+    : (customization?.heroDescription?.trim() || '');
+
   const slideSubtitle =
+    liveDesc ||
     activeSlide?.subtitle ||
     (activeSlide as unknown as { subheading?: string })?.subheading ||
     'We aim at success by creating skills necessary for kids to enrich & empower in studies & sports through sensory play, imagination, and loving guidance.';
@@ -153,7 +166,7 @@ export default function HeroCarousel({ slides, siteTitle, customization }: HeroC
               </div>
               <div>
                 <span className="text-[11px] sm:text-xs font-extrabold text-gray-900 block truncate">
-                  {customization?.hero_card1_title || 'Creative Arts'}
+                  <LiveText field="hero_card1_title" initial={customization?.hero_card1_title} fallback="Creative Arts" />
                 </span>
                 <span
                   className="text-[9px] sm:text-[10px] font-semibold block truncate"
@@ -243,7 +256,7 @@ export default function HeroCarousel({ slides, siteTitle, customization }: HeroC
           >
             <span className="w-1.5 h-1.5 rounded-full bg-primary-color shrink-0 hidden sm:inline-block"></span>
             <span className="bg-white/80 text-primary-color px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-extrabold tracking-wide">
-              {customization?.admission_badge_text || 'Admissions Open 2026-27'}
+              <LiveText field="admission_badge_text" initial={customization?.admission_badge_text} fallback="Admissions Open 2026-27" />
             </span>
           </div>
         </div>
@@ -284,7 +297,9 @@ export default function HeroCarousel({ slides, siteTitle, customization }: HeroC
                 data-customizer-field="hero_btn2_text"
                 data-customizer-title="Hero Secondary Button Text"
               >
-                <span>{customization?.hero_btn2_text || "Book Campus Tour"}</span>
+                <span>
+                  <LiveText field="hero_btn2_text" initial={customization?.hero_btn2_text} fallback="Book Campus Tour" />
+                </span>
               </a>
             )}
           </div>

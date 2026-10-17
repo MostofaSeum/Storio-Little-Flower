@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { StorioLeadershipMessage, LittleFlowersCustomizationConfig } from '@/types';
 import { resolveMediaUrl } from '@/lib/media';
-import SplitText from '@/components/ui/SplitText';
+import LiveText from '@/components/ui/LiveText';
 
 interface LeadershipSectionProps {
   messages: StorioLeadershipMessage[];
@@ -54,7 +54,7 @@ export default function LeadershipSection({ messages, customization }: Leadershi
             data-customizer-title="Leadership Section Badge"
           >
             <span className="w-2 h-2 rounded-full bg-accent-pink" />
-            {badgeText}
+            <LiveText field="leadership_section_badge" initial={customization?.leadership_section_badge} fallback="Leadership Desk" />
           </span>
 
           <h2
@@ -62,11 +62,7 @@ export default function LeadershipSection({ messages, customization }: Leadershi
             data-customizer-field="leadership_section_title"
             data-customizer-title="Leadership Section Title"
           >
-            <SplitText
-              text={titleText}
-              tag="span"
-              threshold={0.15}
-            />
+            <LiveText field="leadership_section_title" initial={customization?.leadership_section_title} fallback="Words from Our Leadership" />
           </h2>
 
           <p
@@ -74,7 +70,7 @@ export default function LeadershipSection({ messages, customization }: Leadershi
             data-customizer-field="leadership_section_subtitle"
             data-customizer-title="Leadership Section Subtitle"
           >
-            {subtitleText}
+            <LiveText field="leadership_section_subtitle" initial={customization?.leadership_section_subtitle} fallback="Guiding principles and vision from the leaders shaping our students' future." />
           </p>
         </div>
         {displayMessages.map((item, index) => {

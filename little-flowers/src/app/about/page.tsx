@@ -9,6 +9,7 @@ import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 import SplitText from '@/components/ui/SplitText';
+import LiveText from '@/components/ui/LiveText';
 
 export async function generateMetadata() {
   const { tenantHost, isStandalone } = await getTenantContext();
@@ -110,22 +111,14 @@ export default async function AboutPage() {
                 data-customizer-field="page_about_badge"
                 data-customizer-title="About Page Badge"
               >
-                {customization?.page_about_badge || "Our Story & Philosophy"}
+                <LiveText field="page_about_badge" initial={customization?.page_about_badge} fallback="Our Story & Philosophy" />
               </div>
               <h1
                 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 leading-tight font-fredoka"
                 data-customizer-field="page_about_title"
                 data-customizer-title="About Page Title"
               >
-                <SplitText
-                  text={customization?.page_about_title || "Nurturing Wonder, Creativity & Empathy"}
-                  tag="span"
-                  splitType="words, chars"
-                  delay={30}
-                  duration={0.7}
-                  ease="power3.out"
-                  className="inline-block"
-                />
+                <LiveText field="page_about_title" initial={customization?.page_about_title} fallback="Nurturing Wonder, Creativity & Empathy" />
               </h1>
               <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
                 {profile?.school_details ||

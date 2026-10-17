@@ -5,7 +5,7 @@ import { StorioEvent, StorioCalendarEvent } from '@/types';
 import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
-import SplitText from '@/components/ui/SplitText';
+import LiveText from '@/components/ui/LiveText';
 import EventsAndCalendarClient from '@/components/sections/EventsAndCalendarClient';
 
 export async function generateMetadata() {
@@ -63,20 +63,15 @@ export default async function EventsPage() {
               data-customizer-title="Events Page Badge"
             >
               <span className="w-2 h-2 rounded-full bg-accent-pink animate-pulse" />
-              {customization?.page_events_badge || "School Calendar & Life"}
+              <LiveText field="page_events_badge" initial={customization?.page_events_badge} fallback="School Calendar & Life" />
             </span>
 
             <h1
-              className="page-hero-title font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight"
+              className="page-hero-title font-extrabold tracking-tight font-fredoka text-primary-color leading-tight"
               data-customizer-field="page_events_title"
               data-customizer-title="Events Page Title"
             >
-              <SplitText
-                text={customization?.page_events_title || "Events & Academic Calendar"}
-                className="inline-block text-primary-color"
-                tag="span"
-                triggerOnMount={true}
-              />
+              <LiveText field="page_events_title" initial={customization?.page_events_title} fallback="Events & Academic Calendar" />
             </h1>
 
             <p
@@ -84,7 +79,7 @@ export default async function EventsPage() {
               data-customizer-field="page_events_subtitle"
               data-customizer-title="Events Page Subtitle"
             >
-              {customization?.page_events_subtitle || "Stay connected with our campus life, celebrations, examination milestones, and scheduled holidays."}
+              <LiveText field="page_events_subtitle" initial={customization?.page_events_subtitle} fallback="Stay connected with our campus life, celebrations, examination milestones, and scheduled holidays." />
             </p>
           </div>
         </section>

@@ -7,7 +7,7 @@ import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
 import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
-import SplitText from '@/components/ui/SplitText';
+import LiveText from '@/components/ui/LiveText';
 import ThemeIcon from '@/components/ui/ThemeIcon';
 
 export async function generateMetadata() {
@@ -75,30 +75,23 @@ export default async function BlogPage() {
               data-customizer-title="Blog Page Badge"
             >
               <ThemeIcon name="flower-blossom" size={16} />
-              <span>{customization?.page_blog_badge || "Our Stories & Insights"}</span>
+              <span>
+                <LiveText field="page_blog_badge" initial={customization?.page_blog_badge} fallback="Our Stories & Insights" />
+              </span>
             </div>
             <h1
               className="text-3xl md:text-5xl font-extrabold text-primary-color tracking-tight mb-3 font-fredoka"
               data-customizer-field="page_blog_title"
               data-customizer-title="Blog Page Title"
             >
-              <SplitText
-                text={customization?.page_blog_title || "Stories, News & Updates"}
-                tag="span"
-                splitType="chars"
-                delay={35}
-                duration={0.8}
-                ease="power3.out"
-                textAlign="center"
-                className="inline-block text-primary-color"
-              />
+              <LiveText field="page_blog_title" initial={customization?.page_blog_title} fallback="Stories, News & Updates" />
             </h1>
             <p
               className="text-gray-600 text-base md:text-lg"
               data-customizer-field="page_blog_subtitle"
               data-customizer-title="Blog Page Subtitle"
             >
-              {customization?.page_blog_subtitle || "Explore insightful guides on early childhood development, exciting campus milestones, and classroom activities."}
+              <LiveText field="page_blog_subtitle" initial={customization?.page_blog_subtitle} fallback="Explore insightful guides on early childhood development, exciting campus milestones, and classroom activities." />
             </p>
           </div>
 

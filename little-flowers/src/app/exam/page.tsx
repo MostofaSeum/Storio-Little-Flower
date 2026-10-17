@@ -4,7 +4,7 @@ import { getTenantContext, getTemplateLayout, getExamResults } from '@/lib/stori
 import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
-import SplitText from '@/components/ui/SplitText';
+import LiveText from '@/components/ui/LiveText';
 import ExamResultsClientView, { StorioExamResult } from '@/components/sections/ExamResultsClientView';
 import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
 
@@ -45,20 +45,15 @@ export default async function ExamResultsPage() {
               data-customizer-title="Exam Results Page Badge"
             >
               <span className="w-2 h-2 rounded-full bg-accent-blue animate-pulse" />
-              {customization?.page_exam_badge || "Academic Performance"}
+              <LiveText field="page_exam_badge" initial={customization?.page_exam_badge} fallback="Academic Performance" />
             </span>
 
             <h1
-              className="page-hero-title font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight"
+              className="page-hero-title font-extrabold tracking-tight font-fredoka text-primary-color leading-tight"
               data-customizer-field="page_exam_title"
               data-customizer-title="Exam Results Page Title"
             >
-              <SplitText
-                text={customization?.page_exam_title || "Exam Results"}
-                className="inline-block text-primary-color"
-                tag="span"
-                triggerOnMount={true}
-              />
+              <LiveText field="page_exam_title" initial={customization?.page_exam_title} fallback="Exam Results" />
             </h1>
 
             <p
@@ -66,7 +61,7 @@ export default async function ExamResultsPage() {
               data-customizer-field="page_exam_subtitle"
               data-customizer-title="Exam Results Page Subtitle"
             >
-              {customization?.page_exam_subtitle || "Official assessment statistics, term milestones, and downloadable grade reports."}
+              <LiveText field="page_exam_subtitle" initial={customization?.page_exam_subtitle} fallback="Official assessment statistics, term milestones, and downloadable grade reports." />
             </p>
           </div>
         </section>

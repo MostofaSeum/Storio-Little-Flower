@@ -3,7 +3,7 @@ import { getTenantContext, getTemplateLayout } from '@/lib/storio';
 import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
-import SplitText from '@/components/ui/SplitText';
+import LiveText from '@/components/ui/LiveText';
 import ContactFormClient from '@/components/sections/ContactFormClient';
 
 export async function generateMetadata() {
@@ -36,20 +36,15 @@ export default async function ContactPage() {
               data-customizer-title="Contact Page Badge"
             >
               <span className="w-2 h-2 rounded-full bg-accent-pink animate-pulse" />
-              {customization?.page_contact_badge || "Direct Communication"}
+              <LiveText field="page_contact_badge" initial={customization?.page_contact_badge} fallback="Direct Communication" />
             </span>
 
             <h1
-              className="text-3xl sm:text-5xl font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight"
+              className="text-3xl sm:text-5xl font-extrabold tracking-tight font-fredoka text-primary-color leading-tight"
               data-customizer-field="page_contact_title"
               data-customizer-title="Contact Page Title"
             >
-              <SplitText
-                text={customization?.page_contact_title || "Contact Our Campus"}
-                className="inline-block text-primary-color"
-                tag="span"
-                triggerOnMount={true}
-              />
+              <LiveText field="page_contact_title" initial={customization?.page_contact_title} fallback="Contact Our Campus" />
             </h1>
 
             <p
@@ -57,7 +52,7 @@ export default async function ContactPage() {
               data-customizer-field="page_contact_subtitle"
               data-customizer-title="Contact Page Subtitle"
             >
-              {customization?.page_contact_subtitle || "We welcome parents, educators, and visitors to connect with our administrative office, schedule campus tours, or ask any questions."}
+              <LiveText field="page_contact_subtitle" initial={customization?.page_contact_subtitle} fallback="We welcome parents, educators, and visitors to connect with our administrative office, schedule campus tours, or ask any questions." />
             </p>
           </div>
         </section>

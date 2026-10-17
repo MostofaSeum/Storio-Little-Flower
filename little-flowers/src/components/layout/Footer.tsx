@@ -3,6 +3,7 @@
 import React from "react";
 import { StorioSettingsResponse } from "@storio/template-sdk";
 import { StorioInstitutionProfile, LittleFlowersCustomizationConfig } from "@/types";
+import LiveText from "@/components/ui/LiveText";
 
 interface FooterProps {
   settings?: StorioSettingsResponse | null;
@@ -62,7 +63,7 @@ export default function Footer({ settings, profile, importantLinks = [], customi
             data-customizer-field="footer_quick_links_title"
             data-customizer-title="Footer Quick Links Title"
           >
-            {quickLinksTitle}
+            <LiveText field="footer_quick_links_title" initial={customization?.footer_quick_links_title} fallback="Quick Exploration" />
           </h4>
           <ul className="space-y-2 text-xs text-gray-400">
             <li>

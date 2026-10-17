@@ -4,7 +4,7 @@ import { getTenantContext, getTemplateLayout, getCareers } from '@/lib/storio';
 import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
-import SplitText from '@/components/ui/SplitText';
+import LiveText from '@/components/ui/LiveText';
 import ThemeIcon from '@/components/ui/ThemeIcon';
 import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
 import { StorioJobOpening } from '@/types';
@@ -59,20 +59,15 @@ export default async function CareersPage() {
               data-customizer-title="Careers Page Badge"
             >
               <span className="w-2 h-2 rounded-full bg-accent-green animate-pulse" />
-              {customization?.page_career_badge || "Join Our Family"}
+              <LiveText field="page_career_badge" initial={customization?.page_career_badge} fallback="Join Our Family" />
             </span>
 
             <h1
-              className="text-3xl sm:text-5xl font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight"
+              className="text-3xl sm:text-5xl font-extrabold tracking-tight font-fredoka text-primary-color leading-tight"
               data-customizer-field="page_career_title"
               data-customizer-title="Careers Page Title"
             >
-              <SplitText
-                text={customization?.page_career_title || "Career Opportunities"}
-                className="inline-block text-primary-color"
-                tag="span"
-                triggerOnMount={true}
-              />
+              <LiveText field="page_career_title" initial={customization?.page_career_title} fallback="Career Opportunities" />
             </h1>
 
             <p
@@ -80,7 +75,7 @@ export default async function CareersPage() {
               data-customizer-field="page_career_subtitle"
               data-customizer-title="Careers Page Subtitle"
             >
-              {customization?.page_career_subtitle || "Work with passion and purpose in a joyful, supportive environment dedicated to child growth."}
+              <LiveText field="page_career_subtitle" initial={customization?.page_career_subtitle} fallback="Work with passion and purpose in a joyful, supportive environment dedicated to child growth." />
             </p>
           </div>
         </section>

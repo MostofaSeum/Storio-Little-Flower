@@ -6,7 +6,7 @@ import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
 import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
-import SplitText from '@/components/ui/SplitText';
+import LiveText from '@/components/ui/LiveText';
 import ThemeIcon from '@/components/ui/ThemeIcon';
 
 export async function generateMetadata() {
@@ -58,20 +58,15 @@ export default async function NoticePage() {
               data-customizer-title="Notice Page Badge"
             >
               <span className="w-2 h-2 rounded-full bg-accent-pink animate-pulse" />
-              {customization?.page_notices_badge || "Circulars & Updates"}
+              <LiveText field="page_notices_badge" initial={customization?.page_notices_badge} fallback="Circulars & Updates" />
             </span>
 
             <h1
-              className="text-3xl sm:text-5xl font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight"
+              className="text-3xl sm:text-5xl font-extrabold tracking-tight font-fredoka text-primary-color leading-tight"
               data-customizer-field="page_notices_title"
               data-customizer-title="Notice Page Title"
             >
-              <SplitText
-                text={customization?.page_notices_title || "Notice Board"}
-                className="inline-block text-primary-color"
-                tag="span"
-                triggerOnMount={true}
-              />
+              <LiveText field="page_notices_title" initial={customization?.page_notices_title} fallback="Notice Board" />
             </h1>
 
             <p
@@ -79,7 +74,7 @@ export default async function NoticePage() {
               data-customizer-field="page_notices_subtitle"
               data-customizer-title="Notice Page Subtitle"
             >
-              {customization?.page_notices_subtitle || "Stay up-to-date with official academic circulars, schedules, and important school notices."}
+              <LiveText field="page_notices_subtitle" initial={customization?.page_notices_subtitle} fallback="Stay up-to-date with official academic circulars, schedules, and important school notices." />
             </p>
           </div>
         </section>

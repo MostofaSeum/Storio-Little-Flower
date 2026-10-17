@@ -170,6 +170,7 @@ export interface LittleFlowersCustomizationConfig {
   about_btn_link?: string;
   about_metric3_number?: string;
   about_metric3_label?: string;
+  heroHeadline?: string;
   heroTitle1?: string;
   heroTitle2?: string;
   heroDescription?: string;

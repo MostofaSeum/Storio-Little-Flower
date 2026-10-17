@@ -1,6 +1,6 @@
 import React from 'react';
 import { StorioEvent, LittleFlowersCustomizationConfig } from '@/types';
-import SplitText from '@/components/ui/SplitText';
+import LiveText from '@/components/ui/LiveText';
 import AccordionGallery from '@/components/sections/AccordionGallery';
 
 interface EventsSectionProps {
@@ -10,11 +10,6 @@ interface EventsSectionProps {
 
 export default function EventsSection({ events, customization }: EventsSectionProps) {
   if (!events || events.length === 0) return null;
-
-  const badgeText = customization?.events_section_badge || "Campus Life & Gatherings";
-  const titleText = customization?.events_section_title || "Upcoming Events & Celebrations";
-  const subtitleText = customization?.events_section_subtitle || "Hover over any event card to view the schedule, venue, and program overview.";
-  const viewAllText = customization?.events_view_all_text || "Full School Calendar";
 
   return (
     <section id="events" className="site-section-py site-section-px">
@@ -26,29 +21,21 @@ export default function EventsSection({ events, customization }: EventsSectionPr
               data-customizer-field="events_section_badge"
               data-customizer-title="Events Section Badge"
             >
-              {badgeText}
+              <LiveText field="events_section_badge" initial={customization?.events_section_badge} fallback="Campus Life & Gatherings" />
             </span>
             <h2
               className="text-3xl sm:text-4xl font-extrabold mt-3 font-fredoka"
               data-customizer-field="events_section_title"
               data-customizer-title="Events Section Title"
             >
-              <SplitText
-                text={titleText}
-                tag="span"
-                splitType="words, chars"
-                delay={30}
-                duration={0.7}
-                ease="power3.out"
-                className="inline-block"
-              />
+              <LiveText field="events_section_title" initial={customization?.events_section_title} fallback="Upcoming Events & Celebrations" />
             </h2>
             <p
               className="text-gray-500 text-sm mt-1 font-medium"
               data-customizer-field="events_section_subtitle"
               data-customizer-title="Events Section Subtitle"
             >
-              {subtitleText}
+              <LiveText field="events_section_subtitle" initial={customization?.events_section_subtitle} fallback="Hover over any event card to view the schedule, venue, and program overview." />
             </p>
           </div>
           <a
@@ -57,7 +44,9 @@ export default function EventsSection({ events, customization }: EventsSectionPr
             data-customizer-field="events_view_all_text"
             data-customizer-title="Events View All Button Text"
           >
-            <span>{viewAllText}</span>
+            <span>
+              <LiveText field="events_view_all_text" initial={customization?.events_view_all_text} fallback="Full School Calendar" />
+            </span>
           </a>
         </div>
 

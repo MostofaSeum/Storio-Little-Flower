@@ -1,7 +1,7 @@
 import React from 'react';
 import { StorioStaffMember } from '@storio/template-sdk';
 import { LittleFlowersCustomizationConfig } from '@/types';
-import SplitText from '@/components/ui/SplitText';
+import LiveText from '@/components/ui/LiveText';
 import { getStaffMemberPhoto } from '@/lib/media';
 
 interface StaffSectionProps {
@@ -11,10 +11,6 @@ interface StaffSectionProps {
 
 export default function StaffSection({ staffList, customization }: StaffSectionProps) {
   if (!staffList || staffList.length === 0) return null;
-
-  const badgeText = customization?.teachers_section_badge || "Warm & Caring";
-  const titleText = customization?.teachers_section_title || "Meet Our Loving Mentors";
-  const subtitleText = customization?.teachers_section_subtitle || "Certified childhood educators dedicated to giving every child warmth, guidance, and laughter.";
 
   return (
     <section
@@ -27,29 +23,21 @@ export default function StaffSection({ staffList, customization }: StaffSectionP
           data-customizer-field="teachers_section_badge"
           data-customizer-title="Teachers Section Badge"
         >
-          {badgeText}
+          <LiveText field="teachers_section_badge" initial={customization?.teachers_section_badge} fallback="Warm & Caring" />
         </span>
         <h2
           className="text-3xl sm:text-4xl font-extrabold mt-3 font-fredoka"
           data-customizer-field="teachers_section_title"
           data-customizer-title="Teachers Section Title"
         >
-          <SplitText
-            text={titleText}
-            tag="span"
-            splitType="chars"
-            delay={30}
-            duration={0.7}
-            ease="power3.out"
-            className="inline-block"
-          />
+          <LiveText field="teachers_section_title" initial={customization?.teachers_section_title} fallback="Meet Our Loving Mentors" />
         </h2>
         <p
           className="text-gray-500 text-sm mt-2 font-medium"
           data-customizer-field="teachers_section_subtitle"
           data-customizer-title="Teachers Section Subtitle"
         >
-          {subtitleText}
+          <LiveText field="teachers_section_subtitle" initial={customization?.teachers_section_subtitle} fallback="Certified childhood educators dedicated to giving every child warmth, guidance, and laughter." />
         </p>
       </div>
 

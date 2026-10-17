@@ -1,34 +1,49 @@
 'use client';
 
-import { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { setLiveConfig } from '@/lib/liveConfig';
 
-/**
- * TemplateVisualInspector
- * 
- * Implements Storio Template Customization Guide specifications:
- * 1. Visual Click-to-Edit Inspector:
- *    - In the Storio Admin customizer iframe, shows visual outline & badge on hover
- *    - Clicking an element with `data-customizer-field` posts an 'INSPECT_FIELD' message to parent
- * 2. Real-Time Live Preview Sync:
- *    - Listens for `THEME_UPDATE` message from the Storio Admin Panel
- *    - Immediately applies updated CSS variables and dispatches custom events without full reload
- */
+// Inline pencil icon — do NOT add lucide-react as a dependency (it is not used by this template).
+const PencilIcon = () => (
+  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+  </svg>
+);
+
+interface ActiveTarget {
+  rect: DOMRect;
+  title: string;
+  fieldId?: string;
+  sectionId?: string;
+}
+
 export default function TemplateVisualInspector() {
-  useEffect(() => {
-    // Only activate if running inside an iframe (Storio Admin preview mode)
-    const isInIframe = typeof window !== 'undefined' && window.self !== window.top;
-    if (!isInIframe) return;
+  const [enabled, setEnabled] = useState(true);
+  const [activeTarget, setActiveTarget] = useState<ActiveTarget | null>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const isInsideIframe =
+    typeof window !== 'undefined' && window.self !== window.top;
 
-    // --- 1. Real-time Live Preview Listener ---
-    const handleMessage = (event: MessageEvent) => {
-      // Security check: Ignore messages from unrecognized sources if needed
+  // Toggle from the admin panel
+  useEffect(() => {
+    if (!isInsideIframe) return;
+    const onMessage = (event: MessageEvent) => {
+      if (event.data && event.data.type === 'SET_INSPECTOR_MODE') {
+        setEnabled(Boolean(event.data.enabled));
+        if (!event.data.enabled) setActiveTarget(null);
+      }
+    };
+    window.addEventListener('message', onMessage);
+    return () => window.removeEventListener('message', onMessage);
+  }, [isInsideIframe]);
+
+  // Live CSS variables + live text store (existing behavior + new store update)
+  useEffect(() => {
+    const onMessage = (event: MessageEvent) => {
       const data = event.data;
       if (!data || typeof data !== 'object') return;
-
       if (data.type === 'THEME_UPDATE' && data.config) {
         const config = data.config as Record<string, unknown>;
-
-        // Dynamically update CSS variables on document root
         const root = document.documentElement;
         if (config.primaryColor) root.style.setProperty('--primary', String(config.primaryColor));
         if (config.primary_color) root.style.setProperty('--primary', String(config.primary_color));
@@ -64,117 +79,110 @@ export default function TemplateVisualInspector() {
         }
         if (config.headingColor) root.style.setProperty('--heading-color', String(config.headingColor));
         if (config.borderRadius) {
-          const radius = String(config.borderRadius).endsWith('px') ? String(config.borderRadius) : `${config.borderRadius}px`;
+          const radius = String(config.borderRadius).endsWith('px')
+            ? String(config.borderRadius)
+            : `${config.borderRadius}px`;
           root.style.setProperty('--button-border-radius', radius);
         }
 
-        // Dispatch a custom event so client components can reactively update their state if desired
+        // Keep custom event dispatched for compatibility
         window.dispatchEvent(new CustomEvent('storio:theme-update', { detail: config }));
+
+        // NEW: feed the live text store
+        setLiveConfig(config as any);
       }
     };
+    window.addEventListener('message', onMessage);
+    return () => window.removeEventListener('message', onMessage);
+  }, []);
 
-    window.addEventListener('message', handleMessage);
+  // Hover detection
+  useEffect(() => {
+    if (!isInsideIframe || !enabled) {
+      setActiveTarget(null);
+      return;
+    }
+    const handleMouseMove = (e: MouseEvent) => {
+      const target = (e.target as HTMLElement)?.closest(
+        '[data-customizer-field], [data-customizer-section]'
+      ) as HTMLElement | null;
 
-    // --- 2. Visual Click-to-Edit Inspector Overlay ---
-    let hoverOutline: HTMLDivElement | null = document.createElement('div');
-    hoverOutline.id = 'storio-customizer-outline';
-    hoverOutline.style.position = 'fixed';
-    hoverOutline.style.pointerEvents = 'none';
-    hoverOutline.style.border = '2px dashed #0284c7';
-    hoverOutline.style.borderRadius = '8px';
-    hoverOutline.style.backgroundColor = 'rgba(2, 132, 199, 0.08)';
-    hoverOutline.style.zIndex = '999999';
-    hoverOutline.style.display = 'none';
-    hoverOutline.style.transition = 'all 0.12s ease';
-
-    const badge = document.createElement('div');
-    badge.id = 'storio-customizer-badge';
-    badge.style.position = 'absolute';
-    badge.style.top = '-26px';
-    badge.style.left = '0';
-    badge.style.backgroundColor = '#0284c7';
-    badge.style.color = '#ffffff';
-    badge.style.fontSize = '11px';
-    badge.style.fontWeight = '700';
-    badge.style.padding = '2px 8px';
-    badge.style.borderRadius = '4px';
-    badge.style.boxShadow = '0 2px 6px rgba(0,0,0,0.15)';
-    badge.style.whiteSpace = 'nowrap';
-    hoverOutline.appendChild(badge);
-
-    document.body.appendChild(hoverOutline);
-
-    let activeTarget: HTMLElement | null = null;
-
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = (e.target as HTMLElement)?.closest('[data-customizer-field]') as HTMLElement | null;
       if (!target) {
-        if (hoverOutline) hoverOutline.style.display = 'none';
-        activeTarget = null;
+        if (overlayRef.current?.contains(e.target as Node)) return;
+        setActiveTarget(null);
         return;
       }
 
-      activeTarget = target;
       const rect = target.getBoundingClientRect();
-      const fieldId = target.getAttribute('data-customizer-field');
-      const title = target.getAttribute('data-customizer-title') || fieldId || 'Edit Setting';
+      const fieldId = target.getAttribute('data-customizer-field') || undefined;
+      const sectionId = target.getAttribute('data-customizer-section') || undefined;
+      const title =
+        target.getAttribute('data-customizer-title') ||
+        (fieldId ? `Edit: ${fieldId}` : sectionId ? `Edit ${sectionId}` : 'Edit Component');
 
-      if (hoverOutline) {
-        hoverOutline.style.display = 'block';
-        hoverOutline.style.top = `${rect.top}px`;
-        hoverOutline.style.left = `${rect.left}px`;
-        hoverOutline.style.width = `${rect.width}px`;
-        hoverOutline.style.height = `${rect.height}px`;
-        badge.textContent = `✎ Edit: ${title}`;
-      }
+      setActiveTarget({ rect, title, fieldId, sectionId });
     };
 
-    const handleClick = (e: MouseEvent) => {
-      const target = (e.target as HTMLElement)?.closest('[data-customizer-field]') as HTMLElement | null;
-      if (!target) return;
+    const handleScrollOrResize = () => setActiveTarget(null);
 
-      const fieldId = target.getAttribute('data-customizer-field');
-      const section = target.getAttribute('data-customizer-section');
-      if (fieldId) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        // Send inspection event to Storio Admin Panel
-        window.parent.postMessage(
-          {
-            type: 'INSPECT_FIELD',
-            fieldId,
-            section: section || 'content',
-          },
-          '*'
-        );
-      }
-    };
-
-    const handleScroll = () => {
-      if (activeTarget && hoverOutline && hoverOutline.style.display !== 'none') {
-        const rect = activeTarget.getBoundingClientRect();
-        hoverOutline.style.top = `${rect.top}px`;
-        hoverOutline.style.left = `${rect.left}px`;
-        hoverOutline.style.width = `${rect.width}px`;
-        hoverOutline.style.height = `${rect.height}px`;
-      }
-    };
-
-    document.addEventListener('mouseover', handleMouseOver);
-    document.addEventListener('click', handleClick, true);
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    window.addEventListener('scroll', handleScrollOrResize, { passive: true });
+    window.addEventListener('resize', handleScrollOrResize, { passive: true });
 
     return () => {
-      window.removeEventListener('message', handleMessage);
-      document.removeEventListener('mouseover', handleMouseOver);
-      document.removeEventListener('click', handleClick, true);
-      window.removeEventListener('scroll', handleScroll);
-      if (hoverOutline && hoverOutline.parentNode) {
-        hoverOutline.parentNode.removeChild(hoverOutline);
-      }
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('scroll', handleScrollOrResize);
+      window.removeEventListener('resize', handleScrollOrResize);
     };
-  }, []);
+  }, [isInsideIframe, enabled]);
 
-  return null;
+  const handleEditClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!activeTarget) return;
+
+    window.parent.postMessage(
+      {
+        type: 'CUSTOMIZER_INSPECT_CLICK', // MUST be this exact string
+        fieldId: activeTarget.fieldId,
+        sectionId: activeTarget.sectionId, // property name MUST be sectionId
+        title: activeTarget.title,         // include title
+      },
+      '*'
+    );
+  };
+
+  if (!isInsideIframe || !enabled || !activeTarget) return null;
+
+  const { rect, title } = activeTarget;
+  if (rect.width <= 0 || rect.height <= 0) return null;
+
+  return (
+    <div
+      ref={overlayRef}
+      className="fixed pointer-events-none z-[9999999] transition-all duration-75 ease-out"
+      style={{
+        top: `${rect.top}px`,
+        left: `${rect.left}px`,
+        width: `${rect.width}px`,
+        height: `${rect.height}px`,
+      }}
+    >
+      <div className="absolute inset-0 border-2 border-dashed border-sky-500 rounded-lg pointer-events-none bg-sky-500/5 shadow-[0_0_15px_rgba(14,165,233,0.3)] animate-in fade-in duration-100" />
+      <div
+        className="absolute -top-3.5 right-4 pointer-events-auto"
+        style={{ transform: rect.top < 40 ? 'translateY(38px)' : 'none' }}
+      >
+        <button
+          type="button"
+          onClick={handleEditClick}
+          className="flex items-center gap-1.5 px-3 py-1 bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold rounded-full shadow-lg shadow-sky-600/40 border border-white/90 transition-all hover:scale-105 active:scale-95 cursor-pointer backdrop-blur-xs"
+          title={`Click to edit ${title} in dashboard`}
+        >
+          <PencilIcon />
+          <span>{title}</span>
+        </button>
+      </div>
+    </div>
+  );
 }

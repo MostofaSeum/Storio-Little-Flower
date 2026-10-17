@@ -1,6 +1,6 @@
 import React from 'react';
 import { StorioTestimonial, LittleFlowersCustomizationConfig } from '@/types';
-import SplitText from '@/components/ui/SplitText';
+import LiveText from '@/components/ui/LiveText';
 import TestimonialSlider from '@/components/sections/TestimonialSlider';
 
 interface TestimonialsSectionProps {
@@ -13,9 +13,6 @@ export default function TestimonialsSection({ testimonials, siteTitle, customiza
   if (!testimonials || testimonials.length === 0) return null;
 
   const defaultSubtitle = `Hear what parents say about their child’s joyful journey with ${siteTitle || 'our school'}.`;
-  const badgeText = customization?.testimonials_section_badge || "Parent Voices";
-  const titleText = customization?.testimonials_section_title || "Loved by Families";
-  const subtitleText = customization?.testimonials_section_subtitle || defaultSubtitle;
 
   return (
     <section className="site-section-py site-section-px bg-gradient-to-b from-accent-soft-blue/70 to-pink-50/40 border-t border-sky-100 relative overflow-hidden">
@@ -30,29 +27,21 @@ export default function TestimonialsSection({ testimonials, siteTitle, customiza
             data-customizer-field="testimonials_section_badge"
             data-customizer-title="Testimonials Section Badge"
           >
-            {badgeText}
+            <LiveText field="testimonials_section_badge" initial={customization?.testimonials_section_badge} fallback="Parent Voices" />
           </span>
           <h2
             className="text-3xl sm:text-4xl font-extrabold mt-3 font-fredoka"
             data-customizer-field="testimonials_section_title"
             data-customizer-title="Testimonials Section Title"
           >
-            <SplitText
-              text={titleText}
-              tag="span"
-              splitType="chars"
-              delay={30}
-              duration={0.7}
-              ease="power3.out"
-              className="inline-block"
-            />
+            <LiveText field="testimonials_section_title" initial={customization?.testimonials_section_title} fallback="Loved by Families" />
           </h2>
           <p
             className="text-gray-600 text-sm mt-2 font-medium"
             data-customizer-field="testimonials_section_subtitle"
             data-customizer-title="Testimonials Section Subtitle"
           >
-            {subtitleText}
+            <LiveText field="testimonials_section_subtitle" initial={customization?.testimonials_section_subtitle} fallback={defaultSubtitle} />
           </p>
         </div>
 

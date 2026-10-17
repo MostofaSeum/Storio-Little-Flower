@@ -1,7 +1,7 @@
 import React from 'react';
 import { StorioNotice } from '@storio/template-sdk';
 import { LittleFlowersCustomizationConfig } from '@/types';
-import SplitText from '@/components/ui/SplitText';
+import LiveText from '@/components/ui/LiveText';
 
 interface NoticeSectionProps {
   notices: StorioNotice[];
@@ -10,11 +10,6 @@ interface NoticeSectionProps {
 
 export default function NoticeSection({ notices, customization }: NoticeSectionProps) {
   if (!notices || notices.length === 0) return null;
-
-  const badgeText = customization?.notice_section_badge || "Important Circulars";
-  const titleText = customization?.notice_section_title || "Campus Announcements";
-  const subtitleText = customization?.notice_section_subtitle || "Stay updated with latest school circulars, events, and schedules";
-  const viewAllText = customization?.notice_view_all_text || "View All Notices";
 
   return (
     <section
@@ -29,30 +24,21 @@ export default function NoticeSection({ notices, customization }: NoticeSectionP
               data-customizer-field="notice_section_badge"
               data-customizer-title="Notice Section Badge"
             >
-              {badgeText}
+              <LiveText field="notice_section_badge" initial={customization?.notice_section_badge} fallback="Important Circulars" />
             </span>
             <h3
               className="text-3xl font-extrabold mt-2 font-fredoka"
               data-customizer-field="notice_section_title"
               data-customizer-title="Notice Section Title"
             >
-              <SplitText
-                text={titleText}
-                tag="span"
-                splitType="chars"
-                delay={30}
-                duration={0.7}
-                ease="power3.out"
-                textAlign="left"
-                className="inline-block"
-              />
+              <LiveText field="notice_section_title" initial={customization?.notice_section_title} fallback="Campus Announcements" />
             </h3>
             <p
               className="text-sm text-gray-500 font-medium"
               data-customizer-field="notice_section_subtitle"
               data-customizer-title="Notice Section Subtitle"
             >
-              {subtitleText}
+              <LiveText field="notice_section_subtitle" initial={customization?.notice_section_subtitle} fallback="Stay updated with latest school circulars, events, and schedules" />
             </p>
           </div>
           <a
@@ -61,7 +47,7 @@ export default function NoticeSection({ notices, customization }: NoticeSectionP
             data-customizer-field="notice_view_all_text"
             data-customizer-title="Notice View All Button Text"
           >
-            {viewAllText}
+            <LiveText field="notice_view_all_text" initial={customization?.notice_view_all_text} fallback="View All Notices" />
           </a>
         </div>
 
