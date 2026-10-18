@@ -43,7 +43,7 @@ export default function AboutSection({ profile, customization, isStandalone }: A
     >
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         {/* Left: Playful Image Showcase */}
-        <div className="lg:col-span-5 relative reveal-on-scroll">
+        <div className="lg:col-span-5 relative">
           <div className="relative mx-auto max-w-[420px] rounded-3xl overflow-hidden border-8 border-white shadow-xl transform -rotate-1 hover:rotate-0 hover:scale-102 transition-all duration-500">
             <img
               src={profile.institution_image_url || "/homepage/About Our Academy/Trial 1.jpg"}
@@ -64,7 +64,7 @@ export default function AboutSection({ profile, customization, isStandalone }: A
         </div>
 
         {/* Right: Mission, Details, and Key Metrics */}
-        <div className="lg:col-span-7 space-y-6 reveal-on-scroll delay-150">
+        <div className="lg:col-span-7 space-y-6">
           <div
             className="inline-block bg-accent-soft-blue text-primary-color font-bold text-xs uppercase px-3.5 py-1 rounded-full"
             data-customizer-field="about_section_badge"
@@ -98,7 +98,7 @@ export default function AboutSection({ profile, customization, isStandalone }: A
             <LiveText
               field="about_section_description"
               initial={customization?.about_section_description || profile.school_details}
-              fallback={isStandalone ? "Our school provides experiential early childhood education centered on play, sensory exploration, creativity, and foundational social skills." : ""}
+              fallback="Our school provides experiential early childhood education centered on play, sensory exploration, creativity, and foundational social skills."
             />
           </p>
 

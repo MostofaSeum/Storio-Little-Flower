@@ -18,7 +18,10 @@ interface ActiveTarget {
 }
 
 export default function TemplateVisualInspector() {
-  const [enabled, setEnabled] = useState(false);
+  const [enabled, setEnabled] = useState(() => {
+    if (typeof window === 'undefined' || window.self === window.top) return false;
+    return new URLSearchParams(window.location.search).get('edit') === '1';
+  });
   const [activeTarget, setActiveTarget] = useState<ActiveTarget | null>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const isInsideIframe =
@@ -98,10 +101,7 @@ export default function TemplateVisualInspector() {
 
   // Hover detection
   useEffect(() => {
-    if (!isInsideIframe || !enabled) {
-      setActiveTarget(null);
-      return;
-    }
+    if (!isInsideIframe || !enabled) return;
     const handleMouseMove = (e: MouseEvent) => {
       const target = (e.target as HTMLElement)?.closest(
         '[data-customizer-field], [data-customizer-section]'

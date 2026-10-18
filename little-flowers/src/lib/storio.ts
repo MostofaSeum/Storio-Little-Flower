@@ -140,7 +140,7 @@ function mapApiCustomizationToConfig(
 
 export async function getTemplateLayout(tenantHost: string, isStandalone: boolean): Promise<ResolvedTemplateLayout> {
   const [rawLayout, rawImportantLinks] = await Promise.all([
-    storio.getLayout(tenantHost).catch(() => null),
+    storio.getLayout({ tenantHost, next: { revalidate: 0 } }).catch(() => null),
     storio.apiFetch<{ id: number; title: string; url: string; order?: number }[]>('/api/v2/template/important-links/', { tenantHost }).catch(() => null),
   ]);
 
@@ -361,5 +361,4 @@ export async function getHotlines(tenantHost: string) {
 
 // Media resolution re-exports for convenience
 export { getStaffMemberPhoto, resolveMediaUrl, getBlogPostImageUrl } from './media';
-
 

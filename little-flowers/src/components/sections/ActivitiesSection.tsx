@@ -17,7 +17,7 @@ export default function ActivitiesSection({ activities, customization }: Activit
       className="site-section-py site-section-px border-y border-purple-50/50"
     >
       <div className="site-container">
-        <div className="text-center max-w-2xl mx-auto mb-14 reveal-on-scroll">
+        <div className="text-center max-w-2xl mx-auto mb-14">
           <span
             className="text-xs font-extrabold tracking-wider uppercase text-accent-pink bg-pink-100 px-3 py-1 rounded-full"
             data-customizer-field="programs_section_badge"
@@ -92,7 +92,7 @@ export default function ActivitiesSection({ activities, customization }: Activit
             return (
               <div
                 key={activity.id}
-                className={`rounded-3xl p-6 border-2 ${borderColors[idx % 4]} ${courseGlowClasses[idx % 4]} flex flex-col justify-between group card-interactive cursor-pointer ${directionClass} ${delayClass}`}
+                className={`rounded-3xl p-6 border-2 ${borderColors[idx % 4]} ${courseGlowClasses[idx % 4]} flex flex-col justify-between group card-interactive cursor-pointer  ${delayClass}`}
                 style={{ backgroundColor: 'var(--bg-surface, #ffffff)' }}
               >
                 <div>
