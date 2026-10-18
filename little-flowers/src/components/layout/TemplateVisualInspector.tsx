@@ -18,7 +18,7 @@ interface ActiveTarget {
 }
 
 export default function TemplateVisualInspector() {
-  const [enabled, setEnabled] = useState(true);
+  const [enabled, setEnabled] = useState(false);
   const [activeTarget, setActiveTarget] = useState<ActiveTarget | null>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const isInsideIframe =
