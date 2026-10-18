@@ -2,6 +2,7 @@ import React from 'react';
 import { StorioStaffMember } from '@storio/template-sdk';
 import { LittleFlowersCustomizationConfig } from '@/types';
 import LiveText from '@/components/ui/LiveText';
+import SplitText from '@/components/ui/SplitText';
 import { getStaffMemberPhoto } from '@/lib/media';
 
 interface StaffSectionProps {
@@ -30,7 +31,17 @@ export default function StaffSection({ staffList, customization }: StaffSectionP
           data-customizer-field="teachers_section_title"
           data-customizer-title="Teachers Section Title"
         >
-          <LiveText field="teachers_section_title" initial={customization?.teachers_section_title} fallback="Meet Our Loving Mentors" />
+          <SplitText
+            field="teachers_section_title"
+            initial={customization?.teachers_section_title}
+            fallback="Meet Our Loving Mentors"
+            tag="span"
+            splitType="chars"
+            delay={30}
+            duration={0.7}
+            ease="power3.out"
+            className="inline-block"
+          />
         </h2>
         <p
           className="text-gray-500 text-sm mt-2 font-medium"

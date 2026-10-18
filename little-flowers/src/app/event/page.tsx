@@ -6,6 +6,7 @@ import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 import LiveText from '@/components/ui/LiveText';
+import SplitText from '@/components/ui/SplitText';
 import EventsAndCalendarClient from '@/components/sections/EventsAndCalendarClient';
 
 export async function generateMetadata() {
@@ -71,7 +72,14 @@ export default async function EventsPage() {
               data-customizer-field="page_events_title"
               data-customizer-title="Events Page Title"
             >
-              <LiveText field="page_events_title" initial={customization?.page_events_title} fallback="Events & Academic Calendar" />
+              <SplitText
+                field="page_events_title"
+                initial={customization?.page_events_title}
+                fallback="Events & Academic Calendar"
+                className="inline-block text-primary-color"
+                tag="span"
+                triggerOnMount={true}
+              />
             </h1>
 
             <p

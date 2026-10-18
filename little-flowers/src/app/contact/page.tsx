@@ -4,6 +4,7 @@ import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 import LiveText from '@/components/ui/LiveText';
+import SplitText from '@/components/ui/SplitText';
 import ContactFormClient from '@/components/sections/ContactFormClient';
 
 export async function generateMetadata() {
@@ -44,7 +45,14 @@ export default async function ContactPage() {
               data-customizer-field="page_contact_title"
               data-customizer-title="Contact Page Title"
             >
-              <LiveText field="page_contact_title" initial={customization?.page_contact_title} fallback="Contact Our Campus" />
+              <SplitText
+                field="page_contact_title"
+                initial={customization?.page_contact_title}
+                fallback="Contact Our Campus"
+                className="inline-block text-primary-color"
+                tag="span"
+                triggerOnMount={true}
+              />
             </h1>
 
             <p

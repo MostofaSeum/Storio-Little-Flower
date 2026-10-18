@@ -2,6 +2,7 @@ import React from 'react';
 import { StorioGalleryItem } from '@storio/template-sdk';
 import { LittleFlowersCustomizationConfig } from '@/types';
 import LiveText from '@/components/ui/LiveText';
+import SplitText from '@/components/ui/SplitText';
 import InteractiveGallery from '@/components/sections/InteractiveGallery';
 
 interface GallerySectionProps {
@@ -34,7 +35,17 @@ export default function GallerySection({ items, siteTitle, customization }: Gall
             data-customizer-field="gallery_section_title"
             data-customizer-title="Gallery Section Title"
           >
-            <LiveText field="gallery_section_title" initial={customization?.gallery_section_title} fallback={defaultHeading} />
+            <SplitText
+              field="gallery_section_title"
+              initial={customization?.gallery_section_title}
+              fallback={defaultHeading}
+              tag="span"
+              splitType="chars"
+              delay={30}
+              duration={0.7}
+              ease="power3.out"
+              className="inline-block"
+            />
           </h2>
           <p
             className="text-gray-500 text-sm mt-1 font-medium"

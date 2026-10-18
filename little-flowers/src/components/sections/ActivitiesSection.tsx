@@ -1,6 +1,7 @@
 import React from 'react';
 import { StorioActivityItem, LittleFlowersCustomizationConfig } from '@/types';
 import LiveText from '@/components/ui/LiveText';
+import SplitText from '@/components/ui/SplitText';
 
 interface ActivitiesSectionProps {
   activities: StorioActivityItem[];
@@ -29,7 +30,17 @@ export default function ActivitiesSection({ activities, customization }: Activit
             data-customizer-field="programs_section_title"
             data-customizer-title="Programs Section Title"
           >
-            <LiveText field="programs_section_title" initial={customization?.programs_section_title} fallback="Our Learning Programs" />
+            <SplitText
+              field="programs_section_title"
+              initial={customization?.programs_section_title}
+              fallback="Our Learning Programs"
+              tag="span"
+              splitType="chars"
+              delay={30}
+              duration={0.7}
+              ease="power3.out"
+              className="inline-block"
+            />
           </h2>
           <p
             className="text-gray-500 text-sm mt-2 font-medium"

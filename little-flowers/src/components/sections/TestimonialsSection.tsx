@@ -1,6 +1,7 @@
 import React from 'react';
 import { StorioTestimonial, LittleFlowersCustomizationConfig } from '@/types';
 import LiveText from '@/components/ui/LiveText';
+import SplitText from '@/components/ui/SplitText';
 import TestimonialSlider from '@/components/sections/TestimonialSlider';
 
 interface TestimonialsSectionProps {
@@ -34,7 +35,17 @@ export default function TestimonialsSection({ testimonials, siteTitle, customiza
             data-customizer-field="testimonials_section_title"
             data-customizer-title="Testimonials Section Title"
           >
-            <LiveText field="testimonials_section_title" initial={customization?.testimonials_section_title} fallback="Loved by Families" />
+            <SplitText
+              field="testimonials_section_title"
+              initial={customization?.testimonials_section_title}
+              fallback="Loved by Families"
+              tag="span"
+              splitType="chars"
+              delay={30}
+              duration={0.7}
+              ease="power3.out"
+              className="inline-block"
+            />
           </h2>
           <p
             className="text-gray-600 text-sm mt-2 font-medium"

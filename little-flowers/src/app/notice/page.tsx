@@ -7,6 +7,7 @@ import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 import LiveText from '@/components/ui/LiveText';
+import SplitText from '@/components/ui/SplitText';
 import ThemeIcon from '@/components/ui/ThemeIcon';
 
 export async function generateMetadata() {
@@ -66,7 +67,14 @@ export default async function NoticePage() {
               data-customizer-field="page_notices_title"
               data-customizer-title="Notice Page Title"
             >
-              <LiveText field="page_notices_title" initial={customization?.page_notices_title} fallback="Notice Board" />
+              <SplitText
+                field="page_notices_title"
+                initial={customization?.page_notices_title}
+                fallback="Notice Board"
+                className="inline-block text-primary-color"
+                tag="span"
+                triggerOnMount={true}
+              />
             </h1>
 
             <p

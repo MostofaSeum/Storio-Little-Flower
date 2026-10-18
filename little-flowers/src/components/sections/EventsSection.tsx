@@ -1,6 +1,7 @@
 import React from 'react';
 import { StorioEvent, LittleFlowersCustomizationConfig } from '@/types';
 import LiveText from '@/components/ui/LiveText';
+import SplitText from '@/components/ui/SplitText';
 import AccordionGallery from '@/components/sections/AccordionGallery';
 
 interface EventsSectionProps {
@@ -28,7 +29,17 @@ export default function EventsSection({ events, customization }: EventsSectionPr
               data-customizer-field="events_section_title"
               data-customizer-title="Events Section Title"
             >
-              <LiveText field="events_section_title" initial={customization?.events_section_title} fallback="Upcoming Events & Celebrations" />
+              <SplitText
+                field="events_section_title"
+                initial={customization?.events_section_title}
+                fallback="Upcoming Events & Celebrations"
+                tag="span"
+                splitType="words, chars"
+                delay={30}
+                duration={0.7}
+                ease="power3.out"
+                className="inline-block"
+              />
             </h2>
             <p
               className="text-gray-500 text-sm mt-1 font-medium"

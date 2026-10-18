@@ -2,6 +2,7 @@ import React from 'react';
 import { StorioNotice } from '@storio/template-sdk';
 import { LittleFlowersCustomizationConfig } from '@/types';
 import LiveText from '@/components/ui/LiveText';
+import SplitText from '@/components/ui/SplitText';
 
 interface NoticeSectionProps {
   notices: StorioNotice[];
@@ -31,7 +32,18 @@ export default function NoticeSection({ notices, customization }: NoticeSectionP
               data-customizer-field="notice_section_title"
               data-customizer-title="Notice Section Title"
             >
-              <LiveText field="notice_section_title" initial={customization?.notice_section_title} fallback="Campus Announcements" />
+              <SplitText
+                field="notice_section_title"
+                initial={customization?.notice_section_title}
+                fallback="Campus Announcements"
+                tag="span"
+                splitType="chars"
+                delay={30}
+                duration={0.7}
+                ease="power3.out"
+                textAlign="left"
+                className="inline-block"
+              />
             </h3>
             <p
               className="text-sm text-gray-500 font-medium"

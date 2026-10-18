@@ -18,6 +18,7 @@ import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 import LiveText from '@/components/ui/LiveText';
+import SplitText from '@/components/ui/SplitText';
 import ComplianceClientView from '@/components/sections/ComplianceClientView';
 
 export async function generateMetadata() {
@@ -83,7 +84,14 @@ export default async function CompliancePage() {
               data-customizer-field="page_compliance_title"
               data-customizer-title="Compliance Page Title"
             >
-              <LiveText field="page_compliance_title" initial={customization?.page_compliance_title} fallback="Citizen Charter & Institutional Compliance" />
+              <SplitText
+                field="page_compliance_title"
+                initial={customization?.page_compliance_title}
+                fallback="Citizen Charter & Institutional Compliance"
+                className="inline-block text-primary-color"
+                tag="span"
+                triggerOnMount={true}
+              />
             </h1>
 
             <p

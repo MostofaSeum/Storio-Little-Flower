@@ -1,6 +1,7 @@
 import React from 'react';
 import { StorioInstitutionProfile, LittleFlowersCustomizationConfig } from '@/types';
 import LiveText from '@/components/ui/LiveText';
+import SplitText from '@/components/ui/SplitText';
 import AnimatedCounter from '@/components/ui/AnimatedCounter';
 
 interface AboutSectionProps {
@@ -76,7 +77,18 @@ export default function AboutSection({ profile, customization, isStandalone }: A
             data-customizer-field="about_section_title"
             data-customizer-title="About Section Title"
           >
-            <LiveText field="about_section_title" initial={customization?.about_section_title} fallback="A Loving Second Home for Your Little Ones" />
+            <SplitText
+              field="about_section_title"
+              initial={customization?.about_section_title}
+              fallback="A Loving Second Home for Your Little Ones"
+              tag="span"
+              splitType="words, chars"
+              delay={30}
+              duration={0.7}
+              ease="power3.out"
+              textAlign="left"
+              className="inline-block"
+            />
           </h2>
           <p
             className="text-gray-600 text-base leading-relaxed"

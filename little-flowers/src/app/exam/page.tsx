@@ -5,6 +5,7 @@ import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 import LiveText from '@/components/ui/LiveText';
+import SplitText from '@/components/ui/SplitText';
 import ExamResultsClientView, { StorioExamResult } from '@/components/sections/ExamResultsClientView';
 import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
 
@@ -53,7 +54,14 @@ export default async function ExamResultsPage() {
               data-customizer-field="page_exam_title"
               data-customizer-title="Exam Results Page Title"
             >
-              <LiveText field="page_exam_title" initial={customization?.page_exam_title} fallback="Exam Results" />
+              <SplitText
+                field="page_exam_title"
+                initial={customization?.page_exam_title}
+                fallback="Exam Results"
+                className="inline-block text-primary-color"
+                tag="span"
+                triggerOnMount={true}
+              />
             </h1>
 
             <p

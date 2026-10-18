@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { StorioLeadershipMessage, LittleFlowersCustomizationConfig } from '@/types';
 import { resolveMediaUrl } from '@/lib/media';
 import LiveText from '@/components/ui/LiveText';
+import SplitText from '@/components/ui/SplitText';
 
 interface LeadershipSectionProps {
   messages: StorioLeadershipMessage[];
@@ -62,7 +63,13 @@ export default function LeadershipSection({ messages, customization }: Leadershi
             data-customizer-field="leadership_section_title"
             data-customizer-title="Leadership Section Title"
           >
-            <LiveText field="leadership_section_title" initial={customization?.leadership_section_title} fallback="Words from Our Leadership" />
+            <SplitText
+              field="leadership_section_title"
+              initial={customization?.leadership_section_title}
+              fallback="Words from Our Leadership"
+              tag="span"
+              threshold={0.15}
+            />
           </h2>
 
           <p

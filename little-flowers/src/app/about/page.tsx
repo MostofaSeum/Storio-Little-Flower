@@ -118,7 +118,17 @@ export default async function AboutPage() {
                 data-customizer-field="page_about_title"
                 data-customizer-title="About Page Title"
               >
-                <LiveText field="page_about_title" initial={customization?.page_about_title} fallback="Nurturing Wonder, Creativity & Empathy" />
+                <SplitText
+                  field="page_about_title"
+                  initial={customization?.page_about_title}
+                  fallback="Nurturing Wonder, Creativity & Empathy"
+                  tag="span"
+                  splitType="words, chars"
+                  delay={30}
+                  duration={0.7}
+                  ease="power3.out"
+                  className="inline-block"
+                />
               </h1>
               <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
                 {profile?.school_details ||

@@ -5,6 +5,7 @@ import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 import LiveText from '@/components/ui/LiveText';
+import SplitText from '@/components/ui/SplitText';
 import ThemeIcon from '@/components/ui/ThemeIcon';
 import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
 import { StorioJobOpening } from '@/types';
@@ -67,7 +68,14 @@ export default async function CareersPage() {
               data-customizer-field="page_career_title"
               data-customizer-title="Careers Page Title"
             >
-              <LiveText field="page_career_title" initial={customization?.page_career_title} fallback="Career Opportunities" />
+              <SplitText
+                field="page_career_title"
+                initial={customization?.page_career_title}
+                fallback="Career Opportunities"
+                className="inline-block text-primary-color"
+                tag="span"
+                triggerOnMount={true}
+              />
             </h1>
 
             <p

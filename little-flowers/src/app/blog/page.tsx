@@ -8,6 +8,7 @@ import InteractiveHeader from '@/components/layout/InteractiveHeader';
 import Footer from '@/components/layout/Footer';
 import DynamicThemeStyles from '@/components/layout/DynamicThemeStyles';
 import LiveText from '@/components/ui/LiveText';
+import SplitText from '@/components/ui/SplitText';
 import ThemeIcon from '@/components/ui/ThemeIcon';
 
 export async function generateMetadata() {
@@ -84,7 +85,18 @@ export default async function BlogPage() {
               data-customizer-field="page_blog_title"
               data-customizer-title="Blog Page Title"
             >
-              <LiveText field="page_blog_title" initial={customization?.page_blog_title} fallback="Stories, News & Updates" />
+              <SplitText
+                field="page_blog_title"
+                initial={customization?.page_blog_title}
+                fallback="Stories, News & Updates"
+                tag="span"
+                splitType="chars"
+                delay={35}
+                duration={0.8}
+                ease="power3.out"
+                textAlign="center"
+                className="inline-block text-primary-color"
+              />
             </h1>
             <p
               className="text-gray-600 text-base md:text-lg"

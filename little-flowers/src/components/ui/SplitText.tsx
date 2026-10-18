@@ -5,12 +5,24 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText as GSAPSplitText } from 'gsap/SplitText';
 
+import {
+  getLiveConfig,
+  getServerLiveConfig,
+  subscribeLiveConfig,
+} from '@/lib/liveConfig';
+import type { LittleFlowersCustomizationConfig } from '@/types';
+
+type Field = (keyof LittleFlowersCustomizationConfig & string) | (string & {});
+
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger, GSAPSplitText);
 }
 
 export interface SplitTextProps {
-  text: string;
+  text?: string;
+  field?: Field;
+  initial?: string | null;
+  fallback?: string;
   className?: string;
   delay?: number;
   duration?: number;
@@ -27,7 +39,10 @@ export interface SplitTextProps {
 }
 
 const SplitText: React.FC<SplitTextProps> = ({
-  text,
+  text: explicitText,
+  field,
+  initial,
+  fallback = '',
   className = '',
   delay = 50,
   duration = 1.25,
@@ -42,6 +57,21 @@ const SplitText: React.FC<SplitTextProps> = ({
   onLetterAnimationComplete,
   triggerOnMount = false,
 }) => {
+  const live = React.useSyncExternalStore(
+    subscribeLiveConfig,
+    getLiveConfig,
+    getServerLiveConfig
+  ) as Record<string, unknown>;
+
+  const liveVal = field ? live?.[field] : undefined;
+  const resolvedText =
+    field !== undefined
+      ? (typeof liveVal === 'string' && liveVal.trim() !== ''
+          ? liveVal
+          : (initial !== undefined && initial !== null && initial !== '' ? initial : fallback))
+      : (explicitText ?? '');
+
+  const text = resolvedText;
   const ref = useRef<HTMLParagraphElement>(null);
   const animationCompletedRef = useRef(false);
   const onCompleteRef = useRef(onLetterAnimationComplete);
@@ -66,6 +96,14 @@ const SplitText: React.FC<SplitTextProps> = ({
       setFontsLoaded(true);
     }
   }, []);
+
+  const lastTextRef = useRef(text);
+  useEffect(() => {
+    if (lastTextRef.current !== text) {
+      lastTextRef.current = text;
+      animationCompletedRef.current = false;
+    }
+  }, [text]);
 
   useEffect(() => {
     if (!ref.current || !text || !fontsLoaded) return;
