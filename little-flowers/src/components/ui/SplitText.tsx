@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText as GSAPSplitText } from 'gsap/SplitText';
@@ -17,6 +17,9 @@ type Field = (keyof LittleFlowersCustomizationConfig & string) | (string & {});
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger, GSAPSplitText);
 }
+
+const useIsomorphicLayoutEffect =
+  typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 export interface SplitTextProps {
   text?: string;
@@ -98,10 +101,39 @@ const SplitText: React.FC<SplitTextProps> = ({
   }, []);
 
   const lastTextRef = useRef(text);
-  useEffect(() => {
+  const isFirstRender = useRef(true);
+
+  // Synchronously revert any old GSAP SplitText DOM mutations before React renders the new text
+  useIsomorphicLayoutEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
     if (lastTextRef.current !== text) {
       lastTextRef.current = text;
       animationCompletedRef.current = false;
+
+      if (ref.current) {
+        const el = ref.current as HTMLElement & {
+          _rbsplitInstance?: GSAPSplitText;
+        };
+
+        // Kill ScrollTrigger associated with this element
+        ScrollTrigger.getAll().forEach((st) => {
+          if (st.trigger === el) st.kill();
+        });
+
+        if (el._rbsplitInstance) {
+          try {
+            el._rbsplitInstance.revert();
+          } catch (_) {}
+          el._rbsplitInstance = undefined;
+        }
+
+        // Force the element content to match the new text clean string
+        el.textContent = text;
+      }
     }
   }, [text]);
 

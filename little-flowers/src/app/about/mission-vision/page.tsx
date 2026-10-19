@@ -60,7 +60,9 @@ export default async function MissionVisionPage() {
 
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight">
               <SplitText
-                text={customization?.page_mission_vision_hero_title || "Mission & Vision"}
+                field="page_mission_vision_hero_title"
+                  initial={customization?.page_mission_vision_hero_title}
+                  fallback="Mission & Vision"
                 className="inline-block text-primary-color"
                 tag="span"
                 triggerOnMount={true}

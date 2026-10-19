@@ -70,7 +70,9 @@ export default async function LeadershipMessagePage() {
 
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight">
               <SplitText
-                text={customization?.page_leadership_title || "Leadership Messages"}
+                field="page_leadership_title"
+                  initial={customization?.page_leadership_title}
+                  fallback="Leadership Messages"
                 className="inline-block text-primary-color"
                 tag="span"
                 triggerOnMount={true}

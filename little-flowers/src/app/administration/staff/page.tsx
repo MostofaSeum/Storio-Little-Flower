@@ -59,7 +59,9 @@ export default async function TeachersPage() {
 
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight">
               <SplitText
-                text={customization?.page_staff_title || "Our Teachers"}
+                field="page_staff_title"
+                  initial={customization?.page_staff_title}
+                  fallback="Our Teachers"
                 className="inline-block text-primary-color"
                 tag="span"
                 triggerOnMount={true}

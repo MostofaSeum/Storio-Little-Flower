@@ -62,7 +62,9 @@ export default async function SyllabusPage() {
 
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight">
               <SplitText
-                text={customization?.page_syllabus_title || "Curriculum Syllabuses & Outlines"}
+                field="page_syllabus_title"
+                  initial={customization?.page_syllabus_title}
+                  fallback="Curriculum Syllabuses & Outlines"
                 className="inline-block text-primary-color"
                 tag="span"
                 triggerOnMount={true}

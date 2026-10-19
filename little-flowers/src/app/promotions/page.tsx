@@ -52,7 +52,9 @@ export default async function PromotionsPage() {
 
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight">
               <SplitText
-                text={customization?.page_promotions_title || "Active School Promotions"}
+                field="page_promotions_title"
+                  initial={customization?.page_promotions_title}
+                  fallback="Active School Promotions"
                 className="inline-block text-primary-color"
                 tag="span"
                 triggerOnMount={true}

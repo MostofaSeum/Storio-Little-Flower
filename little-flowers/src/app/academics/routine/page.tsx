@@ -63,7 +63,9 @@ export default async function RoutinePage() {
 
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight">
               <SplitText
-                text={customization?.page_routines_title || "Class Timetables & Daily Routines"}
+                field="page_routines_title"
+                  initial={customization?.page_routines_title}
+                  fallback="Class Timetables & Daily Routines"
                 className="inline-block text-primary-color"
                 tag="span"
                 triggerOnMount={true}

@@ -170,7 +170,9 @@ export default async function AboutPage() {
                 </span>
                 <h2 className="text-2xl sm:text-4xl font-extrabold text-gray-900 mt-3 font-fredoka">
                   <SplitText
-                    text={customization?.page_about_leadership_title || "Governing Body & Advisory Board"}
+                    field="page_about_leadership_title"
+                  initial={customization?.page_about_leadership_title}
+                  fallback="Governing Body & Advisory Board"
                     tag="span"
                     splitType="words, chars"
                     delay={35}
@@ -234,7 +236,9 @@ export default async function AboutPage() {
                   </span>
                   <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 mt-2 font-fredoka">
                     <SplitText
-                      text={customization?.page_about_teachers_title || "Our Dedicated Mentors"}
+                      field="page_about_teachers_title"
+                  initial={customization?.page_about_teachers_title}
+                  fallback="Our Dedicated Mentors"
                       tag="span"
                       splitType="words, chars"
                       delay={35}

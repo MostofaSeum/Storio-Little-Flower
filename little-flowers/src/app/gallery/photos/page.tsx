@@ -79,7 +79,9 @@ export default async function PhotosGalleryPage() {
 
             <h1 className="page-hero-title font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight">
               <SplitText
-                text={customization?.page_gallery_title || "Photo Gallery"}
+                field="page_gallery_title"
+                  initial={customization?.page_gallery_title}
+                  fallback="Photo Gallery"
                 className="inline-block text-primary-color"
                 tag="span"
               />

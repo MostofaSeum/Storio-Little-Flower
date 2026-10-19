@@ -59,7 +59,9 @@ export default async function CommitteeMembersPage() {
 
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-fredoka text-gray-900 leading-tight">
               <SplitText
-                text={customization?.page_team_title || "Committee Members"}
+                field="page_team_title"
+                  initial={customization?.page_team_title}
+                  fallback="Committee Members"
                 className="inline-block text-primary-color"
                 tag="span"
                 triggerOnMount={true}
