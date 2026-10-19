@@ -53,10 +53,14 @@ export async function getTenantContext(): Promise<TenantContext> {
   const rawHost = headersList.get('x-tenant-host') || headersList.get('host') || '';
   const host = rawHost.split(':')[0]; // Remove port if present
 
-  const linkedTenant = process.env.NEXT_PUBLIC_STORIO_TENANT_HOST;
+  const isSandboxHeader = headersList.get('x-storio-sandbox') === 'true';
+  const isDemoHost = host === 'demo.storio.cloud' || host === 'demo.localhost';
   const isLocalHost = host === 'localhost' || host === '127.0.0.1' || host === '::1';
-  const isStandalone = isLocalHost && !linkedTenant;
-  const tenantHost = linkedTenant || (isStandalone ? 'demo.storio.cloud' : host);
+
+  // If linked to a live tenant via Storio CLI / environment, it is NOT standalone
+  const linkedTenant = process.env.NEXT_PUBLIC_STORIO_TENANT_HOST;
+  const isStandalone = !linkedTenant && (isLocalHost || isSandboxHeader || isDemoHost);
+  const tenantHost = linkedTenant || (isStandalone ? (process.env.NEXT_PUBLIC_DEFAULT_TENANT_HOST || 'demo.storio.cloud') : host);
 
   return { host, tenantHost, isStandalone, linkedTenant };
 }
@@ -83,9 +87,10 @@ function mapApiCustomizationToConfig(
 ): Partial<LittleFlowersCustomizationConfig> {
   if (!apiConfig || typeof apiConfig !== 'object') return {};
 
-  const config: Record<string, unknown> = {};
+  // Start with all raw API fields (so any text, labels, titles, badges, subtitles, toggles pass through)
+  const config: Record<string, unknown> = { ...apiConfig };
 
-  // Map both camelCase and snake_case field names from the API
+  // Map both camelCase and snake_case color/style aliases for backwards compatibility
   const fieldMappings: Record<string, string[]> = {
     primaryColor: ['primaryColor', 'primary_color'],
     secondaryColor: ['secondaryColor', 'secondary_color'],
