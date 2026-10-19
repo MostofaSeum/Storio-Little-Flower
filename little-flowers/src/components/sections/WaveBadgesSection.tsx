@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import Link from 'next/link';
 import { LittleFlowersCustomizationConfig, StorioActivityItem } from '@/types';
 import LiveText from '@/components/ui/LiveText';
@@ -87,7 +87,7 @@ export default function WaveBadgesSection({
       {/* Pastel Sky Blue Strip with Customizable Feature Badges */}
       {showBadges && (
         <div className="bg-accent-soft-blue pb-16 pt-2 px-4 sm:px-8">
-          <div className="max-w-5xl mx-auto flex flex-wrap items-center justify-around gap-6 sm:gap-8 reveal-on-scroll">
+          <div className="max-w-5xl mx-auto flex flex-wrap items-center justify-around gap-6 sm:gap-8">
             {badges.map((badge, idx) => (
               <Link
                 key={idx}
@@ -120,3 +120,4 @@ export default function WaveBadgesSection({
     </div>
   );
 }
+

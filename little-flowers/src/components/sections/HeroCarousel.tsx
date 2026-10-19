@@ -61,24 +61,25 @@ export default function HeroCarousel({ slides, siteTitle, customization }: HeroC
 
   const slideImageUrl = getSlideImageUrl(activeSlide);
 
-  const liveHeadline = typeof liveConfig?.heroHeadline === 'string' && liveConfig.heroHeadline.trim() !== ''
-    ? liveConfig.heroHeadline
-    : (customization?.heroHeadline?.trim() || '');
+  // Only override slide heading if admin is actively typing in the customizer inspector
+  const isLiveHeadlineActive =
+    typeof liveConfig?.heroHeadline === 'string' && liveConfig.heroHeadline.trim() !== '';
 
   const slideTitle =
-    liveHeadline ||
-    activeSlide?.title ||
+    (isLiveHeadlineActive ? liveConfig.heroHeadline : null) ||
     (activeSlide as unknown as { heading?: string })?.heading ||
+    activeSlide?.title ||
+    customization?.heroHeadline?.trim() ||
     'Practical teaching & Social Development';
 
-  const liveDesc = typeof liveConfig?.heroDescription === 'string' && liveConfig.heroDescription.trim() !== ''
-    ? liveConfig.heroDescription
-    : (customization?.heroDescription?.trim() || '');
+  const isLiveDescActive =
+    typeof liveConfig?.heroDescription === 'string' && liveConfig.heroDescription.trim() !== '';
 
   const slideSubtitle =
-    liveDesc ||
-    activeSlide?.subtitle ||
+    (isLiveDescActive ? liveConfig.heroDescription : null) ||
     (activeSlide as unknown as { subheading?: string })?.subheading ||
+    activeSlide?.subtitle ||
+    customization?.heroDescription?.trim() ||
     'We aim at success by creating skills necessary for kids to enrich & empower in studies & sports through sensory play, imagination, and loving guidance.';
 
   const slideButtonText =

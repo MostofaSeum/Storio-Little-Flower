@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
 import { StorioNotice } from '@storio/template-sdk';
 import { LittleFlowersCustomizationConfig } from '@/types';
@@ -26,7 +26,7 @@ export default function NoticeSection({ notices: rawNotices, customization, isSt
       className="py-16 px-4 sm:px-8 border-b border-purple-50/50"
     >
       <div className="site-container">
-        <div className="flex flex-wrap items-end justify-between border-b-2 border-purple-100/50 pb-4 mb-8 gap-4 reveal-on-scroll">
+        <div className="flex flex-wrap items-end justify-between border-b-2 border-purple-100/50 pb-4 mb-8 gap-4">
           <div>
             <span
               className="text-xs font-extrabold tracking-wider uppercase text-accent-pink bg-pink-100/80 px-3 py-1 rounded-full"
@@ -75,7 +75,7 @@ export default function NoticeSection({ notices: rawNotices, customization, isSt
           {notices.slice(0, 6).map((notice, idx) => (
             <div
               key={notice.id}
-              className={`p-6 rounded-3xl border border-purple-100/80 hover:border-pink-300 shadow-sm relative overflow-hidden flex flex-col justify-between group card-interactive cursor-pointer reveal-on-scroll delay-${(idx % 3) * 100 + 100}`}
+              className={`p-6 rounded-3xl border border-purple-100/80 hover:border-pink-300 shadow-sm relative overflow-hidden flex flex-col justify-between group card-interactive cursor-pointer`}
               style={{ backgroundColor: 'var(--bg-surface, #ffffff)' }}
             >
               {notice.is_urgent && (
@@ -109,3 +109,4 @@ export default function NoticeSection({ notices: rawNotices, customization, isSt
     </section>
   );
 }
+
