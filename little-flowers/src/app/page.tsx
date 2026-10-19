@@ -224,7 +224,7 @@ export default async function Home() {
       />
 
       {/* 5. NOTICE BOARD & ANNOUNCEMENTS */}
-      <NoticeSection notices={notices} customization={customization} />
+      <NoticeSection notices={notices} customization={customization} isStandalone={isStandalone} />
 
       {/* 6. ABOUT US & INSTITUTION PROFILE */}
       <AboutSection profile={profile} customization={customization} isStandalone={isStandalone} />

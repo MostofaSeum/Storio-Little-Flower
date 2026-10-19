@@ -1,4 +1,5 @@
 import React from 'react';
+import { DEFAULT_DEMO_DATA } from '@/data/defaultDemoData';
 import { StorioNotice } from '@storio/template-sdk';
 import { LittleFlowersCustomizationConfig } from '@/types';
 import LiveText from '@/components/ui/LiveText';
@@ -7,9 +8,16 @@ import SplitText from '@/components/ui/SplitText';
 interface NoticeSectionProps {
   notices: StorioNotice[];
   customization?: LittleFlowersCustomizationConfig | null;
+  isStandalone?: boolean;
 }
 
-export default function NoticeSection({ notices, customization }: NoticeSectionProps) {
+export default function NoticeSection({ notices: rawNotices, customization, isStandalone }: NoticeSectionProps) {
+  // RULE 1: Only fall back to demo notices in standalone preview/customizer mode.
+  // On a live tenant, if there are 0 notices, never show dummy data.
+  const notices = (!rawNotices || rawNotices.length === 0)
+    ? (isStandalone ? DEFAULT_DEMO_DATA.notices : [])
+    : rawNotices;
+
   if (!notices || notices.length === 0) return null;
 
   return (
